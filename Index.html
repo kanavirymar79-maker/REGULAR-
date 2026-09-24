@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>REG LOCK</title>
+<style>
+:root{
+  --ocean:#8B0000; --purple:#1a0000; --bg:#0d0000; --card:#1a0a0a;
+  --text:#FFE6E6; --sub:#B08888; --green:#FF4C4C; --red:#FF4C4C; --gold:#FFAA00;
+  --grad1:#8B0000; --grad2:#1a0000;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:linear-gradient(135deg,var(--grad1),var(--grad2));color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
+
+#key-screen{width:100%;max-width:400px;padding:20px;text-align:center;display:flex;flex-direction:column;gap:20px;z-index:10}
+.logo-box{display:flex;flex-direction:column;align-items:center;gap:10px}
+.logo-svg{width:70px;height:70px;filter:drop-shadow(0 0 15px var(--green))}
+.logo{font-size:38px;font-weight:900;letter-spacing:3px;background:linear-gradient(to right,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.slogan{font-size:12px;color:var(--sub);letter-spacing:2px}
+.input-group{display:flex;flex-direction:column;gap:15px;background:rgba(255,255,255,.05);padding:25px;border-radius:20px;border:1px solid rgba(255,76,76,.2)}
+input{padding:16px;border-radius:12px;border:1px solid rgba(255,76,76,.3);background:rgba(0,0,0,.4);color:#fff;font-size:16px;outline:none;text-align:center;letter-spacing:2px}
+input::placeholder{color:rgba(255,255,255,.3)}
+button{padding:16px;border-radius:12px;border:none;font-size:16px;font-weight:bold;cursor:pointer;transition:all .3s}
+.btn-primary{background:linear-gradient(to right,var(--purple),var(--ocean));color:#fff;box-shadow:0 4px 20px rgba(139,0,0,.5)}
+.btn-primary:active{transform:scale(.97)}
+.loading{display:none;flex-direction:column;align-items:center;gap:15px;margin-top:20px}
+.spinner{width:50px;height:50px;border:5px solid rgba(255,255,255,.1);border-top:5px solid var(--green);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.err{color:var(--red);font-size:14px;display:none;margin-top:10px;font-weight:600}
+
+#app-screen{display:none;width:100%;max-width:400px;height:100vh;background:var(--bg);flex-direction:column;overflow-y:auto;position:absolute;top:0;left:0;z-index:20}
+.header{padding:20px;background:linear-gradient(to right,var(--grad1),var(--grad2));border-bottom-left-radius:25px;border-bottom-right-radius:25px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(0,0,0,.6);position:sticky;top:0;z-index:5}
+.header h1{font-size:20px;font-weight:800;letter-spacing:1px;color:#FF4C4C}
+.timer{background:rgba(0,0,0,.4);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:bold;color:var(--green);border:1px solid rgba(255,76,76,.4);font-family:monospace}
+.timer.warn{color:#FFAA00;border-color:#FFAA00;animation:blink 1s infinite}
+.timer.danger{color:var(--red);border-color:var(--red);animation:blink .5s infinite}
+@keyframes blink{50%{opacity:.4}}
+
+.content{padding:20px;flex:1}
+.section{font-size:13px;color:var(--sub);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;margin-top:20px;font-weight:700}
+.info{background:rgba(255,76,76,.08);border:1px solid rgba(255,76,76,.3);border-radius:12px;padding:12px;margin-bottom:15px;font-size:13px;display:none}
+.info.active{display:block}
+.info strong{color:var(--green)}
+
+.key-info{background:linear-gradient(135deg,rgba(255,76,76,.1),rgba(255,170,0,.1));border:1px solid var(--green);border-radius:14px;padding:15px;margin-bottom:15px}
+.key-info-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.key-info-row:last-child{margin-bottom:0}
+.key-info-row span:first-child{color:var(--sub)}
+.key-info-row span:last-child{color:var(--green);font-weight:bold}
+
+.card{background:var(--card);border-radius:14px;padding:15px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,76,76,.1);transition:all .2s;cursor:pointer}
+.card:active{background:#2a0a0a}
+.card.selected{border:1px solid var(--green);background:rgba(255,76,76,.05);box-shadow:0 0 15px rgba(255,76,76,.3)}
+.card-left{display:flex;align-items:center;gap:12px;flex:1}
+.icon{width:40px;height:40px;background:rgba(255,76,76,.1);border-radius:10px;display:flex;justify-content:center;align-items:center;color:var(--green);font-size:20px;flex-shrink:0}
+.card-text{display:flex;flex-direction:column;flex:1;gap:4px}
+.card-title{font-size:15px;font-weight:700}
+.card-sub{font-size:11px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.aim{background:rgba(255,170,0,.15);color:var(--gold);padding:3px 8px;border-radius:6px;font-weight:bold;font-size:11px;border:1px solid rgba(255,170,0,.4);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,170,0,.4)}50%{box-shadow:0 0 0 5px rgba(255,170,0,0)}100%{box-shadow:0 0 0 0 rgba(255,170,0,0)}}
+
+.dns-box{background:transparent;border-radius:14px;margin-bottom:10px;overflow:hidden;transition:all .3s}
+.dns-box .card{margin-bottom:0;border-radius:14px;transition:all .3s}
+.dns-box.open .card{border-radius:14px 14px 0 0;border-bottom:1px solid rgba(255,76,76,.3);border-color:var(--green);background:rgba(255,76,76,.05)}
+.arrow{color:var(--sub);font-size:12px;transition:transform .3s;margin-left:10px}
+.dns-box.open .arrow{transform:rotate(180deg);color:var(--green)}
+.dns-fix{max-height:0;overflow:hidden;transition:max-height .5s ease, padding .3s;background:var(--card);border-radius:0 0 14px 14px;padding:0 15px}
+.dns-box.open .dns-fix{max-height:800px;padding:15px;border:1px solid var(--green);border-top:none}
+
+.btns{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+.btns:first-child{margin-top:0}
+.btn-action{flex:1;background:rgba(255,76,76,.08);color:var(--green);border:1px solid rgba(255,76,76,.3);padding:12px;font-size:13px;border-radius:10px;font-weight:600;min-width:70px;cursor:pointer}
+.btn-action.active{background:var(--green);color:var(--bg);box-shadow:0 0 15px rgba(255,76,76,.5)}
+.btn-action.special{background:linear-gradient(to right,var(--gold),#FF8C00);color:var(--bg);border:none;font-weight:bold}
+.btn-action.special.active{background:var(--red);color:#fff}
+
+/* PHẦN CHỈNH AIM */
+.aim-config{
+  background:linear-gradient(135deg,rgba(255,76,76,.1),rgba(255,170,0,.1));
+  border:2px solid var(--gold);
+  border-radius:12px;
+  padding:15px;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+.aim-config-title{
+  font-size:13px;
+  font-weight:bold;
+  color:var(--gold);
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+.aim-slider-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+.aim-slider-row .lbl{
+  font-size:12px;
+  color:var(--sub);
+  min-width:45px;
+  font-weight:600;
+}
+.aim-slider-row input[type="range"]{
+  flex:1;
+  -webkit-appearance:none;
+  appearance:none;
+  height:6px;
+  border-radius:3px;
+  background:linear-gradient(to right,#8B0000,#FF4C4C,#FFAA00);
+  outline:none;
+  padding:0;
+}
+.aim-slider-row input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  appearance:none;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:#FFAA00;
+  cursor:pointer;
+  border:2px solid #fff;
+  box-shadow:0 0 10px rgba(255,170,0,.8);
+}
+.aim-slider-row input[type="range"]::-moz-range-thumb{
+  width:20px;height:20px;border-radius:50%;background:#FFAA00;cursor:pointer;border:2px solid #fff;
+}
+.aim-slider-row .val-box{
+  min-width:55px;
+  text-align:center;
+  background:rgba(0,0,0,.5);
+  color:var(--gold);
+  font-family:monospace;
+  font-weight:bold;
+  font-size:14px;
+  padding:6px 8px;
+  border-radius:8px;
+  border:1px solid var(--gold);
+}
+.aim-slider-row .val-box input{
+  width:100%;
+  background:transparent;
+  border:none;
+  color:var(--gold);
+  font-family:monospace;
+  font-weight:bold;
+  font-size:14px;
+  text-align:center;
+  outline:none;
+  padding:0;
+}
+.aim-preset{
+  display:flex;
+  gap:6px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+.preset-btn{
+  flex:1;
+  background:rgba(255,170,0,.1);
+  color:var(--gold);
+  border:1px solid rgba(255,170,0,.4);
+  padding:8px;
+  font-size:11px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  min-width:60px;
+}
+.preset-btn:active{background:rgba(255,170,0,.3)}
+.btn-save-aim{
+  width:100%;
+  background:linear-gradient(to right,#FFAA00,#FF4C4C);
+  color:#0d0000;
+  border:none;
+  padding:12px;
+  font-size:13px;
+  font-weight:bold;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:10px;
+  letter-spacing:1px;
+}
+.btn-save-aim:active{transform:scale(.97)}
+
+.btn-download{width:100%;background:linear-gradient(to right,var(--grad1),var(--grad2));color:#fff;margin-top:20px;padding:16px;font-size:15px;font-weight:bold;border-radius:12px;border:1px solid rgba(255,76,76,.3)}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:100;justify-content:center;align-items:center;padding:20px}
+.modal.active{display:flex}
+.modal-box{background:var(--card);border-radius:16px;padding:20px;width:100%;max-width:380px;max-height:80vh;overflow-y:auto;border:1px solid var(--green)}
+.modal-box h2{font-size:18px;color:var(--green);margin-bottom:15px}
+.modal-box pre{background:#0a0000;padding:15px;border-radius:10px;font-size:10px;color:#a8b2d1;white-space:pre-wrap;word-break:break-all;max-height:280px;overflow-y:auto}
+.modal-btns{display:flex;gap:10px;margin-top:15px}
+.btn-modal{flex:1;padding:12px;border-radius:10px;font-size:14px;font-weight:bold;border:none;cursor:pointer}
+.btn-cancel{background:rgba(255,255,255,.1);color:#fff}
+.btn-confirm{background:var(--green);color:var(--bg)}
+
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green);color:var(--bg);padding:14px 24px;border-radius:12px;font-weight:bold;font-size:14px;z-index:200;opacity:0;transition:all .3s;max-width:90%;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+.notif{position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg,#FF4C4C,#FFAA00);color:#fff;padding:12px;text-align:center;font-size:13px;font-weight:bold;z-index:400;transform:translateY(-100%);transition:transform .3s}
+.notif.show{transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="notif" id="notif">⚠️ Key sắp hết hạn!</div>
+
+<!-- TRANG 1: NHẬP KEY -->
+<div id="key-screen">
+  <div class="logo-box">
+    <svg class="logo-svg" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#FF4C4C"/>
+          <stop offset="100%" style="stop-color:#FFAA00"/>
+        </linearGradient>
+      </defs>
+      <circle cx="50" cy="50" r="45" fill="none" stroke="url(#g1)" stroke-width="3"/>
+      <path d="M50 20 L50 50 L70 60" stroke="url(#g1)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="50" cy="50" r="5" fill="url(#g1)"/>
+      <text x="50" y="85" text-anchor="middle" fill="url(#g1)" font-size="14" font-weight="bold">REG</text>
+    </svg>
+    <div class="logo">REG LOCK</div>
+    <div class="slogan">PREMIUM DNS & AIM CONFIG</div>
+  </div>
+  <div class="input-group" id="input-group">
+    <input type="text" id="key-input" placeholder="Nhập Key của bạn..." maxlength="12" style="text-transform:uppercase">
+    <button class="btn-primary" onclick="verifyKey()">🔓 KÍCH HOẠT</button>
+  </div>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p style="font-size:14px;color:var(--sub)">Đang xác thực thiết bị...</p>
+    <p style="font-size:12px;color:var(--red)">Vui lòng đợi 1 phút</p>
+  </div>
+  <div class="err" id="err"></div>
+</div>
+
+<!-- TRANG 2: APP -->
+<div id="app-screen">
+  <div class="header">
+    <h1>REG LOCK</h1>
+    <div class="timer" id="timer">--:--:--</div>
+  </div>
+  <div class="content">
+
+    <div class="key-info">
+      <div class="key-info-row"><span>🔑 Key:</span><span id="ki-key">--</span></div>
+      <div class="key-info-row"><span>📋 Loại:</span><span id="ki-type">--</span></div>
+      <div class="key-info-row"><span>📱 Thiết bị:</span><span id="ki-device">--</span></div>
+      <div class="key-info-row"><span>⏰ Hết hạn:</span><span id="ki-expire">--</span></div>
+    </div>
+
+    <div class="section">🎮 CẤU HÌNH DNS & AIM</div>
+    <div class="info" id="info">Đã chọn: <strong id="sel-name">--</strong> | AIM: <strong id="sel-aim">--</strong></div>
+
+    <!-- AIMBOT -->
+    <div class="dns-box" id="dns-aimbot">
+      <div class="card" onclick="toggleDNS('dns-aimbot', this, 'Aimbot','0.5 - 1.2','aimbot.reglock.dns','1.1.1.1','1.0.0.1')">
+        <div class="card-left">
+          <div class="icon">🎯</div>
+          <div class="card-text">
+            <span class="card-title">Aimbot ⚡</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-aimbot">0.5 - 1.2</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="btns">
+          <button class="btn-action special" onclick="toggleFix(this)">Chỉ Aimbot</button>
+        </div>
+        <!-- CHỈNH AIM -->
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-aimbot" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateAimValue('aimbot')">
+            <div class="val-box"><input type="number" id="aim-minv-aimbot" min="0.1" max="2.0" step="0.1" value="0.5" onchange="updateAimValue('aimbot', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-aimbot" min="0.1" max="2.0" step="0.1" value="1.2" oninput="updateAimValue('aimbot')">
+            <div class="val-box"><input type="number" id="aim-maxv-aimbot" min="0.1" max="2.0" step="0.1" value="1.2" onchange="updateAimValue('aimbot', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('aimbot', 0.3, 0.8)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('aimbot', 0.5, 1.2)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('aimbot', 0.8, 1.5)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('aimbot', 1.0, 2.0)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('aimbot')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DPI 1200 -->
+    <div class="dns-box" id="dns-dpi">
+      <div class="card" onclick="toggleDNS('dns-dpi', this, 'DPI 1200','0.8 - 1.5','dpi.reglock.dns','8.8.8.8','8.8.4.4')">
+        <div class="card-left">
+          <div class="icon">🖱️</div>
+          <div class="card-text">
+            <span class="card-title">DPI Seper💀 👤</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-dpi">0.8 - 1.5</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-dpi" min="0.1" max="2.0" step="0.1" value="0.8" oninput="updateAimValue('dpi')">
+            <div class="val-box"><input type="number" id="aim-minv-dpi" min="0.1" max="2.0" step="0.1" value="0.8" onchange="updateAimValue('dpi', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-dpi" min="0.1" max="2.0" step="0.1" value="1.5" oninput="updateAimValue('dpi')">
+            <div class="val-box"><input type="number" id="aim-maxv-dpi" min="0.1" max="2.0" step="0.1" value="1.5" onchange="updateAimValue('dpi', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('dpi', 0.5, 1.0)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('dpi', 0.8, 1.5)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('dpi', 1.0, 1.8)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('dpi', 1.2, 2.0)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('dpi')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FPS 90 -->
+    <div class="dns-box" id="dns-fps">
+      <div class="card" onclick="toggleDNS('dns-fps', this, 'FPS 90','0.6 - 1.0','fps90.reglock.dns','9.9.9.9','149.112.112.112')">
+        <div class="card-left">
+          <div class="icon">📱</div>
+          <div class="card-text">
+            <span class="card-title">FPS 90 📱</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-fps">0.6 - 1.0</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-fps" min="0.1" max="2.0" step="0.1" value="0.6" oninput="updateAimValue('fps')">
+            <div class="val-box"><input type="number" id="aim-minv-fps" min="0.1" max="2.0" step="0.1" value="0.6" onchange="updateAimValue('fps', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-fps" min="0.1" max="2.0" step="0.1" value="1.0" oninput="updateAimValue('fps')">
+            <div class="val-box"><input type="number" id="aim-maxv-fps" min="0.1" max="2.0" step="0.1" value="1.0" onchange="updateAimValue('fps', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('fps', 0.3, 0.7)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('fps', 0.6, 1.0)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('fps', 0.8, 1.3)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('fps', 1.0, 1.8)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('fps')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FULL SETTINGS -->
+    <div class="dns-box" id="dns-full">
+      <div class="card" onclick="toggleDNS('dns-full', this, 'Full Settings DNS','0.4 - 0.9','full.reglock.dns','208.67.222.222','208.67.220.220')">
+        <div class="card-left">
+          <div class="icon">⚙️</div>
+          <div class="card-text">
+            <span class="card-title">Full Settings DNS ✅🔥</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-full">0.4 - 0.9</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-full" min="0.1" max="2.0" step="0.1" value="0.4" oninput="updateAimValue('full')">
+            <div class="val-box"><input type="number" id="aim-minv-full" min="0.1" max="2.0" step="0.1" value="0.4" onchange="updateAimValue('full', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-full" min="0.1" max="2.0" step="0.1" value="0.9" oninput="updateAimValue('full')">
+            <div class="val-box"><input type="number" id="aim-maxv-full" min="0.1" max="2.0" step="0.1" value="0.9" onchange="updateAimValue('full', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('full', 0.2, 0.6)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('full', 0.4, 0.9)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('full', 0.6, 1.2)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('full', 0.8, 1.6)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('full')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEAD -->
+    <div class="dns-box" id="dns-head">
+      <div class="card" onclick="toggleDNS('dns-head', this, 'HEAD','0.7 - 1.3','head.reglock.dns','1.1.1.1','1.0.0.1')">
+        <div class="card-left">
+          <div class="icon">💀</div>
+          <div class="card-text">
+            <span class="card-title">HEAD lOCK💀 🔥</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-head">0.7 - 1.3</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-head" min="0.1" max="2.0" step="0.1" value="0.7" oninput="updateAimValue('head')">
+            <div class="val-box"><input type="number" id="aim-minv-head" min="0.1" max="2.0" step="0.1" value="0.7" onchange="updateAimValue('head', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-head" min="0.1" max="2.0" step="0.1" value="1.3" oninput="updateAimValue('head')">
+            <div class="val-box"><input type="number" id="aim-maxv-head" min="0.1" max="2.0" step="0.1" value="1.3" onchange="updateAimValue('head', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('head', 0.4, 0.9)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('head', 0.7, 1.3)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('head', 0.9, 1.6)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('head', 1.2, 2.0)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('head')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEXTDNS -->
+    <div class="dns-box" id="dns-next">
+      <div class="card" onclick="toggleDNS('dns-next', this, 'NextDNS','0.5 - 1.1','next.reglock.dns','45.90.28.0','45.90.30.0')">
+        <div class="card-left">
+          <div class="icon">🌐</div>
+          <div class="card-text">
+            <span class="card-title">NextDNS</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-next">0.5 - 1.1</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-next" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateAimValue('next')">
+            <div class="val-box"><input type="number" id="aim-minv-next" min="0.1" max="2.0" step="0.1" value="0.5" onchange="updateAimValue('next', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-next" min="0.1" max="2.0" step="0.1" value="1.1" oninput="updateAimValue('next')">
+            <div class="val-box"><input type="number" id="aim-maxv-next" min="0.1" max="2.0" step="0.1" value="1.1" onchange="updateAimValue('next', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('next', 0.3, 0.8)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('next', 0.5, 1.1)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('next', 0.7, 1.4)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('next', 1.0, 1.8)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('next')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SENSI TOUCH -->
+    <div class="dns-box" id="dns-sensi">
+      <div class="card" onclick="toggleDNS('dns-sensi', this, 'Sensi Touch','0.9 - 1.8','sensi.reglock.dns','76.76.2.0','76.76.10.0')">
+        <div class="card-left">
+          <div class="icon">👆</div>
+          <div class="card-text">
+            <span class="card-title">Sensi Touch ⚡</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-sensi">0.9 - 1.8</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aimMin-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span:</ class="lbl">span>
+            <input type="range" id="aim-min-sensi" min="0.1" max="2.0" step="0.1" value="0.9" oninput="updateAimValue('sensi')">
+            <div class="val-box"><input type="number" id="aim-minv-sensi" min="0.1" max="2.0" step="0.1" value="0.9" onchange="updateAimValue('sensi', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-sensi" min="0.1" max="2.0" step="0.1" value="1.8" oninput="updateAimValue('sensi')">
+            <div class="val-box"><input type="number" id="aim-maxv-sensi" min="0.1" max="2.0" step="0.1" value="1.8" onchange="updateAimValue('sensi', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('sensi', 0.5, 1.0)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('sensi', 0.9, 1.8)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('sensi', 1.2, 2.0)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('sensi', 1.5, 2.0)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('sensi')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FREE FIRE -->
+    <div class="section">🔥 FREE FIRE</div>
+
+    <div class="dns-box" id="dns-ffthuong">
+      <div class="card" onclick="toggleDNS('dns-ffthuong', this, 'FF Thường','0.5 - 1.2','ff-thuong.reglock.dns','1.1.1.1','1.0.0.1')">
+        <div class="card-left">
+          <div class="icon">🔥</div>
+          <div class="card-text">
+            <span class="card-title">FF Thường ⚡</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-ffthuong">0.5 - 1.2</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="lbl">Min:</span>
+            <input type="range" id="aim-min-ffthuong" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateAimValue('ffthuong')">
+            <div class="val-box"><input type="number" id="aim-minv-ffthuong" min="0.1" max="2.0" step="0.1" value="0.5" onchange="updateAimValue('ffthuong', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" id="aim-max-ffthuong" min="0.1" max="2.0" step="0.1" value="1.2" oninput="updateAimValue('ffthuong')">
+            <div class="val-box"><input type="number" id="aim-maxv-ffthuong" min="0.1" max="2.0" step="0.1" value="1.2" onchange="updateAimValue('ffthuong', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('ffthuong', 0.3, 0.8)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('ffthuong', 0.5, 1.2)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('ffthuong', 0.8, 1.6)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('ffthuong', 1.0, 2.0)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('ffthuong')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dns-box" id="dns-ffmaxx">
+      <div class="card" onclick="toggleDNS('dns-ffmaxx', this, 'FF Maxx','0.3 - 0.8','ff-maxx.reglock.dns','1.1.1.1','1.0.0.1')">
+        <div class="card-left">
+          <div class="icon">💥</div>
+          <div class="card-text">
+            <span class="card-title">FF Maxx 🔥</span>
+            <span class="card-sub">AIM: <span class="aim" id="aim-val-ffmaxx">0.3 - 0.8</span></span>
+          </div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="dns-fix">
+        <div class="btns">
+          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
+          <="button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
+          <button class="btn-action" onclick="aimtoggleFix(this)">Bám Tâm</button>
+        </div>
+        <div class="aim-config">
+          <div-max class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
+          <div class="aim-slider-row">
+            <span class="-lbl">Min:</span>
+            <input type="range" id="aim-min-ffmaxx" min="0.1" max="2.0" step="0.ff1" value="0.3" oninput="updateAimValue('ffmaxx')">
+            <div class="val-box"><input type="numbermax" id="aim-minv-ffmaxx" min="0.1" max="2.0" step="0.1" value="0.3" onchange="updateAimValue('ffmaxx', true)"></div>
+          </div>
+          <div class="aim-slider-row">
+            <span class="lbl">Max:</span>
+            <input type="range" idx" min="0.1" max="2.0" step="0.1" value="0.8" oninput="updateAimValue('ffmaxx')">
+            <div class="val-box"><input type="number" id="aim-maxv-ffmaxx" min="0.1" max="2.0" step="0.1" value="0.8" onchange="updateAimValue('ffmaxx', true)"></div>
+          </div>
+          <div class="aim-preset">
+            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.2, 0.5)">Nhẹ</button>
+            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.3, 0.8)">Chuẩn</button>
+            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.5, 1.2)">Mạnh</button>
+            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.8, 1.8)">Max</button>
+          </div>
+          <button class="btn-save-aim" onclick="saveAim('ffmaxx')">💾 LƯU CẤU HÌNH AIM</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-download" onclick="previewDNS()">⬇️ TẢI CẤU HÌNH DNS VỀ MÁY</button>
+
+    <div style="height:30px"></div>
+  </div>
+</div>
+
+<!-- MODAL XEM TRƯỚC DNS -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2>📄 Xem trước cấu hình DNS</h2>
+    <p style="font-size:12px;color:var(--sub);margin-bottom:10px">File <b>.mobileconfig</b> chuẩn Apple với thông số AIM đã chỉnh.</p>
+    <pre id="preview"></pre>
+    <div class="modal-btns">
+      <button class="btn-modal btn-cancel" onclick="closeModal('modal')">HỦY</button>
+      <button class="btn-modal btn-confirm" onclick="confirmDownload()">TẢI XUỐNG</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   REG LOCK - FULL + CHỈNH AIM DYNAMIC
+   ============================================================ */
+
+let timeLeft = 0, timerInterval, selectedDNS = null, notifShown = false;
+
+/* Lưu AIM config của từng DNS */
+const AIM_CONFIG = {
+  aimbot: { min: 0.5, max: 1.2 },
+  dpi:    { min: 0.8, max: 1.5 },
+  fps:    { min: 0.6, max: 1.0 },
+  full:   { min: 0.4, max: 0.9 },
+  head:   { min: 0.7, max: 1.3 },
+  next:   { min: 0.5, max: 1.1 },
+  sensi:  { min: 0.9, max: 1.8 },
+  ffthuong:{ min: 0.5, max: 1.2 },
+  ffmaxx: { min: 0.3, max: 0.8 }
+};
+
+/* ============ 20 KEY ============ */
+const KEY_HASH = {
+  "UkVHSE9ORVkwMUZG":{t:"24 Giờ",d:86400},
+  "UkVHSE9ORVkwMkZG":{t:"24 Giờ",d:86400},
+  "UkVHSE9ORVkwM0ZG":{t:"24 Giờ",d:86400},
+  "UkVHSE9ORVkwNEZG":{t:"24 Giờ",d:86400},
+  "UkVHSE9ORVkwNUZG":{t:"24 Giờ",d:86400},
+  "UkVHV0VFS0wwMUZG":{t:"Tuần",d:604800},
+  "UkVHV0VFS0wwMkZG":{t:"Tuần",d:604800},
+  "UkVHV0VFS0wwM0ZG":{t:"Tuần",d:604800},
+  "UkVHV0VFS0wwNEZG":{t:"Tuần",d:604800},
+  "UkVHV0VFS0wwNUZG":{t:"Tuần",d:604800},
+  "UkVHTU9OVEgwMUZG":{t:"Tháng",d:2592000},
+  "UkVHTU9OVEgwMkZG":{t:"Tháng",d:2592000},
+  "UkVHTU9OVEgwM0ZG":{t:"Tháng",d:2592000},
+  "UkVHTU9OVEgwNEZG":{t:"Tháng",d:2592000},
+  "UkVHTU9OVEgwNUZG":{t:"Tháng",d:2592000},
+  "UkVHTElGRTAwMUZG":{t:"Vĩnh viễn",d:999999999},
+  "UkVHTElGRTAwMkZG":{t:"Vĩnh viễn",d:999999999},
+  "UkVHTElGRTAwM0ZG":{t:"Vĩnh viễn",d:999999999},
+  "UkVHTElGRTAwNEZG":{t:"Vĩnh viễn",d:999999999},
+  "UkVHTElGRTAwNUZG":{t:"Vĩnh viễn",d:999999999}
+};
+
+function encodeKey(k){ return btoa(k); }
+
+/* ============ CHỈNH AIM ============ */
+function updateAimValue(key, fromInput){
+  const minSlider = document.getElementById('aim-min-' + key);
+  const maxSlider = document.getElementById('aim-max-' + key);
+  const minInput = document.getElementById('aim-minv-' + key);
+  const maxInput = document.getElementById('aim-maxv-' + key);
+  
+  let min, max;
+  
+  if(fromInput){
+    min = parseFloat(minInput.value) || 0.1;
+    max = parseFloat(maxInput.value) || 2.0;
+    minSlider.value = min;
+    maxSlider.value = max;
+  } else {
+    min = parseFloat(minSlider.value);
+    max = parseFloat(maxSlider.value);
+    minInput.value = min.toFixed(1);
+    maxInput.value = max.toFixed(1);
+  }
+  
+  // Đảm bảo min <= max
+  if(min > max){
+    if(fromInput){ min = max; minInput.value = min.toFixed(1); minSlider.value = min; }
+    else { max = min; maxInput.value = max.toFixed(1); maxSlider.value = max; }
+  }
+  
+  // Cập nhật AIM_CONFIG
+  AIM_CONFIG[key].min = min;
+  AIM_CONFIG[key].max = max;
+  
+  // Cập nhật hiển thị trên card
+  const valEl = document.getElementById('aim-val-' + key);
+  if(valEl) valEl.innerText = min.toFixed(1) + ' - ' + max.toFixed(1);
+}
+
+function setPreset(key, min, max){
+  document.getElementById('aim-min-' + key).value = min;
+  document.getElementById('aim-max-' + key).value = max;
+  document.getElementById('aim-minv-' + key).value = min;
+  document.getElementById('aim-maxv-' + key).value = max;
+  updateAimValue(key);
+  toast('✅ Đã đặt preset: ' + min.toFixed(1) + ' - ' + max.toFixed(1));
+}
+
+function saveAim(key){
+  const cfg = AIM_CONFIG[key];
+  
+  // Lưu vào localStorage
+  localStorage.setItem('reglock_aim_' + key, JSON.stringify(cfg));
+  
+  // Cập nhật vào selectedDNS nếu đang chọn
+  if(selectedDNS && selectedDNS.key === key){
+    selectedDNS.aim = cfg.min.toFixed(1) + ' - ' + cfg.max.toFixed(1);
+    document.getElementById('sel-aim').innerText = selectedDNS.aim;
+  }
+  
+  toast('💾 Đã lưu AIM: ' + cfg.min.toFixed(1) + ' - ' + cfg.max.toFixed(1));
+  console.log('[AIM] Đã lưu', key, cfg);
+}
+
+/* Load AIM đã lưu */
+function loadAimConfigs(){
+  Object.keys(AIM_CONFIG).forEach(key => {
+    const saved = localStorage.getItem('reglock_aim_' + key);
+    if(saved){
+      try {
+        const cfg = JSON.parse(saved);
+        AIM_CONFIG[key] = cfg;
+        
+        // Cập nhật UI
+        const minSlider = document.getElementById('aim-min-' + key);
+        const maxSlider = document.getElementById('aim-max-' + key);
+        const minInput = document.getElementById('aim-minv-' + key);
+        const maxInput = document.getElementById('aim-maxv-' + key);
+        const valEl = document.getElementById('aim-val-' + key);
+        
+        if(minSlider) minSlider.value = cfg.min;
+        if(maxSlider) maxSlider.value = cfg.max;
+        if(minInput) minInput.value = cfg.min.toFixed(1);
+        if(maxInput) maxInput.value = cfg.max.toFixed(1);
+        if(valEl) valEl.innerText = cfg.min.toFixed(1) + ' - ' + cfg.max.toFixed(1);
+      } catch(e){}
+    }
+  });
+}
+
+/* ============ XÁC THỰC KEY ============ */
+function verifyKey(){
+  const key = document.getElementById('key-input').value.trim().toUpperCase();
+  const err = document.getElementById('err');
+
+  if(!key){ err.innerText = "Vui lòng nhập Key!"; err.style.display = "block"; return; }
+  if(!key.startsWith("REG") || !key.endsWith("FF")){ err.innerText = "Key phải bắt đầu REG và kết thúc FF!"; err.style.display = "block"; return; }
+  if(key.length !== 12){ err.innerText = "Key phải có đúng 12 ký tự!"; err.style.display = "block"; return; }
+
+  err.style.display = "none";
+  document.getElementById('input-group').style.display = "none";
+  document.getElementById('loading').style.display = "flex";
+
+  setTimeout(() => {
+    let deviceId = localStorage.getItem('reglock_device');
+    if(!deviceId){
+      deviceId = 'DEV-' + Math.random().toString(36).substr(2,9).toUpperCase();
+      localStorage.setItem('reglock_device', deviceId);
+    }
+
+    const hash = encodeKey(key);
+    const keyData = KEY_HASH[hash];
+
+    if(!keyData){ failVerify("❌ Key không tồn tại trong hệ thống!"); return; }
+
+    const savedDevice = localStorage.getItem('reglock_key_' + hash);
+    if(savedDevice && savedDevice !== deviceId){ failVerify("❌ Key đã kích hoạt trên thiết bị khác!"); return; }
+
+    localStorage.setItem('reglock_key_' + hash, deviceId);
+    localStorage.setItem('reglock_current', JSON.stringify({
+      hash: hash, key: key, device: deviceId,
+      type: keyData.t, time: keyData.d,
+      start: Date.now(), expire: Date.now() + keyData.d * 1000
+    }));
+
+    timeLeft = keyData.d;
+    startApp();
+  }, 60000);
+}
+
+function failVerify(msg){
+  document.getElementById('loading').style.display = "none";
+  document.getElementById('input-group').style.display = "flex";
+  document.getElementById('err').innerText = msg;
+  document.getElementById('err').style.display = "block";
+}
+
+function startApp(){
+  document.getElementById('key-screen').style.display = "none";
+  document.getElementById('app-screen').style.display = "flex";
+  toast("✅ Kích hoạt thành công!");
+  loadKeyInfo();
+  loadAimConfigs();
+  updateTimer();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimer();
+    checkExpireWarning();
+    if(timeLeft <= 0){
+      clearInterval(timerInterval);
+      alert("⏰ Thời gian dùng Key đã hết!\nVui lòng nhập Key mới.");
+      localStorage.removeItem('reglock_current');
+      location.reload();
+    }
+  }, 1000);
+}
+
+function loadKeyInfo(){
+  const data = JSON.parse(localStorage.getItem('reglock_current') || '{}');
+  if(!data.key) return;
+  document.getElementById('ki-key').innerText = data.key;
+  document.getElementById('ki-type').innerText = data.type;
+  document.getElementById('ki-device').innerText = data.device;
+  const exp = new Date(data.expire);
+  document.getElementById('ki-expire').innerText = exp.toLocaleDateString('vi-VN') + ' ' + exp.toLocaleTimeString('vi-VN');
+}
+
+function updateTimer(){
+  const d = Math.floor(timeLeft / 86400);
+  const h = Math.floor((timeLeft % 86400) / 3600);
+  const m = Math.floor((timeLeft % 3600) / 60);
+  const s = timeLeft % 60;
+  const el = document.getElementById('timer');
+  el.classList.remove('warn','danger');
+  if(timeLeft < 300) el.classList.add('danger');
+  else if(timeLeft < 3600) el.classList.add('warn');
+
+  if(d > 0) el.innerText = `${d}d ${pad(h)}:${pad(m)}:${pad(s)}`;
+  else el.innerText = `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+function pad(n){ return n<10?'0'+n:''+n; }
+
+function checkExpireWarning(){
+  if(timeLeft === 300 && !notifShown){
+    notifShown = true;
+    const n = document.getElementById('notif');
+    n.innerText = "⚠️ Key sắp hết hạn (còn 5 phút)!";
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 5000);
+  }
+}
+
+/* ============ DNS ============ */
+function toggleDNS(id, cardEl, name, aim, host, d1, d2){
+  const box = document.getElementById(id);
+  const isOpen = box.classList.contains('open');
+  document.querySelectorAll('.dns-box').forEach(b => b.classList.remove('open'));
+  if(!isOpen){
+    box.classList.add('open');
+    const key = id.replace('dns-', '');
+    selectDNS(cardEl, name, aim, host, d1, d2, key);
+  }
+}
+
+function selectDNS(el, name, aim, host, d1, d2, key){
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedDNS = { name, aim, host, d1, d2, key };
+  document.getElementById('sel-name').innerText = name;
+  document.getElementById('sel-aim').innerText = aim;
+  document.getElementById('info').classList.add('active');
+  toast("✅ Đã chọn: " + name);
+}
+
+function toggleFix(btn){
+  btn.classList.toggle('active');
+  const name = btn.innerText;
+  if(btn.classList.contains('active')) toast("🔧 Đã bật: " + name);
+  else toast("🔧 Đã tắt: " + name);
+}
+
+/* ============ TẢI DNS ============ */
+function uuid(){ return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8); return v.toString(16).toUpperCase(); }); }
+
+function buildConfig(){
+  if(!selectedDNS) return "";
+  const u1 = uuid(), u2 = uuid();
+  
+  // Lấy AIM config của DNS đã chọn
+  const aimCfg = AIM_CONFIG[selectedDNS.key] || { min: 0.5, max: 1.2 };
+  const aimString = aimCfg.min.toFixed(1) + ' - ' + aimCfg.max.toFixed(1);
+  
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key>
+        <string>HTTPS</string>
+        <key>ServerURL</key>
+        <string>https://${selectedDNS.host}/dns-query</string>
+        <key>ServerAddresses</key>
+        <array>
+          <string>${selectedDNS.d1}</string>
+          <string>${selectedDNS.d2}</string>
+        </array>
+      </dict>
+      <key>PayloadDescription</key>
+      <string>REG LOCK DNS - ${selectedDNS.name} (AIM: ${aimString})</string>
+      <key>PayloadDisplayName</key>
+      <string>REG LOCK - ${selectedDNS.name}</string>
+      <key>PayloadIdentifier</key>
+      <string>com.reglock.dns.${selectedDNS.host}</string>
+      <key>PayloadType</key>
+      <string>com.apple.dnsSettings.managed</string>
+      <key>PayloadUUID</key>
+      <string>${u1}</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+    </dict>
+  </array>
+  <key>PayloadDescription</key>
+  <string>REG LOCK - ${selectedDNS.name} - AIM: ${aimString}</string>
+  <key>PayloadDisplayName</key>
+  <string>REG LOCK DNS - ${selectedDNS.name}</string>
+  <key>PayloadIdentifier</key>
+  <string>com.reglock.profile.${u2}</string>
+  <key>PayloadOrganization</key>
+  <string>REG LOCK</string>
+  <key>PayloadRemovalDisallowed</key>
+  <false/>
+  <key>PayloadType</key>
+  <string>Configuration</string>
+  <key>PayloadUUID</key>
+  <string>${u2}</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+</dict>
+</plist>`;
+}
+
+function previewDNS(){
+  if(!selectedDNS){ toast("⚠️ Vui lòng chọn DNS trước!"); return; }
+  document.getElementById('preview').innerText = buildConfig();
+  document.getElementById('modal').classList.add('active');
+}
+
+function closeModal(id){ document.getElementById(id).classList.remove('active'); }
+
+function confirmDownload(){
+  if(!selectedDNS) return;
+  const blob = new Blob([buildConfig()], { type: 'application/x-apple-aspen-config' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const aimCfg = AIM_CONFIG[selectedDNS.key] || { min: 0.5, max: 1.2 };
+  a.download = `REG-LOCK-${selectedDNS.name.replace(/\s+/g,'-')}-AIM-${aimCfg.min.toFixed(1)}-${aimCfg.max.toFixed(1)}.mobileconfig`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  closeModal('modal');
+  setTimeout(() => {
+    alert(`✅ Đã tải: ${selectedDNS.name}\nAIM: ${aimCfg.min.toFixed(1)} - ${aimCfg.max.toFixed(1)}\n\n📱 Cài đặt trên iPhone:\n1. Mở Cài đặt\n2. Vào "Đã tải về"\n3. Bấm "Cài đặt"`);
+  }, 500);
+}
+
+/* ============ TOAST ============ */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.innerText = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+/* ============ AUTO-RESUME ============ */
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('reglock_current');
+  if(saved){
+    try{
+      const data = JSON.parse(saved);
+      const remain = Math.floor((data.expire - Date.now()) / 1000);
+      if(remain > 0){ timeLeft = remain; startApp(); return; }
+      else localStorage.removeItem('reglock_current');
+    }catch(e){ localStorage.removeItem('reglock_current'); }
+  }
+});
+</script>
+</body>
+</html>
