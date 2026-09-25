@@ -31,14 +31,8 @@
     position:relative; overflow-y:auto; overflow-x:hidden; z-index:2; scrollbar-width:none;
   }
   .app::-webkit-scrollbar { display:none; }
-  .app::before {
-    content:''; position:absolute; top:-140px; right:-100px; width:280px; height:280px;
-    background:radial-gradient(circle,rgba(56,189,248,0.22),transparent 70%);
-    pointer-events:none; z-index:0;
-  }
   .screen { position:relative; z-index:2; }
 
-  /* LOCK SCREEN */
   .lock-screen { display:flex; flex-direction:column; align-items:center; gap:16px; padding:16px 4px 8px; }
   .lock-icon-wrap {
     width:92px; height:92px; border-radius:30px;
@@ -118,7 +112,6 @@
   @keyframes spin { to{transform:rotate(360deg);} }
   .key-hint { font-size:0.6rem; color:#3d6f8a; text-align:center; letter-spacing:0.6px; line-height:1.6; margin-top:-4px; }
 
-  /* MAIN SCREEN */
   .main-screen { display:none; flex-direction:column; gap:14px; animation:fadeUp 0.5s ease; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
   .header { display:flex; align-items:center; justify-content:space-between; padding:0 6px 2px; }
@@ -183,11 +176,10 @@
     content:''; position:absolute; left:0; top:0; height:100%; width:3px;
     background:linear-gradient(180deg,#38bdf8,#0284c7); opacity:0; transition:opacity 0.25s;
   }
-  .list-item:hover::before, .list-item:active::before { opacity:1; }
+  .list-item:active::before { opacity:1; }
   .list-item:active {
     transform:scale(0.985); border-color:rgba(56,189,248,0.7);
     box-shadow:0 0 26px rgba(56,189,248,0.4),0 0 0 1px rgba(56,189,248,0.4) inset;
-    background:linear-gradient(100deg,rgba(3,60,88,0.98),rgba(2,44,66,0.98));
   }
   .item-left { display:flex; align-items:center; gap:12px; min-width:0; flex:1; }
   .item-icon {
@@ -247,35 +239,22 @@
 <body>
 
 <div class="app">
-
-  <!-- LOCK SCREEN -->
   <div class="screen lock-screen" id="lockScreen">
-    <div class="lock-icon-wrap">
-      <div class="lock-icon">🔒</div>
-    </div>
+    <div class="lock-icon-wrap"><div class="lock-icon">🔒</div></div>
     <div class="lock-title">SERENITY</div>
     <div class="lock-sub">NHẬP KEY KÍCH HOẠT</div>
-
-    <input type="text" class="key-input" id="keyInput"
-           placeholder="SETTING-XXXX-XXXX-FF"
-           autocomplete="off" autocapitalize="characters" spellcheck="false">
-
+    <input type="text" class="key-input" id="keyInput" placeholder="SETTING-XXXX-XXXX-FF" autocomplete="off" autocapitalize="characters" spellcheck="false">
     <button class="btn" id="activateBtn">KÍCH HOẠT</button>
     <div class="status-msg" id="lockStatus"></div>
     <button class="btn-reset" id="resetBtn">🔄 RESET THIẾT BỊ</button>
-    <div class="key-hint">
-      Định dạng: SETTING-xxxx-xxxx-FF<br>
-      Mỗi key chỉ dùng cho 1 thiết bị duy nhất
-    </div>
+    <div class="key-hint">Định dạng: SETTING-xxxx-xxxx-FF<br>Mỗi key chỉ dùng cho 1 thiết bị duy nhất</div>
   </div>
 
-  <!-- MAIN SCREEN -->
   <div class="screen main-screen" id="mainScreen">
     <div class="header">
       <span class="logo">SERENITY LOCK</span>
       <span class="badge" id="licenseBadge">TUẦN</span>
     </div>
-
     <div class="countdown-card">
       <div class="countdown-left">
         <div class="countdown-label">Thời gian còn lại</div>
@@ -283,26 +262,17 @@
       </div>
       <div class="countdown-icon">⏳</div>
     </div>
-
     <div class="dns-bar">
       <div class="dns-dot"></div>
       <span>dns.serenity-lock.com • backup.serenity-lock.com</span>
     </div>
-
     <div class="list-title">Chọn cấu hình</div>
     <div class="list" id="configList"></div>
-
-    <div class="footer-note">
-      Nhấn vào cấu hình để tải tệp .mobileconfig<br>
-      DNS + thông số AIM được nhúng trực tiếp
-    </div>
+    <div class="footer-note">Nhấn vào cấu hình để tải tệp .mobileconfig<br>DNS + thông số AIM được nhúng trực tiếp</div>
   </div>
-
 </div>
 
-<div class="toast" id="toast">
-  <span id="toastIcon">✅</span><span id="toastText">Đã tải cấu hình</span>
-</div>
+<div class="toast" id="toast"><span id="toastIcon">✅</span><span id="toastText">Đã tải cấu hình</span></div>
 
 <div class="expire-overlay" id="expireOverlay">
   <div class="expire-box">
@@ -317,29 +287,22 @@
 (function() {
   'use strict';
 
-  // ============================================================
-  // 1. KEYS — 5 Giờ / 5 Tuần / 5 Tháng / 5 Vĩnh Viễn
-  // ============================================================
   const KEYS = {
-    // GIỜ (1 giờ)
     'SETTING-GIO1-AAAA-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
     'SETTING-GIO2-BBBB-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
     'SETTING-GIO3-CCCC-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
     'SETTING-GIO4-DDDD-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
     'SETTING-GIO5-EEEE-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
-    // TUẦN (7 ngày)
     'SETTING-TUAN1-AAAA-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
     'SETTING-TUAN2-BBBB-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
     'SETTING-TUAN3-CCCC-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
     'SETTING-TUAN4-DDDD-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
     'SETTING-TUAN5-EEEE-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
-    // THÁNG (30 ngày)
     'SETTING-THANG1-AAAA-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
     'SETTING-THANG2-BBBB-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
     'SETTING-THANG3-CCCC-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
     'SETTING-THANG4-DDDD-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
     'SETTING-THANG5-EEEE-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
-    // VĨNH VIỄN
     'SETTING-VINH1-AAAA-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
     'SETTING-VINH2-BBBB-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
     'SETTING-VINH3-CCCC-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
@@ -347,73 +310,33 @@
     'SETTING-VINH5-EEEE-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity }
   };
 
-  // ============================================================
-  // 2. CONFIGS — Thông số AIM TỐI ĐA
-  //    sens: độ nhạy (0-200)
-  //    head: bám tâm (0.00-1.00)
-  //    recoil: giảm giật (%)
-  //    stab: ổn định (%)
-  // ============================================================
   const CONFIGS = [
-    {
-      id: 'aim_tam',
-      name: 'AIM Bám Tâm',
-      icon: '⚡',
-      sub: 'NHẠY 135 • BÁM 0.94 • GIẬT 98% • ỔN 99%',
-      aim: { sens: 135, head: 0.94, recoil: 98, stab: 99, ff: 'FF Max', profile: 'AIM_TAM' }
-    },
-    {
-      id: 'dpi_1200',
-      name: 'DPI 1200',
-      icon: '💻',
-      sub: 'NHẠY 140 • BÁM 0.90 • GIẬT 95% • ỔN 100%',
-      aim: { sens: 140, head: 0.90, recoil: 95, stab: 100, ff: 'FF Thường', profile: 'DPI_1200' }
-    },
-    {
-      id: 'fps_90',
-      name: 'FPS 90',
-      icon: '📱',
-      sub: 'NHẠY 130 • BÁM 0.88 • GIẬT 99% • ỔN 100%',
-      aim: { sens: 130, head: 0.88, recoil: 99, stab: 100, ff: 'FF Thường', profile: 'FPS_90' }
-    },
-    {
-      id: 'full_settings',
-      name: 'Full Settings',
-      icon: '✅🔥',
-      sub: 'NHẠY 150 • BÁM 0.96 • GIẬT 100% • ỔN 100%',
-      aim: { sens: 150, head: 0.96, recoil: 100, stab: 100, ff: 'FF Max', profile: 'FULL_SETTINGS' }
-    },
-    {
-      id: 'head_shot',
-      name: 'HEAD Bắn Đầu',
-      icon: '🔥',
-      sub: 'NHẠY 125 • BÁM 0.98 • GIẬT 98% • ỔN 99%',
-      aim: { sens: 125, head: 0.98, recoil: 98, stab: 99, ff: 'FF Max', profile: 'HEAD_SHOT' }
-    },
-    {
-      id: 'sensi_touch',
-      name: 'Sensi Touch',
-      icon: '⚡',
-      sub: 'NHẠY 155 • BÁM 0.92 • GIẬT 97% • ỔN 99%',
-      aim: { sens: 155, head: 0.92, recoil: 97, stab: 99, ff: 'FF Thường', profile: 'SENSI_TOUCH' }
-    }
+    { id:'aim_tam', name:'AIM Bám Tâm', icon:'⚡',
+      sub:'NHẠY 135 • BÁM 0.94 • GIẬT 98% • ỔN 99%',
+      aim:{ sens:135, head:0.94, recoil:98, stab:99, ff:'FF Max', profile:'AIM_TAM' } },
+    { id:'dpi_1200', name:'DPI 1200', icon:'💻',
+      sub:'NHẠY 140 • BÁM 0.90 • GIẬT 95% • ỔN 100%',
+      aim:{ sens:140, head:0.90, recoil:95, stab:100, ff:'FF Thường', profile:'DPI_1200' } },
+    { id:'fps_90', name:'FPS 90', icon:'📱',
+      sub:'NHẠY 130 • BÁM 0.88 • GIẬT 99% • ỔN 100%',
+      aim:{ sens:130, head:0.88, recoil:99, stab:100, ff:'FF Thường', profile:'FPS_90' } },
+    { id:'full_settings', name:'Full Settings', icon:'✅🔥',
+      sub:'NHẠY 150 • BÁM 0.96 • GIẬT 100% • ỔN 100%',
+      aim:{ sens:150, head:0.96, recoil:100, stab:100, ff:'FF Max', profile:'FULL_SETTINGS' } },
+    { id:'head_shot', name:'HEAD Bắn Đầu', icon:'🔥',
+      sub:'NHẠY 125 • BÁM 0.98 • GIẬT 98% • ỔN 99%',
+      aim:{ sens:125, head:0.98, recoil:98, stab:99, ff:'FF Max', profile:'HEAD_SHOT' } },
+    { id:'sensi_touch', name:'Sensi Touch', icon:'⚡',
+      sub:'NHẠY 155 • BÁM 0.92 • GIẬT 97% • ỔN 99%',
+      aim:{ sens:155, head:0.92, recoil:97, stab:99, ff:'FF Thường', profile:'SENSI_TOUCH' } }
   ];
 
-  // ============================================================
-  // 3. STORAGE
-  // ============================================================
   const SK = {
-    ACTIVATED: 'serenity_activated',
-    EXPIRY: 'serenity_expiry',
-    LICENSE: 'serenity_license',
-    DEVICE_ID: 'serenity_device_id',
-    USED_KEY: 'serenity_used_key',
-    REGISTRY: 'serenity_key_registry'
+    ACTIVATED:'serenity_activated', EXPIRY:'serenity_expiry',
+    LICENSE:'serenity_license', DEVICE_ID:'serenity_device_id',
+    USED_KEY:'serenity_used_key', REGISTRY:'serenity_key_registry'
   };
 
-  // ============================================================
-  // 4. DOM
-  // ============================================================
   const lockScreen = document.getElementById('lockScreen');
   const mainScreen = document.getElementById('mainScreen');
   const keyInput = document.getElementById('keyInput');
@@ -432,218 +355,122 @@
 
   let countdownInterval = null;
 
-  // ============================================================
-  // 5. DEVICE ID
-  // ============================================================
   function getDeviceId() {
     let id = localStorage.getItem(SK.DEVICE_ID);
     if (!id) {
-      const fp = [
-        navigator.userAgent, navigator.language,
-        screen.width + 'x' + screen.height, screen.colorDepth,
-        new Date().getTimezoneOffset(),
-        navigator.hardwareConcurrency || 0,
-        navigator.platform || '',
-        Math.random().toString(36).substring(2, 12)
-      ].join('|');
+      const fp = [navigator.userAgent, navigator.language,
+        screen.width+'x'+screen.height, screen.colorDepth,
+        new Date().getTimezoneOffset(), navigator.hardwareConcurrency||0,
+        navigator.platform||'', Math.random().toString(36).substring(2,12)].join('|');
       let hash = 5381;
-      for (let i = 0; i < fp.length; i++) {
-        hash = ((hash << 5) + hash) + fp.charCodeAt(i);
-        hash = hash & hash;
-      }
-      id = 'DEV-' + Math.abs(hash).toString(36).toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+      for (let i=0;i<fp.length;i++){ hash=((hash<<5)+hash)+fp.charCodeAt(i); hash=hash&hash; }
+      id = 'DEV-'+Math.abs(hash).toString(36).toUpperCase()+'-'+Date.now().toString(36).toUpperCase();
       localStorage.setItem(SK.DEVICE_ID, id);
     }
     return id;
   }
 
-  // ============================================================
-  // 6. REGISTRY
-  // ============================================================
   function getKeyRegistry() {
-    try {
-      const raw = localStorage.getItem(SK.REGISTRY);
-      return raw ? JSON.parse(raw) : {};
-    } catch (e) { return {}; }
+    try { const r = localStorage.getItem(SK.REGISTRY); return r?JSON.parse(r):{}; }
+    catch(e){ return {}; }
   }
   function saveKeyRegistry(reg) {
-    try { localStorage.setItem(SK.REGISTRY, JSON.stringify(reg)); } catch (e) {}
+    try { localStorage.setItem(SK.REGISTRY, JSON.stringify(reg)); } catch(e){}
   }
 
-  // ============================================================
-  // 7. CHECK ACTIVATION
-  // ============================================================
   function checkActivation() {
-    const activated = localStorage.getItem(SK.ACTIVATED);
-    const expiryStr = localStorage.getItem(SK.EXPIRY);
-    const license = localStorage.getItem(SK.LICENSE);
-    const usedKey = localStorage.getItem(SK.USED_KEY);
-
-    if (activated === 'true' && expiryStr && usedKey) {
-      const expiry = parseInt(expiryStr);
-      const now = Date.now();
+    const act = localStorage.getItem(SK.ACTIVATED);
+    const exp = localStorage.getItem(SK.EXPIRY);
+    const lic = localStorage.getItem(SK.LICENSE);
+    const used = localStorage.getItem(SK.USED_KEY);
+    if (act==='true' && exp && used) {
       const deviceId = getDeviceId();
       const reg = getKeyRegistry();
-      if (reg[usedKey] && reg[usedKey] !== deviceId) {
-        forceExpire('Key đã được dùng trên thiết bị khác!');
-        return false;
-      }
-      if (now < expiry) {
-        showMainScreen(license);
-        startCountdown(expiry);
-        return true;
-      } else {
-        forceExpire('Key của bạn đã hết hạn.');
-        return false;
-      }
+      if (reg[used] && reg[used] !== deviceId) { forceExpire('Key đã được dùng trên thiết bị khác!'); return false; }
+      if (Date.now() < parseInt(exp)) {
+        showMainScreen(lic); startCountdown(parseInt(exp)); return true;
+      } else { forceExpire('Key của bạn đã hết hạn.'); return false; }
     }
     return false;
   }
 
-  function showMainScreen(licenseLabel) {
-    lockScreen.style.display = 'none';
-    mainScreen.style.display = 'flex';
-    if (licenseLabel) licenseBadge.textContent = licenseLabel;
+  function showMainScreen(label) {
+    lockScreen.style.display='none'; mainScreen.style.display='flex';
+    if (label) licenseBadge.textContent = label;
   }
 
-  // ============================================================
-  // 8. COUNTDOWN
-  // ============================================================
   function startCountdown(expiry) {
     if (countdownInterval) clearInterval(countdownInterval);
     function tick() {
       const left = expiry - Date.now();
-      if (left <= 0) {
-        clearInterval(countdownInterval);
-        countdownTime.textContent = '00:00:00';
-        forceExpire('Key của bạn đã hết hạn.');
-        return;
-      }
-      const totalSec = Math.floor(left / 1000);
-      const days = Math.floor(totalSec / 86400);
-      const hours = Math.floor((totalSec % 86400) / 3600);
-      const mins = Math.floor((totalSec % 3600) / 60);
-      const secs = totalSec % 60;
-      const pad = (n) => String(n).padStart(2, '0');
-      countdownTime.textContent = days > 0
-        ? days + 'd ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs)
-        : pad(hours) + ':' + pad(mins) + ':' + pad(secs);
-      countdownTime.classList.remove('warning', 'danger');
-      if (left < 5 * 60 * 1000) countdownTime.classList.add('danger');
-      else if (left < 60 * 60 * 1000) countdownTime.classList.add('warning');
+      if (left <= 0) { clearInterval(countdownInterval); countdownTime.textContent='00:00:00'; forceExpire('Key của bạn đã hết hạn.'); return; }
+      const ts = Math.floor(left/1000);
+      const d = Math.floor(ts/86400), h = Math.floor((ts%86400)/3600), m = Math.floor((ts%3600)/60), s = ts%60;
+      const pad = n => String(n).padStart(2,'0');
+      countdownTime.textContent = d>0 ? d+'d '+pad(h)+':'+pad(m)+':'+pad(s) : pad(h)+':'+pad(m)+':'+pad(s);
+      countdownTime.classList.remove('warning','danger');
+      if (left < 5*60*1000) countdownTime.classList.add('danger');
+      else if (left < 60*60*1000) countdownTime.classList.add('warning');
     }
-    tick();
-    countdownInterval = setInterval(tick, 1000);
+    tick(); countdownInterval = setInterval(tick, 1000);
   }
 
-  // ============================================================
-  // 9. FORCE EXPIRE — tự đóng app
-  // ============================================================
-  function forceExpire(message) {
-    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+  function forceExpire(msg) {
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
     localStorage.removeItem(SK.ACTIVATED);
     localStorage.removeItem(SK.EXPIRY);
     localStorage.removeItem(SK.LICENSE);
-    if (message) {
-      expireText.innerHTML = message.replace(/\n/g, '<br>') +
-        '<br><br>Vui lòng nhập key mới để tiếp tục sử dụng.';
-    }
+    if (msg) expireText.innerHTML = msg.replace(/\n/g,'<br>')+'<br><br>Vui lòng nhập key mới để tiếp tục sử dụng.';
     expireOverlay.classList.add('show');
   }
 
-  // ============================================================
-  // 10. ACTIVATE KEY
-  // ============================================================
   function activateKey() {
     const raw = keyInput.value.trim().toUpperCase();
-    if (!raw) {
-      lockStatus.textContent = 'Vui lòng nhập key.';
-      lockStatus.classList.remove('success');
-      return;
-    }
-
+    if (!raw) { lockStatus.textContent='Vui lòng nhập key.'; lockStatus.classList.remove('success'); return; }
     const pattern = /^SETTING-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/;
-    if (!pattern.test(raw)) {
-      lockStatus.textContent = 'Sai định dạng! Đúng: SETTING-xxxx-xxxx-FF';
-      lockStatus.classList.remove('success');
-      return;
-    }
-
+    if (!pattern.test(raw)) { lockStatus.textContent='Sai định dạng! Đúng: SETTING-xxxx-xxxx-FF'; lockStatus.classList.remove('success'); return; }
     const keyData = KEYS[raw];
-    if (!keyData) {
-      lockStatus.textContent = 'Key không tồn tại.';
-      lockStatus.classList.remove('success');
-      return;
-    }
+    if (!keyData) { lockStatus.textContent='Key không tồn tại.'; lockStatus.classList.remove('success'); return; }
 
-    // Check registry theo thiết bị
     const deviceId = getDeviceId();
     const reg = getKeyRegistry();
-
     if (reg[raw] && reg[raw] !== deviceId) {
-      lockStatus.textContent = 'Key đã được kích hoạt trên thiết bị khác!';
+      lockStatus.textContent='Key đã được kích hoạt trên thiết bị khác!';
       lockStatus.classList.remove('success');
       showToast('Key thuộc thiết bị khác', true);
       return;
     }
+    if (!reg[raw]) { reg[raw]=deviceId; saveKeyRegistry(reg); }
 
-    if (!reg[raw]) {
-      reg[raw] = deviceId;
-      saveKeyRegistry(reg);
-    }
-
-    // Loading 1 giây
     activateBtn.disabled = true;
     activateBtn.innerHTML = '<span class="loading-spinner"></span> ĐANG KÍCH HOẠT...';
-    lockStatus.textContent = '';
-    lockStatus.classList.remove('success');
+    lockStatus.textContent=''; lockStatus.classList.remove('success');
 
     setTimeout(() => {
       const now = Date.now();
-      let expiryTime;
-      if (keyData.type === 'forever') {
-        expiryTime = now + 100 * 365 * 24 * 60 * 60 * 1000;
-      } else {
-        expiryTime = now + keyData.ms;
-      }
-
-      localStorage.setItem(SK.ACTIVATED, 'true');
+      const expiryTime = keyData.type==='forever' ? now + 100*365*24*60*60*1000 : now + keyData.ms;
+      localStorage.setItem(SK.ACTIVATED,'true');
       localStorage.setItem(SK.EXPIRY, expiryTime.toString());
       localStorage.setItem(SK.LICENSE, keyData.label);
       localStorage.setItem(SK.USED_KEY, raw);
-
-      activateBtn.disabled = false;
-      activateBtn.innerHTML = 'KÍCH HOẠT';
-      lockStatus.textContent = '';
-      keyInput.value = '';
-
-      showMainScreen(keyData.label);
-      startCountdown(expiryTime);
-      showToast('Kích hoạt thành công • ' + keyData.label, false);
+      activateBtn.disabled=false; activateBtn.innerHTML='KÍCH HOẠT';
+      lockStatus.textContent=''; keyInput.value='';
+      showMainScreen(keyData.label); startCountdown(expiryTime);
+      showToast('Kích hoạt thành công • '+keyData.label, false);
     }, 1000);
   }
 
-  // ============================================================
-  // 11. RESET DEVICE
-  // ============================================================
   function resetDevice() {
-    if (!confirm('XÓA TOÀN BỘ trạng thái kích hoạt và registry key?\n\nSau khi reset, mọi key đều có thể nhập lại.')) return;
-    Object.keys(localStorage).forEach(k => {
-      if (k.indexOf('serenity_') === 0) localStorage.removeItem(k);
-    });
-    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+    if (!confirm('XÓA TOÀN BỘ trạng thái kích hoạt và registry key?')) return;
+    Object.keys(localStorage).forEach(k => { if (k.indexOf('serenity_')===0) localStorage.removeItem(k); });
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
     expireOverlay.classList.remove('show');
-    mainScreen.style.display = 'none';
-    lockScreen.style.display = 'flex';
-    lockStatus.textContent = 'Đã reset! Nhập key để kích hoạt lại.';
-    lockStatus.classList.add('success');
-    keyInput.value = '';
+    mainScreen.style.display='none'; lockScreen.style.display='flex';
+    lockStatus.textContent='Đã reset! Nhập key để kích hoạt lại.';
+    lockStatus.classList.add('success'); keyInput.value='';
     showToast('Đã reset thiết bị', false);
   }
 
-  // ============================================================
-  // 12. RENDER CONFIGS
-  // ============================================================
   function renderConfigs() {
     configList.innerHTML = '';
     CONFIGS.forEach(cfg => {
@@ -663,63 +490,97 @@
     });
   }
 
-  // ============================================================
-  // 13. UUID
-  // ============================================================
   function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+      const r = Math.random()*16|0;
+      const v = c==='x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
   }
 
   // ============================================================
-  // 14. GENERATE .mobileconfig
-  //     DNS + AIM nhúng TRỰC TIẾP trong cùng payload
+  // GENERATE .mobileconfig CHUẨN APPLE
   // ============================================================
   function generateMobileConfig(cfg) {
-    const uuid = generateUUID();
-    const uuid2 = generateUUID();
+    const uuidDns   = generateUUID();
+    const uuidAim   = generateUUID();
+    const uuidOuter = generateUUID();
     const aim = cfg.aim;
 
+    // ----- PAYLOAD 1: DNS chuẩn Apple -----
+    // Tham khảo: com.apple.dnsSettings.managed
+    // - DNSProtocol: HTTPS (DoH)
+    // - ServerURL: URL DoH đầy đủ
+    // - ServerAddresses: mảng IP/domain dự phòng
     const dnsPayload =
-      '\n      <key>DNSSettings</key>' +
-      '\n      <dict>' +
-      '\n        <key>DNSProtocol</key>' +
-      '\n        <string>HTTPS</string>' +
-      '\n        <key>ServerURL</key>' +
-      '\n        <string>https://dns.serenity-lock.com/dns-query</string>' +
-      '\n        <key>ServerAddresses</key>' +
-      '\n        <array>' +
-      '\n          <string>dns.serenity-lock.com</string>' +
-      '\n          <string>backup.serenity-lock.com</string>' +
-      '\n        </array>' +
-      '\n      </dict>';
+      '    <dict>\n' +
+      '      <key>PayloadType</key>\n' +
+      '      <string>com.apple.dnsSettings.managed</string>\n' +
+      '      <key>PayloadIdentifier</key>\n' +
+      '      <string>com.serenity.lock.dns.' + uuidDns + '</string>\n' +
+      '      <key>PayloadUUID</key>\n' +
+      '      <string>' + uuidDns + '</string>\n' +
+      '      <key>PayloadDisplayName</key>\n' +
+      '      <string>SERENITY DNS — ' + cfg.name + '</string>\n' +
+      '      <key>PayloadDescription</key>\n' +
+      '      <string>DNS mã hoá cho SERENITY LOCK</string>\n' +
+      '      <key>PayloadOrganization</key>\n' +
+      '      <string>SERENITY</string>\n' +
+      '      <key>PayloadVersion</key>\n' +
+      '      <integer>1</integer>\n' +
+      '      <key>DNSProtocol</key>\n' +
+      '      <string>HTTPS</string>\n' +
+      '      <key>ServerURL</key>\n' +
+      '      <string>https://dns.serenity-lock.com/dns-query</string>\n' +
+      '      <key>ServerAddresses</key>\n' +
+      '      <array>\n' +
+      '        <string>dns.serenity-lock.com</string>\n' +
+      '        <string>backup.serenity-lock.com</string>\n' +
+      '      </array>\n' +
+      '      <key>SupplementalMatchDomains</key>\n' +
+      '      <array>\n' +
+      '        <string>serenity-lock.com</string>\n' +
+      '      </array>\n' +
+      '    </dict>';
 
-    // AIM nhúng trực tiếp cùng payload với DNS
+    // ----- PAYLOAD 2: AIM tùy chỉnh (custom payload) -----
+    // Dùng PayloadType riêng để iOS chấp nhận & giữ nguyên dữ liệu
+    // Các key AIM sẽ nằm trong payload này, cài cùng lúc với DNS
     const aimPayload =
-      '\n      <key>AIMSettings</key>' +
-      '\n      <dict>' +
-      '\n        <key>ProfileName</key>' +
-      '\n        <string>SERENITY_' + aim.profile + '</string>' +
-      '\n        <key>ConfigName</key>' +
-      '\n        <string>' + cfg.name + '</string>' +
-      '\n        <key>FFMode</key>' +
-      '\n        <string>' + aim.ff + '</string>' +
-      '\n        <key>TotalSensitivity</key>' +
-      '\n        <integer>' + aim.sens + '</integer>' +
-      '\n        <key>HeadTracking</key>' +
-      '\n        <real>' + aim.head.toFixed(2) + '</real>' +
-      '\n        <key>RecoilControl</key>' +
-      '\n        <integer>' + aim.recoil + '</integer>' +
-      '\n        <key>ScreenStabilization</key>' +
-      '\n        <integer>' + aim.stab + '</integer>' +
-      '\n        <key>DNSLock</key>' +
-      '\n        <string>dns.serenity-lock.com</string>' +
-      '\n        <key>DNSBackup</key>' +
-      '\n        <string>backup.serenity-lock.com</string>' +
-      '\n      </dict>';
+      '    <dict>\n' +
+      '      <key>PayloadType</key>\n' +
+      '      <string>com.serenity.lock.aim</string>\n' +
+      '      <key>PayloadIdentifier</key>\n' +
+      '      <string>com.serenity.lock.aim.' + uuidAim + '</string>\n' +
+      '      <key>PayloadUUID</key>\n' +
+      '      <string>' + uuidAim + '</string>\n' +
+      '      <key>PayloadDisplayName</key>\n' +
+      '      <string>SERENITY AIM — ' + cfg.name + '</string>\n' +
+      '      <key>PayloadDescription</key>\n' +
+      '      <string>Thông số AIM cho ' + cfg.name + '</string>\n' +
+      '      <key>PayloadOrganization</key>\n' +
+      '      <string>SERENITY</string>\n' +
+      '      <key>PayloadVersion</key>\n' +
+      '      <integer>1</integer>\n' +
+      '      <key>ProfileName</key>\n' +
+      '      <string>SERENITY_' + aim.profile + '</string>\n' +
+      '      <key>ConfigName</key>\n' +
+      '      <string>' + cfg.name + '</string>\n' +
+      '      <key>FFMode</key>\n' +
+      '      <string>' + aim.ff + '</string>\n' +
+      '      <key>TotalSensitivity</key>\n' +
+      '      <integer>' + aim.sens + '</integer>\n' +
+      '      <key>HeadTracking</key>\n' +
+      '      <string>' + aim.head.toFixed(2) + '</string>\n' +
+      '      <key>RecoilControl</key>\n' +
+      '      <integer>' + aim.recoil + '</integer>\n' +
+      '      <key>ScreenStabilization</key>\n' +
+      '      <integer>' + aim.stab + '</integer>\n' +
+      '      <key>DNSLock</key>\n' +
+      '      <string>dns.serenity-lock.com</string>\n' +
+      '      <key>DNSBackup</key>\n' +
+      '      <string>backup.serenity-lock.com</string>\n' +
+      '    </dict>';
 
     return '<?xml version="1.0" encoding="UTF-8"?>\n' +
       '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
@@ -727,46 +588,27 @@
       '<dict>\n' +
       '  <key>PayloadContent</key>\n' +
       '  <array>\n' +
-      '    <dict>\n' +
-      '      <key>PayloadType</key>\n' +
-      '      <string>com.apple.dnsSettings.managed</string>\n' +
-      '      <key>PayloadIdentifier</key>\n' +
-      '      <string>com.serenity.lock.' + cfg.id + '.' + uuid + '</string>\n' +
-      '      <key>PayloadUUID</key>\n' +
-      '      <string>' + uuid + '</string>\n' +
-      '      <key>PayloadDisplayName</key>\n' +
-      '      <string>SERENITY LOCK — ' + cfg.name + '</string>\n' +
-      '      <key>PayloadDescription</key>\n' +
-      '      <string>DNS + AIM: ' + cfg.name + '</string>\n' +
-      '      <key>PayloadVersion</key>\n' +
-      '      <integer>1</integer>\n' +
-      '      <key>PayloadOrganization</key>\n' +
-      '      <string>SERENITY</string>\n' +
       dnsPayload + '\n' +
       aimPayload + '\n' +
-      '    </dict>\n' +
       '  </array>\n' +
       '  <key>PayloadDisplayName</key>\n' +
       '  <string>SERENITY LOCK — ' + cfg.name + '</string>\n' +
       '  <key>PayloadIdentifier</key>\n' +
-      '  <string>com.serenity.lock.profile.' + uuid2 + '</string>\n' +
+      '  <string>com.serenity.lock.profile.' + uuidOuter + '</string>\n' +
       '  <key>PayloadUUID</key>\n' +
-      '  <string>' + uuid2 + '</string>\n' +
-      '  <key>PayloadVersion</key>\n' +
-      '  <integer>1</integer>\n' +
-      '  <key>PayloadOrganization</key>\n' +
-      '  <string>SERENITY</string>\n' +
+      '  <string>' + uuidOuter + '</string>\n' +
       '  <key>PayloadDescription</key>\n' +
       '  <string>Cấu hình DNS + AIM tích hợp — ' + cfg.name + '</string>\n' +
+      '  <key>PayloadOrganization</key>\n' +
+      '  <string>SERENITY</string>\n' +
+      '  <key>PayloadVersion</key>\n' +
+      '  <integer>1</integer>\n' +
       '  <key>PayloadRemovalDisallowed</key>\n' +
       '  <false/>\n' +
       '</dict>\n' +
       '</plist>';
   }
 
-  // ============================================================
-  // 15. DOWNLOAD
-  // ============================================================
   function downloadConfig(cfg) {
     try {
       const content = generateMobileConfig(cfg);
@@ -785,9 +627,6 @@
     }
   }
 
-  // ============================================================
-  // 16. TOAST
-  // ============================================================
   let toastTimer = null;
   function showToast(msg, isError) {
     toastText.textContent = msg;
@@ -798,49 +637,37 @@
     toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
   }
 
-  // ============================================================
-  // 17. INIT
-  // ============================================================
   function init() {
     renderConfigs();
     getDeviceId();
-
     const wasActivated = checkActivation();
-    if (!wasActivated) {
-      lockScreen.style.display = 'flex';
-      mainScreen.style.display = 'none';
-    }
+    if (!wasActivated) { lockScreen.style.display='flex'; mainScreen.style.display='none'; }
 
     activateBtn.addEventListener('click', activateKey);
     resetBtn.addEventListener('click', resetDevice);
 
-    keyInput.addEventListener('keydown', (e) => {
+    keyInput.addEventListener('keydown', e => {
       if (e.key === 'Enter') { e.preventDefault(); activateKey(); }
     });
-
-    keyInput.addEventListener('input', (e) => {
+    keyInput.addEventListener('input', e => {
       const pos = e.target.selectionStart;
       e.target.value = e.target.value.toUpperCase();
-      try { e.target.setSelectionRange(pos, pos); } catch (err) {}
+      try { e.target.setSelectionRange(pos, pos); } catch(err){}
     });
 
     expireBtn.addEventListener('click', () => {
       expireOverlay.classList.remove('show');
-      lockScreen.style.display = 'flex';
-      mainScreen.style.display = 'none';
-      lockStatus.textContent = 'Key đã hết hạn. Vui lòng nhập key mới.';
-      lockStatus.classList.remove('success');
-      keyInput.value = '';
+      lockScreen.style.display='flex'; mainScreen.style.display='none';
+      lockStatus.textContent='Key đã hết hạn. Vui lòng nhập key mới.';
+      lockStatus.classList.remove('success'); keyInput.value='';
     });
 
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {
-        const expiryStr = localStorage.getItem(SK.EXPIRY);
-        const activated = localStorage.getItem(SK.ACTIVATED);
-        if (activated === 'true' && expiryStr) {
-          if (Date.now() >= parseInt(expiryStr)) {
-            forceExpire('Key của bạn đã hết hạn.');
-          }
+        const exp = localStorage.getItem(SK.EXPIRY);
+        const act = localStorage.getItem(SK.ACTIVATED);
+        if (act==='true' && exp && Date.now() >= parseInt(exp)) {
+          forceExpire('Key của bạn đã hết hạn.');
         }
       }
     });
