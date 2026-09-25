@@ -2,1030 +2,852 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>REG LOCK</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>SERENITY LOCK</title>
 <style>
-:root{
-  --ocean:#8B0000; --purple:#1a0000; --bg:#0d0000; --card:#1a0a0a;
-  --text:#FFE6E6; --sub:#B08888; --green:#FF4C4C; --red:#FF4C4C; --gold:#FFAA00;
-  --grad1:#8B0000; --grad2:#1a0000;
-}
-*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:linear-gradient(135deg,var(--grad1),var(--grad2));color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden}
+  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,'SF Pro Display','Segoe UI',Roboto,sans-serif; -webkit-tap-highlight-color:transparent; }
+  html,body { height:100%; overflow:hidden; }
+  body {
+    min-height:100vh;
+    background:linear-gradient(165deg,#031a2a 0%,#052b42 40%,#021420 100%);
+    display:flex; align-items:center; justify-content:center;
+    padding:14px; color:#e0f2fe; position:relative;
+  }
+  body::before {
+    content:''; position:fixed; top:-20%; left:-20%; width:140%; height:140%;
+    background:radial-gradient(circle at 30% 20%,rgba(56,189,248,0.15),transparent 50%),
+              radial-gradient(circle at 70% 80%,rgba(2,132,199,0.18),transparent 50%);
+    pointer-events:none; animation:bgShift 18s ease-in-out infinite;
+  }
+  @keyframes bgShift { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-3%,2%) scale(1.08);} }
+  .app {
+    width:100%; max-width:420px; max-height:96vh;
+    background:rgba(4,28,44,0.78);
+    backdrop-filter:blur(22px) saturate(170%); -webkit-backdrop-filter:blur(22px) saturate(170%);
+    border-radius:38px; padding:22px 18px 24px;
+    border:1px solid rgba(56,189,248,0.28);
+    box-shadow:0 30px 70px -14px rgba(0,0,0,0.95),0 0 0 1px rgba(14,165,233,0.15) inset,0 0 50px rgba(2,132,199,0.28);
+    position:relative; overflow-y:auto; overflow-x:hidden; z-index:2; scrollbar-width:none;
+  }
+  .app::-webkit-scrollbar { display:none; }
+  .app::before {
+    content:''; position:absolute; top:-140px; right:-100px; width:280px; height:280px;
+    background:radial-gradient(circle,rgba(56,189,248,0.22),transparent 70%);
+    pointer-events:none; z-index:0;
+  }
+  .screen { position:relative; z-index:2; }
 
-#key-screen{width:100%;max-width:400px;padding:20px;text-align:center;display:flex;flex-direction:column;gap:20px;z-index:10}
-.logo-box{display:flex;flex-direction:column;align-items:center;gap:10px}
-.logo-svg{width:70px;height:70px;filter:drop-shadow(0 0 15px var(--green))}
-.logo{font-size:38px;font-weight:900;letter-spacing:3px;background:linear-gradient(to right,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.slogan{font-size:12px;color:var(--sub);letter-spacing:2px}
-.input-group{display:flex;flex-direction:column;gap:15px;background:rgba(255,255,255,.05);padding:25px;border-radius:20px;border:1px solid rgba(255,76,76,.2)}
-input{padding:16px;border-radius:12px;border:1px solid rgba(255,76,76,.3);background:rgba(0,0,0,.4);color:#fff;font-size:16px;outline:none;text-align:center;letter-spacing:2px}
-input::placeholder{color:rgba(255,255,255,.3)}
-button{padding:16px;border-radius:12px;border:none;font-size:16px;font-weight:bold;cursor:pointer;transition:all .3s}
-.btn-primary{background:linear-gradient(to right,var(--purple),var(--ocean));color:#fff;box-shadow:0 4px 20px rgba(139,0,0,.5)}
-.btn-primary:active{transform:scale(.97)}
-.loading{display:none;flex-direction:column;align-items:center;gap:15px;margin-top:20px}
-.spinner{width:50px;height:50px;border:5px solid rgba(255,255,255,.1);border-top:5px solid var(--green);border-radius:50%;animation:spin 1s linear infinite}
-@keyframes spin{100%{transform:rotate(360deg)}}
-.err{color:var(--red);font-size:14px;display:none;margin-top:10px;font-weight:600}
+  /* LOCK SCREEN */
+  .lock-screen { display:flex; flex-direction:column; align-items:center; gap:16px; padding:16px 4px 8px; }
+  .lock-icon-wrap {
+    width:92px; height:92px; border-radius:30px;
+    background:linear-gradient(145deg,#0369a1,#0ea5e9);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 38px rgba(56,189,248,0.75),0 0 0 1px rgba(255,255,255,0.1) inset;
+    animation:floaty 3s ease-in-out infinite; position:relative;
+  }
+  .lock-icon-wrap::after {
+    content:''; position:absolute; inset:-8px; border-radius:38px;
+    border:1.5px solid rgba(125,211,252,0.45); animation:ringPulse 2.4s ease-out infinite;
+  }
+  @keyframes ringPulse { 0%{transform:scale(1);opacity:0.8;} 100%{transform:scale(1.28);opacity:0;} }
+  @keyframes floaty { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
+  .lock-icon { font-size:2.7rem; filter:drop-shadow(0 0 12px rgba(255,255,255,0.7)); }
+  .lock-title {
+    font-size:2rem; font-weight:900; letter-spacing:5px;
+    background:linear-gradient(180deg,#e0f2fe,#38bdf8);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    text-shadow:0 0 30px rgba(56,189,248,0.75); margin-top:4px;
+  }
+  .lock-sub { font-size:0.72rem; color:#5b93b3; letter-spacing:4px; text-transform:uppercase; font-weight:700; margin-top:-8px; }
+  .key-input {
+    width:100%; padding:16px 14px; border-radius:18px;
+    border:1.5px solid rgba(56,189,248,0.4);
+    background:rgba(1,22,35,0.88); color:#e0f2fe;
+    font-size:0.92rem; font-weight:700; letter-spacing:1.2px;
+    text-align:center; outline:none; transition:all 0.25s;
+    font-family:'SF Mono',Menlo,monospace;
+  }
+  .key-input:focus {
+    border-color:#38bdf8;
+    box-shadow:0 0 0 4px rgba(56,189,248,0.18),0 0 26px rgba(14,165,233,0.55);
+    background:rgba(2,36,56,0.98);
+  }
+  .key-input::placeholder { color:#2f6180; letter-spacing:0.5px; font-size:0.74rem; font-weight:500; }
+  .btn {
+    width:100%; padding:16px; border-radius:18px; border:none;
+    font-size:1rem; font-weight:800; letter-spacing:2.5px;
+    background:linear-gradient(135deg,#0284c7,#0ea5e9,#38bdf8);
+    color:#fff; cursor:pointer; transition:all 0.2s;
+    text-shadow:0 1px 4px rgba(0,0,0,0.5);
+    box-shadow:0 10px 26px -8px #0284c7,0 0 26px rgba(56,189,248,0.6);
+    animation:btnGlow 2.4s ease-in-out infinite;
+    position:relative; overflow:hidden;
+  }
+  .btn::after {
+    content:''; position:absolute; top:0; left:-80%; width:60%; height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+    animation:shine 3.2s infinite;
+  }
+  @keyframes shine { 0%{left:-80%;} 55%{left:130%;} 100%{left:130%;} }
+  @keyframes btnGlow {
+    0%,100%{box-shadow:0 10px 26px -8px #0284c7,0 0 20px rgba(56,189,248,0.45);}
+    50%{box-shadow:0 10px 34px -6px #38bdf8,0 0 38px rgba(56,189,248,0.85);}
+  }
+  .btn:active { transform:scale(0.97); filter:brightness(1.12); }
+  .btn:disabled { opacity:0.65; animation:none; cursor:not-allowed; }
+  .btn-reset {
+    width:100%; padding:12px; border-radius:16px;
+    background:rgba(220,38,38,0.15); border:1px solid rgba(248,113,113,0.5);
+    color:#fca5a5; font-size:0.78rem; font-weight:700; letter-spacing:1.5px;
+    cursor:pointer; transition:all 0.2s; margin-top:-4px;
+  }
+  .btn-reset:active { transform:scale(0.97); background:rgba(220,38,38,0.3); }
+  .status-msg {
+    font-size:0.82rem; min-height:20px; color:#fca5a5;
+    text-align:center; font-weight:700; letter-spacing:0.3px; line-height:1.4;
+  }
+  .status-msg.success { color:#86efac; }
+  .loading-spinner {
+    display:inline-block; width:16px; height:16px;
+    border:2px solid rgba(255,255,255,0.3); border-radius:50%;
+    border-top-color:#fff; animation:spin 0.7s linear infinite;
+    margin-right:8px; vertical-align:middle;
+  }
+  @keyframes spin { to{transform:rotate(360deg);} }
+  .key-hint { font-size:0.6rem; color:#3d6f8a; text-align:center; letter-spacing:0.6px; line-height:1.6; margin-top:-4px; }
 
-#app-screen{display:none;width:100%;max-width:400px;height:100vh;background:var(--bg);flex-direction:column;overflow-y:auto;position:absolute;top:0;left:0;z-index:20}
-.header{padding:20px;background:linear-gradient(to right,var(--grad1),var(--grad2));border-bottom-left-radius:25px;border-bottom-right-radius:25px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 15px rgba(0,0,0,.6);position:sticky;top:0;z-index:5}
-.header h1{font-size:20px;font-weight:800;letter-spacing:1px;color:#FF4C4C}
-.timer{background:rgba(0,0,0,.4);padding:8px 14px;border-radius:10px;font-size:13px;font-weight:bold;color:var(--green);border:1px solid rgba(255,76,76,.4);font-family:monospace}
-.timer.warn{color:#FFAA00;border-color:#FFAA00;animation:blink 1s infinite}
-.timer.danger{color:var(--red);border-color:var(--red);animation:blink .5s infinite}
-@keyframes blink{50%{opacity:.4}}
+  /* MAIN SCREEN */
+  .main-screen { display:none; flex-direction:column; gap:14px; animation:fadeUp 0.5s ease; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
+  .header { display:flex; align-items:center; justify-content:space-between; padding:0 6px 2px; }
+  .logo {
+    font-size:1.15rem; font-weight:900; letter-spacing:2.5px;
+    background:linear-gradient(90deg,#bae6fd,#38bdf8);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .badge {
+    background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.6);
+    padding:5px 12px; border-radius:30px; font-size:0.62rem; font-weight:800;
+    color:#7dd3fc; letter-spacing:1.2px; text-transform:uppercase;
+    box-shadow:0 0 14px rgba(56,189,248,0.4); white-space:nowrap;
+  }
+  .countdown-card {
+    background:linear-gradient(100deg,rgba(2,44,66,0.9),rgba(3,32,50,0.9));
+    border:1px solid rgba(56,189,248,0.35); border-radius:18px;
+    padding:12px 16px; display:flex; align-items:center; justify-content:space-between;
+    gap:10px; box-shadow:0 0 20px rgba(56,189,248,0.15) inset;
+  }
+  .countdown-left { display:flex; flex-direction:column; gap:3px; }
+  .countdown-label { font-size:0.6rem; color:#5b93b3; letter-spacing:1.8px; text-transform:uppercase; font-weight:700; }
+  .countdown-time {
+    font-size:1.15rem; font-weight:900; color:#38bdf8;
+    font-family:'SF Mono',Menlo,monospace; letter-spacing:1px;
+    text-shadow:0 0 16px rgba(56,189,248,0.7);
+  }
+  .countdown-time.warning { color:#fbbf24; text-shadow:0 0 16px rgba(251,191,36,0.7); animation:warnPulse 1s infinite; }
+  .countdown-time.danger { color:#f87171; text-shadow:0 0 16px rgba(248,113,113,0.8); animation:warnPulse 0.7s infinite; }
+  @keyframes warnPulse { 0%,100%{opacity:1;} 50%{opacity:0.55;} }
+  .countdown-icon {
+    width:38px; height:38px; border-radius:12px;
+    background:linear-gradient(145deg,rgba(14,165,233,0.3),rgba(2,132,199,0.15));
+    border:1px solid rgba(56,189,248,0.4); display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; box-shadow:0 0 14px rgba(56,189,248,0.3) inset;
+  }
+  .dns-bar {
+    background:rgba(2,36,56,0.75); border:1px solid rgba(56,189,248,0.3);
+    border-radius:14px; padding:9px 13px; display:flex; align-items:center;
+    gap:9px; font-size:0.68rem; color:#8ecae6;
+  }
+  .dns-dot {
+    width:8px; height:8px; border-radius:50%; background:#22c55e;
+    box-shadow:0 0 12px #22c55e; flex-shrink:0; animation:blink 1.6s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .dns-bar span {
+    font-family:'SF Mono',Menlo,monospace; font-weight:600; color:#7dd3fc;
+    font-size:0.66rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .list-title { font-size:0.72rem; font-weight:800; color:#5b93b3; letter-spacing:2.5px; text-transform:uppercase; padding-left:6px; margin-top:2px; }
+  .list { display:flex; flex-direction:column; gap:9px; }
+  .list-item {
+    display:flex; align-items:center; justify-content:space-between;
+    background:linear-gradient(100deg,rgba(2,44,66,0.88),rgba(3,32,50,0.88));
+    border:1px solid rgba(56,189,248,0.22); border-radius:17px;
+    padding:13px 16px; cursor:pointer;
+    transition:all 0.22s cubic-bezier(0.4,0,0.2,1);
+    position:relative; overflow:hidden;
+  }
+  .list-item::before {
+    content:''; position:absolute; left:0; top:0; height:100%; width:3px;
+    background:linear-gradient(180deg,#38bdf8,#0284c7); opacity:0; transition:opacity 0.25s;
+  }
+  .list-item:hover::before, .list-item:active::before { opacity:1; }
+  .list-item:active {
+    transform:scale(0.985); border-color:rgba(56,189,248,0.7);
+    box-shadow:0 0 26px rgba(56,189,248,0.4),0 0 0 1px rgba(56,189,248,0.4) inset;
+    background:linear-gradient(100deg,rgba(3,60,88,0.98),rgba(2,44,66,0.98));
+  }
+  .item-left { display:flex; align-items:center; gap:12px; min-width:0; flex:1; }
+  .item-icon {
+    width:40px; height:40px; border-radius:12px;
+    background:linear-gradient(145deg,rgba(14,165,233,0.28),rgba(2,132,199,0.15));
+    border:1px solid rgba(56,189,248,0.38); display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; box-shadow:0 0 16px rgba(56,189,248,0.22) inset;
+  }
+  .item-info { min-width:0; flex:1; }
+  .item-name { font-size:0.92rem; font-weight:800; letter-spacing:0.2px; color:#e0f2fe; display:flex; align-items:center; gap:4px; white-space:nowrap; }
+  .item-sub { font-size:0.55rem; color:#4f8aa8; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .item-arrow { font-size:1.3rem; color:#38bdf8; opacity:0.75; transition:transform 0.25s; filter:drop-shadow(0 0 6px rgba(56,189,248,0.6)); flex-shrink:0; }
+  .list-item:active .item-arrow { transform:translateX(4px); opacity:1; }
+  .footer-note { text-align:center; font-size:0.58rem; color:#35647e; letter-spacing:0.9px; line-height:1.7; margin-top:4px; padding:0 10px; }
 
-.content{padding:20px;flex:1}
-.section{font-size:13px;color:var(--sub);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;margin-top:20px;font-weight:700}
-.info{background:rgba(255,76,76,.08);border:1px solid rgba(255,76,76,.3);border-radius:12px;padding:12px;margin-bottom:15px;font-size:13px;display:none}
-.info.active{display:block}
-.info strong{color:var(--green)}
+  .toast {
+    position:fixed; bottom:30px; left:50%;
+    transform:translateX(-50%) translateY(140px);
+    background:linear-gradient(135deg,#0284c7,#0ea5e9); color:#fff;
+    padding:12px 22px; border-radius:30px; font-size:0.82rem; font-weight:800;
+    letter-spacing:0.5px; box-shadow:0 14px 34px -6px #0284c7,0 0 28px rgba(56,189,248,0.7);
+    z-index:999; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    display:flex; align-items:center; gap:8px; white-space:nowrap; max-width:90vw;
+  }
+  .toast.show { transform:translateX(-50%) translateY(0); }
+  .toast.error { background:linear-gradient(135deg,#b91c1c,#ef4444); box-shadow:0 14px 34px -6px #b91c1c,0 0 28px rgba(239,68,68,0.7); }
 
-.key-info{background:linear-gradient(135deg,rgba(255,76,76,.1),rgba(255,170,0,.1));border:1px solid var(--green);border-radius:14px;padding:15px;margin-bottom:15px}
-.key-info-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
-.key-info-row:last-child{margin-bottom:0}
-.key-info-row span:first-child{color:var(--sub)}
-.key-info-row span:last-child{color:var(--green);font-weight:bold}
-
-.card{background:var(--card);border-radius:14px;padding:15px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;border:1px solid rgba(255,76,76,.1);transition:all .2s;cursor:pointer}
-.card:active{background:#2a0a0a}
-.card.selected{border:1px solid var(--green);background:rgba(255,76,76,.05);box-shadow:0 0 15px rgba(255,76,76,.3)}
-.card-left{display:flex;align-items:center;gap:12px;flex:1}
-.icon{width:40px;height:40px;background:rgba(255,76,76,.1);border-radius:10px;display:flex;justify-content:center;align-items:center;color:var(--green);font-size:20px;flex-shrink:0}
-.card-text{display:flex;flex-direction:column;flex:1;gap:4px}
-.card-title{font-size:15px;font-weight:700}
-.card-sub{font-size:11px;color:var(--sub);display:flex;align-items:center;gap:6px}
-.aim{background:rgba(255,170,0,.15);color:var(--gold);padding:3px 8px;border-radius:6px;font-weight:bold;font-size:11px;border:1px solid rgba(255,170,0,.4);animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,170,0,.4)}50%{box-shadow:0 0 0 5px rgba(255,170,0,0)}100%{box-shadow:0 0 0 0 rgba(255,170,0,0)}}
-
-.dns-box{background:transparent;border-radius:14px;margin-bottom:10px;overflow:hidden;transition:all .3s}
-.dns-box .card{margin-bottom:0;border-radius:14px;transition:all .3s}
-.dns-box.open .card{border-radius:14px 14px 0 0;border-bottom:1px solid rgba(255,76,76,.3);border-color:var(--green);background:rgba(255,76,76,.05)}
-.arrow{color:var(--sub);font-size:12px;transition:transform .3s;margin-left:10px}
-.dns-box.open .arrow{transform:rotate(180deg);color:var(--green)}
-.dns-fix{max-height:0;overflow:hidden;transition:max-height .5s ease, padding .3s;background:var(--card);border-radius:0 0 14px 14px;padding:0 15px}
-.dns-box.open .dns-fix{max-height:800px;padding:15px;border:1px solid var(--green);border-top:none}
-
-.btns{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-.btns:first-child{margin-top:0}
-.btn-action{flex:1;background:rgba(255,76,76,.08);color:var(--green);border:1px solid rgba(255,76,76,.3);padding:12px;font-size:13px;border-radius:10px;font-weight:600;min-width:70px;cursor:pointer}
-.btn-action.active{background:var(--green);color:var(--bg);box-shadow:0 0 15px rgba(255,76,76,.5)}
-.btn-action.special{background:linear-gradient(to right,var(--gold),#FF8C00);color:var(--bg);border:none;font-weight:bold}
-.btn-action.special.active{background:var(--red);color:#fff}
-
-/* PHẦN CHỈNH AIM */
-.aim-config{
-  background:linear-gradient(135deg,rgba(255,76,76,.1),rgba(255,170,0,.1));
-  border:2px solid var(--gold);
-  border-radius:12px;
-  padding:15px;
-  margin-top:12px;
-  margin-bottom:12px;
-}
-.aim-config-title{
-  font-size:13px;
-  font-weight:bold;
-  color:var(--gold);
-  text-align:center;
-  margin-bottom:12px;
-  letter-spacing:1px;
-}
-.aim-slider-row{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-.aim-slider-row .lbl{
-  font-size:12px;
-  color:var(--sub);
-  min-width:45px;
-  font-weight:600;
-}
-.aim-slider-row input[type="range"]{
-  flex:1;
-  -webkit-appearance:none;
-  appearance:none;
-  height:6px;
-  border-radius:3px;
-  background:linear-gradient(to right,#8B0000,#FF4C4C,#FFAA00);
-  outline:none;
-  padding:0;
-}
-.aim-slider-row input[type="range"]::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  appearance:none;
-  width:20px;
-  height:20px;
-  border-radius:50%;
-  background:#FFAA00;
-  cursor:pointer;
-  border:2px solid #fff;
-  box-shadow:0 0 10px rgba(255,170,0,.8);
-}
-.aim-slider-row input[type="range"]::-moz-range-thumb{
-  width:20px;height:20px;border-radius:50%;background:#FFAA00;cursor:pointer;border:2px solid #fff;
-}
-.aim-slider-row .val-box{
-  min-width:55px;
-  text-align:center;
-  background:rgba(0,0,0,.5);
-  color:var(--gold);
-  font-family:monospace;
-  font-weight:bold;
-  font-size:14px;
-  padding:6px 8px;
-  border-radius:8px;
-  border:1px solid var(--gold);
-}
-.aim-slider-row .val-box input{
-  width:100%;
-  background:transparent;
-  border:none;
-  color:var(--gold);
-  font-family:monospace;
-  font-weight:bold;
-  font-size:14px;
-  text-align:center;
-  outline:none;
-  padding:0;
-}
-.aim-preset{
-  display:flex;
-  gap:6px;
-  margin-top:10px;
-  flex-wrap:wrap;
-}
-.preset-btn{
-  flex:1;
-  background:rgba(255,170,0,.1);
-  color:var(--gold);
-  border:1px solid rgba(255,170,0,.4);
-  padding:8px;
-  font-size:11px;
-  border-radius:8px;
-  font-weight:600;
-  cursor:pointer;
-  min-width:60px;
-}
-.preset-btn:active{background:rgba(255,170,0,.3)}
-.btn-save-aim{
-  width:100%;
-  background:linear-gradient(to right,#FFAA00,#FF4C4C);
-  color:#0d0000;
-  border:none;
-  padding:12px;
-  font-size:13px;
-  font-weight:bold;
-  border-radius:10px;
-  cursor:pointer;
-  margin-top:10px;
-  letter-spacing:1px;
-}
-.btn-save-aim:active{transform:scale(.97)}
-
-.btn-download{width:100%;background:linear-gradient(to right,var(--grad1),var(--grad2));color:#fff;margin-top:20px;padding:16px;font-size:15px;font-weight:bold;border-radius:12px;border:1px solid rgba(255,76,76,.3)}
-
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:100;justify-content:center;align-items:center;padding:20px}
-.modal.active{display:flex}
-.modal-box{background:var(--card);border-radius:16px;padding:20px;width:100%;max-width:380px;max-height:80vh;overflow-y:auto;border:1px solid var(--green)}
-.modal-box h2{font-size:18px;color:var(--green);margin-bottom:15px}
-.modal-box pre{background:#0a0000;padding:15px;border-radius:10px;font-size:10px;color:#a8b2d1;white-space:pre-wrap;word-break:break-all;max-height:280px;overflow-y:auto}
-.modal-btns{display:flex;gap:10px;margin-top:15px}
-.btn-modal{flex:1;padding:12px;border-radius:10px;font-size:14px;font-weight:bold;border:none;cursor:pointer}
-.btn-cancel{background:rgba(255,255,255,.1);color:#fff}
-.btn-confirm{background:var(--green);color:var(--bg)}
-
-.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green);color:var(--bg);padding:14px 24px;border-radius:12px;font-weight:bold;font-size:14px;z-index:200;opacity:0;transition:all .3s;max-width:90%;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-
-.notif{position:fixed;top:0;left:0;right:0;background:linear-gradient(90deg,#FF4C4C,#FFAA00);color:#fff;padding:12px;text-align:center;font-size:13px;font-weight:bold;z-index:400;transform:translateY(-100%);transition:transform .3s}
-.notif.show{transform:translateY(0)}
+  .expire-overlay {
+    position:fixed; inset:0; background:rgba(0,8,16,0.92);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    display:none; align-items:center; justify-content:center; z-index:9999;
+    padding:20px; animation:fadeIn 0.4s ease;
+  }
+  .expire-overlay.show { display:flex; }
+  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  .expire-box {
+    background:linear-gradient(160deg,rgba(8,38,56,0.98),rgba(2,22,36,0.98));
+    border:1.5px solid rgba(248,113,113,0.5); border-radius:30px;
+    padding:34px 26px; text-align:center; max-width:340px; width:100%;
+    box-shadow:0 30px 70px -10px rgba(0,0,0,0.9),0 0 40px rgba(239,68,68,0.35);
+    animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes popIn { 0%{transform:scale(0.7);opacity:0;} 100%{transform:scale(1);opacity:1;} }
+  .expire-icon { font-size:3.4rem; margin-bottom:12px; filter:drop-shadow(0 0 20px rgba(248,113,113,0.8)); }
+  .expire-title { font-size:1.4rem; font-weight:900; color:#f87171; letter-spacing:2px; margin-bottom:8px; text-shadow:0 0 20px rgba(248,113,113,0.6); }
+  .expire-text { font-size:0.85rem; color:#cbd5e1; line-height:1.6; margin-bottom:22px; }
+  .expire-btn {
+    width:100%; padding:14px; border-radius:16px; border:none;
+    background:linear-gradient(135deg,#dc2626,#ef4444); color:#fff;
+    font-weight:800; font-size:0.92rem; letter-spacing:1.5px;
+    cursor:pointer; box-shadow:0 10px 26px -8px #dc2626,0 0 24px rgba(239,68,68,0.6);
+    transition:all 0.2s;
+  }
+  .expire-btn:active { transform:scale(0.97); }
 </style>
 </head>
 <body>
 
-<div class="notif" id="notif">⚠️ Key sắp hết hạn!</div>
+<div class="app">
 
-<!-- TRANG 1: NHẬP KEY -->
-<div id="key-screen">
-  <div class="logo-box">
-    <svg class="logo-svg" viewBox="0 0 100 100">
-      <defs>
-        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#FF4C4C"/>
-          <stop offset="100%" style="stop-color:#FFAA00"/>
-        </linearGradient>
-      </defs>
-      <circle cx="50" cy="50" r="45" fill="none" stroke="url(#g1)" stroke-width="3"/>
-      <path d="M50 20 L50 50 L70 60" stroke="url(#g1)" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <circle cx="50" cy="50" r="5" fill="url(#g1)"/>
-      <text x="50" y="85" text-anchor="middle" fill="url(#g1)" font-size="14" font-weight="bold">REG</text>
-    </svg>
-    <div class="logo">REG LOCK</div>
-    <div class="slogan">PREMIUM DNS & AIM CONFIG</div>
+  <!-- LOCK SCREEN -->
+  <div class="screen lock-screen" id="lockScreen">
+    <div class="lock-icon-wrap">
+      <div class="lock-icon">🔒</div>
+    </div>
+    <div class="lock-title">SERENITY</div>
+    <div class="lock-sub">NHẬP KEY KÍCH HOẠT</div>
+
+    <input type="text" class="key-input" id="keyInput"
+           placeholder="SETTING-XXXX-XXXX-FF"
+           autocomplete="off" autocapitalize="characters" spellcheck="false">
+
+    <button class="btn" id="activateBtn">KÍCH HOẠT</button>
+    <div class="status-msg" id="lockStatus"></div>
+    <button class="btn-reset" id="resetBtn">🔄 RESET THIẾT BỊ</button>
+    <div class="key-hint">
+      Định dạng: SETTING-xxxx-xxxx-FF<br>
+      Mỗi key chỉ dùng cho 1 thiết bị duy nhất
+    </div>
   </div>
-  <div class="input-group" id="input-group">
-    <input type="text" id="key-input" placeholder="Nhập Key của bạn..." maxlength="12" style="text-transform:uppercase">
-    <button class="btn-primary" onclick="verifyKey()">🔓 KÍCH HOẠT</button>
+
+  <!-- MAIN SCREEN -->
+  <div class="screen main-screen" id="mainScreen">
+    <div class="header">
+      <span class="logo">SERENITY LOCK</span>
+      <span class="badge" id="licenseBadge">TUẦN</span>
+    </div>
+
+    <div class="countdown-card">
+      <div class="countdown-left">
+        <div class="countdown-label">Thời gian còn lại</div>
+        <div class="countdown-time" id="countdownTime">--:--:--</div>
+      </div>
+      <div class="countdown-icon">⏳</div>
+    </div>
+
+    <div class="dns-bar">
+      <div class="dns-dot"></div>
+      <span>dns.serenity-lock.com • backup.serenity-lock.com</span>
+    </div>
+
+    <div class="list-title">Chọn cấu hình</div>
+    <div class="list" id="configList"></div>
+
+    <div class="footer-note">
+      Nhấn vào cấu hình để tải tệp .mobileconfig<br>
+      DNS + thông số AIM được nhúng trực tiếp
+    </div>
   </div>
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <p style="font-size:14px;color:var(--sub)">Đang xác thực thiết bị...</p>
-    <p style="font-size:12px;color:var(--red)">Vui lòng đợi 1 phút</p>
-  </div>
-  <div class="err" id="err"></div>
+
 </div>
 
-<!-- TRANG 2: APP -->
-<div id="app-screen">
-  <div class="header">
-    <h1>REG LOCK</h1>
-    <div class="timer" id="timer">--:--:--</div>
-  </div>
-  <div class="content">
-
-    <div class="key-info">
-      <div class="key-info-row"><span>🔑 Key:</span><span id="ki-key">--</span></div>
-      <div class="key-info-row"><span>📋 Loại:</span><span id="ki-type">--</span></div>
-      <div class="key-info-row"><span>📱 Thiết bị:</span><span id="ki-device">--</span></div>
-      <div class="key-info-row"><span>⏰ Hết hạn:</span><span id="ki-expire">--</span></div>
-    </div>
-
-    <div class="section">🎮 CẤU HÌNH DNS & AIM</div>
-    <div class="info" id="info">Đã chọn: <strong id="sel-name">--</strong> | AIM: <strong id="sel-aim">--</strong></div>
-
-    <!-- AIMBOT -->
-    <div class="dns-box" id="dns-aimbot">
-      <div class="card" onclick="toggleDNS('dns-aimbot', this, 'Aimbot','0.5 - 1.2','aimbot.reglock.dns','1.1.1.1','1.0.0.1')">
-        <div class="card-left">
-          <div class="icon">🎯</div>
-          <div class="card-text">
-            <span class="card-title">Aimbot ⚡</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-aimbot">0.5 - 1.2</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="btns">
-          <button class="btn-action special" onclick="toggleFix(this)">Chỉ Aimbot</button>
-        </div>
-        <!-- CHỈNH AIM -->
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-aimbot" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateAimValue('aimbot')">
-            <div class="val-box"><input type="number" id="aim-minv-aimbot" min="0.1" max="2.0" step="0.1" value="0.5" onchange="updateAimValue('aimbot', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-aimbot" min="0.1" max="2.0" step="0.1" value="1.2" oninput="updateAimValue('aimbot')">
-            <div class="val-box"><input type="number" id="aim-maxv-aimbot" min="0.1" max="2.0" step="0.1" value="1.2" onchange="updateAimValue('aimbot', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('aimbot', 0.3, 0.8)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('aimbot', 0.5, 1.2)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('aimbot', 0.8, 1.5)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('aimbot', 1.0, 2.0)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('aimbot')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- DPI 1200 -->
-    <div class="dns-box" id="dns-dpi">
-      <div class="card" onclick="toggleDNS('dns-dpi', this, 'DPI 1200','0.8 - 1.5','dpi.reglock.dns','8.8.8.8','8.8.4.4')">
-        <div class="card-left">
-          <div class="icon">🖱️</div>
-          <div class="card-text">
-            <span class="card-title">DPI Seper💀 👤</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-dpi">0.8 - 1.5</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-dpi" min="0.1" max="2.0" step="0.1" value="0.8" oninput="updateAimValue('dpi')">
-            <div class="val-box"><input type="number" id="aim-minv-dpi" min="0.1" max="2.0" step="0.1" value="0.8" onchange="updateAimValue('dpi', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-dpi" min="0.1" max="2.0" step="0.1" value="1.5" oninput="updateAimValue('dpi')">
-            <div class="val-box"><input type="number" id="aim-maxv-dpi" min="0.1" max="2.0" step="0.1" value="1.5" onchange="updateAimValue('dpi', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('dpi', 0.5, 1.0)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('dpi', 0.8, 1.5)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('dpi', 1.0, 1.8)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('dpi', 1.2, 2.0)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('dpi')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- FPS 90 -->
-    <div class="dns-box" id="dns-fps">
-      <div class="card" onclick="toggleDNS('dns-fps', this, 'FPS 90','0.6 - 1.0','fps90.reglock.dns','9.9.9.9','149.112.112.112')">
-        <div class="card-left">
-          <div class="icon">📱</div>
-          <div class="card-text">
-            <span class="card-title">FPS 90 📱</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-fps">0.6 - 1.0</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-fps" min="0.1" max="2.0" step="0.1" value="0.6" oninput="updateAimValue('fps')">
-            <div class="val-box"><input type="number" id="aim-minv-fps" min="0.1" max="2.0" step="0.1" value="0.6" onchange="updateAimValue('fps', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-fps" min="0.1" max="2.0" step="0.1" value="1.0" oninput="updateAimValue('fps')">
-            <div class="val-box"><input type="number" id="aim-maxv-fps" min="0.1" max="2.0" step="0.1" value="1.0" onchange="updateAimValue('fps', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('fps', 0.3, 0.7)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('fps', 0.6, 1.0)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('fps', 0.8, 1.3)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('fps', 1.0, 1.8)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('fps')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- FULL SETTINGS -->
-    <div class="dns-box" id="dns-full">
-      <div class="card" onclick="toggleDNS('dns-full', this, 'Full Settings DNS','0.4 - 0.9','full.reglock.dns','208.67.222.222','208.67.220.220')">
-        <div class="card-left">
-          <div class="icon">⚙️</div>
-          <div class="card-text">
-            <span class="card-title">Full Settings DNS ✅🔥</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-full">0.4 - 0.9</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-full" min="0.1" max="2.0" step="0.1" value="0.4" oninput="updateAimValue('full')">
-            <div class="val-box"><input type="number" id="aim-minv-full" min="0.1" max="2.0" step="0.1" value="0.4" onchange="updateAimValue('full', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-full" min="0.1" max="2.0" step="0.1" value="0.9" oninput="updateAimValue('full')">
-            <div class="val-box"><input type="number" id="aim-maxv-full" min="0.1" max="2.0" step="0.1" value="0.9" onchange="updateAimValue('full', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('full', 0.2, 0.6)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('full', 0.4, 0.9)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('full', 0.6, 1.2)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('full', 0.8, 1.6)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('full')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- HEAD -->
-    <div class="dns-box" id="dns-head">
-      <div class="card" onclick="toggleDNS('dns-head', this, 'HEAD','0.7 - 1.3','head.reglock.dns','1.1.1.1','1.0.0.1')">
-        <div class="card-left">
-          <div class="icon">💀</div>
-          <div class="card-text">
-            <span class="card-title">HEAD lOCK💀 🔥</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-head">0.7 - 1.3</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-head" min="0.1" max="2.0" step="0.1" value="0.7" oninput="updateAimValue('head')">
-            <div class="val-box"><input type="number" id="aim-minv-head" min="0.1" max="2.0" step="0.1" value="0.7" onchange="updateAimValue('head', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-head" min="0.1" max="2.0" step="0.1" value="1.3" oninput="updateAimValue('head')">
-            <div class="val-box"><input type="number" id="aim-maxv-head" min="0.1" max="2.0" step="0.1" value="1.3" onchange="updateAimValue('head', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('head', 0.4, 0.9)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('head', 0.7, 1.3)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('head', 0.9, 1.6)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('head', 1.2, 2.0)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('head')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- NEXTDNS -->
-    <div class="dns-box" id="dns-next">
-      <div class="card" onclick="toggleDNS('dns-next', this, 'NextDNS','0.5 - 1.1','next.reglock.dns','45.90.28.0','45.90.30.0')">
-        <div class="card-left">
-          <div class="icon">🌐</div>
-          <div class="card-text">
-            <span class="card-title">NextDNS</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-next">0.5 - 1.1</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-next" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateAimValue('next')">
-            <div class="val-box"><input type="number" id="aim-minv-next" min="0.1" max="2.0" step="0.1" value="0.5" onchange="updateAimValue('next', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-next" min="0.1" max="2.0" step="0.1" value="1.1" oninput="updateAimValue('next')">
-            <div class="val-box"><input type="number" id="aim-maxv-next" min="0.1" max="2.0" step="0.1" value="1.1" onchange="updateAimValue('next', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('next', 0.3, 0.8)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('next', 0.5, 1.1)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('next', 0.7, 1.4)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('next', 1.0, 1.8)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('next')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- SENSI TOUCH -->
-    <div class="dns-box" id="dns-sensi">
-      <div class="card" onclick="toggleDNS('dns-sensi', this, 'Sensi Touch','0.9 - 1.8','sensi.reglock.dns','76.76.2.0','76.76.10.0')">
-        <div class="card-left">
-          <div class="icon">👆</div>
-          <div class="card-text">
-            <span class="card-title">Sensi Touch ⚡</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-sensi">0.9 - 1.8</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aimMin-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span:</ class="lbl">span>
-            <input type="range" id="aim-min-sensi" min="0.1" max="2.0" step="0.1" value="0.9" oninput="updateAimValue('sensi')">
-            <div class="val-box"><input type="number" id="aim-minv-sensi" min="0.1" max="2.0" step="0.1" value="0.9" onchange="updateAimValue('sensi', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-sensi" min="0.1" max="2.0" step="0.1" value="1.8" oninput="updateAimValue('sensi')">
-            <div class="val-box"><input type="number" id="aim-maxv-sensi" min="0.1" max="2.0" step="0.1" value="1.8" onchange="updateAimValue('sensi', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('sensi', 0.5, 1.0)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('sensi', 0.9, 1.8)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('sensi', 1.2, 2.0)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('sensi', 1.5, 2.0)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('sensi')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- FREE FIRE -->
-    <div class="section">🔥 FREE FIRE</div>
-
-    <div class="dns-box" id="dns-ffthuong">
-      <div class="card" onclick="toggleDNS('dns-ffthuong', this, 'FF Thường','0.5 - 1.2','ff-thuong.reglock.dns','1.1.1.1','1.0.0.1')">
-        <div class="card-left">
-          <div class="icon">🔥</div>
-          <div class="card-text">
-            <span class="card-title">FF Thường ⚡</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-ffthuong">0.5 - 1.2</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="toggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="lbl">Min:</span>
-            <input type="range" id="aim-min-ffthuong" min="0.1" max="2.0" step="0.1" value="0.5" oninput="updateAimValue('ffthuong')">
-            <div class="val-box"><input type="number" id="aim-minv-ffthuong" min="0.1" max="2.0" step="0.1" value="0.5" onchange="updateAimValue('ffthuong', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" id="aim-max-ffthuong" min="0.1" max="2.0" step="0.1" value="1.2" oninput="updateAimValue('ffthuong')">
-            <div class="val-box"><input type="number" id="aim-maxv-ffthuong" min="0.1" max="2.0" step="0.1" value="1.2" onchange="updateAimValue('ffthuong', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('ffthuong', 0.3, 0.8)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('ffthuong', 0.5, 1.2)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('ffthuong', 0.8, 1.6)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('ffthuong', 1.0, 2.0)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('ffthuong')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dns-box" id="dns-ffmaxx">
-      <div class="card" onclick="toggleDNS('dns-ffmaxx', this, 'FF Maxx','0.3 - 0.8','ff-maxx.reglock.dns','1.1.1.1','1.0.0.1')">
-        <div class="card-left">
-          <div class="icon">💥</div>
-          <div class="card-text">
-            <span class="card-title">FF Maxx 🔥</span>
-            <span class="card-sub">AIM: <span class="aim" id="aim-val-ffmaxx">0.3 - 0.8</span></span>
-          </div>
-        </div>
-        <div class="arrow">▼</div>
-      </div>
-      <div class="dns-fix">
-        <div class="btns">
-          <button class="btn-action" onclick="toggleFix(this)">Fix Rung</button>
-          <="button class="btn-action" onclick="toggleFix(this)">Tăng Nhạy</button>
-          <button class="btn-action" onclick="aimtoggleFix(this)">Bám Tâm</button>
-        </div>
-        <div class="aim-config">
-          <div-max class="aim-config-title">⚙️ CHỈNH THÔNG SỐ AIM</div>
-          <div class="aim-slider-row">
-            <span class="-lbl">Min:</span>
-            <input type="range" id="aim-min-ffmaxx" min="0.1" max="2.0" step="0.ff1" value="0.3" oninput="updateAimValue('ffmaxx')">
-            <div class="val-box"><input type="numbermax" id="aim-minv-ffmaxx" min="0.1" max="2.0" step="0.1" value="0.3" onchange="updateAimValue('ffmaxx', true)"></div>
-          </div>
-          <div class="aim-slider-row">
-            <span class="lbl">Max:</span>
-            <input type="range" idx" min="0.1" max="2.0" step="0.1" value="0.8" oninput="updateAimValue('ffmaxx')">
-            <div class="val-box"><input type="number" id="aim-maxv-ffmaxx" min="0.1" max="2.0" step="0.1" value="0.8" onchange="updateAimValue('ffmaxx', true)"></div>
-          </div>
-          <div class="aim-preset">
-            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.2, 0.5)">Nhẹ</button>
-            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.3, 0.8)">Chuẩn</button>
-            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.5, 1.2)">Mạnh</button>
-            <button class="preset-btn" onclick="setPreset('ffmaxx', 0.8, 1.8)">Max</button>
-          </div>
-          <button class="btn-save-aim" onclick="saveAim('ffmaxx')">💾 LƯU CẤU HÌNH AIM</button>
-        </div>
-      </div>
-    </div>
-
-    <button class="btn-download" onclick="previewDNS()">⬇️ TẢI CẤU HÌNH DNS VỀ MÁY</button>
-
-    <div style="height:30px"></div>
-  </div>
+<div class="toast" id="toast">
+  <span id="toastIcon">✅</span><span id="toastText">Đã tải cấu hình</span>
 </div>
 
-<!-- MODAL XEM TRƯỚC DNS -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <h2>📄 Xem trước cấu hình DNS</h2>
-    <p style="font-size:12px;color:var(--sub);margin-bottom:10px">File <b>.mobileconfig</b> chuẩn Apple với thông số AIM đã chỉnh.</p>
-    <pre id="preview"></pre>
-    <div class="modal-btns">
-      <button class="btn-modal btn-cancel" onclick="closeModal('modal')">HỦY</button>
-      <button class="btn-modal btn-confirm" onclick="confirmDownload()">TẢI XUỐNG</button>
-    </div>
+<div class="expire-overlay" id="expireOverlay">
+  <div class="expire-box">
+    <div class="expire-icon">⛔</div>
+    <div class="expire-title">HẾT HẠN</div>
+    <div class="expire-text" id="expireText">Key của bạn đã hết hạn.<br>Vui lòng nhập key mới để tiếp tục sử dụng.</div>
+    <button class="expire-btn" id="expireBtn">NHẬP KEY MỚI</button>
   </div>
 </div>
-
-<div class="toast" id="toast"></div>
 
 <script>
-/* ============================================================
-   REG LOCK - FULL + CHỈNH AIM DYNAMIC
-   ============================================================ */
+(function() {
+  'use strict';
 
-let timeLeft = 0, timerInterval, selectedDNS = null, notifShown = false;
+  // ============================================================
+  // 1. KEYS — 5 Giờ / 5 Tuần / 5 Tháng / 5 Vĩnh Viễn
+  // ============================================================
+  const KEYS = {
+    // GIỜ (1 giờ)
+    'SETTING-GIO1-AAAA-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
+    'SETTING-GIO2-BBBB-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
+    'SETTING-GIO3-CCCC-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
+    'SETTING-GIO4-DDDD-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
+    'SETTING-GIO5-EEEE-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
+    // TUẦN (7 ngày)
+    'SETTING-TUAN1-AAAA-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
+    'SETTING-TUAN2-BBBB-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
+    'SETTING-TUAN3-CCCC-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
+    'SETTING-TUAN4-DDDD-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
+    'SETTING-TUAN5-EEEE-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
+    // THÁNG (30 ngày)
+    'SETTING-THANG1-AAAA-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
+    'SETTING-THANG2-BBBB-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
+    'SETTING-THANG3-CCCC-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
+    'SETTING-THANG4-DDDD-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
+    'SETTING-THANG5-EEEE-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
+    // VĨNH VIỄN
+    'SETTING-VINH1-AAAA-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
+    'SETTING-VINH2-BBBB-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
+    'SETTING-VINH3-CCCC-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
+    'SETTING-VINH4-DDDD-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
+    'SETTING-VINH5-EEEE-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity }
+  };
 
-/* Lưu AIM config của từng DNS */
-const AIM_CONFIG = {
-  aimbot: { min: 0.5, max: 1.2 },
-  dpi:    { min: 0.8, max: 1.5 },
-  fps:    { min: 0.6, max: 1.0 },
-  full:   { min: 0.4, max: 0.9 },
-  head:   { min: 0.7, max: 1.3 },
-  next:   { min: 0.5, max: 1.1 },
-  sensi:  { min: 0.9, max: 1.8 },
-  ffthuong:{ min: 0.5, max: 1.2 },
-  ffmaxx: { min: 0.3, max: 0.8 }
-};
-
-/* ============ 20 KEY ============ */
-const KEY_HASH = {
-  "UkVHSE9ORVkwMUZG":{t:"24 Giờ",d:86400},
-  "UkVHSE9ORVkwMkZG":{t:"24 Giờ",d:86400},
-  "UkVHSE9ORVkwM0ZG":{t:"24 Giờ",d:86400},
-  "UkVHSE9ORVkwNEZG":{t:"24 Giờ",d:86400},
-  "UkVHSE9ORVkwNUZG":{t:"24 Giờ",d:86400},
-  "UkVHV0VFS0wwMUZG":{t:"Tuần",d:604800},
-  "UkVHV0VFS0wwMkZG":{t:"Tuần",d:604800},
-  "UkVHV0VFS0wwM0ZG":{t:"Tuần",d:604800},
-  "UkVHV0VFS0wwNEZG":{t:"Tuần",d:604800},
-  "UkVHV0VFS0wwNUZG":{t:"Tuần",d:604800},
-  "UkVHTU9OVEgwMUZG":{t:"Tháng",d:2592000},
-  "UkVHTU9OVEgwMkZG":{t:"Tháng",d:2592000},
-  "UkVHTU9OVEgwM0ZG":{t:"Tháng",d:2592000},
-  "UkVHTU9OVEgwNEZG":{t:"Tháng",d:2592000},
-  "UkVHTU9OVEgwNUZG":{t:"Tháng",d:2592000},
-  "UkVHTElGRTAwMUZG":{t:"Vĩnh viễn",d:999999999},
-  "UkVHTElGRTAwMkZG":{t:"Vĩnh viễn",d:999999999},
-  "UkVHTElGRTAwM0ZG":{t:"Vĩnh viễn",d:999999999},
-  "UkVHTElGRTAwNEZG":{t:"Vĩnh viễn",d:999999999},
-  "UkVHTElGRTAwNUZG":{t:"Vĩnh viễn",d:999999999}
-};
-
-function encodeKey(k){ return btoa(k); }
-
-/* ============ CHỈNH AIM ============ */
-function updateAimValue(key, fromInput){
-  const minSlider = document.getElementById('aim-min-' + key);
-  const maxSlider = document.getElementById('aim-max-' + key);
-  const minInput = document.getElementById('aim-minv-' + key);
-  const maxInput = document.getElementById('aim-maxv-' + key);
-  
-  let min, max;
-  
-  if(fromInput){
-    min = parseFloat(minInput.value) || 0.1;
-    max = parseFloat(maxInput.value) || 2.0;
-    minSlider.value = min;
-    maxSlider.value = max;
-  } else {
-    min = parseFloat(minSlider.value);
-    max = parseFloat(maxSlider.value);
-    minInput.value = min.toFixed(1);
-    maxInput.value = max.toFixed(1);
-  }
-  
-  // Đảm bảo min <= max
-  if(min > max){
-    if(fromInput){ min = max; minInput.value = min.toFixed(1); minSlider.value = min; }
-    else { max = min; maxInput.value = max.toFixed(1); maxSlider.value = max; }
-  }
-  
-  // Cập nhật AIM_CONFIG
-  AIM_CONFIG[key].min = min;
-  AIM_CONFIG[key].max = max;
-  
-  // Cập nhật hiển thị trên card
-  const valEl = document.getElementById('aim-val-' + key);
-  if(valEl) valEl.innerText = min.toFixed(1) + ' - ' + max.toFixed(1);
-}
-
-function setPreset(key, min, max){
-  document.getElementById('aim-min-' + key).value = min;
-  document.getElementById('aim-max-' + key).value = max;
-  document.getElementById('aim-minv-' + key).value = min;
-  document.getElementById('aim-maxv-' + key).value = max;
-  updateAimValue(key);
-  toast('✅ Đã đặt preset: ' + min.toFixed(1) + ' - ' + max.toFixed(1));
-}
-
-function saveAim(key){
-  const cfg = AIM_CONFIG[key];
-  
-  // Lưu vào localStorage
-  localStorage.setItem('reglock_aim_' + key, JSON.stringify(cfg));
-  
-  // Cập nhật vào selectedDNS nếu đang chọn
-  if(selectedDNS && selectedDNS.key === key){
-    selectedDNS.aim = cfg.min.toFixed(1) + ' - ' + cfg.max.toFixed(1);
-    document.getElementById('sel-aim').innerText = selectedDNS.aim;
-  }
-  
-  toast('💾 Đã lưu AIM: ' + cfg.min.toFixed(1) + ' - ' + cfg.max.toFixed(1));
-  console.log('[AIM] Đã lưu', key, cfg);
-}
-
-/* Load AIM đã lưu */
-function loadAimConfigs(){
-  Object.keys(AIM_CONFIG).forEach(key => {
-    const saved = localStorage.getItem('reglock_aim_' + key);
-    if(saved){
-      try {
-        const cfg = JSON.parse(saved);
-        AIM_CONFIG[key] = cfg;
-        
-        // Cập nhật UI
-        const minSlider = document.getElementById('aim-min-' + key);
-        const maxSlider = document.getElementById('aim-max-' + key);
-        const minInput = document.getElementById('aim-minv-' + key);
-        const maxInput = document.getElementById('aim-maxv-' + key);
-        const valEl = document.getElementById('aim-val-' + key);
-        
-        if(minSlider) minSlider.value = cfg.min;
-        if(maxSlider) maxSlider.value = cfg.max;
-        if(minInput) minInput.value = cfg.min.toFixed(1);
-        if(maxInput) maxInput.value = cfg.max.toFixed(1);
-        if(valEl) valEl.innerText = cfg.min.toFixed(1) + ' - ' + cfg.max.toFixed(1);
-      } catch(e){}
+  // ============================================================
+  // 2. CONFIGS — Thông số AIM TỐI ĐA
+  //    sens: độ nhạy (0-200)
+  //    head: bám tâm (0.00-1.00)
+  //    recoil: giảm giật (%)
+  //    stab: ổn định (%)
+  // ============================================================
+  const CONFIGS = [
+    {
+      id: 'aim_tam',
+      name: 'AIM Bám Tâm',
+      icon: '⚡',
+      sub: 'NHẠY 135 • BÁM 0.94 • GIẬT 98% • ỔN 99%',
+      aim: { sens: 135, head: 0.94, recoil: 98, stab: 99, ff: 'FF Max', profile: 'AIM_TAM' }
+    },
+    {
+      id: 'dpi_1200',
+      name: 'DPI 1200',
+      icon: '💻',
+      sub: 'NHẠY 140 • BÁM 0.90 • GIẬT 95% • ỔN 100%',
+      aim: { sens: 140, head: 0.90, recoil: 95, stab: 100, ff: 'FF Thường', profile: 'DPI_1200' }
+    },
+    {
+      id: 'fps_90',
+      name: 'FPS 90',
+      icon: '📱',
+      sub: 'NHẠY 130 • BÁM 0.88 • GIẬT 99% • ỔN 100%',
+      aim: { sens: 130, head: 0.88, recoil: 99, stab: 100, ff: 'FF Thường', profile: 'FPS_90' }
+    },
+    {
+      id: 'full_settings',
+      name: 'Full Settings',
+      icon: '✅🔥',
+      sub: 'NHẠY 150 • BÁM 0.96 • GIẬT 100% • ỔN 100%',
+      aim: { sens: 150, head: 0.96, recoil: 100, stab: 100, ff: 'FF Max', profile: 'FULL_SETTINGS' }
+    },
+    {
+      id: 'head_shot',
+      name: 'HEAD Bắn Đầu',
+      icon: '🔥',
+      sub: 'NHẠY 125 • BÁM 0.98 • GIẬT 98% • ỔN 99%',
+      aim: { sens: 125, head: 0.98, recoil: 98, stab: 99, ff: 'FF Max', profile: 'HEAD_SHOT' }
+    },
+    {
+      id: 'sensi_touch',
+      name: 'Sensi Touch',
+      icon: '⚡',
+      sub: 'NHẠY 155 • BÁM 0.92 • GIẬT 97% • ỔN 99%',
+      aim: { sens: 155, head: 0.92, recoil: 97, stab: 99, ff: 'FF Thường', profile: 'SENSI_TOUCH' }
     }
-  });
-}
+  ];
 
-/* ============ XÁC THỰC KEY ============ */
-function verifyKey(){
-  const key = document.getElementById('key-input').value.trim().toUpperCase();
-  const err = document.getElementById('err');
+  // ============================================================
+  // 3. STORAGE
+  // ============================================================
+  const SK = {
+    ACTIVATED: 'serenity_activated',
+    EXPIRY: 'serenity_expiry',
+    LICENSE: 'serenity_license',
+    DEVICE_ID: 'serenity_device_id',
+    USED_KEY: 'serenity_used_key',
+    REGISTRY: 'serenity_key_registry'
+  };
 
-  if(!key){ err.innerText = "Vui lòng nhập Key!"; err.style.display = "block"; return; }
-  if(!key.startsWith("REG") || !key.endsWith("FF")){ err.innerText = "Key phải bắt đầu REG và kết thúc FF!"; err.style.display = "block"; return; }
-  if(key.length !== 12){ err.innerText = "Key phải có đúng 12 ký tự!"; err.style.display = "block"; return; }
+  // ============================================================
+  // 4. DOM
+  // ============================================================
+  const lockScreen = document.getElementById('lockScreen');
+  const mainScreen = document.getElementById('mainScreen');
+  const keyInput = document.getElementById('keyInput');
+  const activateBtn = document.getElementById('activateBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const lockStatus = document.getElementById('lockStatus');
+  const licenseBadge = document.getElementById('licenseBadge');
+  const countdownTime = document.getElementById('countdownTime');
+  const configList = document.getElementById('configList');
+  const toast = document.getElementById('toast');
+  const toastIcon = document.getElementById('toastIcon');
+  const toastText = document.getElementById('toastText');
+  const expireOverlay = document.getElementById('expireOverlay');
+  const expireText = document.getElementById('expireText');
+  const expireBtn = document.getElementById('expireBtn');
 
-  err.style.display = "none";
-  document.getElementById('input-group').style.display = "none";
-  document.getElementById('loading').style.display = "flex";
+  let countdownInterval = null;
 
-  setTimeout(() => {
-    let deviceId = localStorage.getItem('reglock_device');
-    if(!deviceId){
-      deviceId = 'DEV-' + Math.random().toString(36).substr(2,9).toUpperCase();
-      localStorage.setItem('reglock_device', deviceId);
+  // ============================================================
+  // 5. DEVICE ID
+  // ============================================================
+  function getDeviceId() {
+    let id = localStorage.getItem(SK.DEVICE_ID);
+    if (!id) {
+      const fp = [
+        navigator.userAgent, navigator.language,
+        screen.width + 'x' + screen.height, screen.colorDepth,
+        new Date().getTimezoneOffset(),
+        navigator.hardwareConcurrency || 0,
+        navigator.platform || '',
+        Math.random().toString(36).substring(2, 12)
+      ].join('|');
+      let hash = 5381;
+      for (let i = 0; i < fp.length; i++) {
+        hash = ((hash << 5) + hash) + fp.charCodeAt(i);
+        hash = hash & hash;
+      }
+      id = 'DEV-' + Math.abs(hash).toString(36).toUpperCase() + '-' + Date.now().toString(36).toUpperCase();
+      localStorage.setItem(SK.DEVICE_ID, id);
+    }
+    return id;
+  }
+
+  // ============================================================
+  // 6. REGISTRY
+  // ============================================================
+  function getKeyRegistry() {
+    try {
+      const raw = localStorage.getItem(SK.REGISTRY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+  function saveKeyRegistry(reg) {
+    try { localStorage.setItem(SK.REGISTRY, JSON.stringify(reg)); } catch (e) {}
+  }
+
+  // ============================================================
+  // 7. CHECK ACTIVATION
+  // ============================================================
+  function checkActivation() {
+    const activated = localStorage.getItem(SK.ACTIVATED);
+    const expiryStr = localStorage.getItem(SK.EXPIRY);
+    const license = localStorage.getItem(SK.LICENSE);
+    const usedKey = localStorage.getItem(SK.USED_KEY);
+
+    if (activated === 'true' && expiryStr && usedKey) {
+      const expiry = parseInt(expiryStr);
+      const now = Date.now();
+      const deviceId = getDeviceId();
+      const reg = getKeyRegistry();
+      if (reg[usedKey] && reg[usedKey] !== deviceId) {
+        forceExpire('Key đã được dùng trên thiết bị khác!');
+        return false;
+      }
+      if (now < expiry) {
+        showMainScreen(license);
+        startCountdown(expiry);
+        return true;
+      } else {
+        forceExpire('Key của bạn đã hết hạn.');
+        return false;
+      }
+    }
+    return false;
+  }
+
+  function showMainScreen(licenseLabel) {
+    lockScreen.style.display = 'none';
+    mainScreen.style.display = 'flex';
+    if (licenseLabel) licenseBadge.textContent = licenseLabel;
+  }
+
+  // ============================================================
+  // 8. COUNTDOWN
+  // ============================================================
+  function startCountdown(expiry) {
+    if (countdownInterval) clearInterval(countdownInterval);
+    function tick() {
+      const left = expiry - Date.now();
+      if (left <= 0) {
+        clearInterval(countdownInterval);
+        countdownTime.textContent = '00:00:00';
+        forceExpire('Key của bạn đã hết hạn.');
+        return;
+      }
+      const totalSec = Math.floor(left / 1000);
+      const days = Math.floor(totalSec / 86400);
+      const hours = Math.floor((totalSec % 86400) / 3600);
+      const mins = Math.floor((totalSec % 3600) / 60);
+      const secs = totalSec % 60;
+      const pad = (n) => String(n).padStart(2, '0');
+      countdownTime.textContent = days > 0
+        ? days + 'd ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs)
+        : pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+      countdownTime.classList.remove('warning', 'danger');
+      if (left < 5 * 60 * 1000) countdownTime.classList.add('danger');
+      else if (left < 60 * 60 * 1000) countdownTime.classList.add('warning');
+    }
+    tick();
+    countdownInterval = setInterval(tick, 1000);
+  }
+
+  // ============================================================
+  // 9. FORCE EXPIRE — tự đóng app
+  // ============================================================
+  function forceExpire(message) {
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+    localStorage.removeItem(SK.ACTIVATED);
+    localStorage.removeItem(SK.EXPIRY);
+    localStorage.removeItem(SK.LICENSE);
+    if (message) {
+      expireText.innerHTML = message.replace(/\n/g, '<br>') +
+        '<br><br>Vui lòng nhập key mới để tiếp tục sử dụng.';
+    }
+    expireOverlay.classList.add('show');
+  }
+
+  // ============================================================
+  // 10. ACTIVATE KEY
+  // ============================================================
+  function activateKey() {
+    const raw = keyInput.value.trim().toUpperCase();
+    if (!raw) {
+      lockStatus.textContent = 'Vui lòng nhập key.';
+      lockStatus.classList.remove('success');
+      return;
     }
 
-    const hash = encodeKey(key);
-    const keyData = KEY_HASH[hash];
-
-    if(!keyData){ failVerify("❌ Key không tồn tại trong hệ thống!"); return; }
-
-    const savedDevice = localStorage.getItem('reglock_key_' + hash);
-    if(savedDevice && savedDevice !== deviceId){ failVerify("❌ Key đã kích hoạt trên thiết bị khác!"); return; }
-
-    localStorage.setItem('reglock_key_' + hash, deviceId);
-    localStorage.setItem('reglock_current', JSON.stringify({
-      hash: hash, key: key, device: deviceId,
-      type: keyData.t, time: keyData.d,
-      start: Date.now(), expire: Date.now() + keyData.d * 1000
-    }));
-
-    timeLeft = keyData.d;
-    startApp();
-  }, 60000);
-}
-
-function failVerify(msg){
-  document.getElementById('loading').style.display = "none";
-  document.getElementById('input-group').style.display = "flex";
-  document.getElementById('err').innerText = msg;
-  document.getElementById('err').style.display = "block";
-}
-
-function startApp(){
-  document.getElementById('key-screen').style.display = "none";
-  document.getElementById('app-screen').style.display = "flex";
-  toast("✅ Kích hoạt thành công!");
-  loadKeyInfo();
-  loadAimConfigs();
-  updateTimer();
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimer();
-    checkExpireWarning();
-    if(timeLeft <= 0){
-      clearInterval(timerInterval);
-      alert("⏰ Thời gian dùng Key đã hết!\nVui lòng nhập Key mới.");
-      localStorage.removeItem('reglock_current');
-      location.reload();
+    const pattern = /^SETTING-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/;
+    if (!pattern.test(raw)) {
+      lockStatus.textContent = 'Sai định dạng! Đúng: SETTING-xxxx-xxxx-FF';
+      lockStatus.classList.remove('success');
+      return;
     }
-  }, 1000);
-}
 
-function loadKeyInfo(){
-  const data = JSON.parse(localStorage.getItem('reglock_current') || '{}');
-  if(!data.key) return;
-  document.getElementById('ki-key').innerText = data.key;
-  document.getElementById('ki-type').innerText = data.type;
-  document.getElementById('ki-device').innerText = data.device;
-  const exp = new Date(data.expire);
-  document.getElementById('ki-expire').innerText = exp.toLocaleDateString('vi-VN') + ' ' + exp.toLocaleTimeString('vi-VN');
-}
+    const keyData = KEYS[raw];
+    if (!keyData) {
+      lockStatus.textContent = 'Key không tồn tại.';
+      lockStatus.classList.remove('success');
+      return;
+    }
 
-function updateTimer(){
-  const d = Math.floor(timeLeft / 86400);
-  const h = Math.floor((timeLeft % 86400) / 3600);
-  const m = Math.floor((timeLeft % 3600) / 60);
-  const s = timeLeft % 60;
-  const el = document.getElementById('timer');
-  el.classList.remove('warn','danger');
-  if(timeLeft < 300) el.classList.add('danger');
-  else if(timeLeft < 3600) el.classList.add('warn');
+    // Check registry theo thiết bị
+    const deviceId = getDeviceId();
+    const reg = getKeyRegistry();
 
-  if(d > 0) el.innerText = `${d}d ${pad(h)}:${pad(m)}:${pad(s)}`;
-  else el.innerText = `${pad(h)}:${pad(m)}:${pad(s)}`;
-}
-function pad(n){ return n<10?'0'+n:''+n; }
+    if (reg[raw] && reg[raw] !== deviceId) {
+      lockStatus.textContent = 'Key đã được kích hoạt trên thiết bị khác!';
+      lockStatus.classList.remove('success');
+      showToast('Key thuộc thiết bị khác', true);
+      return;
+    }
 
-function checkExpireWarning(){
-  if(timeLeft === 300 && !notifShown){
-    notifShown = true;
-    const n = document.getElementById('notif');
-    n.innerText = "⚠️ Key sắp hết hạn (còn 5 phút)!";
-    n.classList.add('show');
-    setTimeout(() => n.classList.remove('show'), 5000);
+    if (!reg[raw]) {
+      reg[raw] = deviceId;
+      saveKeyRegistry(reg);
+    }
+
+    // Loading 1 giây
+    activateBtn.disabled = true;
+    activateBtn.innerHTML = '<span class="loading-spinner"></span> ĐANG KÍCH HOẠT...';
+    lockStatus.textContent = '';
+    lockStatus.classList.remove('success');
+
+    setTimeout(() => {
+      const now = Date.now();
+      let expiryTime;
+      if (keyData.type === 'forever') {
+        expiryTime = now + 100 * 365 * 24 * 60 * 60 * 1000;
+      } else {
+        expiryTime = now + keyData.ms;
+      }
+
+      localStorage.setItem(SK.ACTIVATED, 'true');
+      localStorage.setItem(SK.EXPIRY, expiryTime.toString());
+      localStorage.setItem(SK.LICENSE, keyData.label);
+      localStorage.setItem(SK.USED_KEY, raw);
+
+      activateBtn.disabled = false;
+      activateBtn.innerHTML = 'KÍCH HOẠT';
+      lockStatus.textContent = '';
+      keyInput.value = '';
+
+      showMainScreen(keyData.label);
+      startCountdown(expiryTime);
+      showToast('Kích hoạt thành công • ' + keyData.label, false);
+    }, 1000);
   }
-}
 
-/* ============ DNS ============ */
-function toggleDNS(id, cardEl, name, aim, host, d1, d2){
-  const box = document.getElementById(id);
-  const isOpen = box.classList.contains('open');
-  document.querySelectorAll('.dns-box').forEach(b => b.classList.remove('open'));
-  if(!isOpen){
-    box.classList.add('open');
-    const key = id.replace('dns-', '');
-    selectDNS(cardEl, name, aim, host, d1, d2, key);
+  // ============================================================
+  // 11. RESET DEVICE
+  // ============================================================
+  function resetDevice() {
+    if (!confirm('XÓA TOÀN BỘ trạng thái kích hoạt và registry key?\n\nSau khi reset, mọi key đều có thể nhập lại.')) return;
+    Object.keys(localStorage).forEach(k => {
+      if (k.indexOf('serenity_') === 0) localStorage.removeItem(k);
+    });
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+    expireOverlay.classList.remove('show');
+    mainScreen.style.display = 'none';
+    lockScreen.style.display = 'flex';
+    lockStatus.textContent = 'Đã reset! Nhập key để kích hoạt lại.';
+    lockStatus.classList.add('success');
+    keyInput.value = '';
+    showToast('Đã reset thiết bị', false);
   }
-}
 
-function selectDNS(el, name, aim, host, d1, d2, key){
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedDNS = { name, aim, host, d1, d2, key };
-  document.getElementById('sel-name').innerText = name;
-  document.getElementById('sel-aim').innerText = aim;
-  document.getElementById('info').classList.add('active');
-  toast("✅ Đã chọn: " + name);
-}
-
-function toggleFix(btn){
-  btn.classList.toggle('active');
-  const name = btn.innerText;
-  if(btn.classList.contains('active')) toast("🔧 Đã bật: " + name);
-  else toast("🔧 Đã tắt: " + name);
-}
-
-/* ============ TẢI DNS ============ */
-function uuid(){ return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8); return v.toString(16).toUpperCase(); }); }
-
-function buildConfig(){
-  if(!selectedDNS) return "";
-  const u1 = uuid(), u2 = uuid();
-  
-  // Lấy AIM config của DNS đã chọn
-  const aimCfg = AIM_CONFIG[selectedDNS.key] || { min: 0.5, max: 1.2 };
-  const aimString = aimCfg.min.toFixed(1) + ' - ' + aimCfg.max.toFixed(1);
-  
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>PayloadContent</key>
-  <array>
-    <dict>
-      <key>DNSSettings</key>
-      <dict>
-        <key>DNSProtocol</key>
-        <string>HTTPS</string>
-        <key>ServerURL</key>
-        <string>https://${selectedDNS.host}/dns-query</string>
-        <key>ServerAddresses</key>
-        <array>
-          <string>${selectedDNS.d1}</string>
-          <string>${selectedDNS.d2}</string>
-        </array>
-      </dict>
-      <key>PayloadDescription</key>
-      <string>REG LOCK DNS - ${selectedDNS.name} (AIM: ${aimString})</string>
-      <key>PayloadDisplayName</key>
-      <string>REG LOCK - ${selectedDNS.name}</string>
-      <key>PayloadIdentifier</key>
-      <string>com.reglock.dns.${selectedDNS.host}</string>
-      <key>PayloadType</key>
-      <string>com.apple.dnsSettings.managed</string>
-      <key>PayloadUUID</key>
-      <string>${u1}</string>
-      <key>PayloadVersion</key>
-      <integer>1</integer>
-    </dict>
-  </array>
-  <key>PayloadDescription</key>
-  <string>REG LOCK - ${selectedDNS.name} - AIM: ${aimString}</string>
-  <key>PayloadDisplayName</key>
-  <string>REG LOCK DNS - ${selectedDNS.name}</string>
-  <key>PayloadIdentifier</key>
-  <string>com.reglock.profile.${u2}</string>
-  <key>PayloadOrganization</key>
-  <string>REG LOCK</string>
-  <key>PayloadRemovalDisallowed</key>
-  <false/>
-  <key>PayloadType</key>
-  <string>Configuration</string>
-  <key>PayloadUUID</key>
-  <string>${u2}</string>
-  <key>PayloadVersion</key>
-  <integer>1</integer>
-</dict>
-</plist>`;
-}
-
-function previewDNS(){
-  if(!selectedDNS){ toast("⚠️ Vui lòng chọn DNS trước!"); return; }
-  document.getElementById('preview').innerText = buildConfig();
-  document.getElementById('modal').classList.add('active');
-}
-
-function closeModal(id){ document.getElementById(id).classList.remove('active'); }
-
-function confirmDownload(){
-  if(!selectedDNS) return;
-  const blob = new Blob([buildConfig()], { type: 'application/x-apple-aspen-config' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  const aimCfg = AIM_CONFIG[selectedDNS.key] || { min: 0.5, max: 1.2 };
-  a.download = `REG-LOCK-${selectedDNS.name.replace(/\s+/g,'-')}-AIM-${aimCfg.min.toFixed(1)}-${aimCfg.max.toFixed(1)}.mobileconfig`;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  closeModal('modal');
-  setTimeout(() => {
-    alert(`✅ Đã tải: ${selectedDNS.name}\nAIM: ${aimCfg.min.toFixed(1)} - ${aimCfg.max.toFixed(1)}\n\n📱 Cài đặt trên iPhone:\n1. Mở Cài đặt\n2. Vào "Đã tải về"\n3. Bấm "Cài đặt"`);
-  }, 500);
-}
-
-/* ============ TOAST ============ */
-let toastTimer;
-function toast(msg){
-  const t = document.getElementById('toast');
-  t.innerText = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
-}
-
-/* ============ AUTO-RESUME ============ */
-window.addEventListener('load', () => {
-  const saved = localStorage.getItem('reglock_current');
-  if(saved){
-    try{
-      const data = JSON.parse(saved);
-      const remain = Math.floor((data.expire - Date.now()) / 1000);
-      if(remain > 0){ timeLeft = remain; startApp(); return; }
-      else localStorage.removeItem('reglock_current');
-    }catch(e){ localStorage.removeItem('reglock_current'); }
+  // ============================================================
+  // 12. RENDER CONFIGS
+  // ============================================================
+  function renderConfigs() {
+    configList.innerHTML = '';
+    CONFIGS.forEach(cfg => {
+      const item = document.createElement('div');
+      item.className = 'list-item';
+      item.innerHTML =
+        '<div class="item-left">' +
+          '<div class="item-icon">' + cfg.icon + '</div>' +
+          '<div class="item-info">' +
+            '<div class="item-name">' + cfg.name + '</div>' +
+            '<div class="item-sub">' + cfg.sub + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="item-arrow">›</div>';
+      item.addEventListener('click', () => downloadConfig(cfg));
+      configList.appendChild(item);
+    });
   }
-});
+
+  // ============================================================
+  // 13. UUID
+  // ============================================================
+  function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0;
+      const v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  // ============================================================
+  // 14. GENERATE .mobileconfig
+  //     DNS + AIM nhúng TRỰC TIẾP trong cùng payload
+  // ============================================================
+  function generateMobileConfig(cfg) {
+    const uuid = generateUUID();
+    const uuid2 = generateUUID();
+    const aim = cfg.aim;
+
+    const dnsPayload =
+      '\n      <key>DNSSettings</key>' +
+      '\n      <dict>' +
+      '\n        <key>DNSProtocol</key>' +
+      '\n        <string>HTTPS</string>' +
+      '\n        <key>ServerURL</key>' +
+      '\n        <string>https://dns.serenity-lock.com/dns-query</string>' +
+      '\n        <key>ServerAddresses</key>' +
+      '\n        <array>' +
+      '\n          <string>dns.serenity-lock.com</string>' +
+      '\n          <string>backup.serenity-lock.com</string>' +
+      '\n        </array>' +
+      '\n      </dict>';
+
+    // AIM nhúng trực tiếp cùng payload với DNS
+    const aimPayload =
+      '\n      <key>AIMSettings</key>' +
+      '\n      <dict>' +
+      '\n        <key>ProfileName</key>' +
+      '\n        <string>SERENITY_' + aim.profile + '</string>' +
+      '\n        <key>ConfigName</key>' +
+      '\n        <string>' + cfg.name + '</string>' +
+      '\n        <key>FFMode</key>' +
+      '\n        <string>' + aim.ff + '</string>' +
+      '\n        <key>TotalSensitivity</key>' +
+      '\n        <integer>' + aim.sens + '</integer>' +
+      '\n        <key>HeadTracking</key>' +
+      '\n        <real>' + aim.head.toFixed(2) + '</real>' +
+      '\n        <key>RecoilControl</key>' +
+      '\n        <integer>' + aim.recoil + '</integer>' +
+      '\n        <key>ScreenStabilization</key>' +
+      '\n        <integer>' + aim.stab + '</integer>' +
+      '\n        <key>DNSLock</key>' +
+      '\n        <string>dns.serenity-lock.com</string>' +
+      '\n        <key>DNSBackup</key>' +
+      '\n        <string>backup.serenity-lock.com</string>' +
+      '\n      </dict>';
+
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
+      '<plist version="1.0">\n' +
+      '<dict>\n' +
+      '  <key>PayloadContent</key>\n' +
+      '  <array>\n' +
+      '    <dict>\n' +
+      '      <key>PayloadType</key>\n' +
+      '      <string>com.apple.dnsSettings.managed</string>\n' +
+      '      <key>PayloadIdentifier</key>\n' +
+      '      <string>com.serenity.lock.' + cfg.id + '.' + uuid + '</string>\n' +
+      '      <key>PayloadUUID</key>\n' +
+      '      <string>' + uuid + '</string>\n' +
+      '      <key>PayloadDisplayName</key>\n' +
+      '      <string>SERENITY LOCK — ' + cfg.name + '</string>\n' +
+      '      <key>PayloadDescription</key>\n' +
+      '      <string>DNS + AIM: ' + cfg.name + '</string>\n' +
+      '      <key>PayloadVersion</key>\n' +
+      '      <integer>1</integer>\n' +
+      '      <key>PayloadOrganization</key>\n' +
+      '      <string>SERENITY</string>\n' +
+      dnsPayload + '\n' +
+      aimPayload + '\n' +
+      '    </dict>\n' +
+      '  </array>\n' +
+      '  <key>PayloadDisplayName</key>\n' +
+      '  <string>SERENITY LOCK — ' + cfg.name + '</string>\n' +
+      '  <key>PayloadIdentifier</key>\n' +
+      '  <string>com.serenity.lock.profile.' + uuid2 + '</string>\n' +
+      '  <key>PayloadUUID</key>\n' +
+      '  <string>' + uuid2 + '</string>\n' +
+      '  <key>PayloadVersion</key>\n' +
+      '  <integer>1</integer>\n' +
+      '  <key>PayloadOrganization</key>\n' +
+      '  <string>SERENITY</string>\n' +
+      '  <key>PayloadDescription</key>\n' +
+      '  <string>Cấu hình DNS + AIM tích hợp — ' + cfg.name + '</string>\n' +
+      '  <key>PayloadRemovalDisallowed</key>\n' +
+      '  <false/>\n' +
+      '</dict>\n' +
+      '</plist>';
+  }
+
+  // ============================================================
+  // 15. DOWNLOAD
+  // ============================================================
+  function downloadConfig(cfg) {
+    try {
+      const content = generateMobileConfig(cfg);
+      const blob = new Blob([content], { type:'application/x-apple-aspen-config' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'SERENITY_' + cfg.aim.profile + '.mobileconfig';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+      showToast('Đã tải: ' + cfg.name, false);
+    } catch (err) {
+      showToast('Lỗi tạo tệp!', true);
+    }
+  }
+
+  // ============================================================
+  // 16. TOAST
+  // ============================================================
+  let toastTimer = null;
+  function showToast(msg, isError) {
+    toastText.textContent = msg;
+    toastIcon.textContent = isError ? '⚠️' : '✅';
+    toast.classList.toggle('error', !!isError);
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+
+  // ============================================================
+  // 17. INIT
+  // ============================================================
+  function init() {
+    renderConfigs();
+    getDeviceId();
+
+    const wasActivated = checkActivation();
+    if (!wasActivated) {
+      lockScreen.style.display = 'flex';
+      mainScreen.style.display = 'none';
+    }
+
+    activateBtn.addEventListener('click', activateKey);
+    resetBtn.addEventListener('click', resetDevice);
+
+    keyInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); activateKey(); }
+    });
+
+    keyInput.addEventListener('input', (e) => {
+      const pos = e.target.selectionStart;
+      e.target.value = e.target.value.toUpperCase();
+      try { e.target.setSelectionRange(pos, pos); } catch (err) {}
+    });
+
+    expireBtn.addEventListener('click', () => {
+      expireOverlay.classList.remove('show');
+      lockScreen.style.display = 'flex';
+      mainScreen.style.display = 'none';
+      lockStatus.textContent = 'Key đã hết hạn. Vui lòng nhập key mới.';
+      lockStatus.classList.remove('success');
+      keyInput.value = '';
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        const expiryStr = localStorage.getItem(SK.EXPIRY);
+        const activated = localStorage.getItem(SK.ACTIVATED);
+        if (activated === 'true' && expiryStr) {
+          if (Date.now() >= parseInt(expiryStr)) {
+            forceExpire('Key của bạn đã hết hạn.');
+          }
+        }
+      }
+    });
+  }
+
+  init();
+})();
 </script>
 </body>
 </html>
