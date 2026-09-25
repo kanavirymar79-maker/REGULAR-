@@ -180,6 +180,7 @@
   .list-item:active {
     transform:scale(0.985); border-color:rgba(56,189,248,0.7);
     box-shadow:0 0 26px rgba(56,189,248,0.4),0 0 0 1px rgba(56,189,248,0.4) inset;
+    background:linear-gradient(100deg,rgba(3,60,88,0.98),rgba(2,44,66,0.98));
   }
   .item-left { display:flex; align-items:center; gap:12px; min-width:0; flex:1; }
   .item-icon {
@@ -234,6 +235,40 @@
     transition:all 0.2s;
   }
   .expire-btn:active { transform:scale(0.97); }
+
+  /* ===== CUSTOM CONFIRM MODAL (thay thế confirm() để chạy trên iOS PWA) ===== */
+  .confirm-overlay {
+    position:fixed; inset:0; background:rgba(0,8,16,0.9);
+    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+    display:none; align-items:center; justify-content:center; z-index:10000;
+    padding:20px; animation:fadeIn 0.3s ease;
+  }
+  .confirm-overlay.show { display:flex; }
+  .confirm-box {
+    background:linear-gradient(160deg,rgba(8,38,56,0.98),rgba(2,22,36,0.98));
+    border:1.5px solid rgba(56,189,248,0.5); border-radius:26px;
+    padding:26px 22px; text-align:center; max-width:340px; width:100%;
+    box-shadow:0 30px 70px -10px rgba(0,0,0,0.9),0 0 40px rgba(2,132,199,0.4);
+    animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .confirm-icon { font-size:2.4rem; margin-bottom:10px; }
+  .confirm-title { font-size:1.1rem; font-weight:900; color:#7dd3fc; letter-spacing:1.5px; margin-bottom:10px; }
+  .confirm-text { font-size:0.82rem; color:#cbd5e1; line-height:1.6; margin-bottom:20px; }
+  .confirm-actions { display:flex; gap:10px; }
+  .confirm-btn {
+    flex:1; padding:13px; border-radius:14px; border:none;
+    font-weight:800; font-size:0.85rem; letter-spacing:1px;
+    cursor:pointer; transition:all 0.2s;
+  }
+  .confirm-btn.cancel {
+    background:rgba(148,163,184,0.15); color:#cbd5e1;
+    border:1px solid rgba(148,163,184,0.4);
+  }
+  .confirm-btn.ok {
+    background:linear-gradient(135deg,#dc2626,#ef4444); color:#fff;
+    box-shadow:0 8px 22px -6px #dc2626,0 0 20px rgba(239,68,68,0.5);
+  }
+  .confirm-btn:active { transform:scale(0.96); }
 </style>
 </head>
 <body>
@@ -283,10 +318,26 @@
   </div>
 </div>
 
+<!-- Custom confirm modal -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon" id="confirmIcon">⚠️</div>
+    <div class="confirm-title" id="confirmTitle">XÁC NHẬN</div>
+    <div class="confirm-text" id="confirmText">Bạn có chắc chắn?</div>
+    <div class="confirm-actions">
+      <button class="confirm-btn cancel" id="confirmCancel">HỦY</button>
+      <button class="confirm-btn ok" id="confirmOk">ĐỒNG Ý</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function() {
   'use strict';
 
+  // ============================================================
+  // KEYS — 5 Giờ / 5 Tuần / 5 Tháng / 5 Vĩnh Viễn
+  // ============================================================
   const KEYS = {
     'SETTING-GIO1-AAAA-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
     'SETTING-GIO2-BBBB-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
@@ -310,6 +361,9 @@
     'SETTING-VINH5-EEEE-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity }
   };
 
+  // ============================================================
+  // CONFIGS
+  // ============================================================
   const CONFIGS = [
     { id:'aim_tam', name:'AIM Bám Tâm', icon:'⚡',
       sub:'NHẠY 135 • BÁM 0.94 • GIẬT 98% • ỔN 99%',
@@ -331,12 +385,18 @@
       aim:{ sens:155, head:0.92, recoil:97, stab:99, ff:'FF Thường', profile:'SENSI_TOUCH' } }
   ];
 
+  // ============================================================
+  // STORAGE KEYS
+  // ============================================================
   const SK = {
     ACTIVATED:'serenity_activated', EXPIRY:'serenity_expiry',
     LICENSE:'serenity_license', DEVICE_ID:'serenity_device_id',
     USED_KEY:'serenity_used_key', REGISTRY:'serenity_key_registry'
   };
 
+  // ============================================================
+  // DOM
+  // ============================================================
   const lockScreen = document.getElementById('lockScreen');
   const mainScreen = document.getElementById('mainScreen');
   const keyInput = document.getElementById('keyInput');
@@ -352,9 +412,41 @@
   const expireOverlay = document.getElementById('expireOverlay');
   const expireText = document.getElementById('expireText');
   const expireBtn = document.getElementById('expireBtn');
+  const confirmOverlay = document.getElementById('confirmOverlay');
+  const confirmIcon = document.getElementById('confirmIcon');
+  const confirmTitle = document.getElementById('confirmTitle');
+  const confirmText = document.getElementById('confirmText');
+  const confirmOk = document.getElementById('confirmOk');
+  const confirmCancel = document.getElementById('confirmCancel');
 
   let countdownInterval = null;
+  let confirmCallback = null;
 
+  // ============================================================
+  // CUSTOM CONFIRM (thay confirm() — chạy cả trên iOS PWA)
+  // ============================================================
+  function customConfirm(title, text, icon, onOk) {
+    confirmTitle.textContent = title;
+    confirmText.textContent = text;
+    confirmIcon.textContent = icon || '⚠️';
+    confirmCallback = onOk;
+    confirmOverlay.classList.add('show');
+  }
+
+  confirmOk.addEventListener('click', () => {
+    confirmOverlay.classList.remove('show');
+    if (typeof confirmCallback === 'function') confirmCallback();
+    confirmCallback = null;
+  });
+
+  confirmCancel.addEventListener('click', () => {
+    confirmOverlay.classList.remove('show');
+    confirmCallback = null;
+  });
+
+  // ============================================================
+  // DEVICE ID
+  // ============================================================
   function getDeviceId() {
     let id = localStorage.getItem(SK.DEVICE_ID);
     if (!id) {
@@ -370,6 +462,9 @@
     return id;
   }
 
+  // ============================================================
+  // REGISTRY
+  // ============================================================
   function getKeyRegistry() {
     try { const r = localStorage.getItem(SK.REGISTRY); return r?JSON.parse(r):{}; }
     catch(e){ return {}; }
@@ -378,6 +473,9 @@
     try { localStorage.setItem(SK.REGISTRY, JSON.stringify(reg)); } catch(e){}
   }
 
+  // ============================================================
+  // CHECK ACTIVATION
+  // ============================================================
   function checkActivation() {
     const act = localStorage.getItem(SK.ACTIVATED);
     const exp = localStorage.getItem(SK.EXPIRY);
@@ -399,6 +497,9 @@
     if (label) licenseBadge.textContent = label;
   }
 
+  // ============================================================
+  // COUNTDOWN
+  // ============================================================
   function startCountdown(expiry) {
     if (countdownInterval) clearInterval(countdownInterval);
     function tick() {
@@ -415,15 +516,22 @@
     tick(); countdownInterval = setInterval(tick, 1000);
   }
 
+  // ============================================================
+  // FORCE EXPIRE — giữ USED_KEY + REGISTRY (key cũ không nhập lại được)
+  // ============================================================
   function forceExpire(msg) {
     if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
     localStorage.removeItem(SK.ACTIVATED);
     localStorage.removeItem(SK.EXPIRY);
     localStorage.removeItem(SK.LICENSE);
+    // KHÔNG xóa SK.USED_KEY, SK.REGISTRY, SK.DEVICE_ID
     if (msg) expireText.innerHTML = msg.replace(/\n/g,'<br>')+'<br><br>Vui lòng nhập key mới để tiếp tục sử dụng.';
     expireOverlay.classList.add('show');
   }
 
+  // ============================================================
+  // ACTIVATE KEY
+  // ============================================================
   function activateKey() {
     const raw = keyInput.value.trim().toUpperCase();
     if (!raw) { lockStatus.textContent='Vui lòng nhập key.'; lockStatus.classList.remove('success'); return; }
@@ -460,17 +568,36 @@
     }, 1000);
   }
 
+  // ============================================================
+  . // RESET DEVICE — dùng customConfirm, giữ registry key cũ
+  // ============================================================
   function resetDevice() {
-    if (!confirm('XÓA TOÀN BỘ trạng thái kích hoạt và registry key?')) return;
-    Object.keys(localStorage).forEach(k => { if (k.indexOf('serenity_')===0) localStorage.removeItem(k); });
-    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
-    expireOverlay.classList.remove('show');
-    mainScreen.style.display='none'; lockScreen.style.display='flex';
-    lockStatus.textContent='Đã reset! Nhập key để kích hoạt lại.';
-    lockStatus.classList.add('success'); keyInput.value='';
-    showToast('Đã reset thiết bị', false);
+    customConfirmreplace(
+      'RESET THIẾT BỊ',
+      'RESET sẽ xóa trạng thái kích hoạt hiện tại(/. Các key ĐÃ DÙNG sẽ KHÔNG thể nhập lại. Bạn có chắc chắn?',
+&      '🔄',
+      function() {
+        // Chỉ xóa trạng thái kích hoạt hiện tại
+        // GIỮ LẠI SK.USED_KEY, SK.REGISTRY, SK.DEVICE_ID
+        localStorage.removeItem(SK.ACTIVATED);
+        localStorage.removeItem(SK.EXPIRY);
+        localStorage.removeItem(SK.LICENSE);
+
+        if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
+        expireOverlay.classList.remove('show');
+        mainScreen.style.display='none';
+        lockScreen.style.display='flex';
+        lockStatus.textContent='Đã reset! Nhập key MỚI để kích hoạt lại.';
+        lockStatus.classList.add('success');
+        keyInput.value='';
+        showToast('Đã reset — key cũ không dùng lại được', false);
+      }
+    );
   }
 
+  // ============================================================
+  // RENDER CONFIGS
+  // ============================================================
   function renderConfigs() {
     configList.innerHTML = '';
     CONFIGS.forEach(cfg => {
@@ -490,6 +617,9 @@
     });
   }
 
+  // ============================================================
+  // UUID
+  // ============================================================
   function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
       const r = Math.random()*16|0;
@@ -499,20 +629,41 @@
   }
 
   // ============================================================
-  // GENERATE .mobileconfig CHUẨN APPLE
+  // ESCAPE XML
+  // ============================================================
+  function escXml(s) {
+    return String(s)
+     /g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  }
+
+  // ============================================================
+  // GENERATE .mobileconfig — 1 payload DNS duy nhất
   // ============================================================
   function generateMobileConfig(cfg) {
     const uuidDns   = generateUUID();
-    const uuidAim   = generateUUID();
     const uuidOuter = generateUUID();
     const aim = cfg.aim;
 
-    // ----- PAYLOAD 1: DNS chuẩn Apple -----
-    // Tham khảo: com.apple.dnsSettings.managed
-    // - DNSProtocol: HTTPS (DoH)
-    // - ServerURL: URL DoH đầy đủ
-    // - ServerAddresses: mảng IP/domain dự phòng
-    const dnsPayload =
+    const aimDesc =
+      'SERENITY ' + cfg.name + ' | ' +
+      'Sens ' + aim.sens + ' | ' +
+      'Head ' + aim.head.toFixed(2) + ' | ' +
+      'Recoil ' + aim.recoil + '% | ' +
+      'Stab ' + aim.stab + '% | ' +
+      aim.ff;
+
+    const profileName = 'SERENITY LOCK — ' + cfg.name;
+
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
+      '<plist version="1.0">\n' +
+      '<dict>\n' +
+      '  <key>PayloadContent</key>\n' +
+      '  <array>\n' +
       '    <dict>\n' +
       '      <key>PayloadType</key>\n' +
       '      <string>com.apple.dnsSettings.managed</string>\n' +
@@ -521,9 +672,9 @@
       '      <key>PayloadUUID</key>\n' +
       '      <string>' + uuidDns + '</string>\n' +
       '      <key>PayloadDisplayName</key>\n' +
-      '      <string>SERENITY DNS — ' + cfg.name + '</string>\n' +
+      '      <string>' + escXml(profileName) + '</string>\n' +
       '      <key>PayloadDescription</key>\n' +
-      '      <string>DNS mã hoá cho SERENITY LOCK</string>\n' +
+      '      <string>' + escXml(aimDesc) + '</string>\n' +
       '      <key>PayloadOrganization</key>\n' +
       '      <string>SERENITY</string>\n' +
       '      <key>PayloadVersion</key>\n' +
@@ -541,64 +692,16 @@
       '      <array>\n' +
       '        <string>serenity-lock.com</string>\n' +
       '      </array>\n' +
-      '    </dict>';
-
-    // ----- PAYLOAD 2: AIM tùy chỉnh (custom payload) -----
-    // Dùng PayloadType riêng để iOS chấp nhận & giữ nguyên dữ liệu
-    // Các key AIM sẽ nằm trong payload này, cài cùng lúc với DNS
-    const aimPayload =
-      '    <dict>\n' +
-      '      <key>PayloadType</key>\n' +
-      '      <string>com.serenity.lock.aim</string>\n' +
-      '      <key>PayloadIdentifier</key>\n' +
-      '      <string>com.serenity.lock.aim.' + uuidAim + '</string>\n' +
-      '      <key>PayloadUUID</key>\n' +
-      '      <string>' + uuidAim + '</string>\n' +
-      '      <key>PayloadDisplayName</key>\n' +
-      '      <string>SERENITY AIM — ' + cfg.name + '</string>\n' +
-      '      <key>PayloadDescription</key>\n' +
-      '      <string>Thông số AIM cho ' + cfg.name + '</string>\n' +
-      '      <key>PayloadOrganization</key>\n' +
-      '      <string>SERENITY</string>\n' +
-      '      <key>PayloadVersion</key>\n' +
-      '      <integer>1</integer>\n' +
-      '      <key>ProfileName</key>\n' +
-      '      <string>SERENITY_' + aim.profile + '</string>\n' +
-      '      <key>ConfigName</key>\n' +
-      '      <string>' + cfg.name + '</string>\n' +
-      '      <key>FFMode</key>\n' +
-      '      <string>' + aim.ff + '</string>\n' +
-      '      <key>TotalSensitivity</key>\n' +
-      '      <integer>' + aim.sens + '</integer>\n' +
-      '      <key>HeadTracking</key>\n' +
-      '      <string>' + aim.head.toFixed(2) + '</string>\n' +
-      '      <key>RecoilControl</key>\n' +
-      '      <integer>' + aim.recoil + '</integer>\n' +
-      '      <key>ScreenStabilization</key>\n' +
-      '      <integer>' + aim.stab + '</integer>\n' +
-      '      <key>DNSLock</key>\n' +
-      '      <string>dns.serenity-lock.com</string>\n' +
-      '      <key>DNSBackup</key>\n' +
-      '      <string>backup.serenity-lock.com</string>\n' +
-      '    </dict>';
-
-    return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-      '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
-      '<plist version="1.0">\n' +
-      '<dict>\n' +
-      '  <key>PayloadContent</key>\n' +
-      '  <array>\n' +
-      dnsPayload + '\n' +
-      aimPayload + '\n' +
+      '    </dict>\n' +
       '  </array>\n' +
       '  <key>PayloadDisplayName</key>\n' +
-      '  <string>SERENITY LOCK — ' + cfg.name + '</string>\n' +
+      '  <string>' + escXml(profileName) + '</string>\n' +
       '  <key>PayloadIdentifier</key>\n' +
       '  <string>com.serenity.lock.profile.' + uuidOuter + '</string>\n' +
       '  <key>PayloadUUID</key>\n' +
       '  <string>' + uuidOuter + '</string>\n' +
       '  <key>PayloadDescription</key>\n' +
-      '  <string>Cấu hình DNS + AIM tích hợp — ' + cfg.name + '</string>\n' +
+      '  <string>' + escXml(aimDesc) + '</string>\n' +
       '  <key>PayloadOrganization</key>\n' +
       '  <string>SERENITY</string>\n' +
       '  <key>PayloadVersion</key>\n' +
@@ -609,6 +712,9 @@
       '</plist>';
   }
 
+  // ============================================================
+  // DOWNLOAD
+  // ============================================================
   function downloadConfig(cfg) {
     try {
       const content = generateMobileConfig(cfg);
@@ -627,6 +733,9 @@
     }
   }
 
+  // ============================================================
+  // TOAST
+  // ============================================================
   let toastTimer = null;
   function showToast(msg, isError) {
     toastText.textContent = msg;
@@ -637,6 +746,9 @@
     toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
   }
 
+  // ============================================================
+  // INIT
+  // ============================================================
   function init() {
     renderConfigs();
     getDeviceId();
