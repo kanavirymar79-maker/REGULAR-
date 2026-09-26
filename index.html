@@ -2,790 +2,1016 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>SERENITY LOCK</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>X LOCK · AIM CONFIG</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:-apple-system,'SF Pro Display','Segoe UI',Roboto,sans-serif; -webkit-tap-highlight-color:transparent; }
-  html,body { height:100%; overflow:hidden; }
-  body {
-    min-height:100vh;
-    background:linear-gradient(165deg,#031a2a 0%,#052b42 40%,#021420 100%);
-    display:flex; align-items:center; justify-content:center;
-    padding:14px; color:#e0f2fe; position:relative;
-  }
-  body::before {
-    content:''; position:fixed; top:-20%; left:-20%; width:140%; height:140%;
-    background:radial-gradient(circle at 30% 20%,rgba(56,189,248,0.15),transparent 50%),
-              radial-gradient(circle at 70% 80%,rgba(2,132,199,0.18),transparent 50%);
-    pointer-events:none; animation:bgShift 18s ease-in-out infinite;
-  }
-  @keyframes bgShift { 0%,100%{transform:translate(0,0) scale(1);} 50%{transform:translate(-3%,2%) scale(1.08);} }
-  .app {
-    width:100%; max-width:420px; max-height:96vh;
-    background:rgba(4,28,44,0.78);
-    backdrop-filter:blur(22px) saturate(170%); -webkit-backdrop-filter:blur(22px) saturate(170%);
-    border-radius:38px; padding:22px 18px 24px;
-    border:1px solid rgba(56,189,248,0.28);
-    box-shadow:0 30px 70px -14px rgba(0,0,0,0.95),0 0 0 1px rgba(14,165,233,0.15) inset,0 0 50px rgba(2,132,199,0.28);
-    position:relative; overflow-y:auto; overflow-x:hidden; z-index:2; scrollbar-width:none;
-  }
-  .app::-webkit-scrollbar { display:none; }
-  .screen { position:relative; z-index:2; }
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom));color:#f5e6ff;overflow-x:hidden}
+.app{width:100%;max-width:420px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(45,8,60,.92),rgba(20,3,35,.96));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 0 0 1px #FF2EF7,0 0 30px #FF2EF788,0 0 60px #C700FF44,0 0 100px #9D00CC33,inset 0 0 40px #FF2EF711;padding:20px 16px 22px;position:relative;overflow:hidden}
+.app::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,#FF2EF722,transparent,#C700FF22,transparent);animation:rotate 12s linear infinite;pointer-events:none;z-index:0}
+@keyframes rotate{100%{transform:rotate(360deg)}}
+.app>*{position:relative;z-index:1}
+.neon-text{text-shadow:0 0 4px #FF2EF7,0 0 12px #FF2EF7,0 0 24px #C700FF,0 0 48px #9D00CC}
+.logo-wrap{text-align:center;margin-bottom:18px}
+.logo-x{width:84px;height:84px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF2EF733,#1A0325);border-radius:50%;border:2px solid #FF2EF7;font-size:54px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 22px #C700FF,0 0 44px #9D00CC;box-shadow:0 0 20px #FF2EF7,0 0 50px #C700FF77,inset 0 0 22px #FF2EF744;animation:pulseX 2.4s ease-in-out infinite}
+@keyframes pulseX{0%,100%{box-shadow:0 0 20px #FF2EF7,0 0 50px #C700FF77,inset 0 0 22px #FF2EF744}50%{box-shadow:0 0 30px #FF2EF7,0 0 70px #C700FFAA,inset 0 0 30px #FF2EF766}}
+.logo-name{font-size:34px;font-weight:900;letter-spacing:8px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 18px #FF2EF7,0 0 36px #C700FF,0 0 72px #9D00CC;margin-bottom:4px}
+.logo-tag{font-size:10px;letter-spacing:4px;color:#d9a6ff;text-shadow:0 0 8px #C700FF}
+.key-screen .input-wrap{margin:20px 0 16px}
+.key-screen label{display:block;font-size:11px;letter-spacing:3px;color:#d9a6ff;margin-bottom:8px;text-shadow:0 0 8px #C700FF;text-align:center}
+.key-input{width:100%;background:rgba(10,0,18,.9);border:1.5px solid #FF2EF7;border-radius:18px;padding:16px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7;outline:none;text-align:center;box-shadow:0 0 0 1px #FF2EF744,0 0 18px #FF2EF766,inset 0 0 12px #C700FF33;transition:all .25s;-webkit-appearance:none;appearance:none}
+.key-input::placeholder{color:#a56dcc;font-size:14px;letter-spacing:2px;font-weight:500}
+.key-input:focus{border-color:#FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 30px #FF2EF7,0 0 60px #C700FF,inset 0 0 18px #FF2EF766}
+.btn{display:block;width:100%;padding:16px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF2EF7,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 8px #fff,0 0 16px #FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 24px #FF2EF7,0 0 50px #C700FF88;cursor:pointer;transition:transform .15s,box-shadow .2s;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.btn:active{transform:scale(.96);box-shadow:0 0 0 1px #FF2EF7,0 0 40px #FF2EF7,0 0 80px #C700FF}
+.btn:disabled{background:linear-gradient(135deg,#3a2045,#2a1035);color:#7a5588;text-shadow:none;box-shadow:0 0 0 1px #5a2a6a;cursor:not-allowed;opacity:.6}
+.btn-outline{background:rgba(255,46,247,.08);border:1.5px solid #FF2EF7;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7;box-shadow:0 0 0 1px #FF2EF744,0 0 16px #FF2EF766,inset 0 0 12px #FF2EF722}
+.btn-sm{padding:10px;font-size:12px;letter-spacing:1px;border-radius:12px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.main-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:14px;border-bottom:1.5px solid #FF2EF7;box-shadow:0 8px 20px -10px #FF2EF7}
+.main-header .title{font-size:22px;font-weight:900;letter-spacing:5px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 16px #C700FF,0 0 32px #9D00CC}
+.device-id{font-size:9px;letter-spacing:.5px;background:rgba(255,46,247,.1);border:1px solid #FF2EF7;border-radius:30px;padding:5px 10px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7;box-shadow:0 0 12px #FF2EF766;font-weight:700;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card{background:linear-gradient(150deg,rgba(60,10,80,.75),rgba(25,4,40,.85));border:1px solid #FF2EF7;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 0 0 1px #FF2EF744,0 0 18px #FF2EF766,0 0 36px #C700FF33,inset 0 0 18px #FF2EF711}
+.card-title{font-size:10px;letter-spacing:3px;color:#d9a6ff;margin-bottom:10px;text-shadow:0 0 8px #C700FF;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.card-title .left{display:flex;align-items:center;gap:6px}
+.card-title .left::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#FF2EF7;box-shadow:0 0 10px #FF2EF7,0 0 20px #FF2EF7}
+.card-title .toggle-btn{font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:20px;background:rgba(255,46,247,.15);border:1px solid #FF2EF7;color:#FF2EF7;cursor:pointer;font-weight:700;text-shadow:0 0 6px #FF2EF7}
+.dns-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #FF2EF722}
+.dns-row:last-child{border-bottom:none}
+.dns-label{font-size:12px;color:#c79cff;letter-spacing:.5px}
+.dns-value{font-size:14px;font-weight:800;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 20px #C700FF;font-family:'SF Mono',Menlo,monospace}
+.doh-link{font-size:11px;color:#FF2EF7;text-decoration:none;text-shadow:0 0 6px #FF2EF7;word-break:break-all;text-align:right;max-width:60%;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF2EF7;padding-bottom:1px}
 
-  .lock-screen { display:flex; flex-direction:column; align-items:center; gap:16px; padding:16px 4px 8px; }
-  .lock-icon-wrap {
-    width:92px; height:92px; border-radius:30px;
-    background:linear-gradient(145deg,#0369a1,#0ea5e9);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 38px rgba(56,189,248,0.75),0 0 0 1px rgba(255,255,255,0.1) inset;
-    animation:floaty 3s ease-in-out infinite; position:relative;
-  }
-  .lock-icon-wrap::after {
-    content:''; position:absolute; inset:-8px; border-radius:38px;
-    border:1.5px solid rgba(125,211,252,0.45); animation:ringPulse 2.4s ease-out infinite;
-  }
-  @keyframes ringPulse { 0%{transform:scale(1);opacity:0.8;} 100%{transform:scale(1.28);opacity:0;} }
-  @keyframes floaty { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-7px);} }
-  .lock-icon { font-size:2.7rem; filter:drop-shadow(0 0 12px rgba(255,255,255,0.7)); }
-  .lock-title {
-    font-size:2rem; font-weight:900; letter-spacing:5px;
-    background:linear-gradient(180deg,#e0f2fe,#38bdf8);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    text-shadow:0 0 30px rgba(56,189,248,0.75); margin-top:4px;
-  }
-  .lock-sub { font-size:0.72rem; color:#5b93b3; letter-spacing:4px; text-transform:uppercase; font-weight:700; margin-top:-8px; }
-  .key-input {
-    width:100%; padding:16px 14px; border-radius:18px;
-    border:1.5px solid rgba(56,189,248,0.4);
-    background:rgba(1,22,35,0.88); color:#e0f2fe;
-    font-size:0.92rem; font-weight:700; letter-spacing:1.2px;
-    text-align:center; outline:none; transition:all 0.25s;
-    font-family:'SF Mono',Menlo,monospace;
-  }
-  .key-input:focus {
-    border-color:#38bdf8;
-    box-shadow:0 0 0 4px rgba(56,189,248,0.18),0 0 26px rgba(14,165,233,0.55);
-    background:rgba(2,36,56,0.98);
-  }
-  .key-input::placeholder { color:#2f6180; letter-spacing:0.5px; font-size:0.74rem; font-weight:500; }
-  .btn {
-    width:100%; padding:16px; border-radius:18px; border:none;
-    font-size:1rem; font-weight:800; letter-spacing:2.5px;
-    background:linear-gradient(135deg,#0284c7,#0ea5e9,#38bdf8);
-    color:#fff; cursor:pointer; transition:all 0.2s;
-    text-shadow:0 1px 4px rgba(0,0,0,0.5);
-    box-shadow:0 10px 26px -8px #0284c7,0 0 26px rgba(56,189,248,0.6);
-    animation:btnGlow 2.4s ease-in-out infinite;
-    position:relative; overflow:hidden;
-  }
-  .btn::after {
-    content:''; position:absolute; top:0; left:-80%; width:60%; height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
-    animation:shine 3.2s infinite;
-  }
-  @keyframes shine { 0%{left:-80%;} 55%{left:130%;} 100%{left:130%;} }
-  @keyframes btnGlow {
-    0%,100%{box-shadow:0 10px 26px -8px #0284c7,0 0 20px rgba(56,189,248,0.45);}
-    50%{box-shadow:0 10px 34px -6px #38bdf8,0 0 38px rgba(56,189,248,0.85);}
-  }
-  .btn:active { transform:scale(0.97); filter:brightness(1.12); }
-  .btn:disabled { opacity:0.65; animation:none; cursor:not-allowed; }
-  .btn-reset {
-    width:100%; padding:12px; border-radius:16px;
-    background:rgba(220,38,38,0.15); border:1px solid rgba(248,113,113,0.5);
-    color:#fca5a5; font-size:0.78rem; font-weight:700; letter-spacing:1.5px;
-    cursor:pointer; transition:all 0.2s; margin-top:-4px;
-  }
-  .btn-reset:active { transform:scale(0.97); background:rgba(220,38,38,0.3); }
-  .status-msg {
-    font-size:0.82rem; min-height:20px; color:#fca5a5;
-    text-align:center; font-weight:700; letter-spacing:0.3px; line-height:1.4;
-  }
-  .status-msg.success { color:#86efac; }
-  .loading-spinner {
-    display:inline-block; width:16px; height:16px;
-    border:2px solid rgba(255,255,255,0.3); border-radius:50%;
-    border-top-color:#fff; animation:spin 0.7s linear infinite;
-    margin-right:8px; vertical-align:middle;
-  }
-  @keyframes spin { to{transform:rotate(360deg);} }
-  .key-hint { font-size:0.6rem; color:#3d6f8a; text-align:center; letter-spacing:0.6px; line-height:1.6; margin-top:-4px; }
+/* ===== AIM EDITOR ===== */
+.aim-editor{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755}
+.aim-editor.open{display:block;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.aim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.aim-field{background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:12px;padding:8px 10px;transition:border-color .2s}
+.aim-field:focus-within{border-color:#FF2EF7;box-shadow:0 0 12px #FF2EF766}
+.aim-field .lbl{font-size:9px;color:#b58ed9;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none;appearance:none}
+.aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none;appearance:none;cursor:pointer}
+.aim-field select option{background:#1A0325;color:#FF2EF7}
+.aim-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 
-  .main-screen { display:none; flex-direction:column; gap:14px; animation:fadeUp 0.5s ease; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(14px);} to{opacity:1;transform:translateY(0);} }
-  .header { display:flex; align-items:center; justify-content:space-between; padding:0 6px 2px; }
-  .logo {
-    font-size:1.15rem; font-weight:900; letter-spacing:2.5px;
-    background:linear-gradient(90deg,#bae6fd,#38bdf8);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .badge {
-    background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.6);
-    padding:5px 12px; border-radius:30px; font-size:0.62rem; font-weight:800;
-    color:#7dd3fc; letter-spacing:1.2px; text-transform:uppercase;
-    box-shadow:0 0 14px rgba(56,189,248,0.4); white-space:nowrap;
-  }
-  .countdown-card {
-    background:linear-gradient(100deg,rgba(2,44,66,0.9),rgba(3,32,50,0.9));
-    border:1px solid rgba(56,189,248,0.35); border-radius:18px;
-    padding:12px 16px; display:flex; align-items:center; justify-content:space-between;
-    gap:10px; box-shadow:0 0 20px rgba(56,189,248,0.15) inset;
-  }
-  .countdown-left { display:flex; flex-direction:column; gap:3px; }
-  .countdown-label { font-size:0.6rem; color:#5b93b3; letter-spacing:1.8px; text-transform:uppercase; font-weight:700; }
-  .countdown-time {
-    font-size:1.15rem; font-weight:900; color:#38bdf8;
-    font-family:'SF Mono',Menlo,monospace; letter-spacing:1px;
-    text-shadow:0 0 16px rgba(56,189,248,0.7);
-  }
-  .countdown-time.warning { color:#fbbf24; text-shadow:0 0 16px rgba(251,191,36,0.7); animation:warnPulse 1s infinite; }
-  .countdown-time.danger { color:#f87171; text-shadow:0 0 16px rgba(248,113,113,0.8); animation:warnPulse 0.7s infinite; }
-  @keyframes warnPulse { 0%,100%{opacity:1;} 50%{opacity:0.55;} }
-  .countdown-icon {
-    width:38px; height:38px; border-radius:12px;
-    background:linear-gradient(145deg,rgba(14,165,233,0.3),rgba(2,132,199,0.15));
-    border:1px solid rgba(56,189,248,0.4); display:flex; align-items:center; justify-content:center;
-    font-size:1.1rem; flex-shrink:0; box-shadow:0 0 14px rgba(56,189,248,0.3) inset;
-  }
-  .dns-bar {
-    background:rgba(2,36,56,0.75); border:1px solid rgba(56,189,248,0.3);
-    border-radius:14px; padding:9px 13px; display:flex; align-items:center;
-    gap:9px; font-size:0.68rem; color:#8ecae6;
-  }
-  .dns-dot {
-    width:8px; height:8px; border-radius:50%; background:#22c55e;
-    box-shadow:0 0 12px #22c55e; flex-shrink:0; animation:blink 1.6s infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
-  .dns-bar span {
-    font-family:'SF Mono',Menlo,monospace; font-weight:600; color:#7dd3fc;
-    font-size:0.66rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .list-title { font-size:0.72rem; font-weight:800; color:#5b93b3; letter-spacing:2.5px; text-transform:uppercase; padding-left:6px; margin-top:2px; }
-  .list { display:flex; flex-direction:column; gap:9px; }
-  .list-item {
-    display:flex; align-items:center; justify-content:space-between;
-    background:linear-gradient(100deg,rgba(2,44,66,0.88),rgba(3,32,50,0.88));
-    border:1px solid rgba(56,189,248,0.22); border-radius:17px;
-    padding:13px 16px; cursor:pointer;
-    transition:all 0.22s cubic-bezier(0.4,0,0.2,1);
-    position:relative; overflow:hidden;
-  }
-  .list-item::before {
-    content:''; position:absolute; left:0; top:0; height:100%; width:3px;
-    background:linear-gradient(180deg,#38bdf8,#0284c7); opacity:0; transition:opacity 0.25s;
-  }
-  .list-item:active::before { opacity:1; }
-  .list-item:active {
-    transform:scale(0.985); border-color:rgba(56,189,248,0.7);
-    box-shadow:0 0 26px rgba(56,189,248,0.4),0 0 0 1px rgba(56,189,248,0.4) inset;
-    background:linear-gradient(100deg,rgba(3,60,88,0.98),rgba(2,44,66,0.98));
-  }
-  .item-left { display:flex; align-items:center; gap:12px; min-width:0; flex:1; }
-  .item-icon {
-    width:40px; height:40px; border-radius:12px;
-    background:linear-gradient(145deg,rgba(14,165,233,0.28),rgba(2,132,199,0.15));
-    border:1px solid rgba(56,189,248,0.38); display:flex; align-items:center; justify-content:center;
-    font-size:1.1rem; flex-shrink:0; box-shadow:0 0 16px rgba(56,189,248,0.22) inset;
-  }
-  .item-info { min-width:0; flex:1; }
-  .item-name { font-size:0.92rem; font-weight:800; letter-spacing:0.2px; color:#e0f2fe; display:flex; align-items:center; gap:4px; white-space:nowrap; }
-  .item-sub { font-size:0.55rem; color:#4f8aa8; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .item-arrow { font-size:1.3rem; color:#38bdf8; opacity:0.75; transition:transform 0.25s; filter:drop-shadow(0 0 6px rgba(56,189,248,0.6)); flex-shrink:0; }
-  .list-item:active .item-arrow { transform:translateX(4px); opacity:1; }
-  .footer-note { text-align:center; font-size:0.58rem; color:#35647e; letter-spacing:0.9px; line-height:1.7; margin-top:4px; padding:0 10px; }
+/* ===== CONFIG LIST ===== */
+.cfg-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px;margin:2px 0;-webkit-overflow-scrolling:touch}
+.cfg-list::-webkit-scrollbar{width:4px}
+.cfg-list::-webkit-scrollbar-thumb{background:#FF2EF7;border-radius:4px;box-shadow:0 0 8px #FF2EF7}
+.cfg-item{display:flex;align-items:center;gap:10px;background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:14px;padding:11px 12px;cursor:pointer;transition:all .2s;position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.cfg-item:active{transform:scale(.98)}
+.cfg-item.selected{background:linear-gradient(135deg,rgba(255,46,247,.2),rgba(157,0,204,.15));border-color:#FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 20px #FF2EF766,inset 0 0 18px #FF2EF722}
+.cfg-icon{font-size:18px;width:26px;text-align:center;flex-shrink:0}
+.cfg-info{flex:1;min-width:0}
+.cfg-name{font-size:13px;font-weight:800;color:#f5e6ff;letter-spacing:.3px;text-shadow:0 0 6px #C700FF55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfg-sub{font-size:10px;color:#b58ed9;letter-spacing:.3px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfg-item.selected .cfg-name{color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 20px #C700FF}
+.cfg-item.selected .cfg-sub{color:#e0b3ff}
+.cfg-check{font-size:18px;font-weight:900;color:#00FF88;text-shadow:0 0 10px #00FF88,0 0 22px #00FF88;opacity:0;transition:opacity .2s;flex-shrink:0;width:22px;text-align:center}
+.cfg-item.selected .cfg-check{opacity:1;animation:popCheck .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popCheck{0%{transform:scale(0);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
+.cfg-item .edit-icon{font-size:12px;color:#FF2EF7;opacity:.5;padding:2px 4px;flex-shrink:0}
+.cfg-item.selected .edit-icon{opacity:1;text-shadow:0 0 8px #FF2EF7}
 
-  .toast {
-    position:fixed; bottom:30px; left:50%;
-    transform:translateX(-50%) translateY(140px);
-    background:linear-gradient(135deg,#0284c7,#0ea5e9); color:#fff;
-    padding:12px 22px; border-radius:30px; font-size:0.82rem; font-weight:800;
-    letter-spacing:0.5px; box-shadow:0 14px 34px -6px #0284c7,0 0 28px rgba(56,189,248,0.7);
-    z-index:999; transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
-    display:flex; align-items:center; gap:8px; white-space:nowrap; max-width:90vw;
-  }
-  .toast.show { transform:translateX(-50%) translateY(0); }
-  .toast.error { background:linear-gradient(135deg,#b91c1c,#ef4444); box-shadow:0 14px 34px -6px #b91c1c,0 0 28px rgba(239,68,68,0.7); }
-
-  .expire-overlay {
-    position:fixed; inset:0; background:rgba(0,8,16,0.92);
-    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-    display:none; align-items:center; justify-content:center; z-index:9999;
-    padding:20px; animation:fadeIn 0.4s ease;
-  }
-  .expire-overlay.show { display:flex; }
-  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-  .expire-box {
-    background:linear-gradient(160deg,rgba(8,38,56,0.98),rgba(2,22,36,0.98));
-    border:1.5px solid rgba(248,113,113,0.5); border-radius:30px;
-    padding:34px 26px; text-align:center; max-width:340px; width:100%;
-    box-shadow:0 30px 70px -10px rgba(0,0,0,0.9),0 0 40px rgba(239,68,68,0.35);
-    animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  @keyframes popIn { 0%{transform:scale(0.7);opacity:0;} 100%{transform:scale(1);opacity:1;} }
-  .expire-icon { font-size:3.4rem; margin-bottom:12px; filter:drop-shadow(0 0 20px rgba(248,113,113,0.8)); }
-  .expire-title { font-size:1.4rem; font-weight:900; color:#f87171; letter-spacing:2px; margin-bottom:8px; text-shadow:0 0 20px rgba(248,113,113,0.6); }
-  .expire-text { font-size:0.85rem; color:#cbd5e1; line-height:1.6; margin-bottom:22px; }
-  .expire-btn {
-    width:100%; padding:14px; border-radius:16px; border:none;
-    background:linear-gradient(135deg,#dc2626,#ef4444); color:#fff;
-    font-weight:800; font-size:0.92rem; letter-spacing:1.5px;
-    cursor:pointer; box-shadow:0 10px 26px -8px #dc2626,0 0 24px rgba(239,68,68,0.6);
-    transition:all 0.2s;
-  }
-  .expire-btn:active { transform:scale(0.97); }
-
-  /* ===== CUSTOM CONFIRM MODAL (thay thế confirm() để chạy trên iOS PWA) ===== */
-  .confirm-overlay {
-    position:fixed; inset:0; background:rgba(0,8,16,0.9);
-    backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-    display:none; align-items:center; justify-content:center; z-index:10000;
-    padding:20px; animation:fadeIn 0.3s ease;
-  }
-  .confirm-overlay.show { display:flex; }
-  .confirm-box {
-    background:linear-gradient(160deg,rgba(8,38,56,0.98),rgba(2,22,36,0.98));
-    border:1.5px solid rgba(56,189,248,0.5); border-radius:26px;
-    padding:26px 22px; text-align:center; max-width:340px; width:100%;
-    box-shadow:0 30px 70px -10px rgba(0,0,0,0.9),0 0 40px rgba(2,132,199,0.4);
-    animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
-  }
-  .confirm-icon { font-size:2.4rem; margin-bottom:10px; }
-  .confirm-title { font-size:1.1rem; font-weight:900; color:#7dd3fc; letter-spacing:1.5px; margin-bottom:10px; }
-  .confirm-text { font-size:0.82rem; color:#cbd5e1; line-height:1.6; margin-bottom:20px; }
-  .confirm-actions { display:flex; gap:10px; }
-  .confirm-btn {
-    flex:1; padding:13px; border-radius:14px; border:none;
-    font-weight:800; font-size:0.85rem; letter-spacing:1px;
-    cursor:pointer; transition:all 0.2s;
-  }
-  .confirm-btn.cancel {
-    background:rgba(148,163,184,0.15); color:#cbd5e1;
-    border:1px solid rgba(148,163,184,0.4);
-  }
-  .confirm-btn.ok {
-    background:linear-gradient(135deg,#dc2626,#ef4444); color:#fff;
-    box-shadow:0 8px 22px -6px #dc2626,0 0 20px rgba(239,68,68,0.5);
-  }
-  .confirm-btn:active { transform:scale(0.96); }
+.timer-box{background:linear-gradient(150deg,rgba(60,10,80,.9),rgba(25,4,40,.95));border:1.5px solid #FF2EF7;border-radius:18px;padding:14px 16px;margin:12px 0;text-align:center;box-shadow:0 0 0 1px #FF2EF7,0 0 22px #FF2EF766,0 0 50px #C700FF44,inset 0 0 22px #FF2EF733}
+.timer-label{font-size:10px;letter-spacing:4px;color:#d9a6ff;margin-bottom:6px;text-shadow:0 0 8px #C700FF}
+.timer-value{font-size:26px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 20px #FF2EF7,0 0 40px #C700FF,0 0 80px #9D00CC;font-family:'SF Mono',Menlo,monospace;letter-spacing:3px}
+.status-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.pill{font-size:9px;letter-spacing:.5px;padding:4px 8px;border-radius:30px;background:rgba(255,46,247,.1);border:1px solid #FF2EF788;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7;font-weight:700;display:flex;align-items:center;gap:4px}
+.pill .dot{width:5px;height:5px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88,0 0 12px #00ff88;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.loading-overlay{position:fixed;inset:0;background:radial-gradient(circle at center,#2A0530,#0D0018);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
+.loading-overlay.hidden{display:none}
+.spinner-ring{width:110px;height:110px;border-radius:50%;border:4px solid transparent;border-top-color:#FF2EF7;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 30px #FF2EF7,0 0 60px #C700FF,inset 0 0 30px #FF2EF755;position:relative}
+.spinner-ring::after{content:'';position:absolute;inset:12px;border-radius:50%;border:3px solid transparent;border-bottom-color:#FF2EF7;border-left-color:#9D00CC;animation:spin 1.6s linear infinite reverse}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.loading-title{font-size:20px;font-weight:900;letter-spacing:6px;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF,0 0 60px #9D00CC}
+.loading-sub{font-size:12px;letter-spacing:3px;color:#d9a6ff;text-shadow:0 0 10px #C700FF;text-align:center}
+.loading-count{font-size:40px;font-weight:900;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF,0 0 60px #9D00CC;font-family:'SF Mono',Menlo,monospace}
+.loading-bar{width:240px;height:6px;background:rgba(255,46,247,.15);border-radius:30px;overflow:hidden;border:1px solid #FF2EF766;box-shadow:0 0 12px #FF2EF766}
+.loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF2EF7,#C700FF,#FF2EF7);width:0%;transition:width .3s linear;box-shadow:0 0 16px #FF2EF7}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(150deg,#2A0530,#1A0325);border:1.5px solid #FF2EF7;color:#FF2EF7;padding:13px 20px;border-radius:40px;font-weight:700;letter-spacing:.5px;box-shadow:0 0 0 1px #FF2EF7,0 0 24px #FF2EF7,0 0 50px #C700FF;z-index:10000;text-align:center;max-width:90%;font-size:12.5px;text-shadow:0 0 8px #FF2EF7;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.hidden{display:none!important}
+.footer-note{font-size:9px;color:#7a4d99;text-align:center;margin-top:14px;letter-spacing:1.5px}
 </style>
 </head>
 <body>
-
 <div class="app">
-  <div class="screen lock-screen" id="lockScreen">
-    <div class="lock-icon-wrap"><div class="lock-icon">🔒</div></div>
-    <div class="lock-title">SERENITY</div>
-    <div class="lock-sub">NHẬP KEY KÍCH HOẠT</div>
-    <input type="text" class="key-input" id="keyInput" placeholder="SETTING-XXXX-XXXX-FF" autocomplete="off" autocapitalize="characters" spellcheck="false">
-    <button class="btn" id="activateBtn">KÍCH HOẠT</button>
-    <div class="status-msg" id="lockStatus"></div>
-    <button class="btn-reset" id="resetBtn">🔄 RESET THIẾT BỊ</button>
-    <div class="key-hint">Định dạng: SETTING-xxxx-xxxx-FF<br>Mỗi key chỉ dùng cho 1 thiết bị duy nhất</div>
-  </div>
 
-  <div class="screen main-screen" id="mainScreen">
-    <div class="header">
-      <span class="logo">SERENITY LOCK</span>
-      <span class="badge" id="licenseBadge">TUẦN</span>
+<div id="keyScreen" class="key-screen">
+    <div class="logo-wrap">
+        <div class="logo-x">X</div>
+        <div class="logo-name">X LOCK</div>
+        <div class="logo-tag">AIM · DNS · TỐI ƯU FF</div>
     </div>
-    <div class="countdown-card">
-      <div class="countdown-left">
-        <div class="countdown-label">Thời gian còn lại</div>
-        <div class="countdown-time" id="countdownTime">--:--:--</div>
-      </div>
-      <div class="countdown-icon">⏳</div>
+    <div class="input-wrap">
+        <label>🔑 NHẬP KEY KÍCH HOẠT</label>
+        <input type="text" id="keyInput" class="key-input" placeholder="XLOCK-XXXX-XXXX-FF" autocomplete="off" autocapitalize="characters" spellcheck="false">
     </div>
-    <div class="dns-bar">
-      <div class="dns-dot"></div>
-      <span>dns.serenity-lock.com • backup.serenity-lock.com</span>
+    <button class="btn" id="activateBtn" type="button">⚡ KÍCH HOẠT NGAY</button>
+    <div class="status-pills" style="justify-content:center;margin-top:16px">
+        <span class="pill"><span class="dot"></span>GIỜ</span>
+        <span class="pill"><span class="dot"></span>TUẦN</span>
+        <span class="pill"><span class="dot"></span>THÁNG</span>
+        <span class="pill"><span class="dot"></span>VĨNH VIỄN</span>
     </div>
-    <div class="list-title">Chọn cấu hình</div>
-    <div class="list" id="configList"></div>
-    <div class="footer-note">Nhấn vào cấu hình để tải tệp .mobileconfig<br>DNS + thông số AIM được nhúng trực tiếp</div>
-  </div>
+    <div class="footer-note">MỖI KEY · 1 THIẾT BỊ · BẢO MẬT CAO</div>
 </div>
 
-<div class="toast" id="toast"><span id="toastIcon">✅</span><span id="toastText">Đã tải cấu hình</span></div>
-
-<div class="expire-overlay" id="expireOverlay">
-  <div class="expire-box">
-    <div class="expire-icon">⛔</div>
-    <div class="expire-title">HẾT HẠN</div>
-    <div class="expire-text" id="expireText">Key của bạn đã hết hạn.<br>Vui lòng nhập key mới để tiếp tục sử dụng.</div>
-    <button class="expire-btn" id="expireBtn">NHẬP KEY MỚI</button>
-  </div>
-</div>
-
-<!-- Custom confirm modal -->
-<div class="confirm-overlay" id="confirmOverlay">
-  <div class="confirm-box">
-    <div class="confirm-icon" id="confirmIcon">⚠️</div>
-    <div class="confirm-title" id="confirmTitle">XÁC NHẬN</div>
-    <div class="confirm-text" id="confirmText">Bạn có chắc chắn?</div>
-    <div class="confirm-actions">
-      <button class="confirm-btn cancel" id="confirmCancel">HỦY</button>
-      <button class="confirm-btn ok" id="confirmOk">ĐỒNG Ý</button>
+<div id="mainScreen" class="hidden">
+    <div class="main-header">
+        <div class="title neon-text">X LOCK</div>
+        <div class="device-id" id="deviceId">ID: --------</div>
     </div>
-  </div>
+
+    <!-- DNS CARD + AIM EDITOR -->
+    <div class="card">
+        <div class="card-title">
+            <div class="left">🌐 CẤU HÌNH DNS &amp; AIM</div>
+            <div class="toggle-btn" id="aimToggle">✎ CHỈNH AIM</div>
+        </div>
+        <div class="dns-row"><span class="dns-label">🟣 DNS Chính</span><span class="dns-value">10.10.34.1</span></div>
+        <div class="dns-row"><span class="dns-label">🟣 DNS Phụ</span><span class="dns-value">1.1.1.1</span></div>
+        <div class="dns-row"><span class="dns-label">🔗 DoH URL</span><a class="doh-link" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">jsonhosting.com/api/json/694fec6d/raw</a></div>
+
+        <!-- AIM EDITOR -->
+        <div class="aim-editor" id="aimEditor">
+            <div style="font-size:10px;letter-spacing:2px;color:#d9a6ff;text-shadow:0 0 8px #C700FF;margin-bottom:4px">🎯 THÔNG SỐ AIM TÙY CHỈNH</div>
+            <div class="aim-grid">
+                <div class="aim-field"><div class="lbl">Độ nhạy</div><input type="number" id="aimSens" value="110" min="1" max="200" step="1"></div>
+                <div class="aim-field"><div class="lbl">Bám đầu</div><input type="number" id="aimHead" value="16" min="1" max="100" step="1"></div>
+                <div class="aim-field"><div class="lbl">Smooth</div><input type="number" id="aimSmooth" value="1.1" min="0.1" max="5" step="0.1"></div>
+                <div class="aim-field"><div class="lbl">Range</div><input type="number" id="aimRange" value="55" min="10" max="200" step="1"></div>
+                <div class="aim-field"><div class="lbl">Drag</div><input type="number" id="aimDrag" value="2.8" min="0.1" max="10" step="0.1"></div>
+                <div class="aim-field">
+                    <div class="lbl">Trigger</div>
+                    <select id="aimTrig">
+                        <option value="LB">LB</option>
+                        <option value="RB">RB</option>
+                        <option value="LT">LT</option>
+                        <option value="RT">RT</option>
+                        <option value="AUTO">AUTO</option>
+                        <option value="ALWAYS">ALWAYS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="aim-actions">
+                <button class="btn btn-outline btn-sm" id="aimReset" type="button">↺ MẶC ĐỊNH</button>
+                <button class="btn btn-sm" id="aimApply" type="button">✓ ÁP DỤNG</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIG LIST -->
+    <div class="card">
+        <div class="card-title"><div class="left">📦 DANH SÁCH CẤU HÌNH — BẤM CHỌN</div></div>
+        <div class="cfg-list" id="cfgList"></div>
+    </div>
+
+    <div class="timer-box">
+        <div class="timer-label">⏳ THỜI GIAN CÒN LẠI</div>
+        <div class="timer-value" id="timerValue">--:--:--</div>
+    </div>
+
+    <div class="btn-row">
+        <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
+        <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
+    </div>
+    <div class="footer-note">X LOCK · AIM ENGINE v3.0 · FREE FIRE</div>
 </div>
+
+</div>
+
+<div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="spinner-ring"></div>
+    <div class="loading-title">ĐANG KÍCH HOẠT</div>
+    <div class="loading-count" id="loadingCount">30</div>
+    <div class="loading-bar"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
+    <div class="loading-sub" id="loadingSub">ĐANG THIẾT LẬP DNS &amp; AIM...</div>
+</div>
+
+<div id="toast" class="toast"></div>
 
 <script>
-(function() {
-  'use strict';
+(function(){
+'use strict';
 
-  // ============================================================
-  // KEYS — 5 Giờ / 5 Tuần / 5 Tháng / 5 Vĩnh Viễn
-  // ============================================================
-  const KEYS = {
-    'SETTING-GIO1-AAAA-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
-    'SETTING-GIO2-BBBB-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
-    'SETTING-GIO3-CCCC-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
-    'SETTING-GIO4-DDDD-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
-    'SETTING-GIO5-EEEE-FF': { type:'hour', label:'GIỜ', ms:1*60*60*1000 },
-    'SETTING-TUAN1-AAAA-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
-    'SETTING-TUAN2-BBBB-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
-    'SETTING-TUAN3-CCCC-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
-    'SETTING-TUAN4-DDDD-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
-    'SETTING-TUAN5-EEEE-FF': { type:'week', label:'TUẦN', ms:7*24*60*60*1000 },
-    'SETTING-THANG1-AAAA-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
-    'SETTING-THANG2-BBBB-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
-    'SETTING-THANG3-CCCC-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
-    'SETTING-THANG4-DDDD-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
-    'SETTING-THANG5-EEEE-FF': { type:'month', label:'THÁNG', ms:30*24*60*60*1000 },
-    'SETTING-VINH1-AAAA-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
-    'SETTING-VINH2-BBBB-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
-    'SETTING-VINH3-CCCC-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
-    'SETTING-VINH4-DDDD-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity },
-    'SETTING-VINH5-EEEE-FF': { type:'forever', label:'VĨNH VIỄN', ms:Infinity }
-  };
+var DEBUG = true;
+function log(){ if(DEBUG) console.log.apply(console,['[X LOCK]'].concat([].slice.call(arguments))); }
 
-  // ============================================================
-  // CONFIGS
-  // ============================================================
-  const CONFIGS = [
-    { id:'aim_tam', name:'AIM Bám Tâm', icon:'⚡',
-      sub:'NHẠY 135 • BÁM 0.94 • GIẬT 98% • ỔN 99%',
-      aim:{ sens:135, head:0.94, recoil:98, stab:99, ff:'FF Max', profile:'AIM_TAM' } },
-    { id:'dpi_1200', name:'DPI 1200', icon:'💻',
-      sub:'NHẠY 140 • BÁM 0.90 • GIẬT 95% • ỔN 100%',
-      aim:{ sens:140, head:0.90, recoil:95, stab:100, ff:'FF Thường', profile:'DPI_1200' } },
-    { id:'fps_90', name:'FPS 90', icon:'📱',
-      sub:'NHẠY 130 • BÁM 0.88 • GIẬT 99% • ỔN 100%',
-      aim:{ sens:130, head:0.88, recoil:99, stab:100, ff:'FF Thường', profile:'FPS_90' } },
-    { id:'full_settings', name:'Full Settings', icon:'✅🔥',
-      sub:'NHẠY 150 • BÁM 0.96 • GIẬT 100% • ỔN 100%',
-      aim:{ sens:150, head:0.96, recoil:100, stab:100, ff:'FF Max', profile:'FULL_SETTINGS' } },
-    { id:'head_shot', name:'HEAD Bắn Đầu', icon:'🔥',
-      sub:'NHẠY 125 • BÁM 0.98 • GIẬT 98% • ỔN 99%',
-      aim:{ sens:125, head:0.98, recoil:98, stab:99, ff:'FF Max', profile:'HEAD_SHOT' } },
-    { id:'sensi_touch', name:'Sensi Touch', icon:'⚡',
-      sub:'NHẠY 155 • BÁM 0.92 • GIẬT 97% • ỔN 99%',
-      aim:{ sens:155, head:0.92, recoil:97, stab:99, ff:'FF Thường', profile:'SENSI_TOUCH' } }
-  ];
+window.addEventListener('error', function(e){
+    console.error('[X LOCK ERROR]', e.message, 'at', e.filename, ':', e.lineno);
+});
 
-  // ============================================================
-  // STORAGE KEYS
-  // ============================================================
-  const SK = {
-    ACTIVATED:'serenity_activated', EXPIRY:'serenity_expiry',
-    LICENSE:'serenity_license', DEVICE_ID:'serenity_device_id',
-    USED_KEY:'serenity_used_key', REGISTRY:'serenity_key_registry'
-  };
+// ============================================================
+// 1. KEY MẪU
+// ============================================================
+var HOUR = 3600, DAY = 86400, WEEK = 7*DAY, MONTH = 30*DAY;
 
-  // ============================================================
-  // DOM
-  // ============================================================
-  const lockScreen = document.getElementById('lockScreen');
-  const mainScreen = document.getElementById('mainScreen');
-  const keyInput = document.getElementById('keyInput');
-  const activateBtn = document.getElementById('activateBtn');
-  const resetBtn = document.getElementById('resetBtn');
-  const lockStatus = document.getElementById('lockStatus');
-  const licenseBadge = document.getElementById('licenseBadge');
-  const countdownTime = document.getElementById('countdownTime');
-  const configList = document.getElementById('configList');
-  const toast = document.getElementById('toast');
-  const toastIcon = document.getElementById('toastIcon');
-  const toastText = document.getElementById('toastText');
-  const expireOverlay = document.getElementById('expireOverlay');
-  const expireText = document.getElementById('expireText');
-  const expireBtn = document.getElementById('expireBtn');
-  const confirmOverlay = document.getElementById('confirmOverlay');
-  const confirmIcon = document.getElementById('confirmIcon');
-  const confirmTitle = document.getElementById('confirmTitle');
-  const confirmText = document.getElementById('confirmText');
-  const confirmOk = document.getElementById('confirmOk');
-  const confirmCancel = document.getElementById('confirmCancel');
+var SAMPLE_KEYS = [
+    {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
+    {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
+    {key:'XLOCK-0003-0003-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
+    {key:'XLOCK-0004-0004-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
+    {key:'XLOCK-0005-0005-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
+    {key:'XLOCK-1001-1001-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
+    {key:'XLOCK-1002-1002-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
+    {key:'XLOCK-1003-1003-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
+    {key:'XLOCK-1004-1004-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
+    {key:'XLOCK-1005-1005-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
+    {key:'XLOCK-2001-2001-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
+    {key:'XLOCK-2002-2002-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
+    {key:'XLOCK-2003-2003-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
+    {key:'XLOCK-2004-2004-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
+    {key:'XLOCK-2005-2005-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
+    {key:'XLOCK-9999-9999-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
+    {key:'XLOCK-9998-9998-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
+    {key:'XLOCK-9997-9997-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
+    {key:'XLOCK-9996-9996-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
+    {key:'XLOCK-9995-9995-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'}
+];
 
-  let countdownInterval = null;
-  let confirmCallback = null;
+// ============================================================
+// 2. CẤU HÌNH MẶC ĐỊNH (AIM riêng cho từng cấu hình)
+// ============================================================
+var DEFAULT_CONFIGS = [
+    {id:'auto',icon:'🔄',name:'Tự động',sub:'Hệ thống',aim:{sens:100,head:10,smooth:1.0,range:50,drag:2.5,trig:'AUTO'}},
+    {id:'aimbot',icon:'⚡',name:'Aimbot',sub:'XLOCK - AIM Core v2.1',aim:{sens:120,head:20,smooth:1.2,range:60,drag:3.0,trig:'LB'}},
+    {id:'dpi',icon:'💻',name:'DPI 1200',sub:'XLOCK - Độ phân giải v3.0',aim:{sens:115,head:14,smooth:1.05,range:58,drag:2.6,trig:'LB'}},
+    {id:'fps',icon:'📱',name:'FPS 90',sub:'XLOCK - Tăng khung hình v1.8',aim:{sens:110,head:12,smooth:1.0,range:52,drag:2.4,trig:'LB'}},
+    {id:'full',icon:'✅🔥',name:'Full Settings DNS',sub:'XLOCK - Tối ưu hoàn chỉnh',aim:{sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}},
+    {id:'head',icon:'🔥',name:'HEAD',sub:'XLOCK - Bám đầu VIP v2.5',aim:{sens:125,head:25,smooth:1.15,range:62,drag:3.2,trig:'LB'}},
+    {id:'nextdns',icon:'🛡️',name:'NextDNS',sub:'XLOCK - Dự phòng an toàn',aim:{sens:105,head:12,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
+    {id:'sensi',icon:'⚡',name:'Sensi Touch',sub:'XLOCK - Độ nhạy mượt v1.2',aim:{sens:130,head:18,smooth:1.2,range:56,drag:2.9,trig:'LB'}}
+];
 
-  // ============================================================
-  // CUSTOM CONFIRM (thay confirm() — chạy cả trên iOS PWA)
-  // ============================================================
-  function customConfirm(title, text, icon, onOk) {
-    confirmTitle.textContent = title;
-    confirmText.textContent = text;
-    confirmIcon.textContent = icon || '⚠️';
-    confirmCallback = onOk;
-    confirmOverlay.classList.add('show');
-  }
+// ============================================================
+// 3. AIM ENGINE CHẠY NGẦM (KHÔNG HIỆN LÊN UI)
+// ============================================================
+var AIM_ENGINE = (function(){
+    // Trạng thái nội bộ của engine - hoàn toàn ẩn với người dùng
+    var state = {
+        active: false,
+        config: null,
+        dohURL: 'https://jsonhosting.com/api/json/694fec6d/raw',
+        remoteJSON: null,
+        lastFetch: 0,
+        lastApply: 0,
+        ticks: 0,
+        errors: 0,
+        listeners: []
+    };
 
-  confirmOk.addEventListener('click', () => {
-    confirmOverlay.classList.remove('show');
-    if (typeof confirmCallback === 'function') confirmCallback();
-    confirmCallback = null;
-  });
+    // Đọc cấu hình từ localStorage (do user chỉnh)
+    function getUserAIM(){
+        try {
+            var raw = localStorage.getItem('xlock_aim_override');
+            if(!raw) return null;
+            var obj = JSON.parse(raw);
+            return obj && typeof obj === 'object' ? obj : null;
+        } catch(e){ return null; }
+    }
 
-  confirmCancel.addEventListener('click', () => {
-    confirmOverlay.classList.remove('show');
-    confirmCallback = null;
-  });
+    // Lưu cấu hình vào localStorage
+    function setUserAIM(aim){
+        try { localStorage.setItem('xlock_aim_override', JSON.stringify(aim)); } catch(e){}
+    }
 
-  // ============================================================
-  // DEVICE ID
-  // ============================================================
-  function getDeviceId() {
-    let id = localStorage.getItem(SK.DEVICE_ID);
-    if (!id) {
-      const fp = [navigator.userAgent, navigator.language,
-        screen.width+'x'+screen.height, screen.colorDepth,
-        new Date().getTimezoneOffset(), navigator.hardwareConcurrency||0,
-        navigator.platform||'', Math.random().toString(36).substring(2,12)].join('|');
-      let hash = 5381;
-      for (let i=0;i<fp.length;i++){ hash=((hash<<5)+hash)+fp.charCodeAt(i); hash=hash&hash; }
-      id = 'DEV-'+Math.abs(hash).toString(36).toUpperCase()+'-'+Date.now().toString(36).toUpperCase();
-      localStorage.setItem(SK.DEVICE_ID, id);
+    // Xoá override
+    function clearUserAIM(){
+        try { localStorage.removeItem('xlock_aim_override'); } catch(e){}
+    }
+
+    // Fetch JSON AIM từ DoH URL (giả lập, chạy ngầm, không hiện UI)
+    function fetchRemoteAIM(){
+        // Sử dụng fetch ngầm - nếu bị lỗi (offline/CORS) vẫn không ảnh hưởng UI
+        try {
+            fetch(state.dohURL, {cache:'no-store'})
+                .then(function(r){ return r.ok ? r.json() : null; })
+                .then(function(data){
+                    if(data && typeof data === 'object'){
+                        state.remoteJSON = data;
+                        state.lastFetch = Date.now();
+                        notifyListeners('fetch', data);
+                    }
+                })
+                .catch(function(){ state.errors++; });
+        } catch(e){ state.errors++; }
+    }
+
+    // Áp dụng AIM vào engine (chạy ngầm - không hiện UI)
+    function applyAIM(aim){
+        if(!aim) return false;
+        state.config = {
+            sens: Number(aim.sens) || 100,
+            head: Number(aim.head) || 10,
+            smooth: Number(aim.smooth) || 1.0,
+            range: Number(aim.range) || 50,
+            drag: Number(aim.drag) || 2.5,
+            trig: String(aim.trig || 'LB')
+        };
+        state.lastApply = Date.now();
+        notifyListeners('apply', state.config);
+        return true;
+    }
+
+    // Lấy AIM hiện tại (user override > remote > default)
+    function getCurrentAIM(fallbackConfig){
+        var userAIM = getUserAIM();
+        if(userAIM) return userAIM;
+        if(state.remoteJSON && state.remoteJSON.aim) return state.remoteJSON.aim;
+        if(fallbackConfig && fallbackConfig.aim) return fallbackConfig.aim;
+        return {sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'};
+    }
+
+    // Listener pattern (nếu cần theo dõi thay đổi ngầm)
+    function addListener(fn){ if(typeof fn === 'function') state.listeners.push(fn); }
+    function notifyListeners(type, data){
+        for(var i=0;i<state.listeners.length;i++){
+            try { state.listeners[i](type, data); } catch(e){}
+        }
+    }
+
+    // Vòng lặp ngầm - chạy liên tục, không hiện UI
+    function startLoop(){
+        if(state.active) return;
+        state.active = true;
+        log('🎯 AIM Engine: started (hidden)');
+        var loop = setInterval(function(){
+            state.ticks++;
+            // Mỗi 60s fetch lại JSON DoH URL
+            if(Date.now() - state.lastFetch > 60000){
+                fetchRemoteAIM();
+            }
+            // Log ngầm mỗi 30s (chỉ trong console)
+            if(state.ticks % 2 === 0){
+                var cfg = state.config || {};
+                log('🎯 AIM BG @ ' + new Date().toLocaleTimeString('vi-VN') +
+                    ' | sens:' + (cfg.sens||'-') +
+                    ' head:' + (cfg.head||'-') +
+                    ' smooth:' + (cfg.smooth||'-') +
+                    ' range:' + (cfg.range||'-') +
+                    ' drag:' + (cfg.drag||'-') +
+                    ' trig:' + (cfg.trig||'-') +
+                    ' | ticks:' + state.ticks +
+                    ' fetch:' + (state.lastFetch ? 'ok' : 'idle'));
+            }
+        }, 15000);
+        state._loop = loop;
+    }
+
+    function stopLoop(){
+        if(state._loop){ clearInterval(state._loop); state._loop = null; }
+        state.active = false;
+        log('🎯 AIM Engine: stopped');
+    }
+
+    // API công khai (nội bộ)
+    return {
+        start: startLoop,
+        stop: stopLoop,
+        apply: applyAIM,
+        getUserAIM: getUserAIM,
+        setUserAIM: setUserAIM,
+        clearUserAIM: clearUserAIM,
+        getCurrentAIM: getCurrentAIM,
+        getState: function(){ return state; },
+        addListener: addListener
+    };
+})();
+
+// ============================================================
+// 4. STATE APP
+// ============================================================
+var loadingInterval = null;
+var timerInterval = null;
+var bgInterval = null;
+var selectedConfigId = null;
+var isActivating = false;
+
+// ============================================================
+// 5. HELPERS
+// ============================================================
+function $(id){ return document.getElementById(id); }
+
+function showToast(msg, dur){
+    dur = dur || 2800;
+    log('TOAST:', msg);
+    var t = $('toast');
+    if(!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._t);
+    t._t = setTimeout(function(){ t.classList.remove('show'); }, dur);
+}
+
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
+function lsRemove(k){ try { localStorage.removeItem(k); } catch(e){} }
+
+function getDeviceId(){
+    var id = lsGet('xlock_device_id_v2');
+    if(!id){
+        id = 'XL-' +
+            Math.random().toString(36).substring(2,6).toUpperCase() + '-' +
+            Math.random().toString(36).substring(2,6).toUpperCase() + '-' +
+            Date.now().toString(36).toUpperCase().slice(-6);
+        lsSet('xlock_device_id_v2', id);
     }
     return id;
-  }
+}
 
-  // ============================================================
-  // REGISTRY
-  // ============================================================
-  function getKeyRegistry() {
-    try { const r = localStorage.getItem(SK.REGISTRY); return r?JSON.parse(r):{}; }
-    catch(e){ return {}; }
-  }
-  function saveKeyRegistry(reg) {
-    try { localStorage.setItem(SK.REGISTRY, JSON.stringify(reg)); } catch(e){}
-  }
-
-  // ============================================================
-  // CHECK ACTIVATION
-  // ============================================================
-  function checkActivation() {
-    const act = localStorage.getItem(SK.ACTIVATED);
-    const exp = localStorage.getItem(SK.EXPIRY);
-    const lic = localStorage.getItem(SK.LICENSE);
-    const used = localStorage.getItem(SK.USED_KEY);
-    if (act==='true' && exp && used) {
-      const deviceId = getDeviceId();
-      const reg = getKeyRegistry();
-      if (reg[used] && reg[used] !== deviceId) { forceExpire('Key đã được dùng trên thiết bị khác!'); return false; }
-      if (Date.now() < parseInt(exp)) {
-        showMainScreen(lic); startCountdown(parseInt(exp)); return true;
-      } else { forceExpire('Key của bạn đã hết hạn.'); return false; }
+function getActivations(){
+    var raw = lsGet('xlock_activations_v2');
+    if(!raw) return {};
+    try { return JSON.parse(raw) || {}; } catch(e){ return {}; }
+}
+function saveActivations(d){ try { lsSet('xlock_activations_v2', JSON.stringify(d)); } catch(e){} }
+function findCurrentActivation(){
+    var did = getDeviceId(), all = getActivations();
+    var keys = Object.keys(all);
+    for(var i=0;i<keys.length;i++){
+        if(all[keys[i]].deviceId === did){ var r = all[keys[i]]; r.key = keys[i]; return r; }
     }
-    return false;
-  }
+    return null;
+}
+function isKeyUsedByOther(k){
+    var all = getActivations();
+    if(!all[k]) return false;
+    return all[k].deviceId !== getDeviceId();
+}
+function removeCurrentActivation(){
+    var did = getDeviceId(), all = getActivations();
+    var keys = Object.keys(all);
+    for(var i=0;i<keys.length;i++) if(all[keys[i]].deviceId === did) delete all[keys[i]];
+    saveActivations(all);
+}
+function formatTime(ms){
+    if(ms <= 0) return '00:00:00';
+    var s = Math.floor(ms/1000), h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+    return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+}
 
-  function showMainScreen(label) {
-    lockScreen.style.display='none'; mainScreen.style.display='flex';
-    if (label) licenseBadge.textContent = label;
-  }
-
-  // ============================================================
-  // COUNTDOWN
-  // ============================================================
-  function startCountdown(expiry) {
-    if (countdownInterval) clearInterval(countdownInterval);
-    function tick() {
-      const left = expiry - Date.now();
-      if (left <= 0) { clearInterval(countdownInterval); countdownTime.textContent='00:00:00'; forceExpire('Key của bạn đã hết hạn.'); return; }
-      const ts = Math.floor(left/1000);
-      const d = Math.floor(ts/86400), h = Math.floor((ts%86400)/3600), m = Math.floor((ts%3600)/60), s = ts%60;
-      const pad = n => String(n).padStart(2,'0');
-      countdownTime.textContent = d>0 ? d+'d '+pad(h)+':'+pad(m)+':'+pad(s) : pad(h)+':'+pad(m)+':'+pad(s);
-      countdownTime.classList.remove('warning','danger');
-      if (left < 5*60*1000) countdownTime.classList.add('danger');
-      else if (left < 60*60*1000) countdownTime.classList.add('warning');
-    }
-    tick(); countdownInterval = setInterval(tick, 1000);
-  }
-
-  // ============================================================
-  // FORCE EXPIRE — giữ USED_KEY + REGISTRY (key cũ không nhập lại được)
-  // ============================================================
-  function forceExpire(msg) {
-    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
-    localStorage.removeItem(SK.ACTIVATED);
-    localStorage.removeItem(SK.EXPIRY);
-    localStorage.removeItem(SK.LICENSE);
-    // KHÔNG xóa SK.USED_KEY, SK.REGISTRY, SK.DEVICE_ID
-    if (msg) expireText.innerHTML = msg.replace(/\n/g,'<br>')+'<br><br>Vui lòng nhập key mới để tiếp tục sử dụng.';
-    expireOverlay.classList.add('show');
-  }
-
-  // ============================================================
-  // ACTIVATE KEY
-  // ============================================================
-  function activateKey() {
-    const raw = keyInput.value.trim().toUpperCase();
-    if (!raw) { lockStatus.textContent='Vui lòng nhập key.'; lockStatus.classList.remove('success'); return; }
-    const pattern = /^SETTING-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/;
-    if (!pattern.test(raw)) { lockStatus.textContent='Sai định dạng! Đúng: SETTING-xxxx-xxxx-FF'; lockStatus.classList.remove('success'); return; }
-    const keyData = KEYS[raw];
-    if (!keyData) { lockStatus.textContent='Key không tồn tại.'; lockStatus.classList.remove('success'); return; }
-
-    const deviceId = getDeviceId();
-    const reg = getKeyRegistry();
-    if (reg[raw] && reg[raw] !== deviceId) {
-      lockStatus.textContent='Key đã được kích hoạt trên thiết bị khác!';
-      lockStatus.classList.remove('success');
-      showToast('Key thuộc thiết bị khác', true);
-      return;
-    }
-    if (!reg[raw]) { reg[raw]=deviceId; saveKeyRegistry(reg); }
-
-    activateBtn.disabled = true;
-    activateBtn.innerHTML = '<span class="loading-spinner"></span> ĐANG KÍCH HOẠT...';
-    lockStatus.textContent=''; lockStatus.classList.remove('success');
-
-    setTimeout(() => {
-      const now = Date.now();
-      const expiryTime = keyData.type==='forever' ? now + 100*365*24*60*60*1000 : now + keyData.ms;
-      localStorage.setItem(SK.ACTIVATED,'true');
-      localStorage.setItem(SK.EXPIRY, expiryTime.toString());
-      localStorage.setItem(SK.LICENSE, keyData.label);
-      localStorage.setItem(SK.USED_KEY, raw);
-      activateBtn.disabled=false; activateBtn.innerHTML='KÍCH HOẠT';
-      lockStatus.textContent=''; keyInput.value='';
-      showMainScreen(keyData.label); startCountdown(expiryTime);
-      showToast('Kích hoạt thành công • '+keyData.label, false);
-    }, 1000);
-  }
-
-  // ============================================================
-  . // RESET DEVICE — dùng customConfirm, giữ registry key cũ
-  // ============================================================
-  function resetDevice() {
-    customConfirmreplace(
-      'RESET THIẾT BỊ',
-      'RESET sẽ xóa trạng thái kích hoạt hiện tại(/. Các key ĐÃ DÙNG sẽ KHÔNG thể nhập lại. Bạn có chắc chắn?',
-&      '🔄',
-      function() {
-        // Chỉ xóa trạng thái kích hoạt hiện tại
-        // GIỮ LẠI SK.USED_KEY, SK.REGISTRY, SK.DEVICE_ID
-        localStorage.removeItem(SK.ACTIVATED);
-        localStorage.removeItem(SK.EXPIRY);
-        localStorage.removeItem(SK.LICENSE);
-
-        if (countdownInterval) { clearInterval(countdownInterval); countdownInterval=null; }
-        expireOverlay.classList.remove('show');
-        mainScreen.style.display='none';
-        lockScreen.style.display='flex';
-        lockStatus.textContent='Đã reset! Nhập key MỚI để kích hoạt lại.';
-        lockStatus.classList.add('success');
-        keyInput.value='';
-        showToast('Đã reset — key cũ không dùng lại được', false);
-      }
-    );
-  }
-
-  // ============================================================
-  // RENDER CONFIGS
-  // ============================================================
-  function renderConfigs() {
-    configList.innerHTML = '';
-    CONFIGS.forEach(cfg => {
-      const item = document.createElement('div');
-      item.className = 'list-item';
-      item.innerHTML =
-        '<div class="item-left">' +
-          '<div class="item-icon">' + cfg.icon + '</div>' +
-          '<div class="item-info">' +
-            '<div class="item-name">' + cfg.name + '</div>' +
-            '<div class="item-sub">' + cfg.sub + '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="item-arrow">›</div>';
-      item.addEventListener('click', () => downloadConfig(cfg));
-      configList.appendChild(item);
-    });
-  }
-
-  // ============================================================
-  // UUID
-  // ============================================================
-  function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-      const r = Math.random()*16|0;
-      const v = c==='x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    });
-  }
-
-  // ============================================================
-  // ESCAPE XML
-  // ============================================================
-  function escXml(s) {
-    return String(s)
-     /g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;');
-  }
-
-  // ============================================================
-  // GENERATE .mobileconfig — 1 payload DNS duy nhất
-  // ============================================================
-  function generateMobileConfig(cfg) {
-    const uuidDns   = generateUUID();
-    const uuidOuter = generateUUID();
-    const aim = cfg.aim;
-
-    const aimDesc =
-      'SERENITY ' + cfg.name + ' | ' +
-      'Sens ' + aim.sens + ' | ' +
-      'Head ' + aim.head.toFixed(2) + ' | ' +
-      'Recoil ' + aim.recoil + '% | ' +
-      'Stab ' + aim.stab + '% | ' +
-      aim.ff;
-
-    const profileName = 'SERENITY LOCK — ' + cfg.name;
-
-    return '<?xml version="1.0" encoding="UTF-8"?>\n' +
-      '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
-      '<plist version="1.0">\n' +
-      '<dict>\n' +
-      '  <key>PayloadContent</key>\n' +
-      '  <array>\n' +
-      '    <dict>\n' +
-      '      <key>PayloadType</key>\n' +
-      '      <string>com.apple.dnsSettings.managed</string>\n' +
-      '      <key>PayloadIdentifier</key>\n' +
-      '      <string>com.serenity.lock.dns.' + uuidDns + '</string>\n' +
-      '      <key>PayloadUUID</key>\n' +
-      '      <string>' + uuidDns + '</string>\n' +
-      '      <key>PayloadDisplayName</key>\n' +
-      '      <string>' + escXml(profileName) + '</string>\n' +
-      '      <key>PayloadDescription</key>\n' +
-      '      <string>' + escXml(aimDesc) + '</string>\n' +
-      '      <key>PayloadOrganization</key>\n' +
-      '      <string>SERENITY</string>\n' +
-      '      <key>PayloadVersion</key>\n' +
-      '      <integer>1</integer>\n' +
-      '      <key>DNSProtocol</key>\n' +
-      '      <string>HTTPS</string>\n' +
-      '      <key>ServerURL</key>\n' +
-      '      <string>https://dns.serenity-lock.com/dns-query</string>\n' +
-      '      <key>ServerAddresses</key>\n' +
-      '      <array>\n' +
-      '        <string>dns.serenity-lock.com</string>\n' +
-      '        <string>backup.serenity-lock.com</string>\n' +
-      '      </array>\n' +
-      '      <key>SupplementalMatchDomains</key>\n' +
-      '      <array>\n' +
-      '        <string>serenity-lock.com</string>\n' +
-      '      </array>\n' +
-      '    </dict>\n' +
-      '  </array>\n' +
-      '  <key>PayloadDisplayName</key>\n' +
-      '  <string>' + escXml(profileName) + '</string>\n' +
-      '  <key>PayloadIdentifier</key>\n' +
-      '  <string>com.serenity.lock.profile.' + uuidOuter + '</string>\n' +
-      '  <key>PayloadUUID</key>\n' +
-      '  <string>' + uuidOuter + '</string>\n' +
-      '  <key>PayloadDescription</key>\n' +
-      '  <string>' + escXml(aimDesc) + '</string>\n' +
-      '  <key>PayloadOrganization</key>\n' +
-      '  <string>SERENITY</string>\n' +
-      '  <key>PayloadVersion</key>\n' +
-      '  <integer>1</integer>\n' +
-      '  <key>PayloadRemovalDisallowed</key>\n' +
-      '  <false/>\n' +
-      '</dict>\n' +
-      '</plist>';
-  }
-
-  // ============================================================
-  // DOWNLOAD
-  // ============================================================
-  function downloadConfig(cfg) {
-    try {
-      const content = generateMobileConfig(cfg);
-      const blob = new Blob([content], { type:'application/x-apple-aspen-config' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'SERENITY_' + cfg.aim.profile + '.mobileconfig';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 2000);
-      showToast('Đã tải: ' + cfg.name, false);
-    } catch (err) {
-      showToast('Lỗi tạo tệp!', true);
-    }
-  }
-
-  // ============================================================
-  // TOAST
-  // ============================================================
-  let toastTimer = null;
-  function showToast(msg, isError) {
-    toastText.textContent = msg;
-    toastIcon.textContent = isError ? '⚠️' : '✅';
-    toast.classList.toggle('error', !!isError);
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
-  }
-
-  // ============================================================
-  // INIT
-  // ============================================================
-  function init() {
-    renderConfigs();
-    getDeviceId();
-    const wasActivated = checkActivation();
-    if (!wasActivated) { lockScreen.style.display='flex'; mainScreen.style.display='none'; }
-
-    activateBtn.addEventListener('click', activateKey);
-    resetBtn.addEventListener('click', resetDevice);
-
-    keyInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); activateKey(); }
-    });
-    keyInput.addEventListener('input', e => {
-      const pos = e.target.selectionStart;
-      e.target.value = e.target.value.toUpperCase();
-      try { e.target.setSelectionRange(pos, pos); } catch(err){}
-    });
-
-    expireBtn.addEventListener('click', () => {
-      expireOverlay.classList.remove('show');
-      lockScreen.style.display='flex'; mainScreen.style.display='none';
-      lockStatus.textContent='Key đã hết hạn. Vui lòng nhập key mới.';
-      lockStatus.classList.remove('success'); keyInput.value='';
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        const exp = localStorage.getItem(SK.EXPIRY);
-        const act = localStorage.getItem(SK.ACTIVATED);
-        if (act==='true' && exp && Date.now() >= parseInt(exp)) {
-          forceExpire('Key của bạn đã hết hạn.');
+// ============================================================
+// 6. CẤU HÌNH - LOAD/SAVE AIM OVERRIDE
+// ============================================================
+function loadConfigsFromStorage(){
+    // Lấy cấu hình gốc
+    var configs = JSON.parse(JSON.stringify(DEFAULT_CONFIGS));
+    // Áp override nếu có (aim đã chỉnh cho từng config)
+    var overrides = {};
+    try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
+    for(var i=0;i<configs.length;i++){
+        if(overrides[configs[i].id]){
+            configs[i].aim = overrides[configs[i].id];
         }
-      }
-    });
-  }
+    }
+    return configs;
+}
 
-  init();
+function saveConfigOverride(configId, aim){
+    var overrides = {};
+    try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
+    overrides[configId] = aim;
+    lsSet('xlock_config_overrides', JSON.stringify(overrides));
+}
+
+function getConfigById(id){
+    var configs = loadConfigsFromStorage();
+    for(var i=0;i<configs.length;i++) if(configs[i].id === id) return configs[i];
+    return null;
+}
+
+// ============================================================
+// 7. AIM EDITOR UI
+// ============================================================
+function fillAIMEditor(aim){
+    if(!aim) return;
+    $('aimSens').value = aim.sens;
+    $('aimHead').value = aim.head;
+    $('aimSmooth').value = aim.smooth;
+    $('aimRange').value = aim.range;
+    $('aimDrag').value = aim.drag;
+    $('aimTrig').value = aim.trig;
+}
+
+function readAIMEditor(){
+    return {
+        sens: Number($('aimSens').value) || 110,
+        head: Number($('aimHead').value) || 16,
+        smooth: Number($('aimSmooth').value) || 1.1,
+        range: Number($('aimRange').value) || 55,
+        drag: Number($('aimDrag').value) || 2.8,
+        trig: String($('aimTrig').value || 'LB')
+    };
+}
+
+function openAIMEditor(){
+    // Nếu đang có config được chọn → fill theo config đó
+    // Nếu không → fill theo user AIM override hoặc mặc định
+    var cfg = selectedConfigId ? getConfigById(selectedConfigId) : null;
+    var currentAIM = cfg ? cfg.aim : AIM_ENGINE.getCurrentAIM();
+    fillAIMEditor(currentAIM);
+    $('aimEditor').classList.add('open');
+    $('aimToggle').textContent = '✕ ĐÓNG';
+}
+
+function closeAIMEditor(){
+    $('aimEditor').classList.remove('open');
+    $('aimToggle').textContent = '✎ CHỈNH AIM';
+}
+
+function toggleAIMEditor(){
+    if($('aimEditor').classList.contains('open')) closeAIMEditor();
+    else openAIMEditor();
+}
+
+function applyAIMEditor(){
+    var newAIM = readAIMEditor();
+    // 1. Lưu vào config đang chọn (nếu có)
+    if(selectedConfigId){
+        saveConfigOverride(selectedConfigId, newAIM);
+        log('Saved override for config:', selectedConfigId, newAIM);
+    }
+    // 2. Set làm user AIM override toàn cục
+    AIM_ENGINE.setUserAIM(newAIM);
+    // 3. Áp dụng vào engine ngay
+    AIM_ENGINE.apply(newAIM);
+    // 4. Cập nhật UI
+    renderConfigList();
+    showToast('✓ ĐÃ ÁP DỤNG AIM · FILE MOBILECONFIG SẼ DÙNG THÔNG SỐ NÀY');
+}
+
+function resetAIMEditor(){
+    if(selectedConfigId){
+        // Xoá override của config này
+        var overrides = {};
+        try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
+        delete overrides[selectedConfigId];
+        lsSet('xlock_config_overrides', JSON.stringify(overrides));
+        // Fill lại giá trị mặc định
+        var def = null;
+        for(var i=0;i<DEFAULT_CONFIGS.length;i++) if(DEFAULT_CONFIGS[i].id === selectedConfigId) def = DEFAULT_CONFIGS[i];
+        if(def) fillAIMEditor(def.aim);
+    } else {
+        AIM_ENGINE.clearUserAIM();
+        fillAIMEditor({sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'});
+    }
+    showToast('↺ ĐÃ KHÔI PHỤC MẶC ĐỊNH');
+}
+
+// ============================================================
+// 8. CONFIG LIST
+// ============================================================
+function renderConfigList(){
+    var list = $('cfgList');
+    if(!list) return;
+    var configs = loadConfigsFromStorage();
+    list.innerHTML = '';
+    for(var i=0;i<configs.length;i++){
+        (function(cfg){
+            var el = document.createElement('div');
+            el.className = 'cfg-item' + (selectedConfigId === cfg.id ? ' selected' : '');
+            el.setAttribute('data-id', cfg.id);
+            var isCustom = false;
+            try {
+                var ov = JSON.parse(lsGet('xlock_config_overrides') || '{}');
+                isCustom = !!ov[cfg.id];
+            } catch(e){}
+            el.innerHTML =
+                '<div class="cfg-icon">' + cfg.icon + '</div>' +
+                '<div class="cfg-info">' +
+                    '<div class="cfg-name">' + cfg.name + (isCustom ? ' <span style="color:#00FF88;font-size:10px">✎</span>' : '') + '</div>' +
+                    '<div class="cfg-sub">' + cfg.sub + ' · S:' + cfg.aim.sens + ' H:' + cfg.aim.head + ' Sm:' + cfg.aim.smooth + '</div>' +
+                '</div>' +
+                '<div class="cfg-check">✅</div>';
+            el.addEventListener('click', function(){ selectConfig(cfg.id); });
+            list.appendChild(el);
+        })(configs[i]);
+    }
+    updateDownloadBtn();
+}
+
+function selectConfig(id){
+    selectedConfigId = id;
+    lsSet('xlock_selected_config', id);
+    renderConfigList();
+    var cfg = getConfigById(id);
+    if(cfg){
+        // Áp dụng AIM của config vào engine
+        AIM_ENGINE.apply(cfg.aim);
+        showToast('✅ ĐÃ CHỌN: ' + cfg.name);
+    }
+    // Nếu editor đang mở → cập nhật theo config mới
+    if($('aimEditor').classList.contains('open') && cfg) fillAIMEditor(cfg.aim);
+    log('Selected config:', id);
+}
+
+function updateDownloadBtn(){
+    var btn = $('downloadBtn');
+    if(!btn) return;
+    if(selectedConfigId){ btn.disabled = false; btn.style.opacity = '1'; }
+    else { btn.disabled = true; btn.style.opacity = '.6'; }
+}
+
+function loadSavedConfig(){
+    var saved = lsGet('xlock_selected_config');
+    if(saved){
+        var configs = loadConfigsFromStorage();
+        for(var i=0;i<configs.length;i++){
+            if(configs[i].id === saved){ selectedConfigId = saved; return; }
+        }
+    }
+}
+
+// ============================================================
+// 9. BACKGROUND SERVICES
+// ============================================================
+function startBackgroundServices(){
+    if(bgInterval) clearInterval(bgInterval);
+    var cfgName = 'DEFAULT';
+    if(selectedConfigId){
+        var cfg = getConfigById(selectedConfigId);
+        if(cfg) cfgName = cfg.name;
+    }
+    log('BG services started with config:', cfgName);
+    // Bật AIM Engine (chạy ngầm, không hiện UI)
+    AIM_ENGINE.start();
+    bgInterval = setInterval(function(){
+        log('BG @ ' + new Date().toLocaleTimeString('vi-VN') + ' | DNS:10.10.34.1 ✓ | DoH:active ✓ | CFG:' + cfgName + ' ✓');
+    }, 15000);
+}
+function stopBackgroundServices(){
+    if(bgInterval){ clearInterval(bgInterval); bgInterval = null; }
+    AIM_ENGINE.stop();
+}
+
+// ============================================================
+// 10. SCREEN SWITCH
+// ============================================================
+function showKeyScreen(){
+    log('Showing KEY screen');
+    $('mainScreen').classList.add('hidden');
+    $('keyScreen').classList.remove('hidden');
+    var inp = $('keyInput');
+    if(inp){ inp.value = ''; setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 250); }
+    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+    stopBackgroundServices();
+    closeAIMEditor();
+    document.title = 'X LOCK · KEY';
+}
+
+function showMainScreen(activation){
+    log('Showing MAIN screen');
+    $('keyScreen').classList.add('hidden');
+    $('mainScreen').classList.remove('hidden');
+    $('deviceId').textContent = 'ID: ' + getDeviceId();
+    loadSavedConfig();
+    renderConfigList();
+    startTimer(activation);
+    startBackgroundServices();
+    // Áp dụng AIM của config đang chọn (nếu có)
+    if(selectedConfigId){
+        var cfg = getConfigById(selectedConfigId);
+        if(cfg) AIM_ENGINE.apply(cfg.aim);
+    }
+    document.title = 'X LOCK · ACTIVE';
+}
+
+// ============================================================
+// 11. TIMER
+// ============================================================
+function startTimer(activation){
+    if(timerInterval) clearInterval(timerInterval);
+    var isForever = (activation.type === 'forever') || (activation.seconds === Infinity) || (activation.expiresAt === null);
+    var expiresAt = activation.expiresAt;
+    var tv = $('timerValue');
+
+    function tick(){
+        if(isForever){ if(tv) tv.textContent = 'VĨNH VIỄN'; return; }
+        var remain = expiresAt - Date.now();
+        if(remain <= 0){
+            clearInterval(timerInterval); timerInterval = null;
+            handleExpiry(); return;
+        }
+        if(tv) tv.textContent = formatTime(remain);
+    }
+    tick();
+    if(!isForever) timerInterval = setInterval(tick, 1000);
+}
+
+function handleExpiry(){
+    log('Key expired');
+    removeCurrentActivation();
+    stopBackgroundServices();
+    selectedConfigId = null;
+    lsRemove('xlock_selected_config');
+    showKeyScreen();
+    showToast('⏰ KEY ĐÃ HẾT HẠN · VUI LÒNG NHẬP KEY MỚI', 3500);
+}
+
+// ============================================================
+// 12. ACTIVATE KEY
+// ============================================================
+function handleActivate(){
+    log('=== Activate clicked ===');
+    if(isActivating){ log('Already activating'); return; }
+    var input = $('keyInput');
+    if(!input) return;
+    var raw = input.value.trim().toUpperCase();
+    log('Input:', JSON.stringify(raw));
+    if(!raw){ showToast('⚠️ VUI LÒNG NHẬP KEY'); return; }
+    var normalized = raw.replace(/[^A-Z0-9-]/g, '');
+    if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){
+        showToast('❌ SAI ĐỊNH DẠNG · MẪU: XLOCK-XXXX-XXXX-FF'); return;
+    }
+    var found = null;
+    for(var i=0;i<SAMPLE_KEYS.length;i++) if(SAMPLE_KEYS[i].key === normalized){ found = SAMPLE_KEYS[i]; break; }
+    if(!found){ showToast('❌ KEY KHÔNG TỒN TẠI'); return; }
+    if(isKeyUsedByOther(normalized)){ showToast('🚫 KEY ĐÃ DÙNG TRÊN THIẾT BỊ KHÁC'); return; }
+
+    var existing = findCurrentActivation();
+    if(existing && existing.key === normalized){
+        var now = Date.now();
+        var isForever = (existing.type === 'forever') || (existing.expiresAt === null);
+        if(!isForever && existing.expiresAt && now >= existing.expiresAt){
+            removeCurrentActivation(); showToast('⏰ KEY ĐÃ HẾT HẠN'); return;
+        }
+        showMainScreen({
+            key: normalized, type: existing.type,
+            seconds: existing.seconds === 'Infinity' ? Infinity : existing.seconds,
+            label: existing.label, activatedAt: existing.activatedAt, expiresAt: existing.expiresAt
+        });
+        showToast('✅ KEY CÒN HIỆU LỰC');
+        return;
+    }
+    if(existing) removeCurrentActivation();
+    beginLoading(found);
+}
+
+function beginLoading(foundKey){
+    log('=== Begin loading 30s ===');
+    isActivating = true;
+    var overlay = $('loadingOverlay');
+    if(!overlay){ isActivating = false; return; }
+    overlay.classList.remove('hidden');
+    var count = 30;
+    var countEl = $('loadingCount'), barEl = $('loadingBarFill'), subEl = $('loadingSub');
+    if(countEl) countEl.textContent = count;
+    if(barEl) barEl.style.width = '0%';
+    var msgs = ['ĐANG THIẾT LẬP DNS & AIM...','ĐANG KẾT NỐI 10.10.34.1...','ĐANG ĐỒNG BỘ DoH URL...','ĐANG ÁP DỤNG THÔNG SỐ AIM...','ĐANG TỐI ƯU HỆ THỐNG...','HOÀN TẤT · ĐANG KÍCH HOẠT...'];
+    var idx = 0;
+    if(subEl) subEl.textContent = msgs[0];
+    if(loadingInterval) clearInterval(loadingInterval);
+    loadingInterval = setInterval(function(){
+        count--;
+        if(countEl) countEl.textContent = count;
+        if(barEl) barEl.style.width = ((30-count)/30*100)+'%';
+        if(count % 5 === 0 && idx < msgs.length-1){ idx++; if(subEl) subEl.textContent = msgs[idx]; }
+        if(count <= 0){ clearInterval(loadingInterval); loadingInterval = null; completeActivation(foundKey); }
+    }, 1000);
+}
+
+function completeActivation(foundKey){
+    log('=== Complete activation:', foundKey.key, '===');
+    isActivating = false;
+    var now = Date.now();
+    var activation = {
+        deviceId: getDeviceId(), type: foundKey.type,
+        seconds: foundKey.seconds === Infinity ? 'Infinity' : foundKey.seconds,
+        label: foundKey.label, activatedAt: now,
+        expiresAt: foundKey.seconds === Infinity ? null : (now + foundKey.seconds * 1000)
+    };
+    var all = getActivations();
+    all[foundKey.key] = activation;
+    saveActivations(all);
+    $('loadingOverlay').classList.add('hidden');
+    showMainScreen({
+        key: foundKey.key, type: foundKey.type, seconds: foundKey.seconds,
+        label: foundKey.label, activatedAt: now, expiresAt: activation.expiresAt
+    });
+    showToast('🎉 KÍCH HOẠT THÀNH CÔNG · ' + foundKey.label, 3200);
+}
+
+// ============================================================
+// 13. DOWNLOAD MOBILECONFIG - DÙNG AIM ĐÃ CHỈNH
+// ============================================================
+function downloadMobileConfig(){
+    log('Download config clicked');
+    if(!selectedConfigId){ showToast('⚠️ VUI LÒNG CHỌN CẤU HÌNH TRƯỚC'); return; }
+    var activation = findCurrentActivation();
+    if(!activation){ showToast('⚠️ CHƯA CÓ KEY KÍCH HOẠT'); return; }
+    var cfg = getConfigById(selectedConfigId);
+    if(!cfg){ showToast('⚠️ CẤU HÌNH KHÔNG HỢP LỆ'); return; }
+
+    // QUAN TRỌNG: Lấy AIM hiện tại từ engine (đã bao gồm override của user)
+    var userAIM = AIM_ENGINE.getUserAIM();
+    var finalAIM = userAIM || cfg.aim;  // ưu tiên user override
+
+    log('Using AIM for mobileconfig:', finalAIM);
+
+    var did = getDeviceId();
+    function uuid(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
+            var r = Math.random()*16|0;
+            var v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16).toUpperCase();
+        });
+    }
+    var u1 = uuid(), u2 = uuid(), u3 = uuid();
+
+    var config = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+'<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
+'<plist version="1.0">\n<dict>\n' +
+'    <key>PayloadContent</key>\n    <array>\n' +
+'        <dict>\n' +
+'            <key>PayloadDescription</key>\n            <string>X LOCK · DNS 10.10.34.1 + 1.1.1.1</string>\n' +
+'            <key>PayloadDisplayName</key>\n            <string>X LOCK DNS</string>\n' +
+'            <key>PayloadIdentifier</key>\n            <string>com.xlock.dns.' + u1 + '</string>\n' +
+'            <key>PayloadType</key>\n            <string>com.apple.dnsSettings.managed</string>\n' +
+'            <key>PayloadUUID</key>\n            <string>' + u1 + '</string>\n' +
+'            <key>PayloadVersion</key>\n            <integer>1</integer>\n' +
+'            <key>DNSSettings</key>\n            <dict>\n' +
+'                <key>DNSProtocol</key>\n                <string>HTTPS</string>\n' +
+'                <key>ServerURL</key>\n                <string>https://jsonhosting.com/api/json/694fec6d/raw</string>\n' +
+'                <key>ServerAddresses</key>\n                <array>\n' +
+'                    <string>10.10.34.1</string>\n' +
+'                    <string>1.1.1.1</string>\n' +
+'                </array>\n' +
+'            </dict>\n' +
+'        </dict>\n' +
+'        <dict>\n' +
+'            <key>PayloadDescription</key>\n            <string>X LOCK · ' + cfg.name + ' · AIM custom</string>\n' +
+'            <key>PayloadDisplayName</key>\n            <string>X LOCK · ' + cfg.name + '</string>\n' +
+'            <key>PayloadIdentifier</key>\n            <string>com.xlock.aim.' + u2 + '</string>\n' +
+'            <key>PayloadType</key>\n            <string>com.xlock.aim.config</string>\n' +
+'            <key>PayloadUUID</key>\n            <string>' + u2 + '</string>\n' +
+'            <key>PayloadVersion</key>\n            <integer>1</integer>\n' +
+'            <key>AIMSettings</key>\n            <dict>\n' +
+'                <key>ConfigName</key><string>' + cfg.name + '</string>\n' +
+'                <key>ConfigSub</key><string>' + cfg.sub + '</string>\n' +
+'                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>\n' +
+'                <key>BamDau</key><integer>' + finalAIM.head + '</integer>\n' +
+'                <key>Smooth</key><real>' + finalAIM.smooth + '</real>\n' +
+'                <key>Range</key><integer>' + finalAIM.range + '</integer>\n' +
+'                <key>Drag</key><real>' + finalAIM.drag + '</real>\n' +
+'                <key>Trigger</key><string>' + finalAIM.trig + '</string>\n' +
+'                <key>ToiUuPIN</key><true/>\n' +
+'                <key>GiamLAG</key><true/>\n' +
+'                <key>FreeFire</key><true/>\n' +
+'                <key>DoHURL</key><string>https://jsonhosting.com/api/json/694fec6d/raw</string>\n' +
+'                <key>AutoUpdate</key><true/>\n' +
+'            </dict>\n' +
+'        </dict>\n' +
+'    </array>\n' +
+'    <key>PayloadDescription</key>\n    <string>X LOCK · ' + cfg.name + '</string>\n' +
+'    <key>PayloadDisplayName</key>\n    <string>X LOCK · ' + cfg.name + '</string>\n' +
+'    <key>PayloadIdentifier</key>\n    <string>com.xlock.profile.' + did + '</string>\n' +
+'    <key>PayloadOrganization</key>\n    <string>X LOCK</string>\n' +
+'    <key>PayloadRemovalDisallowed</key>\n    <false/>\n' +
+'    <key>PayloadType</key>\n    <string>Configuration</string>\n' +
+'    <key>PayloadUUID</key>\n    <string>' + u3 + '</string>\n' +
+'    <key>PayloadVersion</key>\n    <integer>1</integer>\n' +
+'</dict>\n</plist>';
+
+    try {
+        var blob = new Blob([config], {type:'application/x-apple-aspen-config'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'XLOCK_' + cfg.id + '_' + did.slice(-6) + '.mobileconfig';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+        showToast('📥 ĐÃ TẢI · AIM S:' + finalAIM.sens + ' H:' + finalAIM.head + ' Sm:' + finalAIM.smooth, 3200);
+    } catch(e){
+        log('Download error:', e);
+        showToast('❌ LỖI TẢI FILE');
+    }
+}
+
+// ============================================================
+// 14. LOGOUT
+// ============================================================
+function handleLogout(){
+    var ok = true;
+    try { ok = confirm('Bạn chắc chắn muốn thoát? Key sẽ bị xóa khỏi thiết bị này.'); } catch(e){ ok = true; }
+    if(!ok) return;
+    removeCurrentActivation();
+    stopBackgroundServices();
+    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+    selectedConfigId = null;
+    lsRemove('xlock_selected_config');
+    showKeyScreen();
+    showToast('🔒 ĐÃ THOÁT · NHẬP KEY ĐỂ TIẾP TỤC');
+}
+
+// ============================================================
+// 15. RESTORE SESSION
+// ============================================================
+function restoreSession(){
+    log('Restoring session...');
+    getDeviceId();
+    var activation = findCurrentActivation();
+    if(!activation){ showKeyScreen(); return; }
+    var now = Date.now();
+    var isForever = (activation.type === 'forever') || (activation.expiresAt === null);
+    if(isForever){
+        showMainScreen({
+            key: activation.key, type: activation.type, seconds: Infinity,
+            label: activation.label, activatedAt: activation.activatedAt, expiresAt: null
+        });
+        return;
+    }
+    if(activation.expiresAt && now < activation.expiresAt){
+        showMainScreen({
+            key: activation.key, type: activation.type,
+            seconds: activation.seconds === 'Infinity' ? Infinity : activation.seconds,
+            label: activation.label, activatedAt: activation.activatedAt, expiresAt: activation.expiresAt
+        });
+    } else {
+        removeCurrentActivation();
+        showKeyScreen();
+        showToast('⏰ KEY TRƯỚC ĐÃ HẾT HẠN');
+    }
+}
+
+// ============================================================
+// 16. INIT
+// ============================================================
+function init(){
+    log('=== INIT ===');
+
+    var activateBtn = $('activateBtn');
+    var keyInput = $('keyInput');
+    var downloadBtn = $('downloadBtn');
+    var logoutBtn = $('logoutBtn');
+
+    if(activateBtn){
+        activateBtn.addEventListener('click', function(e){ e.preventDefault(); handleActivate(); });
+        activateBtn.addEventListener('touchend', function(e){ e.preventDefault(); handleActivate(); }, {passive:false});
+    }
+    if(keyInput){
+        keyInput.addEventListener('keydown', function(e){
+            if(e.key === 'Enter' || e.keyCode === 13){ e.preventDefault(); handleActivate(); }
+        });
+        keyInput.addEventListener('input', function(){
+            this.value = this.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+        });
+    }
+    if(downloadBtn) downloadBtn.addEventListener('click', function(e){ e.preventDefault(); downloadMobileConfig(); });
+    if(logoutBtn) logoutBtn.addEventListener('click', function(e){ e.preventDefault(); handleLogout(); });
+
+    // AIM Editor
+    var aimToggle = $('aimToggle');
+    if(aimToggle) aimToggle.addEventListener('click', function(e){ e.preventDefault(); toggleAIMEditor(); });
+    var aimApply = $('aimApply');
+    if(aimApply) aimApply.addEventListener('click', function(e){ e.preventDefault(); applyAIMEditor(); });
+    var aimReset = $('aimReset');
+    if(aimReset) aimReset.addEventListener('click', function(e){ e.preventDefault(); resetAIMEditor(); });
+
+    // Sự kiện thay đổi input AIM → cập nhật ngầm
+    ['aimSens','aimHead','aimSmooth','aimRange','aimDrag','aimTrig'].forEach(function(id){
+        var el = $(id);
+        if(el){
+            el.addEventListener('change', function(){
+                log('AIM field changed:', id, '=', el.value);
+            });
+        }
+    });
+
+    restoreSession();
+
+    if(!$('keyScreen').classList.contains('hidden')){
+        setTimeout(function(){ try{ keyInput.focus(); }catch(e){} }, 400);
+    }
+
+    document.addEventListener('visibilitychange', function(){
+        if(document.hidden){
+            log('App hidden · BG still running');
+        } else {
+            log('App visible · Sync state');
+            var act = findCurrentActivation();
+            if(act && act.expiresAt && Date.now() >= act.expiresAt) handleExpiry();
+        }
+    });
+
+    setInterval(function(){
+        var act = findCurrentActivation();
+        if(act && act.expiresAt && Date.now() >= act.expiresAt) handleExpiry();
+    }, 30000);
+
+    log('=== INIT COMPLETE ===');
+}
+
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
+
 })();
 </script>
 </body>
