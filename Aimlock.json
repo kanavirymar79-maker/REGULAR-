@@ -1,0 +1,27 @@
+{
+  "name": "X LOCK - AIM Config",
+  "version": "2.5",
+  "status": "active",
+  "aim": {
+    "sensi": 110,
+    "range": 55,
+    "head": 30,
+    "drag": 2.8,
+    "smooth": 2.1,
+    "trigger": "LB",
+    "fix_shake": 1.96,
+    "dpi": 1200,
+    "fps_target": 90
+  },
+  "dns": {
+    "primary": "10.10.34.1",
+    "secondary": "1.1.1.1",
+    "doh_url": "https://cloudflare-dns.com/dns-query"
+  },
+  "modules": {
+    "fix_shake": true,
+    "boost_sensi": true,
+    "json_aim": true
+  },
+  "updated_at": "2026-09-26"
+}
