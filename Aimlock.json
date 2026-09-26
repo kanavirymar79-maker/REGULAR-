@@ -1,27 +1,99 @@
 {
-  "name": "X LOCK - AIM Config",
-  "version": "2.5",
-  "status": "active",
-  "aim": {
-    "sensi": 110,
-    "range": 55,
-    "head": 30,
-    "drag": 2.8,
-    "smooth": 2.1,
-    "trigger": "LB",
-    "fix_shake": 1.96,
-    "dpi": 1200,
-    "fps_target": 90
+  "config_info": {
+    "name": "X LOCK - VUỐT DÍNH ĐẦU",
+    "version": "3.5",
+    "updated": "2026-09-26",
+    "status": "active"
   },
+
+  "swipe_lock_head": {
+    "enable": true,
+    "mode": "swipe_lock",
+    "description": "Vuốt màn hình → tự khóa đầu → dính ngay",
+    
+    "swipe_trigger": {
+      "sensitivity": 1.8,
+      "min_distance_px": 15,
+      "response_speed": 0.05,
+      "any_direction": true,
+      "vertical_boost": true
+    },
+
+    "lock_behavior": {
+      "target_part": "head",
+      "stick_strength": 1.0,
+      "stick_on_move": true,
+      "never_lose_track": true,
+      "reconnect_if_lost": true,
+      "max_distance_m": 180,
+      "only_visible": true
+    },
+
+    "red_focus": {
+      "enable": true,
+      "effect": "glow_red",
+      "opacity": 0.9,
+      "pulse": true,
+      "show_distance": true,
+      "outline_thickness": 3
+    },
+
+    "aim_snap": {
+      "enable": true,
+      "speed": 2.5,
+      "acceleration": 1.2,
+      "no_delay": true,
+      "perfect_center": true
+    }
+  },
+
+  "aim_lock": {
+    "enable": true,
+    "target_priority": "head",
+    "auto_switch_target": true,
+    "smooth_movement": 1.0,
+    "body_parts": {
+      "head": { "priority": 1, "offset_y": 0.0, "enable": true },
+      "chest": { "priority": 2, "offset_y": 0.25, "enable": false }
+    }
+  },
+
+  "camera": {
+    "base_sensitivity": 110,
+    "shake_reduction": {
+      "enable": true,
+      "strength": 0.96,
+      "recoil_compensate": true
+    },
+    "crosshair": {
+      "color_when_locked": "#FF0000",
+      "color_normal": "#FF2EF7",
+      "change_on_lock": true
+    }
+  },
+
+  "weapons": {
+    "pistol": {
+      "G18": { "aim_sensi": 115, "head_lock_boost": 1.2, "stick_force": 0.95 },
+      "DESERT_EAGLE": { "aim_sensi": 95, "head_lock_boost": 1.5, "stick_force": 1.0 }
+    },
+    "smg": {
+      "MP40": { "aim_sensi": 125, "head_lock_boost": 1.15, "stick_force": 0.94 },
+      "VECTOR": { "aim_sensi": 130, "head_lock_boost": 1.1, "stick_force": 0.92 }
+    },
+    "rifle": {
+      "AK": { "aim_sensi": 110, "head_lock_boost": 1.25, "stick_force": 0.96 },
+      "M4A1": { "aim_sensi": 112, "head_lock_boost": 1.2, "stick_force": 0.95 },
+      "M1887": { "aim_sensi": 135, "head_lock_boost": 1.4, "stick_force": 0.98, "close_range_lock": true }
+    },
+    "sniper": {
+      "AWM": { "aim_sensi": 75, "head_lock_boost": 2.0, "stick_force": 1.0 }
+    }
+  },
+
   "dns": {
     "primary": "10.10.34.1",
     "secondary": "1.1.1.1",
-    "doh_url": "https://cloudflare-dns.com/dns-query"
-  },
-  "modules": {
-    "fix_shake": true,
-    "boost_sensi": true,
-    "json_aim": true
-  },
-  "updated_at": "2026-09-26"
+    "doh_url": "https://raw.githubusercontent.com/kanaviry-mar79-maker/REGULAR-/main/AIMLock.json"
+  }
 }
