@@ -1,99 +1,179 @@
 {
   "config_info": {
-    "name": "X LOCK - VUỐT DÍNH ĐẦU",
-    "version": "3.5",
+    "name": "X LOCK — MAX OVERDRIVE",
+    "version": "9.9",
+    "level": "GOD",
     "updated": "2026-09-26",
     "status": "active"
   },
 
-  "swipe_lock_head": {
+  "aimbot_core": {
     "enable": true,
-    "mode": "swipe_lock",
-    "description": "Vuốt màn hình → tự khóa đầu → dính ngay",
-    
-    "swipe_trigger": {
-      "sensitivity": 1.8,
-      "min_distance_px": 15,
-      "response_speed": 0.05,
-      "any_direction": true,
-      "vertical_boost": true
-    },
-
-    "lock_behavior": {
-      "target_part": "head",
-      "stick_strength": 1.0,
-      "stick_on_move": true,
-      "never_lose_track": true,
-      "reconnect_if_lost": true,
-      "max_distance_m": 180,
-      "only_visible": true
-    },
-
-    "red_focus": {
-      "enable": true,
-      "effect": "glow_red",
-      "opacity": 0.9,
-      "pulse": true,
-      "show_distance": true,
-      "outline_thickness": 3
-    },
-
-    "aim_snap": {
-      "enable": true,
-      "speed": 2.5,
-      "acceleration": 1.2,
-      "no_delay": true,
-      "perfect_center": true
-    }
+    "mode": "aggressive",
+    "aim_strength": 2.0,
+    "auto_snap_head": true,
+    "stick_forever": true,
+    "never_lose_target": true,
+    "auto_switch_on_death": true,
+    "predict_movement": true,
+    "prediction_strength": 2.5,
+    "fov_radius": 60,
+    "fov_shape": "circle",
+    "fov_visual": false,
+    "aim_delay_ms": 0,
+    "smoothness": 0.0,
+    "recoil_compensate": true,
+    "recoil_strength": 1.0
   },
 
-  "aim_lock": {
-    "enable": true,
-    "target_priority": "head",
-    "auto_switch_target": true,
-    "smooth_movement": 1.0,
-    "body_parts": {
-      "head": { "priority": 1, "offset_y": 0.0, "enable": true },
-      "chest": { "priority": 2, "offset_y": 0.25, "enable": false }
-    }
+  "head_lock": {
+    "priority": 1,
+    "offset_y": 0.0,
+    "auto_correct": true,
+    "tightness": 2.0,
+    "follow_speed": 5.0,
+    "jump_adjust": true,
+    "jump_offset_boost": 2.0,
+    "crouch_adjust": true,
+    "crouch_offset": 0.0
   },
 
-  "camera": {
-    "base_sensitivity": 110,
-    "shake_reduction": {
-      "enable": true,
-      "strength": 0.96,
-      "recoil_compensate": true
-    },
-    "crosshair": {
-      "color_when_locked": "#FF0000",
-      "color_normal": "#FF2EF7",
-      "change_on_lock": true
-    }
+  "swipe_trigger": {
+    "enable": true,
+    "any_swipe": true,
+    "sensitivity": 3.0,
+    "min_px": 1,
+    "instant_lock": true,
+    "lock_on_touch": true,
+    "hold_stick": true,
+    "release_fire": false
+  },
+
+  "target_priority": {
+    "nearest_enemy": true,
+    "lowest_health": false,
+    "center_screen_first": true,
+    "visible_only": false,
+    "max_distance_m": 500,
+    "ignore_teammate": true,
+    "ignore_dead": true
+  },
+
+  "camera_sensitivity": {
+    "base": 200,
+    "aim": 200,
+    "red_dot": 200,
+    "scope_2x": 200,
+    "scope_4x": 200,
+    "sniper": 200,
+    "free_look": 200,
+    "shake_reduction": 1.0,
+    "drift_correction": 1.0,
+    "dpi_boost": 2000
   },
 
   "weapons": {
-    "pistol": {
-      "G18": { "aim_sensi": 115, "head_lock_boost": 1.2, "stick_force": 0.95 },
-      "DESERT_EAGLE": { "aim_sensi": 95, "head_lock_boost": 1.5, "stick_force": 1.0 }
+    "shotgun": {
+      "M1014": {
+        "sensi": 200,
+        "head_boost": 3.0,
+        "stick_force": 2.0,
+        "close_range_lock": true,
+        "fov_boost": 2.0,
+        "spread_compensate": true
+      },
+      "M1887": {
+        "sensi": 200,
+        "head_boost": 3.5,
+        "stick_force": 2.0,
+        "close_range_lock": true,
+        "fov_boost": 2.5,
+        "one_shot_focus": true
+      }
     },
     "smg": {
-      "MP40": { "aim_sensi": 125, "head_lock_boost": 1.15, "stick_force": 0.94 },
-      "VECTOR": { "aim_sensi": 130, "head_lock_boost": 1.1, "stick_force": 0.92 }
+      "VECTOR": {
+        "sensi": 200,
+        "head_boost": 2.5,
+        "stick_force": 2.0,
+        "recoil_control": 1.0,
+        "full_auto_track": true
+      },
+      "MP40": {
+        "sensi": 200,
+        "head_boost": 2.5,
+        "stick_force": 2.0,
+        "recoil_control": 1.0
+      }
     },
     "rifle": {
-      "AK": { "aim_sensi": 110, "head_lock_boost": 1.25, "stick_force": 0.96 },
-      "M4A1": { "aim_sensi": 112, "head_lock_boost": 1.2, "stick_force": 0.95 },
-      "M1887": { "aim_sensi": 135, "head_lock_boost": 1.4, "stick_force": 0.98, "close_range_lock": true }
+      "AK": {
+        "sensi": 200,
+        "head_boost": 2.8,
+        "stick_force": 2.0,
+        "recoil_control": 1.0,
+        "drag_stabilize": true
+      },
+      "M4A1": {
+        "sensi": 200,
+        "head_boost": 2.5,
+        "stick_force": 2.0,
+        "recoil_control": 1.0
+      },
+      "GROZA": {
+        "sensi": 200,
+        "head_boost": 2.6,
+        "stick_force": 2.0,
+        "recoil_control": 1.0
+      }
     },
     "sniper": {
-      "AWM": { "aim_sensi": 75, "head_lock_boost": 2.0, "stick_force": 1.0 }
+      "AWM": {
+        "sensi": 200,
+        "head_boost": 5.0,
+        "stick_force": 2.0,
+        "one_shot_lock": true,
+        "instant_snap": true,
+        "fov_narrow": 60
+      },
+      "M82B": {
+        "sensi": 200,
+        "head_boost": 4.5,
+        "stick_force": 2.0,
+        "one_shot_lock": true
+      }
+    },
+    "pistol": {
+      "DEAGLE": {
+        "sensi": 200,
+        "head_boost": 4.0,
+        "stick_force": 2.0,
+        "one_shot_lock": true
+      }
     }
+  },
+
+  "anti_detect": {
+    "humanize_speed": 0.0,
+    "random_offset_px": 0,
+    "avoid_perfect_center": false,
+    "delay_variation_ms": 0,
+    "recoil_pattern_natural": false
+  },
+
+  "visual": {
+    "target_outline": true,
+    "outline_color": "#FF0000",
+    "outline_thickness": 6,
+    "pulse_when_locked": true,
+    "show_distance": true,
+    "crosshair_color": "#FF0000",
+    "crosshair_lock_color": "#FFFFFF"
   },
 
   "dns": {
     "primary": "10.10.34.1",
     "secondary": "1.1.1.1",
-    "doh_url": "https://raw.githubusercontent.com/kanaviry-mar79-maker/REGULAR-/main/AIMLock.json"
+    "doh_url": "https://raw.githubusercontent.com/kanaviry-mar79-maker/REGULAR-/refs/heads/main/aimlock.json"
   }
 }
