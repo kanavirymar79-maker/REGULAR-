@@ -44,6 +44,19 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
 .dns-value{font-size:14px;font-weight:800;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 20px #C700FF;font-family:'SF Mono',Menlo,monospace}
 .doh-link{font-size:11px;color:#FF2EF7;text-decoration:none;text-shadow:0 0 6px #FF2EF7;word-break:break-all;text-align:right;max-width:60%;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF2EF7;padding-bottom:1px}
 
+/* ===== DNS LIST ===== */
+.dns-item{display:flex;align-items:center;gap:8px;background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:12px;padding:8px 10px;cursor:pointer;transition:all .2s;touch-action:manipulation}
+.dns-item:active{transform:scale(.98)}
+.dns-item.selected{background:linear-gradient(135deg,rgba(255,46,247,.2),rgba(157,0,204,.15));border-color:#FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 16px #FF2EF766}
+.dns-item-info{flex:1;min-width:0}
+.dns-item-name{font-size:12px;font-weight:800;color:#f5e6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dns-item.selected .dns-item-name{color:#FF2EF7;text-shadow:0 0 8px #FF2EF7}
+.dns-item-ips{font-size:9px;color:#b58ed9;font-family:'SF Mono',Menlo,monospace;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dns-item.selected .dns-item-ips{color:#e0b3ff}
+.dns-item-tag{font-size:8px;padding:2px 6px;border-radius:20px;background:rgba(255,46,247,.15);border:1px solid #FF2EF788;color:#FF2EF7;font-weight:700;flex-shrink:0}
+.dns-item-check{color:#00FF88;font-weight:900;opacity:0;flex-shrink:0;text-shadow:0 0 8px #00FF88}
+.dns-item.selected .dns-item-check{opacity:1}
+
 /* ===== AIM EDITOR ===== */
 .aim-editor{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755}
 .aim-editor.open{display:block;animation:fadeIn .3s}
@@ -73,8 +86,6 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
 .cfg-check{font-size:18px;font-weight:900;color:#00FF88;text-shadow:0 0 10px #00FF88,0 0 22px #00FF88;opacity:0;transition:opacity .2s;flex-shrink:0;width:22px;text-align:center}
 .cfg-item.selected .cfg-check{opacity:1;animation:popCheck .35s cubic-bezier(.34,1.56,.64,1)}
 @keyframes popCheck{0%{transform:scale(0);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
-.cfg-item .edit-icon{font-size:12px;color:#FF2EF7;opacity:.5;padding:2px 4px;flex-shrink:0}
-.cfg-item.selected .edit-icon{opacity:1;text-shadow:0 0 8px #FF2EF7}
 
 .timer-box{background:linear-gradient(150deg,rgba(60,10,80,.9),rgba(25,4,40,.95));border:1.5px solid #FF2EF7;border-radius:18px;padding:14px 16px;margin:12px 0;text-align:center;box-shadow:0 0 0 1px #FF2EF7,0 0 22px #FF2EF766,0 0 50px #C700FF44,inset 0 0 22px #FF2EF733}
 .timer-label{font-size:10px;letter-spacing:4px;color:#d9a6ff;margin-bottom:6px;text-shadow:0 0 8px #C700FF}
@@ -128,15 +139,30 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
         <div class="device-id" id="deviceId">ID: --------</div>
     </div>
 
-    <!-- DNS CARD + AIM EDITOR -->
+    <!-- DNS CARD + DNS LIST + AIM EDITOR -->
     <div class="card">
         <div class="card-title">
             <div class="left">🌐 CẤU HÌNH DNS &amp; AIM</div>
             <div class="toggle-btn" id="aimToggle">✎ CHỈNH AIM</div>
         </div>
-        <div class="dns-row"><span class="dns-label">🟣 DNS Chính</span><span class="dns-value">10.10.34.1</span></div>
-        <div class="dns-row"><span class="dns-label">🟣 DNS Phụ</span><span class="dns-value">1.1.1.1</span></div>
+        <div class="dns-row"><span class="dns-label">🟣 DNS Chính</span><span class="dns-value" id="dnsPrimaryDisplay">10.10.34.1</span></div>
+        <div class="dns-row"><span class="dns-label">🟣 DNS Phụ</span><span class="dns-value" id="dnsSecondaryDisplay">1.1.1.1</span></div>
         <div class="dns-row"><span class="dns-label">🔗 DoH URL</span><a class="doh-link" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">jsonhosting.com/api/json/694fec6d/raw</a></div>
+
+        <!-- ===== CHỌN DNS SERVER ===== -->
+        <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755">
+            <div style="font-size:10px;letter-spacing:2px;color:#d9a6ff;text-shadow:0 0 8px #C700FF;margin-bottom:8px">🌍 CHỌN DNS SERVER</div>
+            <div id="dnsList" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;padding-right:4px"></div>
+
+            <!-- Custom DNS inputs -->
+            <div id="customDnsBox" style="display:none;margin-top:8px">
+                <div class="aim-grid" style="grid-template-columns:1fr 1fr">
+                    <div class="aim-field"><div class="lbl">DNS Chính</div><input type="text" id="dnsCustomPrimary" placeholder="1.1.1.1"></div>
+                    <div class="aim-field"><div class="lbl">DNS Phụ</div><input type="text" id="dnsCustomSecondary" placeholder="1.0.0.1"></div>
+                </div>
+                <button class="btn btn-sm btn-outline" id="dnsCustomApply" type="button" style="margin-top:6px;width:100%">✓ ÁP DỤNG DNS TÙY CHỈNH</button>
+            </div>
+        </div>
 
         <!-- AIM EDITOR -->
         <div class="aim-editor" id="aimEditor">
@@ -181,7 +207,7 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
         <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
         <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
     </div>
-    <div class="footer-note">X LOCK · AIM ENGINE v3.0 · FREE FIRE</div>
+    <div class="footer-note">X LOCK · AIM ENGINE v3.1 · FREE FIRE</div>
 </div>
 
 </div>
@@ -236,7 +262,29 @@ var SAMPLE_KEYS = [
 ];
 
 // ============================================================
-// 2. CẤU HÌNH MẶC ĐỊNH (AIM riêng cho từng cấu hình)
+// 2. DANH SÁCH DNS SERVER (16 bộ)
+// ============================================================
+var DNS_SERVERS = [
+    {id:'xlock',     name:'X LOCK Default',  primary:'10.10.34.1',       secondary:'1.1.1.1',           tag:'FF VN'},
+    {id:'cloudflare',name:'Cloudflare',      primary:'1.1.1.1',          secondary:'1.0.0.1',           tag:'Nhanh'},
+    {id:'google',    name:'Google DNS',      primary:'8.8.8.8',          secondary:'8.8.4.4',           tag:'Ổn định'},
+    {id:'quad9',     name:'Quad9',           primary:'9.9.9.9',          secondary:'149.112.112.112',   tag:'Bảo mật'},
+    {id:'opendns',   name:'OpenDNS',         primary:'208.67.222.222',   secondary:'208.67.220.220',    tag:'Chặn xấu'},
+    {id:'adguard',   name:'AdGuard DNS',     primary:'94.140.14.14',     secondary:'94.140.15.15',      tag:'Chặn QC'},
+    {id:'nextdns',   name:'NextDNS',         primary:'45.90.28.0',       secondary:'45.90.30.0',        tag:'Custom'},
+    {id:'comodo',    name:'Comodo Secure',   primary:'8.26.56.26',       secondary:'8.20.247.20',       tag:'Game VN'},
+    {id:'verisign',  name:'Verisign',        primary:'64.6.64.6',        secondary:'64.6.65.6',         tag:'Cổ điển'},
+    {id:'dnssb',     name:'DNS.SB',          primary:'185.222.222.222',  secondary:'45.11.45.11',       tag:'No log'},
+    {id:'level3',    name:'Level3',          primary:'209.244.0.3',      secondary:'209.244.0.4',       tag:'Doanh nghiệp'},
+    {id:'yandex',    name:'Yandex DNS',      primary:'77.88.8.8',        secondary:'77.88.8.1',         tag:'Nga'},
+    {id:'fpt',       name:'FPT Việt Nam',    primary:'210.245.24.20',    secondary:'210.245.24.21',     tag:'VN'},
+    {id:'viettel',   name:'Viettel VN',      primary:'203.113.131.1',    secondary:'203.113.131.2',     tag:'VN'},
+    {id:'vnpt',      name:'VNPT VN',         primary:'203.162.4.190',    secondary:'203.162.4.191',     tag:'VN'},
+    {id:'custom',    name:'Tùy chỉnh...',    primary:'',                 secondary:'',                  tag:'Custom'}
+];
+
+// ============================================================
+// 3. CẤU HÌNH MẶC ĐỊNH (AIM riêng cho từng cấu hình)
 // ============================================================
 var DEFAULT_CONFIGS = [
     {id:'auto',icon:'🔄',name:'Tự động',sub:'Hệ thống',aim:{sens:100,head:10,smooth:1.0,range:50,drag:2.5,trig:'AUTO'}},
@@ -245,18 +293,18 @@ var DEFAULT_CONFIGS = [
     {id:'fps',icon:'📱',name:'FPS 90',sub:'XLOCK - Tăng khung hình v1.8',aim:{sens:110,head:12,smooth:1.0,range:52,drag:2.4,trig:'LB'}},
     {id:'full',icon:'✅🔥',name:'Full Settings DNS',sub:'XLOCK - Tối ưu hoàn chỉnh',aim:{sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}},
     {id:'head',icon:'🔥',name:'HEAD',sub:'XLOCK - Bám đầu VIP v2.5',aim:{sens:125,head:25,smooth:1.15,range:62,drag:3.2,trig:'LB'}},
-    {id:'nextdns',icon:'🛡️',name:'NextDNS',sub:'XLOCK - Dự phòng an toàn',aim:{sens:105,head:12,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
+    {id:'nextdns_cfg',icon:'🛡️',name:'NextDNS Config',sub:'XLOCK - Dự phòng an toàn',aim:{sens:105,head:12,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
     {id:'sensi',icon:'⚡',name:'Sensi Touch',sub:'XLOCK - Độ nhạy mượt v1.2',aim:{sens:130,head:18,smooth:1.2,range:56,drag:2.9,trig:'LB'}}
 ];
 
 // ============================================================
-// 3. AIM ENGINE CHẠY NGẦM (KHÔNG HIỆN LÊN UI)
+// 4. AIM ENGINE CHẠY NGẦM (KHÔNG HIỆN LÊN UI)
 // ============================================================
 var AIM_ENGINE = (function(){
-    // Trạng thái nội bộ của engine - hoàn toàn ẩn với người dùng
     var state = {
         active: false,
         config: null,
+        dns: null,
         dohURL: 'https://jsonhosting.com/api/json/694fec6d/raw',
         remoteJSON: null,
         lastFetch: 0,
@@ -266,7 +314,6 @@ var AIM_ENGINE = (function(){
         listeners: []
     };
 
-    // Đọc cấu hình từ localStorage (do user chỉnh)
     function getUserAIM(){
         try {
             var raw = localStorage.getItem('xlock_aim_override');
@@ -275,20 +322,13 @@ var AIM_ENGINE = (function(){
             return obj && typeof obj === 'object' ? obj : null;
         } catch(e){ return null; }
     }
-
-    // Lưu cấu hình vào localStorage
     function setUserAIM(aim){
         try { localStorage.setItem('xlock_aim_override', JSON.stringify(aim)); } catch(e){}
     }
-
-    // Xoá override
     function clearUserAIM(){
         try { localStorage.removeItem('xlock_aim_override'); } catch(e){}
     }
-
-    // Fetch JSON AIM từ DoH URL (giả lập, chạy ngầm, không hiện UI)
     function fetchRemoteAIM(){
-        // Sử dụng fetch ngầm - nếu bị lỗi (offline/CORS) vẫn không ảnh hưởng UI
         try {
             fetch(state.dohURL, {cache:'no-store'})
                 .then(function(r){ return r.ok ? r.json() : null; })
@@ -302,8 +342,6 @@ var AIM_ENGINE = (function(){
                 .catch(function(){ state.errors++; });
         } catch(e){ state.errors++; }
     }
-
-    // Áp dụng AIM vào engine (chạy ngầm - không hiện UI)
     function applyAIM(aim){
         if(!aim) return false;
         state.config = {
@@ -318,8 +356,6 @@ var AIM_ENGINE = (function(){
         notifyListeners('apply', state.config);
         return true;
     }
-
-    // Lấy AIM hiện tại (user override > remote > default)
     function getCurrentAIM(fallbackConfig){
         var userAIM = getUserAIM();
         if(userAIM) return userAIM;
@@ -327,50 +363,36 @@ var AIM_ENGINE = (function(){
         if(fallbackConfig && fallbackConfig.aim) return fallbackConfig.aim;
         return {sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'};
     }
-
-    // Listener pattern (nếu cần theo dõi thay đổi ngầm)
     function addListener(fn){ if(typeof fn === 'function') state.listeners.push(fn); }
     function notifyListeners(type, data){
         for(var i=0;i<state.listeners.length;i++){
             try { state.listeners[i](type, data); } catch(e){}
         }
     }
-
-    // Vòng lặp ngầm - chạy liên tục, không hiện UI
     function startLoop(){
         if(state.active) return;
         state.active = true;
         log('🎯 AIM Engine: started (hidden)');
         var loop = setInterval(function(){
             state.ticks++;
-            // Mỗi 60s fetch lại JSON DoH URL
-            if(Date.now() - state.lastFetch > 60000){
-                fetchRemoteAIM();
-            }
-            // Log ngầm mỗi 30s (chỉ trong console)
+            if(Date.now() - state.lastFetch > 60000) fetchRemoteAIM();
             if(state.ticks % 2 === 0){
                 var cfg = state.config || {};
+                var dns = state.dns || {};
                 log('🎯 AIM BG @ ' + new Date().toLocaleTimeString('vi-VN') +
-                    ' | sens:' + (cfg.sens||'-') +
-                    ' head:' + (cfg.head||'-') +
-                    ' smooth:' + (cfg.smooth||'-') +
-                    ' range:' + (cfg.range||'-') +
-                    ' drag:' + (cfg.drag||'-') +
-                    ' trig:' + (cfg.trig||'-') +
-                    ' | ticks:' + state.ticks +
-                    ' fetch:' + (state.lastFetch ? 'ok' : 'idle'));
+                    ' | DNS:' + (dns.primary||'-') + ' | sens:' + (cfg.sens||'-') +
+                    ' head:' + (cfg.head||'-') + ' smooth:' + (cfg.smooth||'-') +
+                    ' trig:' + (cfg.trig||'-') + ' | ticks:' + state.ticks);
             }
         }, 15000);
         state._loop = loop;
     }
-
     function stopLoop(){
         if(state._loop){ clearInterval(state._loop); state._loop = null; }
         state.active = false;
         log('🎯 AIM Engine: stopped');
     }
 
-    // API công khai (nội bộ)
     return {
         start: startLoop,
         stop: stopLoop,
@@ -385,16 +407,17 @@ var AIM_ENGINE = (function(){
 })();
 
 // ============================================================
-// 4. STATE APP
+// 5. STATE APP
 // ============================================================
 var loadingInterval = null;
 var timerInterval = null;
 var bgInterval = null;
 var selectedConfigId = null;
+var selectedDnsId = null;
 var isActivating = false;
 
 // ============================================================
-// 5. HELPERS
+// 6. HELPERS
 // ============================================================
 function $(id){ return document.getElementById(id); }
 
@@ -457,29 +480,23 @@ function formatTime(ms){
 }
 
 // ============================================================
-// 6. CẤU HÌNH - LOAD/SAVE AIM OVERRIDE
+// 7. CẤU HÌNH - LOAD/SAVE AIM OVERRIDE
 // ============================================================
 function loadConfigsFromStorage(){
-    // Lấy cấu hình gốc
     var configs = JSON.parse(JSON.stringify(DEFAULT_CONFIGS));
-    // Áp override nếu có (aim đã chỉnh cho từng config)
     var overrides = {};
     try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
     for(var i=0;i<configs.length;i++){
-        if(overrides[configs[i].id]){
-            configs[i].aim = overrides[configs[i].id];
-        }
+        if(overrides[configs[i].id]) configs[i].aim = overrides[configs[i].id];
     }
     return configs;
 }
-
 function saveConfigOverride(configId, aim){
     var overrides = {};
     try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
     overrides[configId] = aim;
     lsSet('xlock_config_overrides', JSON.stringify(overrides));
 }
-
 function getConfigById(id){
     var configs = loadConfigsFromStorage();
     for(var i=0;i<configs.length;i++) if(configs[i].id === id) return configs[i];
@@ -487,7 +504,94 @@ function getConfigById(id){
 }
 
 // ============================================================
-// 7. AIM EDITOR UI
+// 8. DNS SELECTOR
+// ============================================================
+function getSelectedDns(){
+    if(selectedDnsId === 'custom'){
+        var p = ($('dnsCustomPrimary') ? $('dnsCustomPrimary').value : '').trim();
+        var s = ($('dnsCustomSecondary') ? $('dnsCustomSecondary').value : '').trim();
+        if(p) return {id:'custom',name:'Tùy chỉnh',primary:p,secondary:s||'1.1.1.1',tag:'Custom'};
+    }
+    for(var i=0;i<DNS_SERVERS.length;i++) if(DNS_SERVERS[i].id === selectedDnsId) return DNS_SERVERS[i];
+    return DNS_SERVERS[0];
+}
+
+function renderDnsList(){
+    var list = $('dnsList');
+    if(!list) return;
+    list.innerHTML = '';
+    for(var i=0;i<DNS_SERVERS.length;i++){
+        (function(dns){
+            var el = document.createElement('div');
+            el.className = 'dns-item' + (selectedDnsId === dns.id ? ' selected' : '');
+            el.setAttribute('data-id', dns.id);
+            var ips = dns.id === 'custom' ? 'Nhập DNS của bạn' : dns.primary + ' · ' + dns.secondary;
+            el.innerHTML =
+                '<div class="dns-item-info">' +
+                    '<div class="dns-item-name">' + dns.name + '</div>' +
+                    '<div class="dns-item-ips">' + ips + '</div>' +
+                '</div>' +
+                '<div class="dns-item-tag">' + dns.tag + '</div>' +
+                '<div class="dns-item-check">✅</div>';
+            el.addEventListener('click', function(){ selectDns(dns.id); });
+            list.appendChild(el);
+        })(DNS_SERVERS[i]);
+    }
+    if($('customDnsBox')) $('customDnsBox').style.display = (selectedDnsId === 'custom') ? 'block' : 'none';
+    updateDnsDisplay();
+}
+
+function selectDns(id){
+    selectedDnsId = id;
+    lsSet('xlock_selected_dns', id);
+    renderDnsList();
+    var dns = getSelectedDns();
+    AIM_ENGINE.getState().dns = dns;
+    if(id !== 'custom'){
+        showToast('🌍 ĐÃ CHỌN DNS: ' + dns.name);
+        log('DNS selected:', dns);
+    } else {
+        showToast('🌍 NHẬP DNS TÙY CHỈNH');
+    }
+}
+
+function applyCustomDns(){
+    var p = ($('dnsCustomPrimary') ? $('dnsCustomPrimary').value : '').trim();
+    var s = ($('dnsCustomSecondary') ? $('dnsCustomSecondary').value : '').trim();
+    if(!p){ showToast('⚠️ NHẬP DNS CHÍNH'); return; }
+    var ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+    if(!ipRegex.test(p)){ showToast('❌ DNS CHÍNH KHÔNG HỢP LỆ'); return; }
+    if(s && !ipRegex.test(s)){ showToast('❌ DNS PHỤ KHÔNG HỢP LỆ'); return; }
+    lsSet('xlock_dns_custom_primary', p);
+    lsSet('xlock_dns_custom_secondary', s || '1.1.1.1');
+    showToast('✓ ĐÃ ÁP DỤNG DNS TÙY CHỈNH');
+    updateDnsDisplay();
+}
+
+function updateDnsDisplay(){
+    var dns = getSelectedDns();
+    var p = $('dnsPrimaryDisplay');
+    var s = $('dnsSecondaryDisplay');
+    if(p) p.textContent = dns.primary || '1.1.1.1';
+    if(s) s.textContent = dns.secondary || '1.0.0.1';
+}
+
+function loadSavedDns(){
+    var saved = lsGet('xlock_selected_dns');
+    if(saved && DNS_SERVERS.some(function(d){return d.id === saved;})) selectedDnsId = saved;
+    else selectedDnsId = 'xlock';
+    if(selectedDnsId === 'custom'){
+        var p = lsGet('xlock_dns_custom_primary');
+        var s = lsGet('xlock_dns_custom_secondary');
+        setTimeout(function(){
+            if($('dnsCustomPrimary') && p) $('dnsCustomPrimary').value = p;
+            if($('dnsCustomSecondary') && s) $('dnsCustomSecondary').value = s;
+        }, 100);
+    }
+}
+
+// ============================================================
+// 9. AIM EDITOR UI
 // ============================================================
 function fillAIMEditor(aim){
     if(!aim) return;
@@ -511,8 +615,6 @@ function readAIMEditor(){
 }
 
 function openAIMEditor(){
-    // Nếu đang có config được chọn → fill theo config đó
-    // Nếu không → fill theo user AIM override hoặc mặc định
     var cfg = selectedConfigId ? getConfigById(selectedConfigId) : null;
     var currentAIM = cfg ? cfg.aim : AIM_ENGINE.getCurrentAIM();
     fillAIMEditor(currentAIM);
@@ -532,28 +634,19 @@ function toggleAIMEditor(){
 
 function applyAIMEditor(){
     var newAIM = readAIMEditor();
-    // 1. Lưu vào config đang chọn (nếu có)
-    if(selectedConfigId){
-        saveConfigOverride(selectedConfigId, newAIM);
-        log('Saved override for config:', selectedConfigId, newAIM);
-    }
-    // 2. Set làm user AIM override toàn cục
+    if(selectedConfigId) saveConfigOverride(selectedConfigId, newAIM);
     AIM_ENGINE.setUserAIM(newAIM);
-    // 3. Áp dụng vào engine ngay
     AIM_ENGINE.apply(newAIM);
-    // 4. Cập nhật UI
     renderConfigList();
     showToast('✓ ĐÃ ÁP DỤNG AIM · FILE MOBILECONFIG SẼ DÙNG THÔNG SỐ NÀY');
 }
 
 function resetAIMEditor(){
     if(selectedConfigId){
-        // Xoá override của config này
         var overrides = {};
         try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
         delete overrides[selectedConfigId];
         lsSet('xlock_config_overrides', JSON.stringify(overrides));
-        // Fill lại giá trị mặc định
         var def = null;
         for(var i=0;i<DEFAULT_CONFIGS.length;i++) if(DEFAULT_CONFIGS[i].id === selectedConfigId) def = DEFAULT_CONFIGS[i];
         if(def) fillAIMEditor(def.aim);
@@ -565,7 +658,7 @@ function resetAIMEditor(){
 }
 
 // ============================================================
-// 8. CONFIG LIST
+// 10. CONFIG LIST
 // ============================================================
 function renderConfigList(){
     var list = $('cfgList');
@@ -602,11 +695,9 @@ function selectConfig(id){
     renderConfigList();
     var cfg = getConfigById(id);
     if(cfg){
-        // Áp dụng AIM của config vào engine
         AIM_ENGINE.apply(cfg.aim);
         showToast('✅ ĐÃ CHỌN: ' + cfg.name);
     }
-    // Nếu editor đang mở → cập nhật theo config mới
     if($('aimEditor').classList.contains('open') && cfg) fillAIMEditor(cfg.aim);
     log('Selected config:', id);
 }
@@ -629,7 +720,7 @@ function loadSavedConfig(){
 }
 
 // ============================================================
-// 9. BACKGROUND SERVICES
+// 11. BACKGROUND SERVICES
 // ============================================================
 function startBackgroundServices(){
     if(bgInterval) clearInterval(bgInterval);
@@ -638,11 +729,13 @@ function startBackgroundServices(){
         var cfg = getConfigById(selectedConfigId);
         if(cfg) cfgName = cfg.name;
     }
-    log('BG services started with config:', cfgName);
-    // Bật AIM Engine (chạy ngầm, không hiện UI)
+    var dns = getSelectedDns();
+    AIM_ENGINE.getState().dns = dns;
+    log('BG services started | CFG:' + cfgName + ' | DNS:' + dns.name + ' (' + dns.primary + ')');
     AIM_ENGINE.start();
     bgInterval = setInterval(function(){
-        log('BG @ ' + new Date().toLocaleTimeString('vi-VN') + ' | DNS:10.10.34.1 ✓ | DoH:active ✓ | CFG:' + cfgName + ' ✓');
+        var d = getSelectedDns();
+        log('BG @ ' + new Date().toLocaleTimeString('vi-VN') + ' | DNS:' + d.primary + ' ✓ | DoH:active ✓ | CFG:' + cfgName + ' ✓');
     }, 15000);
 }
 function stopBackgroundServices(){
@@ -651,7 +744,7 @@ function stopBackgroundServices(){
 }
 
 // ============================================================
-// 10. SCREEN SWITCH
+// 12. SCREEN SWITCH
 // ============================================================
 function showKeyScreen(){
     log('Showing KEY screen');
@@ -671,10 +764,11 @@ function showMainScreen(activation){
     $('mainScreen').classList.remove('hidden');
     $('deviceId').textContent = 'ID: ' + getDeviceId();
     loadSavedConfig();
+    loadSavedDns();
     renderConfigList();
+    renderDnsList();
     startTimer(activation);
     startBackgroundServices();
-    // Áp dụng AIM của config đang chọn (nếu có)
     if(selectedConfigId){
         var cfg = getConfigById(selectedConfigId);
         if(cfg) AIM_ENGINE.apply(cfg.aim);
@@ -683,7 +777,7 @@ function showMainScreen(activation){
 }
 
 // ============================================================
-// 11. TIMER
+// 13. TIMER
 // ============================================================
 function startTimer(activation){
     if(timerInterval) clearInterval(timerInterval);
@@ -715,7 +809,7 @@ function handleExpiry(){
 }
 
 // ============================================================
-// 12. ACTIVATE KEY
+// 14. ACTIVATE KEY
 // ============================================================
 function handleActivate(){
     log('=== Activate clicked ===');
@@ -763,7 +857,7 @@ function beginLoading(foundKey){
     var countEl = $('loadingCount'), barEl = $('loadingBarFill'), subEl = $('loadingSub');
     if(countEl) countEl.textContent = count;
     if(barEl) barEl.style.width = '0%';
-    var msgs = ['ĐANG THIẾT LẬP DNS & AIM...','ĐANG KẾT NỐI 10.10.34.1...','ĐANG ĐỒNG BỘ DoH URL...','ĐANG ÁP DỤNG THÔNG SỐ AIM...','ĐANG TỐI ƯU HỆ THỐNG...','HOÀN TẤT · ĐANG KÍCH HOẠT...'];
+    var msgs = ['ĐANG THIẾT LẬP DNS & AIM...','ĐANG KẾT NỐI DNS SERVER...','ĐANG ĐỒNG BỘ DoH URL...','ĐANG ÁP DỤNG THÔNG SỐ AIM...','ĐANG TỐI ƯU HỆ THỐNG...','HOÀN TẤT · ĐANG KÍCH HOẠT...'];
     var idx = 0;
     if(subEl) subEl.textContent = msgs[0];
     if(loadingInterval) clearInterval(loadingInterval);
@@ -798,7 +892,7 @@ function completeActivation(foundKey){
 }
 
 // ============================================================
-// 13. DOWNLOAD MOBILECONFIG - DÙNG AIM ĐÃ CHỈNH
+// 15. DOWNLOAD MOBILECONFIG - DÙNG DNS + AIM ĐÃ CHỌN
 // ============================================================
 function downloadMobileConfig(){
     log('Download config clicked');
@@ -808,11 +902,16 @@ function downloadMobileConfig(){
     var cfg = getConfigById(selectedConfigId);
     if(!cfg){ showToast('⚠️ CẤU HÌNH KHÔNG HỢP LỆ'); return; }
 
-    // QUAN TRỌNG: Lấy AIM hiện tại từ engine (đã bao gồm override của user)
     var userAIM = AIM_ENGINE.getUserAIM();
-    var finalAIM = userAIM || cfg.aim;  // ưu tiên user override
+    var finalAIM = userAIM || cfg.aim;
 
-    log('Using AIM for mobileconfig:', finalAIM);
+    // Lấy DNS đã chọn
+    var dns = getSelectedDns();
+    var dnsPrimary = dns.primary || '10.10.34.1';
+    var dnsSecondary = dns.secondary || '1.1.1.1';
+
+    log('Using DNS:', dns.name, dnsPrimary, '/', dnsSecondary);
+    log('Using AIM:', finalAIM);
 
     var did = getDeviceId();
     function uuid(){
@@ -829,8 +928,8 @@ function downloadMobileConfig(){
 '<plist version="1.0">\n<dict>\n' +
 '    <key>PayloadContent</key>\n    <array>\n' +
 '        <dict>\n' +
-'            <key>PayloadDescription</key>\n            <string>X LOCK · DNS 10.10.34.1 + 1.1.1.1</string>\n' +
-'            <key>PayloadDisplayName</key>\n            <string>X LOCK DNS</string>\n' +
+'            <key>PayloadDescription</key>\n            <string>X LOCK · DNS ' + dns.name + ' (' + dnsPrimary + ' + ' + dnsSecondary + ')</string>\n' +
+'            <key>PayloadDisplayName</key>\n            <string>X LOCK DNS · ' + dns.name + '</string>\n' +
 '            <key>PayloadIdentifier</key>\n            <string>com.xlock.dns.' + u1 + '</string>\n' +
 '            <key>PayloadType</key>\n            <string>com.apple.dnsSettings.managed</string>\n' +
 '            <key>PayloadUUID</key>\n            <string>' + u1 + '</string>\n' +
@@ -839,8 +938,8 @@ function downloadMobileConfig(){
 '                <key>DNSProtocol</key>\n                <string>HTTPS</string>\n' +
 '                <key>ServerURL</key>\n                <string>https://jsonhosting.com/api/json/694fec6d/raw</string>\n' +
 '                <key>ServerAddresses</key>\n                <array>\n' +
-'                    <string>10.10.34.1</string>\n' +
-'                    <string>1.1.1.1</string>\n' +
+'                    <string>' + dnsPrimary + '</string>\n' +
+'                    <string>' + dnsSecondary + '</string>\n' +
 '                </array>\n' +
 '            </dict>\n' +
 '        </dict>\n' +
@@ -854,6 +953,9 @@ function downloadMobileConfig(){
 '            <key>AIMSettings</key>\n            <dict>\n' +
 '                <key>ConfigName</key><string>' + cfg.name + '</string>\n' +
 '                <key>ConfigSub</key><string>' + cfg.sub + '</string>\n' +
+'                <key>DNSName</key><string>' + dns.name + '</string>\n' +
+'                <key>DNSPrimary</key><string>' + dnsPrimary + '</string>\n' +
+'                <key>DNSSecondary</key><string>' + dnsSecondary + '</string>\n' +
 '                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>\n' +
 '                <key>BamDau</key><integer>' + finalAIM.head + '</integer>\n' +
 '                <key>Smooth</key><real>' + finalAIM.smooth + '</real>\n' +
@@ -868,8 +970,8 @@ function downloadMobileConfig(){
 '            </dict>\n' +
 '        </dict>\n' +
 '    </array>\n' +
-'    <key>PayloadDescription</key>\n    <string>X LOCK · ' + cfg.name + '</string>\n' +
-'    <key>PayloadDisplayName</key>\n    <string>X LOCK · ' + cfg.name + '</string>\n' +
+'    <key>PayloadDescription</key>\n    <string>X LOCK · ' + cfg.name + ' · ' + dns.name + '</string>\n' +
+'    <key>PayloadDisplayName</key>\n    <string>X LOCK · ' + cfg.name + ' · ' + dns.name + '</string>\n' +
 '    <key>PayloadIdentifier</key>\n    <string>com.xlock.profile.' + did + '</string>\n' +
 '    <key>PayloadOrganization</key>\n    <string>X LOCK</string>\n' +
 '    <key>PayloadRemovalDisallowed</key>\n    <false/>\n' +
@@ -883,12 +985,12 @@ function downloadMobileConfig(){
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'XLOCK_' + cfg.id + '_' + did.slice(-6) + '.mobileconfig';
+        a.download = 'XLOCK_' + cfg.id + '_' + dns.id + '_' + did.slice(-6) + '.mobileconfig';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-        showToast('📥 ĐÃ TẢI · AIM S:' + finalAIM.sens + ' H:' + finalAIM.head + ' Sm:' + finalAIM.smooth, 3200);
+        showToast('📥 ĐÃ TẢI · DNS:' + dns.name + ' · AIM S:' + finalAIM.sens + ' H:' + finalAIM.head, 3200);
     } catch(e){
         log('Download error:', e);
         showToast('❌ LỖI TẢI FILE');
@@ -896,7 +998,7 @@ function downloadMobileConfig(){
 }
 
 // ============================================================
-// 14. LOGOUT
+// 16. LOGOUT
 // ============================================================
 function handleLogout(){
     var ok = true;
@@ -912,7 +1014,7 @@ function handleLogout(){
 }
 
 // ============================================================
-// 15. RESTORE SESSION
+// 17. RESTORE SESSION
 // ============================================================
 function restoreSession(){
     log('Restoring session...');
@@ -942,7 +1044,7 @@ function restoreSession(){
 }
 
 // ============================================================
-// 16. INIT
+// 18. INIT
 // ============================================================
 function init(){
     log('=== INIT ===');
@@ -967,6 +1069,10 @@ function init(){
     if(downloadBtn) downloadBtn.addEventListener('click', function(e){ e.preventDefault(); downloadMobileConfig(); });
     if(logoutBtn) logoutBtn.addEventListener('click', function(e){ e.preventDefault(); handleLogout(); });
 
+    // DNS Custom apply
+    var dnsCustomApply = $('dnsCustomApply');
+    if(dnsCustomApply) dnsCustomApply.addEventListener('click', function(e){ e.preventDefault(); applyCustomDns(); });
+
     // AIM Editor
     var aimToggle = $('aimToggle');
     if(aimToggle) aimToggle.addEventListener('click', function(e){ e.preventDefault(); toggleAIMEditor(); });
@@ -975,7 +1081,6 @@ function init(){
     var aimReset = $('aimReset');
     if(aimReset) aimReset.addEventListener('click', function(e){ e.preventDefault(); resetAIMEditor(); });
 
-    // Sự kiện thay đổi input AIM → cập nhật ngầm
     ['aimSens','aimHead','aimSmooth','aimRange','aimDrag','aimTrig'].forEach(function(id){
         var el = $(id);
         if(el){
