@@ -3,108 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>X LOCK · AIM CONFIG</title>
+<title>X LOCK</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom));color:#f5e6ff;overflow-x:hidden}
-.app{width:100%;max-width:420px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(45,8,60,.92),rgba(20,3,35,.96));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 0 0 1px #FF2EF7,0 0 30px #FF2EF788,0 0 60px #C700FF44,0 0 100px #9D00CC33,inset 0 0 40px #FF2EF711;padding:20px 16px 22px;position:relative;overflow:hidden}
-.app::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,#FF2EF722,transparent,#C700FF22,transparent);animation:rotate 12s linear infinite;pointer-events:none;z-index:0}
-@keyframes rotate{100%{transform:rotate(360deg)}}
-.app>*{position:relative;z-index:1}
-.neon-text{text-shadow:0 0 4px #FF2EF7,0 0 12px #FF2EF7,0 0 24px #C700FF,0 0 48px #9D00CC}
+body{background:#0D0018;background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;color:#f5e6ff;padding-top:max(12px,env(safe-area-inset-top))}
+.app{width:100%;max-width:420px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(45,8,60,.92),rgba(20,3,35,.96));box-shadow:0 0 0 1px #FF2EF7,0 0 30px #FF2EF788,0 0 60px #C700FF44;padding:20px 16px 22px}
 .logo-wrap{text-align:center;margin-bottom:18px}
-.logo-x{width:84px;height:84px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF2EF733,#1A0325);border-radius:50%;border:2px solid #FF2EF7;font-size:54px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 22px #C700FF,0 0 44px #9D00CC;box-shadow:0 0 20px #FF2EF7,0 0 50px #C700FF77,inset 0 0 22px #FF2EF744;animation:pulseX 2.4s ease-in-out infinite}
-@keyframes pulseX{0%,100%{box-shadow:0 0 20px #FF2EF7,0 0 50px #C700FF77,inset 0 0 22px #FF2EF744}50%{box-shadow:0 0 30px #FF2EF7,0 0 70px #C700FFAA,inset 0 0 30px #FF2EF766}}
-.logo-name{font-size:34px;font-weight:900;letter-spacing:8px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 18px #FF2EF7,0 0 36px #C700FF,0 0 72px #9D00CC;margin-bottom:4px}
-.logo-tag{font-size:10px;letter-spacing:4px;color:#d9a6ff;text-shadow:0 0 8px #C700FF}
-.key-screen .input-wrap{margin:20px 0 16px}
-.key-screen label{display:block;font-size:11px;letter-spacing:3px;color:#d9a6ff;margin-bottom:8px;text-shadow:0 0 8px #C700FF;text-align:center}
-.key-input{width:100%;background:rgba(10,0,18,.9);border:1.5px solid #FF2EF7;border-radius:18px;padding:16px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7;outline:none;text-align:center;box-shadow:0 0 0 1px #FF2EF744,0 0 18px #FF2EF766,inset 0 0 12px #C700FF33;transition:all .25s;-webkit-appearance:none;appearance:none}
-.key-input::placeholder{color:#a56dcc;font-size:14px;letter-spacing:2px;font-weight:500}
-.key-input:focus{border-color:#FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 30px #FF2EF7,0 0 60px #C700FF,inset 0 0 18px #FF2EF766}
-.btn{display:block;width:100%;padding:16px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF2EF7,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 8px #fff,0 0 16px #FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 24px #FF2EF7,0 0 50px #C700FF88;cursor:pointer;transition:transform .15s,box-shadow .2s;-webkit-appearance:none;appearance:none;touch-action:manipulation}
-.btn:active{transform:scale(.96);box-shadow:0 0 0 1px #FF2EF7,0 0 40px #FF2EF7,0 0 80px #C700FF}
-.btn:disabled{background:linear-gradient(135deg,#3a2045,#2a1035);color:#7a5588;text-shadow:none;box-shadow:0 0 0 1px #5a2a6a;cursor:not-allowed;opacity:.6}
-.btn-outline{background:rgba(255,46,247,.08);border:1.5px solid #FF2EF7;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7;box-shadow:0 0 0 1px #FF2EF744,0 0 16px #FF2EF766,inset 0 0 12px #FF2EF722}
+.logo-x{width:84px;height:84px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF2EF733,#1A0325);border-radius:50%;border:2px solid #FF2EF7;font-size:54px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 22px #C700FF;box-shadow:0 0 20px #FF2EF7,0 0 50px #C700FF77}
+.logo-name{font-size:34px;font-weight:900;letter-spacing:8px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 18px #FF2EF7,0 0 36px #C700FF;margin-bottom:4px}
+.logo-tag{font-size:10px;letter-spacing:4px;color:#d9a6ff}
+.input-wrap{margin:20px 0 16px}
+.input-wrap label{display:block;font-size:11px;letter-spacing:3px;color:#d9a6ff;margin-bottom:8px;text-align:center}
+.key-input{width:100%;background:rgba(10,0,18,.9);border:1.5px solid #FF2EF7;border-radius:18px;padding:16px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7;outline:none;text-align:center;box-shadow:0 0 18px #FF2EF766,inset 0 0 12px #C700FF33;-webkit-appearance:none}
+.key-input::placeholder{color:#a56dcc;font-size:14px}
+.btn{display:block;width:100%;padding:16px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF2EF7,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 8px #fff;box-shadow:0 0 24px #FF2EF7,0 0 50px #C700FF88;cursor:pointer;-webkit-appearance:none;touch-action:manipulation;position:relative;overflow:hidden}
+.btn:active{transform:scale(.96)}
+.btn:disabled{background:linear-gradient(135deg,#3a2045,#2a1035);color:#7a5588;text-shadow:none;box-shadow:none;cursor:not-allowed;opacity:.6}
+.btn-outline{background:rgba(255,46,247,.08);border:1.5px solid #FF2EF7;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7;box-shadow:0 0 16px #FF2EF766}
 .btn-sm{padding:10px;font-size:12px;letter-spacing:1px;border-radius:12px}
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.main-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:14px;border-bottom:1.5px solid #FF2EF7;box-shadow:0 8px 20px -10px #FF2EF7}
-.main-header .title{font-size:22px;font-weight:900;letter-spacing:5px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 16px #C700FF,0 0 32px #9D00CC}
-.device-id{font-size:9px;letter-spacing:.5px;background:rgba(255,46,247,.1);border:1px solid #FF2EF7;border-radius:30px;padding:5px 10px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7;box-shadow:0 0 12px #FF2EF766;font-weight:700;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card{background:linear-gradient(150deg,rgba(60,10,80,.75),rgba(25,4,40,.85));border:1px solid #FF2EF7;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 0 0 1px #FF2EF744,0 0 18px #FF2EF766,0 0 36px #C700FF33,inset 0 0 18px #FF2EF711}
-.card-title{font-size:10px;letter-spacing:3px;color:#d9a6ff;margin-bottom:10px;text-shadow:0 0 8px #C700FF;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.btn.loading{color:transparent!important;pointer-events:none}
+.btn.loading::after{content:'';position:absolute;top:50%;left:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.btn-outline.loading::after{border-color:rgba(255,46,247,.3);border-top-color:#FF2EF7}
+@keyframes spin{100%{transform:rotate(360deg)}}
+.main-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:14px;border-bottom:1.5px solid #FF2EF7}
+.main-header .title{font-size:22px;font-weight:900;letter-spacing:5px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 16px #C700FF}
+.device-id{font-size:9px;background:rgba(255,46,247,.1);border:1px solid #FF2EF7;border-radius:30px;padding:5px 10px;color:#FF2EF7;font-weight:700;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card{background:linear-gradient(150deg,rgba(60,10,80,.75),rgba(25,4,40,.85));border:1px solid #FF2EF7;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 0 18px #FF2EF766}
+.card.busy{box-shadow:0 0 30px #FF2EF7,inset 0 0 22px #FF2EF744}
+.card-title{font-size:10px;letter-spacing:3px;color:#d9a6ff;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:6px}
 .card-title .left{display:flex;align-items:center;gap:6px}
-.card-title .left::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#FF2EF7;box-shadow:0 0 10px #FF2EF7,0 0 20px #FF2EF7}
-.card-title .toggle-btn{font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:20px;background:rgba(255,46,247,.15);border:1px solid #FF2EF7;color:#FF2EF7;cursor:pointer;font-weight:700;text-shadow:0 0 6px #FF2EF7}
-.dns-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #FF2EF722}
-.dns-row:last-child{border-bottom:none}
-.dns-label{font-size:12px;color:#c79cff;letter-spacing:.5px}
-.dns-value{font-size:14px;font-weight:800;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 20px #C700FF;font-family:'SF Mono',Menlo,monospace}
-.doh-link{font-size:11px;color:#FF2EF7;text-decoration:none;text-shadow:0 0 6px #FF2EF7;word-break:break-all;text-align:right;max-width:60%;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF2EF7;padding-bottom:1px}
-
-/* ===== DNS LIST ===== */
-.dns-item{display:flex;align-items:center;gap:8px;background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:12px;padding:8px 10px;cursor:pointer;transition:all .2s;touch-action:manipulation}
-.dns-item:active{transform:scale(.98)}
-.dns-item.selected{background:linear-gradient(135deg,rgba(255,46,247,.2),rgba(157,0,204,.15));border-color:#FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 16px #FF2EF766}
-.dns-item-info{flex:1;min-width:0}
-.dns-item-name{font-size:12px;font-weight:800;color:#f5e6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dns-item.selected .dns-item-name{color:#FF2EF7;text-shadow:0 0 8px #FF2EF7}
-.dns-item-ips{font-size:9px;color:#b58ed9;font-family:'SF Mono',Menlo,monospace;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dns-item.selected .dns-item-ips{color:#e0b3ff}
-.dns-item-tag{font-size:8px;padding:2px 6px;border-radius:20px;background:rgba(255,46,247,.15);border:1px solid #FF2EF788;color:#FF2EF7;font-weight:700;flex-shrink:0}
-.dns-item-check{color:#00FF88;font-weight:900;opacity:0;flex-shrink:0;text-shadow:0 0 8px #00FF88}
-.dns-item.selected .dns-item-check{opacity:1}
-
-/* ===== AIM EDITOR ===== */
+.card-title .left::before{content:'';width:6px;height:6px;border-radius:50%;background:#FF2EF7;box-shadow:0 0 10px #FF2EF7}
+.card-title .toggle-btn{font-size:9px;padding:3px 8px;border-radius:20px;background:rgba(255,46,247,.15);border:1px solid #FF2EF7;color:#FF2EF7;cursor:pointer;font-weight:700}
+.dns-input-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755}
+.dns-input-field{background:rgba(10,0,18,.85);border:1.5px solid #FF2EF7;border-radius:14px;padding:10px 12px}
+.dns-input-field .lbl{font-size:9px;color:#d9a6ff;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.dns-input-field input{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none}
+.dns-input-field input::placeholder{color:#7a5588;font-weight:500;font-size:13px}
+.dns-status{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;padding:9px 12px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(255,46,247,.06);border:1px dashed #FF2EF755;color:#d9a6ff;min-height:36px;text-align:center}
+.dns-status.checking{background:rgba(255,46,247,.12);border-style:solid;border-color:#FF2EF7;color:#FF2EF7}
+.dns-status.success{background:rgba(0,255,136,.1);border-style:solid;border-color:#00FF88;color:#00FF88}
+.dns-status.error{background:rgba(255,60,60,.1);border-style:solid;border-color:#FF3C3C;color:#FF3C3C}
+.dns-spinner{width:14px;height:14px;border:2px solid rgba(255,46,247,.3);border-top-color:#FF2EF7;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.dns-quick-label{font-size:9px;letter-spacing:2px;color:#b58ed9;margin-top:10px;margin-bottom:6px}
+.dns-chips{display:flex;flex-wrap:wrap;gap:6px}
+.dns-chip{font-size:10px;padding:6px 10px;border-radius:20px;background:rgba(255,46,247,.1);border:1px solid #FF2EF788;color:#FF2EF7;font-weight:700;cursor:pointer;white-space:nowrap;touch-action:manipulation}
+.dns-chip:active{transform:scale(.95)}
+.dns-chip.active{background:linear-gradient(135deg,rgba(255,46,247,.3),rgba(157,0,204,.25));border-color:#FF2EF7;box-shadow:0 0 12px #FF2EF7}
+.doh-row{display:flex;justify-content:space-between;align-items:center;padding-top:10px;margin-top:10px;border-top:1px dashed #FF2EF755}
+.doh-row .lbl{font-size:11px;color:#c79cff}
+.doh-link{font-size:10px;color:#FF2EF7;text-decoration:none;word-break:break-all;text-align:right;max-width:65%;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF2EF7}
 .aim-editor{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755}
-.aim-editor.open{display:block;animation:fadeIn .3s}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.aim-editor.open{display:block}
 .aim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
-.aim-field{background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:12px;padding:8px 10px;transition:border-color .2s}
-.aim-field:focus-within{border-color:#FF2EF7;box-shadow:0 0 12px #FF2EF766}
+.aim-field{background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:12px;padding:8px 10px}
 .aim-field .lbl{font-size:9px;color:#b58ed9;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none;appearance:none}
-.aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none;appearance:none;cursor:pointer}
+.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none}
+.aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
 .aim-field select option{background:#1A0325;color:#FF2EF7}
 .aim-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-
-/* ===== CONFIG LIST ===== */
-.cfg-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px;margin:2px 0;-webkit-overflow-scrolling:touch}
-.cfg-list::-webkit-scrollbar{width:4px}
-.cfg-list::-webkit-scrollbar-thumb{background:#FF2EF7;border-radius:4px;box-shadow:0 0 8px #FF2EF7}
-.cfg-item{display:flex;align-items:center;gap:10px;background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:14px;padding:11px 12px;cursor:pointer;transition:all .2s;position:relative;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.cfg-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px}
+.cfg-item{display:flex;align-items:center;gap:10px;background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:14px;padding:11px 12px;cursor:pointer;touch-action:manipulation}
 .cfg-item:active{transform:scale(.98)}
-.cfg-item.selected{background:linear-gradient(135deg,rgba(255,46,247,.2),rgba(157,0,204,.15));border-color:#FF2EF7;box-shadow:0 0 0 1px #FF2EF7,0 0 20px #FF2EF766,inset 0 0 18px #FF2EF722}
-.cfg-icon{font-size:18px;width:26px;text-align:center;flex-shrink:0}
+.cfg-item.selected{background:linear-gradient(135deg,rgba(255,46,247,.2),rgba(157,0,204,.15));border-color:#FF2EF7;box-shadow:0 0 20px #FF2EF766}
+.cfg-icon{font-size:11px;font-weight:900;width:36px;text-align:center;flex-shrink:0;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7}
 .cfg-info{flex:1;min-width:0}
-.cfg-name{font-size:13px;font-weight:800;color:#f5e6ff;letter-spacing:.3px;text-shadow:0 0 6px #C700FF55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cfg-sub{font-size:10px;color:#b58ed9;letter-spacing:.3px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cfg-item.selected .cfg-name{color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 20px #C700FF}
-.cfg-item.selected .cfg-sub{color:#e0b3ff}
-.cfg-check{font-size:18px;font-weight:900;color:#00FF88;text-shadow:0 0 10px #00FF88,0 0 22px #00FF88;opacity:0;transition:opacity .2s;flex-shrink:0;width:22px;text-align:center}
-.cfg-item.selected .cfg-check{opacity:1;animation:popCheck .35s cubic-bezier(.34,1.56,.64,1)}
-@keyframes popCheck{0%{transform:scale(0);opacity:0}60%{transform:scale(1.3)}100%{transform:scale(1);opacity:1}}
-
-.timer-box{background:linear-gradient(150deg,rgba(60,10,80,.9),rgba(25,4,40,.95));border:1.5px solid #FF2EF7;border-radius:18px;padding:14px 16px;margin:12px 0;text-align:center;box-shadow:0 0 0 1px #FF2EF7,0 0 22px #FF2EF766,0 0 50px #C700FF44,inset 0 0 22px #FF2EF733}
-.timer-label{font-size:10px;letter-spacing:4px;color:#d9a6ff;margin-bottom:6px;text-shadow:0 0 8px #C700FF}
-.timer-value{font-size:26px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 20px #FF2EF7,0 0 40px #C700FF,0 0 80px #9D00CC;font-family:'SF Mono',Menlo,monospace;letter-spacing:3px}
-.status-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.pill{font-size:9px;letter-spacing:.5px;padding:4px 8px;border-radius:30px;background:rgba(255,46,247,.1);border:1px solid #FF2EF788;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7;font-weight:700;display:flex;align-items:center;gap:4px}
-.pill .dot{width:5px;height:5px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88,0 0 12px #00ff88;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.loading-overlay{position:fixed;inset:0;background:radial-gradient(circle at center,#2A0530,#0D0018);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
-.loading-overlay.hidden{display:none}
-.spinner-ring{width:110px;height:110px;border-radius:50%;border:4px solid transparent;border-top-color:#FF2EF7;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 30px #FF2EF7,0 0 60px #C700FF,inset 0 0 30px #FF2EF755;position:relative}
-.spinner-ring::after{content:'';position:absolute;inset:12px;border-radius:50%;border:3px solid transparent;border-bottom-color:#FF2EF7;border-left-color:#9D00CC;animation:spin 1.6s linear infinite reverse}
-@keyframes spin{100%{transform:rotate(360deg)}}
-.loading-title{font-size:20px;font-weight:900;letter-spacing:6px;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF,0 0 60px #9D00CC}
-.loading-sub{font-size:12px;letter-spacing:3px;color:#d9a6ff;text-shadow:0 0 10px #C700FF;text-align:center}
-.loading-count{font-size:40px;font-weight:900;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF,0 0 60px #9D00CC;font-family:'SF Mono',Menlo,monospace}
-.loading-bar{width:240px;height:6px;background:rgba(255,46,247,.15);border-radius:30px;overflow:hidden;border:1px solid #FF2EF766;box-shadow:0 0 12px #FF2EF766}
-.loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF2EF7,#C700FF,#FF2EF7);width:0%;transition:width .3s linear;box-shadow:0 0 16px #FF2EF7}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(150deg,#2A0530,#1A0325);border:1.5px solid #FF2EF7;color:#FF2EF7;padding:13px 20px;border-radius:40px;font-weight:700;letter-spacing:.5px;box-shadow:0 0 0 1px #FF2EF7,0 0 24px #FF2EF7,0 0 50px #C700FF;z-index:10000;text-align:center;max-width:90%;font-size:12.5px;text-shadow:0 0 8px #FF2EF7;transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;pointer-events:none}
+.cfg-name{font-size:13px;font-weight:800;color:#f5e6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfg-sub{font-size:10px;color:#b58ed9;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfg-item.selected .cfg-name{color:#FF2EF7;text-shadow:0 0 10px #FF2EF7}
+.cfg-check{font-size:11px;font-weight:900;color:#00FF88;opacity:0;flex-shrink:0;width:26px;text-align:center}
+.cfg-item.selected .cfg-check{opacity:1}
+.timer-box{background:linear-gradient(150deg,rgba(60,10,80,.9),rgba(25,4,40,.95));border:1.5px solid #FF2EF7;border-radius:18px;padding:14px 16px;margin:12px 0;text-align:center;box-shadow:0 0 22px #FF2EF766}
+.timer-label{font-size:10px;letter-spacing:4px;color:#d9a6ff;margin-bottom:6px}
+.timer-value{font-size:26px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 20px #FF2EF7,0 0 40px #C700FF;font-family:'SF Mono',Menlo,monospace;letter-spacing:3px}
+.status-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;justify-content:center}
+.pill{font-size:9px;padding:4px 8px;border-radius:30px;background:rgba(255,46,247,.1);border:1px solid #FF2EF788;color:#FF2EF7;font-weight:700;display:flex;align-items:center;gap:4px}
+.pill .dot{width:5px;height:5px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88}
+.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,#2A0530,#0D0018);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
+.loading-overlay.show{display:flex}
+.spinner-ring{width:110px;height:110px;border-radius:50%;border:4px solid transparent;border-top-color:#FF2EF7;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 30px #FF2EF7,0 0 60px #C700FF}
+.loading-title{font-size:20px;font-weight:900;letter-spacing:6px;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF}
+.loading-sub{font-size:12px;letter-spacing:3px;color:#d9a6ff;text-align:center}
+.loading-count{font-size:40px;font-weight:900;color:#FF2EF7;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF}
+.loading-bar{width:240px;height:6px;background:rgba(255,46,247,.15);border-radius:30px;overflow:hidden;border:1px solid #FF2EF766}
+.loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF2EF7,#C700FF,#FF2EF7);width:0%;transition:width .3s linear}
+.mc-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(42,5,48,.98),rgba(13,0,24,.99));display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9998;gap:18px;padding:30px}
+.mc-overlay.show{display:flex}
+.mc-spinner{width:100px;height:100px;position:relative}
+.mc-spinner::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;border:3px solid transparent;border-top-color:#FF2EF7;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 24px #FF2EF7}
+.mc-spinner::after{content:'';position:absolute;top:14px;left:14px;right:14px;bottom:14px;border-radius:50%;border:3px solid transparent;border-bottom-color:#FF2EF7;border-left-color:#9D00CC;animation:spin 1.5s linear infinite reverse}
+.mc-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:30px;font-weight:900;color:#FF2EF7;text-shadow:0 0 12px #FF2EF7}
+.mc-title{font-size:17px;font-weight:900;letter-spacing:5px;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7}
+.mc-percent{font-size:38px;font-weight:900;color:#FF2EF7;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF2EF7}
+.mc-step{font-size:11px;letter-spacing:2px;color:#d9a6ff;text-align:center;min-height:16px}
+.mc-bar{width:260px;height:8px;background:rgba(255,46,247,.15);border-radius:30px;overflow:hidden;border:1px solid #FF2EF766}
+.mc-bar-fill{height:100%;background:linear-gradient(90deg,#FF2EF7,#C700FF,#FF2EF7);width:0%;transition:width .25s ease}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(150deg,#2A0530,#1A0325);border:1.5px solid #FF2EF7;color:#FF2EF7;padding:13px 20px;border-radius:40px;font-weight:700;font-size:12.5px;box-shadow:0 0 24px #FF2EF7,0 0 50px #C700FF;z-index:10000;text-align:center;max-width:90%;transition:transform .35s,opacity .3s;opacity:0;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .hidden{display:none!important}
 .footer-note{font-size:9px;color:#7a4d99;text-align:center;margin-top:14px;letter-spacing:1.5px}
@@ -113,18 +107,18 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
 <body>
 <div class="app">
 
-<div id="keyScreen" class="key-screen">
+<div id="keyScreen">
     <div class="logo-wrap">
         <div class="logo-x">X</div>
         <div class="logo-name">X LOCK</div>
-        <div class="logo-tag">AIM · DNS · TỐI ƯU FF</div>
+        <div class="logo-tag">AIM · DNS · FREE FIRE</div>
     </div>
     <div class="input-wrap">
-        <label>🔑 NHẬP KEY KÍCH HOẠT</label>
+        <label>NHẬP KEY KÍCH HOẠT</label>
         <input type="text" id="keyInput" class="key-input" placeholder="XLOCK-XXXX-XXXX-FF" autocomplete="off" autocapitalize="characters" spellcheck="false">
     </div>
     <button class="btn" id="activateBtn" type="button">⚡ KÍCH HOẠT NGAY</button>
-    <div class="status-pills" style="justify-content:center;margin-top:16px">
+    <div class="status-pills" style="margin-top:16px">
         <span class="pill"><span class="dot"></span>GIỜ</span>
         <span class="pill"><span class="dot"></span>TUẦN</span>
         <span class="pill"><span class="dot"></span>THÁNG</span>
@@ -135,38 +129,44 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
 
 <div id="mainScreen" class="hidden">
     <div class="main-header">
-        <div class="title neon-text">X LOCK</div>
+        <div class="title">X LOCK</div>
         <div class="device-id" id="deviceId">ID: --------</div>
     </div>
 
-    <!-- DNS CARD + DNS LIST + AIM EDITOR -->
-    <div class="card">
+    <div class="card" id="dnsCard">
         <div class="card-title">
             <div class="left">🌐 CẤU HÌNH DNS &amp; AIM</div>
             <div class="toggle-btn" id="aimToggle">✎ CHỈNH AIM</div>
         </div>
-        <div class="dns-row"><span class="dns-label">🟣 DNS Chính</span><span class="dns-value" id="dnsPrimaryDisplay">10.10.34.1</span></div>
-        <div class="dns-row"><span class="dns-label">🟣 DNS Phụ</span><span class="dns-value" id="dnsSecondaryDisplay">1.1.1.1</span></div>
-        <div class="dns-row"><span class="dns-label">🔗 DoH URL</span><a class="doh-link" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">jsonhosting.com/api/json/694fec6d/raw</a></div>
 
-        <!-- ===== CHỌN DNS SERVER ===== -->
-        <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755">
-            <div style="font-size:10px;letter-spacing:2px;color:#d9a6ff;text-shadow:0 0 8px #C700FF;margin-bottom:8px">🌍 CHỌN DNS SERVER</div>
-            <div id="dnsList" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;padding-right:4px"></div>
-
-            <!-- Custom DNS inputs -->
-            <div id="customDnsBox" style="display:none;margin-top:8px">
-                <div class="aim-grid" style="grid-template-columns:1fr 1fr">
-                    <div class="aim-field"><div class="lbl">DNS Chính</div><input type="text" id="dnsCustomPrimary" placeholder="1.1.1.1"></div>
-                    <div class="aim-field"><div class="lbl">DNS Phụ</div><input type="text" id="dnsCustomSecondary" placeholder="1.0.0.1"></div>
-                </div>
-                <button class="btn btn-sm btn-outline" id="dnsCustomApply" type="button" style="margin-top:6px;width:100%">✓ ÁP DỤNG DNS TÙY CHỈNH</button>
+        <div class="dns-input-wrap">
+            <div class="dns-input-field">
+                <div class="lbl">🟣 DNS Chính</div>
+                <input type="text" id="dnsPrimaryInput" placeholder="10.10.34.1" autocomplete="off" spellcheck="false" inputmode="decimal">
+            </div>
+            <div class="dns-input-field">
+                <div class="lbl">🟣 DNS Phụ</div>
+                <input type="text" id="dnsSecondaryInput" placeholder="1.1.1.1" autocomplete="off" spellcheck="false" inputmode="decimal">
             </div>
         </div>
 
-        <!-- AIM EDITOR -->
+        <button class="btn btn-sm" id="dnsApplyBtn" type="button" style="margin-top:8px">✓ ÁP DỤNG DNS</button>
+
+        <div class="dns-status" id="dnsStatus">
+            <div class="dns-spinner" id="dnsSpinner" style="display:none"></div>
+            <span id="dnsStatusText">Sẵn sàng</span>
+        </div>
+
+        <div class="dns-quick-label">⚡ CHỌN NHANH DNS</div>
+        <div class="dns-chips" id="dnsChips"></div>
+
+        <div class="doh-row">
+            <span class="lbl">🔗 DoH URL</span>
+            <a class="doh-link" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">jsonhosting.com/api/json/694fec6d/raw</a>
+        </div>
+
         <div class="aim-editor" id="aimEditor">
-            <div style="font-size:10px;letter-spacing:2px;color:#d9a6ff;text-shadow:0 0 8px #C700FF;margin-bottom:4px">🎯 THÔNG SỐ AIM TÙY CHỈNH</div>
+            <div style="font-size:10px;letter-spacing:2px;color:#d9a6ff;margin-bottom:4px">🎯 THÔNG SỐ AIM TÙY CHỈNH</div>
             <div class="aim-grid">
                 <div class="aim-field"><div class="lbl">Độ nhạy</div><input type="number" id="aimSens" value="110" min="1" max="200" step="1"></div>
                 <div class="aim-field"><div class="lbl">Bám đầu</div><input type="number" id="aimHead" value="16" min="1" max="100" step="1"></div>
@@ -192,9 +192,8 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
         </div>
     </div>
 
-    <!-- CONFIG LIST -->
     <div class="card">
-        <div class="card-title"><div class="left">📦 DANH SÁCH CẤU HÌNH — BẤM CHỌN</div></div>
+        <div class="card-title"><div class="left">📦 DANH SÁCH CẤU HÌNH</div></div>
         <div class="cfg-list" id="cfgList"></div>
     </div>
 
@@ -207,17 +206,25 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
         <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
         <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
     </div>
-    <div class="footer-note">X LOCK · AIM ENGINE v3.1 · FREE FIRE</div>
+    <div class="footer-note">X LOCK · v5.1 · FREE FIRE</div>
 </div>
 
 </div>
 
-<div id="loadingOverlay" class="loading-overlay hidden">
+<div id="loadingOverlay" class="loading-overlay">
     <div class="spinner-ring"></div>
     <div class="loading-title">ĐANG KÍCH HOẠT</div>
     <div class="loading-count" id="loadingCount">30</div>
     <div class="loading-bar"><div class="loading-bar-fill" id="loadingBarFill"></div></div>
-    <div class="loading-sub" id="loadingSub">ĐANG THIẾT LẬP DNS &amp; AIM...</div>
+    <div class="loading-sub" id="loadingSub">ĐANG THIẾT LẬP...</div>
+</div>
+
+<div id="mcOverlay" class="mc-overlay">
+    <div class="mc-spinner"><div class="mc-icon" id="mcIcon">MC</div></div>
+    <div class="mc-title" id="mcTitle">ĐANG TẠO FILE</div>
+    <div class="mc-percent" id="mcPercent">0%</div>
+    <div class="mc-bar"><div class="mc-bar-fill" id="mcBarFill"></div></div>
+    <div class="mc-step" id="mcStep">Đang chuẩn bị...</div>
 </div>
 
 <div id="toast" class="toast"></div>
@@ -226,204 +233,174 @@ body{background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018
 (function(){
 'use strict';
 
-var DEBUG = true;
-function log(){ if(DEBUG) console.log.apply(console,['[X LOCK]'].concat([].slice.call(arguments))); }
-
-window.addEventListener('error', function(e){
-    console.error('[X LOCK ERROR]', e.message, 'at', e.filename, ':', e.lineno);
-});
-
-// ============================================================
-// 1. KEY MẪU
-// ============================================================
-var HOUR = 3600, DAY = 86400, WEEK = 7*DAY, MONTH = 30*DAY;
+var HOUR = 3600;
+var WEEK = 7 * 24 * HOUR;
+var MONTH = 30 * 24 * HOUR;
 
 var SAMPLE_KEYS = [
-    {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
-    {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
-    {key:'XLOCK-0003-0003-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
-    {key:'XLOCK-0004-0004-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
-    {key:'XLOCK-0005-0005-FF',type:'hour',seconds:5*HOUR,label:'5 GIỜ'},
-    {key:'XLOCK-1001-1001-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
-    {key:'XLOCK-1002-1002-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
-    {key:'XLOCK-1003-1003-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
-    {key:'XLOCK-1004-1004-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
-    {key:'XLOCK-1005-1005-FF',type:'week',seconds:5*WEEK,label:'5 TUẦN'},
-    {key:'XLOCK-2001-2001-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
-    {key:'XLOCK-2002-2002-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
-    {key:'XLOCK-2003-2003-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
-    {key:'XLOCK-2004-2004-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
-    {key:'XLOCK-2005-2005-FF',type:'month',seconds:5*MONTH,label:'5 THÁNG'},
-    {key:'XLOCK-9999-9999-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
-    {key:'XLOCK-9998-9998-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
-    {key:'XLOCK-9997-9997-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
-    {key:'XLOCK-9996-9996-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'},
-    {key:'XLOCK-9995-9995-FF',type:'forever',seconds:Infinity,label:'VĨNH VIỄN'}
+    {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
+    {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
+    {key:'XLOCK-0003-0003-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
+    {key:'XLOCK-0004-0004-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
+    {key:'XLOCK-0005-0005-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
+    {key:'XLOCK-1001-1001-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
+    {key:'XLOCK-1002-1002-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
+    {key:'XLOCK-1003-1003-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
+    {key:'XLOCK-1004-1004-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
+    {key:'XLOCK-1005-1005-FF',type:'week',seconds:5*WEEK,label:'5 TUAN'},
+    {key:'XLOCK-2001-2001-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
+    {key:'XLOCK-2002-2002-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
+    {key:'XLOCK-2003-2003-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
+    {key:'XLOCK-2004-2004-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
+    {key:'XLOCK-2005-2005-FF',type:'month',seconds:5*MONTH,label:'5 THANG'},
+    {key:'XLOCK-9999-9999-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
+    {key:'XLOCK-9998-9998-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
+    {key:'XLOCK-9997-9997-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
+    {key:'XLOCK-9996-9996-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'},
+    {key:'XLOCK-9995-9995-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'}
 ];
 
-// ============================================================
-// 2. DANH SÁCH DNS SERVER (16 bộ)
-// ============================================================
-var DNS_SERVERS = [
-    {id:'xlock',     name:'X LOCK Default',  primary:'10.10.34.1',       secondary:'1.1.1.1',           tag:'FF VN'},
-    {id:'cloudflare',name:'Cloudflare',      primary:'1.1.1.1',          secondary:'1.0.0.1',           tag:'Nhanh'},
-    {id:'google',    name:'Google DNS',      primary:'8.8.8.8',          secondary:'8.8.4.4',           tag:'Ổn định'},
-    {id:'quad9',     name:'Quad9',           primary:'9.9.9.9',          secondary:'149.112.112.112',   tag:'Bảo mật'},
-    {id:'opendns',   name:'OpenDNS',         primary:'208.67.222.222',   secondary:'208.67.220.220',    tag:'Chặn xấu'},
-    {id:'adguard',   name:'AdGuard DNS',     primary:'94.140.14.14',     secondary:'94.140.15.15',      tag:'Chặn QC'},
-    {id:'nextdns',   name:'NextDNS',         primary:'45.90.28.0',       secondary:'45.90.30.0',        tag:'Custom'},
-    {id:'comodo',    name:'Comodo Secure',   primary:'8.26.56.26',       secondary:'8.20.247.20',       tag:'Game VN'},
-    {id:'verisign',  name:'Verisign',        primary:'64.6.64.6',        secondary:'64.6.65.6',         tag:'Cổ điển'},
-    {id:'dnssb',     name:'DNS.SB',          primary:'185.222.222.222',  secondary:'45.11.45.11',       tag:'No log'},
-    {id:'level3',    name:'Level3',          primary:'209.244.0.3',      secondary:'209.244.0.4',       tag:'Doanh nghiệp'},
-    {id:'yandex',    name:'Yandex DNS',      primary:'77.88.8.8',        secondary:'77.88.8.1',         tag:'Nga'},
-    {id:'fpt',       name:'FPT Việt Nam',    primary:'210.245.24.20',    secondary:'210.245.24.21',     tag:'VN'},
-    {id:'viettel',   name:'Viettel VN',      primary:'203.113.131.1',    secondary:'203.113.131.2',     tag:'VN'},
-    {id:'vnpt',      name:'VNPT VN',         primary:'203.162.4.190',    secondary:'203.162.4.191',     tag:'VN'},
-    {id:'custom',    name:'Tùy chỉnh...',    primary:'',                 secondary:'',                  tag:'Custom'}
+var DNS_CHIPS = [
+    {label:'X LOCK',primary:'10.10.34.1',secondary:'1.1.1.1'},
+    {label:'CF',primary:'1.1.1.1',secondary:'1.0.0.1'},
+    {label:'Google',primary:'8.8.8.8',secondary:'8.8.4.4'},
+    {label:'Quad9',primary:'9.9.9.9',secondary:'149.112.112.112'},
+    {label:'OpenDNS',primary:'208.67.222.222',secondary:'208.67.220.220'},
+    {label:'AdGuard',primary:'94.140.14.14',secondary:'94.140.15.15'},
+    {label:'NextDNS',primary:'45.90.28.0',secondary:'45.90.30.0'},
+    {label:'Comodo',primary:'8.26.56.26',secondary:'8.20.247.20'},
+    {label:'FPT VN',primary:'210.245.24.20',secondary:'210.245.24.21'},
+    {label:'Viettel',primary:'203.113.131.1',secondary:'203.113.131.2'},
+    {label:'VNPT',primary:'203.162.4.190',secondary:'203.162.4.191'},
+    {label:'Verisign',primary:'64.6.64.6',secondary:'64.6.65.6'},
+    {label:'DNS.SB',primary:'185.222.222.222',secondary:'45.11.45.11'},
+    {label:'Level3',primary:'209.244.0.3',secondary:'209.244.0.4'},
+    {label:'Yandex',primary:'77.88.8.8',secondary:'77.88.8.1'}
 ];
 
-// ============================================================
-// 3. CẤU HÌNH MẶC ĐỊNH (AIM riêng cho từng cấu hình)
-// ============================================================
 var DEFAULT_CONFIGS = [
-    {id:'auto',icon:'🔄',name:'Tự động',sub:'Hệ thống',aim:{sens:100,head:10,smooth:1.0,range:50,drag:2.5,trig:'AUTO'}},
-    {id:'aimbot',icon:'⚡',name:'Aimbot',sub:'XLOCK - AIM Core v2.1',aim:{sens:120,head:20,smooth:1.2,range:60,drag:3.0,trig:'LB'}},
-    {id:'dpi',icon:'💻',name:'DPI 1200',sub:'XLOCK - Độ phân giải v3.0',aim:{sens:115,head:14,smooth:1.05,range:58,drag:2.6,trig:'LB'}},
-    {id:'fps',icon:'📱',name:'FPS 90',sub:'XLOCK - Tăng khung hình v1.8',aim:{sens:110,head:12,smooth:1.0,range:52,drag:2.4,trig:'LB'}},
-    {id:'full',icon:'✅🔥',name:'Full Settings DNS',sub:'XLOCK - Tối ưu hoàn chỉnh',aim:{sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}},
-    {id:'head',icon:'🔥',name:'HEAD',sub:'XLOCK - Bám đầu VIP v2.5',aim:{sens:125,head:25,smooth:1.15,range:62,drag:3.2,trig:'LB'}},
-    {id:'nextdns_cfg',icon:'🛡️',name:'NextDNS Config',sub:'XLOCK - Dự phòng an toàn',aim:{sens:105,head:12,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
-    {id:'sensi',icon:'⚡',name:'Sensi Touch',sub:'XLOCK - Độ nhạy mượt v1.2',aim:{sens:130,head:18,smooth:1.2,range:56,drag:2.9,trig:'LB'}}
+    {id:'auto',icon:'AUTO',name:'Tự động',sub:'Hệ thống',aim:{sens:100,head:10,smooth:1.0,range:50,drag:2.5,trig:'AUTO'}},
+    {id:'aimbot',icon:'BOT',name:'Aimbot',sub:'AIM Core v2.1',aim:{sens:120,head:20,smooth:1.2,range:60,drag:3.0,trig:'LB'}},
+    {id:'dpi',icon:'DPI',name:'DPI 1200',sub:'Độ phân giải v3.0',aim:{sens:115,head:14,smooth:1.05,range:58,drag:2.6,trig:'LB'}},
+    {id:'fps',icon:'FPS',name:'FPS 90',sub:'Tăng khung hình v1.8',aim:{sens:110,head:12,smooth:1.0,range:52,drag:2.4,trig:'LB'}},
+    {id:'full',icon:'FULL',name:'Full Settings',sub:'Tối ưu hoàn chỉnh',aim:{sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}},
+    {id:'head',icon:'HEAD',name:'HEAD VIP',sub:'Bám đầu VIP v2.5',aim:{sens:125,head:25,smooth:1.15,range:62,drag:3.2,trig:'LB'}},
+    {id:'nextdns_cfg',icon:'NXT',name:'NextDNS Config',sub:'Dự phòng an toàn',aim:{sens:105,head:12,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
+    {id:'sensi',icon:'SEN',name:'Sensi Touch',sub:'Độ nhạy mượt v1.2',aim:{sens:130,head:18,smooth:1.2,range:56,drag:2.9,trig:'LB'}}
 ];
 
-// ============================================================
-// 4. AIM ENGINE CHẠY NGẦM (KHÔNG HIỆN LÊN UI)
-// ============================================================
-var AIM_ENGINE = (function(){
-    var state = {
-        active: false,
-        config: null,
-        dns: null,
+// =============== JSON AIM ENGINE ===============
+var JsonEngine = (function(){
+    var st = {
+        running: false,
         dohURL: 'https://jsonhosting.com/api/json/694fec6d/raw',
-        remoteJSON: null,
+        jsonAIM: null,
         lastFetch: 0,
-        lastApply: 0,
         ticks: 0,
         errors: 0,
-        listeners: []
+        currentAIM: {sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}
     };
 
-    function getUserAIM(){
+    function logJson(msg){
+        if(window.console) console.log('%c[X LOCK JSON] ' + msg, 'color:#00FF88;font-weight:bold');
+    }
+
+    function fetchJSON(){
         try {
-            var raw = localStorage.getItem('xlock_aim_override');
-            if(!raw) return null;
-            var obj = JSON.parse(raw);
-            return obj && typeof obj === 'object' ? obj : null;
-        } catch(e){ return null; }
-    }
-    function setUserAIM(aim){
-        try { localStorage.setItem('xlock_aim_override', JSON.stringify(aim)); } catch(e){}
-    }
-    function clearUserAIM(){
-        try { localStorage.removeItem('xlock_aim_override'); } catch(e){}
-    }
-    function fetchRemoteAIM(){
-        try {
-            fetch(state.dohURL, {cache:'no-store'})
-                .then(function(r){ return r.ok ? r.json() : null; })
-                .then(function(data){
-                    if(data && typeof data === 'object'){
-                        state.remoteJSON = data;
-                        state.lastFetch = Date.now();
-                        notifyListeners('fetch', data);
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', st.dohURL + '?t=' + Date.now(), true);
+            xhr.timeout = 8000;
+            xhr.onload = function(){
+                if(xhr.status === 200){
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        st.jsonAIM = data;
+                        st.lastFetch = Date.now();
+                        logJson('Fetched OK');
+                        if(data && typeof data === 'object') applyJSON(data);
+                    } catch(e){
+                        st.errors++;
+                        logJson('Parse error: ' + e.message);
                     }
-                })
-                .catch(function(){ state.errors++; });
-        } catch(e){ state.errors++; }
-    }
-    function applyAIM(aim){
-        if(!aim) return false;
-        state.config = {
-            sens: Number(aim.sens) || 100,
-            head: Number(aim.head) || 10,
-            smooth: Number(aim.smooth) || 1.0,
-            range: Number(aim.range) || 50,
-            drag: Number(aim.drag) || 2.5,
-            trig: String(aim.trig || 'LB')
-        };
-        state.lastApply = Date.now();
-        notifyListeners('apply', state.config);
-        return true;
-    }
-    function getCurrentAIM(fallbackConfig){
-        var userAIM = getUserAIM();
-        if(userAIM) return userAIM;
-        if(state.remoteJSON && state.remoteJSON.aim) return state.remoteJSON.aim;
-        if(fallbackConfig && fallbackConfig.aim) return fallbackConfig.aim;
-        return {sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'};
-    }
-    function addListener(fn){ if(typeof fn === 'function') state.listeners.push(fn); }
-    function notifyListeners(type, data){
-        for(var i=0;i<state.listeners.length;i++){
-            try { state.listeners[i](type, data); } catch(e){}
+                } else {
+                    st.errors++;
+                    logJson('HTTP ' + xhr.status);
+                }
+            };
+            xhr.onerror = function(){ st.errors++; logJson('Network error'); };
+            xhr.ontimeout = function(){ st.errors++; logJson('Timeout'); };
+            xhr.send();
+        } catch(e){
+            st.errors++;
+            logJson('XHR error: ' + e.message);
         }
     }
-    function startLoop(){
-        if(state.active) return;
-        state.active = true;
-        log('🎯 AIM Engine: started (hidden)');
-        var loop = setInterval(function(){
-            state.ticks++;
-            if(Date.now() - state.lastFetch > 60000) fetchRemoteAIM();
-            if(state.ticks % 2 === 0){
-                var cfg = state.config || {};
-                var dns = state.dns || {};
-                log('🎯 AIM BG @ ' + new Date().toLocaleTimeString('vi-VN') +
-                    ' | DNS:' + (dns.primary||'-') + ' | sens:' + (cfg.sens||'-') +
-                    ' head:' + (cfg.head||'-') + ' smooth:' + (cfg.smooth||'-') +
-                    ' trig:' + (cfg.trig||'-') + ' | ticks:' + state.ticks);
-            }
-        }, 15000);
-        state._loop = loop;
-    }
-    function stopLoop(){
-        if(state._loop){ clearInterval(state._loop); state._loop = null; }
-        state.active = false;
-        log('🎯 AIM Engine: stopped');
+
+    function applyJSON(data){
+        if(!data || typeof data !== 'object') return;
+        var a = {};
+        a.sens = Number(data.sens || data.sensitivity || data.donhay || st.currentAIM.sens) || 110;
+        a.head = Number(data.head || data.headshot || data.bamdau || st.currentAIM.head) || 16;
+        a.smooth = Number(data.smooth || data.sm || st.currentAIM.smooth) || 1.1;
+        a.range = Number(data.range || data.rg || st.currentAIM.range) || 55;
+        a.drag = Number(data.drag || data.dg || st.currentAIM.drag) || 2.8;
+        a.trig = String(data.trig || data.trigger || st.currentAIM.trig || 'LB');
+        st.currentAIM = a;
+        logJson('APPLIED S:' + a.sens + ' H:' + a.head + ' Sm:' + a.smooth + ' R:' + a.range + ' D:' + a.drag + ' T:' + a.trig);
     }
 
-    return {
-        start: startLoop,
-        stop: stopLoop,
-        apply: applyAIM,
-        getUserAIM: getUserAIM,
-        setUserAIM: setUserAIM,
-        clearUserAIM: clearUserAIM,
-        getCurrentAIM: getCurrentAIM,
-        getState: function(){ return state; },
-        addListener: addListener
-    };
+    function setAIM(aim){
+        if(!aim) return;
+        st.currentAIM = {
+            sens: Number(aim.sens) || 110,
+            head: Number(aim.head) || 16,
+            smooth: Number(aim.smooth) || 1.1,
+            range: Number(aim.range) || 55,
+            drag: Number(aim.drag) || 2.8,
+            trig: String(aim.trig || 'LB')
+        };
+        logJson('Manual set S:' + st.currentAIM.sens + ' H:' + st.currentAIM.head);
+    }
+
+    function getAIM(){ return st.currentAIM; }
+
+    function start(){
+        if(st.running) return;
+        st.running = true;
+        logJson('=== ENGINE STARTED (hidden) ===');
+        logJson('DoH URL: ' + st.dohURL);
+        st._loop = setInterval(function(){
+            st.ticks++;
+            if(Date.now() - st.lastFetch > 60000) fetchJSON();
+            var a = st.currentAIM;
+            logJson('BG tick#' + st.ticks + ' S:' + a.sens + ' H:' + a.head + ' Sm:' + a.smooth + ' R:' + a.range + ' D:' + a.drag + ' T:' + a.trig + ' fetch:' + (st.lastFetch ? 'ok' : 'idle') + ' err:' + st.errors);
+        }, 15000);
+        // Fetch ngay lần đầu
+        fetchJSON();
+    }
+
+    function stop(){
+        if(st._loop){ clearInterval(st._loop); st._loop = null; }
+        st.running = false;
+        logJson('=== ENGINE STOPPED ===');
+    }
+
+    return {start:start, stop:stop, setAIM:setAIM, getAIM:getAIM, getState:function(){ return st; }};
 })();
 
-// ============================================================
-// 5. STATE APP
-// ============================================================
+// =============== STATE ===============
 var loadingInterval = null;
 var timerInterval = null;
-var bgInterval = null;
 var selectedConfigId = null;
-var selectedDnsId = null;
 var isActivating = false;
+var isDnsApplying = false;
+var isDownloading = false;
 
-// ============================================================
-// 6. HELPERS
-// ============================================================
+// =============== HELPERS ===============
 function $(id){ return document.getElementById(id); }
 
 function showToast(msg, dur){
     dur = dur || 2800;
-    log('TOAST:', msg);
     var t = $('toast');
     if(!t) return;
     t.textContent = msg;
@@ -437,170 +414,244 @@ function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ r
 function lsRemove(k){ try { localStorage.removeItem(k); } catch(e){} }
 
 function getDeviceId(){
-    var id = lsGet('xlock_device_id_v2');
+    var id = lsGet('xlock_device_v51');
     if(!id){
-        id = 'XL-' +
-            Math.random().toString(36).substring(2,6).toUpperCase() + '-' +
-            Math.random().toString(36).substring(2,6).toUpperCase() + '-' +
-            Date.now().toString(36).toUpperCase().slice(-6);
-        lsSet('xlock_device_id_v2', id);
+        id = 'XL-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Date.now().toString(36).toUpperCase().slice(-6);
+        lsSet('xlock_device_v51', id);
     }
     return id;
 }
 
 function getActivations(){
-    var raw = lsGet('xlock_activations_v2');
+    var raw = lsGet('xlock_acts_v51');
     if(!raw) return {};
     try { return JSON.parse(raw) || {}; } catch(e){ return {}; }
 }
-function saveActivations(d){ try { lsSet('xlock_activations_v2', JSON.stringify(d)); } catch(e){} }
+
+function saveActivations(d){
+    try { lsSet('xlock_acts_v51', JSON.stringify(d)); } catch(e){}
+}
+
 function findCurrentActivation(){
-    var did = getDeviceId(), all = getActivations();
+    var did = getDeviceId();
+    var all = getActivations();
     var keys = Object.keys(all);
-    for(var i=0;i<keys.length;i++){
-        if(all[keys[i]].deviceId === did){ var r = all[keys[i]]; r.key = keys[i]; return r; }
+    for(var i = 0; i < keys.length; i++){
+        if(all[keys[i]].deviceId === did){
+            var r = all[keys[i]];
+            r.key = keys[i];
+            return r;
+        }
     }
     return null;
 }
+
 function isKeyUsedByOther(k){
     var all = getActivations();
     if(!all[k]) return false;
     return all[k].deviceId !== getDeviceId();
 }
+
 function removeCurrentActivation(){
-    var did = getDeviceId(), all = getActivations();
+    var did = getDeviceId();
+    var all = getActivations();
     var keys = Object.keys(all);
-    for(var i=0;i<keys.length;i++) if(all[keys[i]].deviceId === did) delete all[keys[i]];
+    for(var i = 0; i < keys.length; i++){
+        if(all[keys[i]].deviceId === did) delete all[keys[i]];
+    }
     saveActivations(all);
 }
+
 function formatTime(ms){
     if(ms <= 0) return '00:00:00';
-    var s = Math.floor(ms/1000), h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
-    return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(sec).padStart(2,'0');
+    var s = Math.floor(ms/1000);
+    var h = Math.floor(s/3600);
+    var m = Math.floor((s%3600)/60);
+    var sec = s%60;
+    return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
 }
 
-// ============================================================
-// 7. CẤU HÌNH - LOAD/SAVE AIM OVERRIDE
-// ============================================================
-function loadConfigsFromStorage(){
+function isValidIP(ip){
+    if(!ip) return false;
+    if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip)) return false;
+    var p = ip.split('.');
+    for(var i = 0; i < 4; i++){
+        var n = Number(p[i]);
+        if(n < 0 || n > 255) return false;
+    }
+    return true;
+}
+
+function getCurrentDns(){
+    var p = $('dnsPrimaryInput') ? $('dnsPrimaryInput').value.trim() : '';
+    var s = $('dnsSecondaryInput') ? $('dnsSecondaryInput').value.trim() : '';
+    if(!p) p = '10.10.34.1';
+    if(!s) s = '1.1.1.1';
+    return {primary:p, secondary:s};
+}
+
+// =============== DNS ===============
+function setDnsStatus(state, text){
+    var box = $('dnsStatus');
+    var spinner = $('dnsSpinner');
+    var txt = $('dnsStatusText');
+    if(!box || !txt) return;
+    box.className = 'dns-status';
+    if(state === 'checking'){
+        box.className = 'dns-status checking';
+        if(spinner) spinner.style.display = 'block';
+        txt.textContent = text || 'Đang kiểm tra...';
+    } else if(state === 'success'){
+        box.className = 'dns-status success';
+        if(spinner) spinner.style.display = 'none';
+        txt.textContent = 'OK · ' + (text || '');
+    } else if(state === 'error'){
+        box.className = 'dns-status error';
+        if(spinner) spinner.style.display = 'none';
+        txt.textContent = 'LỖI · ' + (text || '');
+    } else {
+        if(spinner) spinner.style.display = 'none';
+        txt.textContent = text || 'Sẵn sàng';
+    }
+}
+
+function applyDnsInput(){
+    if(isDnsApplying) return;
+    isDnsApplying = true;
+
+    var p = $('dnsPrimaryInput') ? $('dnsPrimaryInput').value.trim() : '';
+    var s = $('dnsSecondaryInput') ? $('dnsSecondaryInput').value.trim() : '';
+
+    if(!p){ setDnsStatus('error','Chưa nhập DNS Chính'); showToast('Nhập DNS Chính'); isDnsApplying = false; return; }
+    if(!isValidIP(p)){ setDnsStatus('error','DNS Chính sai'); showToast('DNS Chính sai định dạng'); isDnsApplying = false; return; }
+    if(s && !isValidIP(s)){ setDnsStatus('error','DNS Phụ sai'); showToast('DNS Phụ sai định dạng'); isDnsApplying = false; return; }
+    if(!s) s = '1.1.1.1';
+
+    var btn = $('dnsApplyBtn');
+    if(btn) btn.classList.add('loading');
+    var card = $('dnsCard');
+    if(card) card.classList.add('busy');
+
+    setDnsStatus('checking','Đang phân giải DNS...');
+
+    setTimeout(function(){
+        setDnsStatus('checking','Đang kiểm tra ' + p + '...');
+        setTimeout(function(){
+            setDnsStatus('checking','Đang kích hoạt DNS dự phòng...');
+            setTimeout(function(){
+                setDnsStatus('checking','Đang áp dụng cấu hình...');
+                setTimeout(function(){
+                    lsSet('xlock_dns_p_v51', p);
+                    lsSet('xlock_dns_s_v51', s);
+
+                    var chips = document.querySelectorAll('.dns-chip');
+                    for(var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
+                    highlightMatchingChip(p, s);
+
+                    setDnsStatus('success', p + ' / ' + s);
+                    if(btn) btn.classList.remove('loading');
+                    if(card) card.classList.remove('busy');
+                    showToast('Đã áp dụng DNS', 2200);
+                    isDnsApplying = false;
+
+                    setTimeout(function(){
+                        if(!isDnsApplying) setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s);
+                    }, 3000);
+                }, 400);
+            }, 500);
+        }, 500);
+    }, 500);
+}
+
+function selectDnsChip(chip, el){
+    if(isDnsApplying) return;
+
+    var allChips = document.querySelectorAll('.dns-chip');
+    for(var i = 0; i < allChips.length; i++) allChips[i].classList.remove('active');
+    if(el) el.classList.add('active');
+
+    if($('dnsPrimaryInput')) $('dnsPrimaryInput').value = chip.primary;
+    if($('dnsSecondaryInput')) $('dnsSecondaryInput').value = chip.secondary;
+
+    lsSet('xlock_dns_p_v51', chip.primary);
+    lsSet('xlock_dns_s_v51', chip.secondary);
+
+    setDnsStatus('success', chip.label + ': ' + chip.primary);
+    showToast('DNS: ' + chip.label, 2000);
+
+    setTimeout(function(){
+        setDnsStatus('idle', 'Đang dùng: ' + chip.primary + ' / ' + chip.secondary);
+    }, 2500);
+}
+
+function loadSavedDns(){
+    var p = lsGet('xlock_dns_p_v51') || '10.10.34.1';
+    var s = lsGet('xlock_dns_s_v51') || '1.1.1.1';
+    if($('dnsPrimaryInput')) $('dnsPrimaryInput').value = p;
+    if($('dnsSecondaryInput')) $('dnsSecondaryInput').value = s;
+    highlightMatchingChip(p, s);
+    setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s);
+}
+
+function renderDnsChips(){
+    var box = $('dnsChips');
+    if(!box) return;
+    box.innerHTML = '';
+    for(var i = 0; i < DNS_CHIPS.length; i++){
+        (function(chip){
+            var el = document.createElement('div');
+            el.className = 'dns-chip';
+            el.setAttribute('data-p', chip.primary);
+            el.setAttribute('data-s', chip.secondary);
+            el.textContent = chip.label;
+            el.addEventListener('click', function(){ selectDnsChip(chip, el); });
+            box.appendChild(el);
+        })(DNS_CHIPS[i]);
+    }
+}
+
+function highlightMatchingChip(p, s){
+    var chips = document.querySelectorAll('.dns-chip');
+    for(var i = 0; i < chips.length; i++){
+        if(chips[i].getAttribute('data-p') === p && chips[i].getAttribute('data-s') === s){
+            chips[i].classList.add('active');
+        }
+    }
+}
+
+// =============== CONFIGS ===============
+function loadConfigs(){
     var configs = JSON.parse(JSON.stringify(DEFAULT_CONFIGS));
     var overrides = {};
-    try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
-    for(var i=0;i<configs.length;i++){
+    try { overrides = JSON.parse(lsGet('xlock_cfg_ov_v51') || '{}'); } catch(e){ overrides = {}; }
+    for(var i = 0; i < configs.length; i++){
         if(overrides[configs[i].id]) configs[i].aim = overrides[configs[i].id];
     }
     return configs;
 }
-function saveConfigOverride(configId, aim){
+
+function saveConfigOverride(id, aim){
     var overrides = {};
-    try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
-    overrides[configId] = aim;
-    lsSet('xlock_config_overrides', JSON.stringify(overrides));
+    try { overrides = JSON.parse(lsGet('xlock_cfg_ov_v51') || '{}'); } catch(e){ overrides = {}; }
+    overrides[id] = aim;
+    lsSet('xlock_cfg_ov_v51', JSON.stringify(overrides));
 }
+
 function getConfigById(id){
-    var configs = loadConfigsFromStorage();
-    for(var i=0;i<configs.length;i++) if(configs[i].id === id) return configs[i];
+    var configs = loadConfigs();
+    for(var i = 0; i < configs.length; i++) if(configs[i].id === id) return configs[i];
     return null;
 }
 
-// ============================================================
-// 8. DNS SELECTOR
-// ============================================================
-function getSelectedDns(){
-    if(selectedDnsId === 'custom'){
-        var p = ($('dnsCustomPrimary') ? $('dnsCustomPrimary').value : '').trim();
-        var s = ($('dnsCustomSecondary') ? $('dnsCustomSecondary').value : '').trim();
-        if(p) return {id:'custom',name:'Tùy chỉnh',primary:p,secondary:s||'1.1.1.1',tag:'Custom'};
-    }
-    for(var i=0;i<DNS_SERVERS.length;i++) if(DNS_SERVERS[i].id === selectedDnsId) return DNS_SERVERS[i];
-    return DNS_SERVERS[0];
-}
-
-function renderDnsList(){
-    var list = $('dnsList');
-    if(!list) return;
-    list.innerHTML = '';
-    for(var i=0;i<DNS_SERVERS.length;i++){
-        (function(dns){
-            var el = document.createElement('div');
-            el.className = 'dns-item' + (selectedDnsId === dns.id ? ' selected' : '');
-            el.setAttribute('data-id', dns.id);
-            var ips = dns.id === 'custom' ? 'Nhập DNS của bạn' : dns.primary + ' · ' + dns.secondary;
-            el.innerHTML =
-                '<div class="dns-item-info">' +
-                    '<div class="dns-item-name">' + dns.name + '</div>' +
-                    '<div class="dns-item-ips">' + ips + '</div>' +
-                '</div>' +
-                '<div class="dns-item-tag">' + dns.tag + '</div>' +
-                '<div class="dns-item-check">✅</div>';
-            el.addEventListener('click', function(){ selectDns(dns.id); });
-            list.appendChild(el);
-        })(DNS_SERVERS[i]);
-    }
-    if($('customDnsBox')) $('customDnsBox').style.display = (selectedDnsId === 'custom') ? 'block' : 'none';
-    updateDnsDisplay();
-}
-
-function selectDns(id){
-    selectedDnsId = id;
-    lsSet('xlock_selected_dns', id);
-    renderDnsList();
-    var dns = getSelectedDns();
-    AIM_ENGINE.getState().dns = dns;
-    if(id !== 'custom'){
-        showToast('🌍 ĐÃ CHỌN DNS: ' + dns.name);
-        log('DNS selected:', dns);
-    } else {
-        showToast('🌍 NHẬP DNS TÙY CHỈNH');
-    }
-}
-
-function applyCustomDns(){
-    var p = ($('dnsCustomPrimary') ? $('dnsCustomPrimary').value : '').trim();
-    var s = ($('dnsCustomSecondary') ? $('dnsCustomSecondary').value : '').trim();
-    if(!p){ showToast('⚠️ NHẬP DNS CHÍNH'); return; }
-    var ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
-    if(!ipRegex.test(p)){ showToast('❌ DNS CHÍNH KHÔNG HỢP LỆ'); return; }
-    if(s && !ipRegex.test(s)){ showToast('❌ DNS PHỤ KHÔNG HỢP LỆ'); return; }
-    lsSet('xlock_dns_custom_primary', p);
-    lsSet('xlock_dns_custom_secondary', s || '1.1.1.1');
-    showToast('✓ ĐÃ ÁP DỤNG DNS TÙY CHỈNH');
-    updateDnsDisplay();
-}
-
-function updateDnsDisplay(){
-    var dns = getSelectedDns();
-    var p = $('dnsPrimaryDisplay');
-    var s = $('dnsSecondaryDisplay');
-    if(p) p.textContent = dns.primary || '1.1.1.1';
-    if(s) s.textContent = dns.secondary || '1.0.0.1';
-}
-
-function loadSavedDns(){
-    var saved = lsGet('xlock_selected_dns');
-    if(saved && DNS_SERVERS.some(function(d){return d.id === saved;})) selectedDnsId = saved;
-    else selectedDnsId = 'xlock';
-    if(selectedDnsId === 'custom'){
-        var p = lsGet('xlock_dns_custom_primary');
-        var s = lsGet('xlock_dns_custom_secondary');
-        setTimeout(function(){
-            if($('dnsCustomPrimary') && p) $('dnsCustomPrimary').value = p;
-            if($('dnsCustomSecondary') && s) $('dnsCustomSecondary').value = s;
-        }, 100);
-    }
-}
-
-// ============================================================
-// 9. AIM EDITOR UI
-// ============================================================
+// =============== AIM EDITOR ===============
 function fillAIMEditor(aim){
     if(!aim) return;
-    $('aimSens').value = aim.sens;
-    $('aimHead').value = aim.head;
-    $('aimSmooth').value = aim.smooth;
-    $('aimRange').value = aim.range;
-    $('aimDrag').value = aim.drag;
-    $('aimTrig').value = aim.trig;
+    if($('aimSens')) $('aimSens').value = aim.sens;
+    if($('aimHead')) $('aimHead').value = aim.head;
+    if($('aimSmooth')) $('aimSmooth').value = aim.smooth;
+    if($('aimRange')) $('aimRange').value = aim.range;
+    if($('aimDrag')) $('aimDrag').value = aim.drag;
+    if($('aimTrig')) $('aimTrig').value = aim.trig;
 }
 
 function readAIMEditor(){
@@ -616,8 +667,8 @@ function readAIMEditor(){
 
 function openAIMEditor(){
     var cfg = selectedConfigId ? getConfigById(selectedConfigId) : null;
-    var currentAIM = cfg ? cfg.aim : AIM_ENGINE.getCurrentAIM();
-    fillAIMEditor(currentAIM);
+    var a = cfg ? cfg.aim : JsonEngine.getAIM();
+    fillAIMEditor(a);
     $('aimEditor').classList.add('open');
     $('aimToggle').textContent = '✕ ĐÓNG';
 }
@@ -635,53 +686,65 @@ function toggleAIMEditor(){
 function applyAIMEditor(){
     var newAIM = readAIMEditor();
     if(selectedConfigId) saveConfigOverride(selectedConfigId, newAIM);
-    AIM_ENGINE.setUserAIM(newAIM);
-    AIM_ENGINE.apply(newAIM);
+    JsonEngine.setAIM(newAIM);
     renderConfigList();
-    showToast('✓ ĐÃ ÁP DỤNG AIM · FILE MOBILECONFIG SẼ DÙNG THÔNG SỐ NÀY');
+    showToast('Đã áp dụng AIM');
 }
 
 function resetAIMEditor(){
     if(selectedConfigId){
         var overrides = {};
-        try { overrides = JSON.parse(lsGet('xlock_config_overrides') || '{}'); } catch(e){ overrides = {}; }
+        try { overrides = JSON.parse(lsGet('xlock_cfg_ov_v51') || '{}'); } catch(e){ overrides = {}; }
         delete overrides[selectedConfigId];
-        lsSet('xlock_config_overrides', JSON.stringify(overrides));
+        lsSet('xlock_cfg_ov_v51', JSON.stringify(overrides));
         var def = null;
-        for(var i=0;i<DEFAULT_CONFIGS.length;i++) if(DEFAULT_CONFIGS[i].id === selectedConfigId) def = DEFAULT_CONFIGS[i];
+        for(var i = 0; i < DEFAULT_CONFIGS.length; i++){
+            if(DEFAULT_CONFIGS[i].id === selectedConfigId) def = DEFAULT_CONFIGS[i];
+        }
         if(def) fillAIMEditor(def.aim);
     } else {
-        AIM_ENGINE.clearUserAIM();
         fillAIMEditor({sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'});
     }
-    showToast('↺ ĐÃ KHÔI PHỤC MẶC ĐỊNH');
+    showToast('Đã khôi phục mặc định');
 }
 
-// ============================================================
-// 10. CONFIG LIST
-// ============================================================
+// =============== CONFIG LIST ===============
 function renderConfigList(){
     var list = $('cfgList');
     if(!list) return;
-    var configs = loadConfigsFromStorage();
+    var configs = loadConfigs();
     list.innerHTML = '';
-    for(var i=0;i<configs.length;i++){
+    for(var i = 0; i < configs.length; i++){
         (function(cfg){
             var el = document.createElement('div');
             el.className = 'cfg-item' + (selectedConfigId === cfg.id ? ' selected' : '');
-            el.setAttribute('data-id', cfg.id);
-            var isCustom = false;
-            try {
-                var ov = JSON.parse(lsGet('xlock_config_overrides') || '{}');
-                isCustom = !!ov[cfg.id];
-            } catch(e){}
-            el.innerHTML =
-                '<div class="cfg-icon">' + cfg.icon + '</div>' +
-                '<div class="cfg-info">' +
-                    '<div class="cfg-name">' + cfg.name + (isCustom ? ' <span style="color:#00FF88;font-size:10px">✎</span>' : '') + '</div>' +
-                    '<div class="cfg-sub">' + cfg.sub + ' · S:' + cfg.aim.sens + ' H:' + cfg.aim.head + ' Sm:' + cfg.aim.smooth + '</div>' +
-                '</div>' +
-                '<div class="cfg-check">✅</div>';
+
+            var icon = document.createElement('div');
+            icon.className = 'cfg-icon';
+            icon.textContent = cfg.icon;
+
+            var info = document.createElement('div');
+            info.className = 'cfg-info';
+
+            var nameDiv = document.createElement('div');
+            nameDiv.className = 'cfg-name';
+            nameDiv.textContent = cfg.name;
+
+            var subDiv = document.createElement('div');
+            subDiv.className = 'cfg-sub';
+            subDiv.textContent = cfg.sub + ' · S:' + cfg.aim.sens + ' H:' + cfg.aim.head + ' Sm:' + cfg.aim.smooth;
+
+            info.appendChild(nameDiv);
+            info.appendChild(subDiv);
+
+            var check = document.createElement('div');
+            check.className = 'cfg-check';
+            check.textContent = '✓';
+
+            el.appendChild(icon);
+            el.appendChild(info);
+            el.appendChild(check);
+
             el.addEventListener('click', function(){ selectConfig(cfg.id); });
             list.appendChild(el);
         })(configs[i]);
@@ -691,106 +754,84 @@ function renderConfigList(){
 
 function selectConfig(id){
     selectedConfigId = id;
-    lsSet('xlock_selected_config', id);
+    lsSet('xlock_cfg_v51', id);
     renderConfigList();
     var cfg = getConfigById(id);
     if(cfg){
-        AIM_ENGINE.apply(cfg.aim);
-        showToast('✅ ĐÃ CHỌN: ' + cfg.name);
+        JsonEngine.setAIM(cfg.aim);
+        showToast('Đã chọn: ' + cfg.name);
     }
     if($('aimEditor').classList.contains('open') && cfg) fillAIMEditor(cfg.aim);
-    log('Selected config:', id);
 }
 
 function updateDownloadBtn(){
     var btn = $('downloadBtn');
     if(!btn) return;
-    if(selectedConfigId){ btn.disabled = false; btn.style.opacity = '1'; }
-    else { btn.disabled = true; btn.style.opacity = '.6'; }
+    if(selectedConfigId && !isDownloading){
+        btn.disabled = false;
+        btn.style.opacity = '1';
+    } else {
+        btn.disabled = true;
+        btn.style.opacity = '.6';
+    }
 }
 
 function loadSavedConfig(){
-    var saved = lsGet('xlock_selected_config');
+    var saved = lsGet('xlock_cfg_v51');
     if(saved){
-        var configs = loadConfigsFromStorage();
-        for(var i=0;i<configs.length;i++){
+        var configs = loadConfigs();
+        for(var i = 0; i < configs.length; i++){
             if(configs[i].id === saved){ selectedConfigId = saved; return; }
         }
     }
 }
 
-// ============================================================
-// 11. BACKGROUND SERVICES
-// ============================================================
-function startBackgroundServices(){
-    if(bgInterval) clearInterval(bgInterval);
-    var cfgName = 'DEFAULT';
-    if(selectedConfigId){
-        var cfg = getConfigById(selectedConfigId);
-        if(cfg) cfgName = cfg.name;
-    }
-    var dns = getSelectedDns();
-    AIM_ENGINE.getState().dns = dns;
-    log('BG services started | CFG:' + cfgName + ' | DNS:' + dns.name + ' (' + dns.primary + ')');
-    AIM_ENGINE.start();
-    bgInterval = setInterval(function(){
-        var d = getSelectedDns();
-        log('BG @ ' + new Date().toLocaleTimeString('vi-VN') + ' | DNS:' + d.primary + ' ✓ | DoH:active ✓ | CFG:' + cfgName + ' ✓');
-    }, 15000);
-}
-function stopBackgroundServices(){
-    if(bgInterval){ clearInterval(bgInterval); bgInterval = null; }
-    AIM_ENGINE.stop();
-}
-
-// ============================================================
-// 12. SCREEN SWITCH
-// ============================================================
+// =============== SCREEN ===============
 function showKeyScreen(){
-    log('Showing KEY screen');
     $('mainScreen').classList.add('hidden');
     $('keyScreen').classList.remove('hidden');
     var inp = $('keyInput');
-    if(inp){ inp.value = ''; setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 250); }
+    if(inp){
+        inp.value = '';
+        setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 250);
+    }
     if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-    stopBackgroundServices();
+    JsonEngine.stop();
     closeAIMEditor();
-    document.title = 'X LOCK · KEY';
 }
 
 function showMainScreen(activation){
-    log('Showing MAIN screen');
     $('keyScreen').classList.add('hidden');
     $('mainScreen').classList.remove('hidden');
-    $('deviceId').textContent = 'ID: ' + getDeviceId();
+    if($('deviceId')) $('deviceId').textContent = 'ID: ' + getDeviceId();
     loadSavedConfig();
-    loadSavedDns();
     renderConfigList();
-    renderDnsList();
-    startTimer(activation);
-    startBackgroundServices();
+    renderDnsChips();
+    loadSavedDns();
+
     if(selectedConfigId){
         var cfg = getConfigById(selectedConfigId);
-        if(cfg) AIM_ENGINE.apply(cfg.aim);
+        if(cfg) JsonEngine.setAIM(cfg.aim);
     }
-    document.title = 'X LOCK · ACTIVE';
+
+    startTimer(activation);
+    JsonEngine.start();
 }
 
-// ============================================================
-// 13. TIMER
-// ============================================================
+// =============== TIMER ===============
 function startTimer(activation){
-    if(timerInterval) clearInterval(timerInterval);
+    if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
     var isForever = (activation.type === 'forever') || (activation.seconds === Infinity) || (activation.expiresAt === null);
     var expiresAt = activation.expiresAt;
     var tv = $('timerValue');
-
     function tick(){
         if(isForever){ if(tv) tv.textContent = 'VĨNH VIỄN'; return; }
         var remain = expiresAt - Date.now();
         if(remain <= 0){
-            clearInterval(timerInterval); timerInterval = null;
-            handleExpiry(); return;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            handleExpiry();
+            return;
         }
         if(tv) tv.textContent = formatTime(remain);
     }
@@ -799,48 +840,51 @@ function startTimer(activation){
 }
 
 function handleExpiry(){
-    log('Key expired');
     removeCurrentActivation();
-    stopBackgroundServices();
+    JsonEngine.stop();
     selectedConfigId = null;
-    lsRemove('xlock_selected_config');
+    lsRemove('xlock_cfg_v51');
     showKeyScreen();
-    showToast('⏰ KEY ĐÃ HẾT HẠN · VUI LÒNG NHẬP KEY MỚI', 3500);
+    showToast('KEY ĐÃ HẾT HẠN', 3500);
 }
 
-// ============================================================
-// 14. ACTIVATE KEY
-// ============================================================
+// =============== ACTIVATE ===============
 function handleActivate(){
-    log('=== Activate clicked ===');
-    if(isActivating){ log('Already activating'); return; }
+    if(isActivating) return;
     var input = $('keyInput');
     if(!input) return;
     var raw = input.value.trim().toUpperCase();
-    log('Input:', JSON.stringify(raw));
-    if(!raw){ showToast('⚠️ VUI LÒNG NHẬP KEY'); return; }
+    if(!raw){ showToast('Vui lòng nhập key'); return; }
     var normalized = raw.replace(/[^A-Z0-9-]/g, '');
     if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){
-        showToast('❌ SAI ĐỊNH DẠNG · MẪU: XLOCK-XXXX-XXXX-FF'); return;
+        showToast('Sai định dạng · Mẫu: XLOCK-XXXX-XXXX-FF');
+        return;
     }
     var found = null;
-    for(var i=0;i<SAMPLE_KEYS.length;i++) if(SAMPLE_KEYS[i].key === normalized){ found = SAMPLE_KEYS[i]; break; }
-    if(!found){ showToast('❌ KEY KHÔNG TỒN TẠI'); return; }
-    if(isKeyUsedByOther(normalized)){ showToast('🚫 KEY ĐÃ DÙNG TRÊN THIẾT BỊ KHÁC'); return; }
+    for(var i = 0; i < SAMPLE_KEYS.length; i++){
+        if(SAMPLE_KEYS[i].key === normalized){ found = SAMPLE_KEYS[i]; break; }
+    }
+    if(!found){ showToast('Key không tồn tại'); return; }
+    if(isKeyUsedByOther(normalized)){ showToast('Key đã dùng trên thiết bị khác'); return; }
 
     var existing = findCurrentActivation();
     if(existing && existing.key === normalized){
         var now = Date.now();
         var isForever = (existing.type === 'forever') || (existing.expiresAt === null);
         if(!isForever && existing.expiresAt && now >= existing.expiresAt){
-            removeCurrentActivation(); showToast('⏰ KEY ĐÃ HẾT HẠN'); return;
+            removeCurrentActivation();
+            showToast('Key đã hết hạn');
+            return;
         }
         showMainScreen({
-            key: normalized, type: existing.type,
+            key: normalized,
+            type: existing.type,
             seconds: existing.seconds === 'Infinity' ? Infinity : existing.seconds,
-            label: existing.label, activatedAt: existing.activatedAt, expiresAt: existing.expiresAt
+            label: existing.label,
+            activatedAt: existing.activatedAt,
+            expiresAt: existing.expiresAt
         });
-        showToast('✅ KEY CÒN HIỆU LỰC');
+        showToast('Key còn hiệu lực');
         return;
     }
     if(existing) removeCurrentActivation();
@@ -848,71 +892,136 @@ function handleActivate(){
 }
 
 function beginLoading(foundKey){
-    log('=== Begin loading 30s ===');
     isActivating = true;
     var overlay = $('loadingOverlay');
     if(!overlay){ isActivating = false; return; }
-    overlay.classList.remove('hidden');
+    overlay.classList.add('show');
     var count = 30;
-    var countEl = $('loadingCount'), barEl = $('loadingBarFill'), subEl = $('loadingSub');
+    var countEl = $('loadingCount');
+    var barEl = $('loadingBarFill');
+    var subEl = $('loadingSub');
     if(countEl) countEl.textContent = count;
     if(barEl) barEl.style.width = '0%';
-    var msgs = ['ĐANG THIẾT LẬP DNS & AIM...','ĐANG KẾT NỐI DNS SERVER...','ĐANG ĐỒNG BỘ DoH URL...','ĐANG ÁP DỤNG THÔNG SỐ AIM...','ĐANG TỐI ƯU HỆ THỐNG...','HOÀN TẤT · ĐANG KÍCH HOẠT...'];
+    var msgs = [
+        'ĐANG THIẾT LẬP DNS & AIM...',
+        'ĐANG KẾT NỐI DNS SERVER...',
+        'ĐANG FETCH JSON AIM...',
+        'ĐANG ÁP DỤNG THÔNG SỐ...',
+        'ĐANG TỐI ƯU HỆ THỐNG...',
+        'HOÀN TẤT · ĐANG KÍCH HOẠT...'
+    ];
     var idx = 0;
     if(subEl) subEl.textContent = msgs[0];
     if(loadingInterval) clearInterval(loadingInterval);
     loadingInterval = setInterval(function(){
         count--;
         if(countEl) countEl.textContent = count;
-        if(barEl) barEl.style.width = ((30-count)/30*100)+'%';
-        if(count % 5 === 0 && idx < msgs.length-1){ idx++; if(subEl) subEl.textContent = msgs[idx]; }
-        if(count <= 0){ clearInterval(loadingInterval); loadingInterval = null; completeActivation(foundKey); }
+        if(barEl) barEl.style.width = ((30-count)/30*100) + '%';
+        if(count % 5 === 0 && idx < msgs.length-1){
+            idx++;
+            if(subEl) subEl.textContent = msgs[idx];
+        }
+        if(count <= 0){
+            clearInterval(loadingInterval);
+            loadingInterval = null;
+            completeActivation(foundKey);
+        }
     }, 1000);
 }
 
 function completeActivation(foundKey){
-    log('=== Complete activation:', foundKey.key, '===');
     isActivating = false;
     var now = Date.now();
     var activation = {
-        deviceId: getDeviceId(), type: foundKey.type,
+        deviceId: getDeviceId(),
+        type: foundKey.type,
         seconds: foundKey.seconds === Infinity ? 'Infinity' : foundKey.seconds,
-        label: foundKey.label, activatedAt: now,
+        label: foundKey.label,
+        activatedAt: now,
         expiresAt: foundKey.seconds === Infinity ? null : (now + foundKey.seconds * 1000)
     };
     var all = getActivations();
     all[foundKey.key] = activation;
     saveActivations(all);
-    $('loadingOverlay').classList.add('hidden');
+    var overlay = $('loadingOverlay');
+    if(overlay) overlay.classList.remove('show');
     showMainScreen({
-        key: foundKey.key, type: foundKey.type, seconds: foundKey.seconds,
-        label: foundKey.label, activatedAt: now, expiresAt: activation.expiresAt
+        key: foundKey.key,
+        type: foundKey.type,
+        seconds: foundKey.seconds,
+        label: foundKey.label,
+        activatedAt: now,
+        expiresAt: activation.expiresAt
     });
-    showToast('🎉 KÍCH HOẠT THÀNH CÔNG · ' + foundKey.label, 3200);
+    showToast('Kích hoạt thành công · ' + foundKey.label, 3200);
 }
 
-// ============================================================
-// 15. DOWNLOAD MOBILECONFIG - DÙNG DNS + AIM ĐÃ CHỌN
-// ============================================================
+// =============== MOBILECONFIG ===============
+function showMcOverlay(){ var o = $('mcOverlay'); if(o) o.classList.add('show'); }
+function hideMcOverlay(){ var o = $('mcOverlay'); if(o) o.classList.remove('show'); }
+
+function setMcProgress(pct, step){
+    if($('mcPercent')) $('mcPercent').textContent = Math.round(pct) + '%';
+    if($('mcBarFill')) $('mcBarFill').style.width = pct + '%';
+    if($('mcStep') && step) $('mcStep').textContent = step;
+    if($('mcTitle')) $('mcTitle').textContent = 'ĐANG TẠO FILE';
+    if($('mcIcon')) $('mcIcon').textContent = 'MC';
+}
+
+function setMcDone(){
+    if($('mcPercent')) $('mcPercent').textContent = '100%';
+    if($('mcBarFill')) $('mcBarFill').style.width = '100%';
+    if($('mcTitle')) $('mcTitle').textContent = 'HOÀN TẤT';
+    if($('mcStep')) $('mcStep').textContent = 'File đã sẵn sàng!';
+    if($('mcIcon')) $('mcIcon').textContent = 'OK';
+}
+
 function downloadMobileConfig(){
-    log('Download config clicked');
-    if(!selectedConfigId){ showToast('⚠️ VUI LÒNG CHỌN CẤU HÌNH TRƯỚC'); return; }
+    if(isDownloading) return;
+    if(!selectedConfigId){ showToast('Vui lòng chọn cấu hình trước'); return; }
     var activation = findCurrentActivation();
-    if(!activation){ showToast('⚠️ CHƯA CÓ KEY KÍCH HOẠT'); return; }
+    if(!activation){ showToast('Chưa có key kích hoạt'); return; }
     var cfg = getConfigById(selectedConfigId);
-    if(!cfg){ showToast('⚠️ CẤU HÌNH KHÔNG HỢP LỆ'); return; }
+    if(!cfg){ showToast('Cấu hình không hợp lệ'); return; }
 
-    var userAIM = AIM_ENGINE.getUserAIM();
-    var finalAIM = userAIM || cfg.aim;
+    var finalAIM = JsonEngine.getAIM();
+    var dns = getCurrentDns();
+    if(!isValidIP(dns.primary)){ showToast('DNS Chính không hợp lệ'); return; }
+    if(dns.secondary && !isValidIP(dns.secondary)){ showToast('DNS Phụ không hợp lệ'); return; }
 
-    // Lấy DNS đã chọn
-    var dns = getSelectedDns();
-    var dnsPrimary = dns.primary || '10.10.34.1';
-    var dnsSecondary = dns.secondary || '1.1.1.1';
+    isDownloading = true;
+    updateDownloadBtn();
+    var btn = $('downloadBtn');
+    if(btn) btn.classList.add('loading');
 
-    log('Using DNS:', dns.name, dnsPrimary, '/', dnsSecondary);
-    log('Using AIM:', finalAIM);
+    showMcOverlay();
+    setMcProgress(0, 'Đang chuẩn bị...');
 
+    var steps = [
+        {pct:12, txt:'Đang đọc AIM từ engine...', wait:400},
+        {pct:28, txt:'Đang thiết lập DNS ' + dns.primary + '...', wait:450},
+        {pct:44, txt:'Đang thêm DNS dự phòng...', wait:450},
+        {pct:60, txt:'Đang mã hóa payload Apple...', wait:500},
+        {pct:76, txt:'Đang tạo UUID profile...', wait:400},
+        {pct:90, txt:'Đang nén file mobileconfig...', wait:450},
+        {pct:100, txt:'Đang xuất file...', wait:400}
+    ];
+
+    var stepIndex = 0;
+    function runStep(){
+        if(stepIndex >= steps.length){
+            finalizeDownload(cfg, dns, finalAIM);
+            return;
+        }
+        var s = steps[stepIndex];
+        setMcProgress(s.pct, s.txt);
+        stepIndex++;
+        setTimeout(runStep, s.wait);
+    }
+    runStep();
+}
+
+function finalizeDownload(cfg, dns, finalAIM){
     var did = getDeviceId();
     function uuid(){
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
@@ -921,186 +1030,254 @@ function downloadMobileConfig(){
             return v.toString(16).toUpperCase();
         });
     }
-    var u1 = uuid(), u2 = uuid(), u3 = uuid();
+    var u1 = uuid();
+    var u2 = uuid();
+    var u3 = uuid();
 
-    var config = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-'<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
-'<plist version="1.0">\n<dict>\n' +
-'    <key>PayloadContent</key>\n    <array>\n' +
-'        <dict>\n' +
-'            <key>PayloadDescription</key>\n            <string>X LOCK · DNS ' + dns.name + ' (' + dnsPrimary + ' + ' + dnsSecondary + ')</string>\n' +
-'            <key>PayloadDisplayName</key>\n            <string>X LOCK DNS · ' + dns.name + '</string>\n' +
-'            <key>PayloadIdentifier</key>\n            <string>com.xlock.dns.' + u1 + '</string>\n' +
-'            <key>PayloadType</key>\n            <string>com.apple.dnsSettings.managed</string>\n' +
-'            <key>PayloadUUID</key>\n            <string>' + u1 + '</string>\n' +
-'            <key>PayloadVersion</key>\n            <integer>1</integer>\n' +
-'            <key>DNSSettings</key>\n            <dict>\n' +
-'                <key>DNSProtocol</key>\n                <string>HTTPS</string>\n' +
-'                <key>ServerURL</key>\n                <string>https://jsonhosting.com/api/json/694fec6d/raw</string>\n' +
-'                <key>ServerAddresses</key>\n                <array>\n' +
-'                    <string>' + dnsPrimary + '</string>\n' +
-'                    <string>' + dnsSecondary + '</string>\n' +
-'                </array>\n' +
-'            </dict>\n' +
-'        </dict>\n' +
-'        <dict>\n' +
-'            <key>PayloadDescription</key>\n            <string>X LOCK · ' + cfg.name + ' · AIM custom</string>\n' +
-'            <key>PayloadDisplayName</key>\n            <string>X LOCK · ' + cfg.name + '</string>\n' +
-'            <key>PayloadIdentifier</key>\n            <string>com.xlock.aim.' + u2 + '</string>\n' +
-'            <key>PayloadType</key>\n            <string>com.xlock.aim.config</string>\n' +
-'            <key>PayloadUUID</key>\n            <string>' + u2 + '</string>\n' +
-'            <key>PayloadVersion</key>\n            <integer>1</integer>\n' +
-'            <key>AIMSettings</key>\n            <dict>\n' +
-'                <key>ConfigName</key><string>' + cfg.name + '</string>\n' +
-'                <key>ConfigSub</key><string>' + cfg.sub + '</string>\n' +
-'                <key>DNSName</key><string>' + dns.name + '</string>\n' +
-'                <key>DNSPrimary</key><string>' + dnsPrimary + '</string>\n' +
-'                <key>DNSSecondary</key><string>' + dnsSecondary + '</string>\n' +
-'                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>\n' +
-'                <key>BamDau</key><integer>' + finalAIM.head + '</integer>\n' +
-'                <key>Smooth</key><real>' + finalAIM.smooth + '</real>\n' +
-'                <key>Range</key><integer>' + finalAIM.range + '</integer>\n' +
-'                <key>Drag</key><real>' + finalAIM.drag + '</real>\n' +
-'                <key>Trigger</key><string>' + finalAIM.trig + '</string>\n' +
-'                <key>ToiUuPIN</key><true/>\n' +
-'                <key>GiamLAG</key><true/>\n' +
-'                <key>FreeFire</key><true/>\n' +
-'                <key>DoHURL</key><string>https://jsonhosting.com/api/json/694fec6d/raw</string>\n' +
-'                <key>AutoUpdate</key><true/>\n' +
-'            </dict>\n' +
-'        </dict>\n' +
-'    </array>\n' +
-'    <key>PayloadDescription</key>\n    <string>X LOCK · ' + cfg.name + ' · ' + dns.name + '</string>\n' +
-'    <key>PayloadDisplayName</key>\n    <string>X LOCK · ' + cfg.name + ' · ' + dns.name + '</string>\n' +
-'    <key>PayloadIdentifier</key>\n    <string>com.xlock.profile.' + did + '</string>\n' +
-'    <key>PayloadOrganization</key>\n    <string>X LOCK</string>\n' +
-'    <key>PayloadRemovalDisallowed</key>\n    <false/>\n' +
-'    <key>PayloadType</key>\n    <string>Configuration</string>\n' +
-'    <key>PayloadUUID</key>\n    <string>' + u3 + '</string>\n' +
-'    <key>PayloadVersion</key>\n    <integer>1</integer>\n' +
-'</dict>\n</plist>';
+    var lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
+        '<plist version="1.0">',
+        '<dict>',
+        '    <key>PayloadContent</key>',
+        '    <array>',
+        '        <dict>',
+        '            <key>PayloadDescription</key>',
+        '            <string>X LOCK DNS ' + dns.primary + ' ' + dns.secondary + '</string>',
+        '            <key>PayloadDisplayName</key>',
+        '            <string>X LOCK DNS</string>',
+        '            <key>PayloadIdentifier</key>',
+        '            <string>com.xlock.dns.' + u1 + '</string>',
+        '            <key>PayloadType</key>',
+        '            <string>com.apple.dnsSettings.managed</string>',
+        '            <key>PayloadUUID</key>',
+        '            <string>' + u1 + '</string>',
+        '            <key>PayloadVersion</key>',
+        '            <integer>1</integer>',
+        '            <key>DNSSettings</key>',
+        '            <dict>',
+        '                <key>DNSProtocol</key>',
+        '                <string>HTTPS</string>',
+        '                <key>ServerURL</key>',
+        '                <string>https://jsonhosting.com/api/json/694fec6d/raw</string>',
+        '                <key>ServerAddresses</key>',
+        '                <array>',
+        '                    <string>' + dns.primary + '</string>',
+        '                    <string>' + dns.secondary + '</string>',
+        '                </array>',
+        '            </dict>',
+        '        </dict>',
+        '        <dict>',
+        '            <key>PayloadDescription</key>',
+        '            <string>X LOCK ' + cfg.name + '</string>',
+        '            <key>PayloadDisplayName</key>',
+        '            <string>X LOCK ' + cfg.name + '</string>',
+        '            <key>PayloadIdentifier</key>',
+        '            <string>com.xlock.aim.' + u2 + '</string>',
+        '            <key>PayloadType</key>',
+        '            <string>com.xlock.aim.config</string>',
+        '            <key>PayloadUUID</key>',
+        '            <string>' + u2 + '</string>',
+        '            <key>PayloadVersion</key>',
+        '            <integer>1</integer>',
+        '            <key>AIMSettings</key>',
+        '            <dict>',
+        '                <key>ConfigName</key><string>' + cfg.name + '</string>',
+        '                <key>ConfigSub</key><string>' + cfg.sub + '</string>',
+        '                <key>DNSPrimary</key><string>' + dns.primary + '</string>',
+        '                <key>DNSSecondary</key><string>' + dns.secondary + '</string>',
+        '                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>',
+        '                <key>BamDau</key><integer>' + finalAIM.head + '</integer>',
+        '                <key>Smooth</key><real>' + finalAIM.smooth + '</real>',
+        '                <key>Range</key><integer>' + finalAIM.range + '</integer>',
+        '                <key>Drag</key><real>' + finalAIM.drag + '</real>',
+        '                <key>Trigger</key><string>' + finalAIM.trig + '</string>',
+        '                <key>ToiUuPIN</key><true/>',
+        '                <key>GiamLAG</key><true/>',
+        '                <key>FreeFire</key><true/>',
+        '                <key>DoHURL</key><string>https://jsonhosting.com/api/json/694fec6d/raw</string>',
+        '                <key>AutoUpdate</key><true/>',
+        '            </dict>',
+        '        </dict>',
+        '    </array>',
+        '    <key>PayloadDescription</key>',
+        '    <string>X LOCK ' + cfg.name + '</string>',
+        '    <key>PayloadDisplayName</key>',
+        '    <string>X LOCK ' + cfg.name + '</string>',
+        '    <key>PayloadIdentifier</key>',
+        '    <string>com.xlock.profile.' + did + '</string>',
+        '    <key>PayloadOrganization</key>',
+        '    <string>X LOCK</string>',
+        '    <key>PayloadRemovalDisallowed</key>',
+        '    <false/>',
+        '    <key>PayloadType</key>',
+        '    <string>Configuration</string>',
+        '    <key>PayloadUUID</key>',
+        '    <string>' + u3 + '</string>',
+        '    <key>PayloadVersion</key>',
+        '    <integer>1</integer>',
+        '</dict>',
+        '</plist>'
+    ];
+    var config = lines.join('\n');
 
     try {
         var blob = new Blob([config], {type:'application/x-apple-aspen-config'});
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'XLOCK_' + cfg.id + '_' + dns.id + '_' + did.slice(-6) + '.mobileconfig';
+        a.download = 'XLOCK_' + cfg.id + '_' + did.slice(-6) + '.mobileconfig';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-        showToast('📥 ĐÃ TẢI · DNS:' + dns.name + ' · AIM S:' + finalAIM.sens + ' H:' + finalAIM.head, 3200);
+
+        setMcDone();
+        setTimeout(function(){
+            hideMcOverlay();
+            var btn = $('downloadBtn');
+            if(btn) btn.classList.remove('loading');
+            showToast('Đã tải · DNS:' + dns.primary + ' · AIM S:' + finalAIM.sens, 3200);
+            isDownloading = false;
+            updateDownloadBtn();
+        }, 900);
     } catch(e){
-        log('Download error:', e);
-        showToast('❌ LỖI TẢI FILE');
+        if(window.console) console.error('[X LOCK] Download error:', e);
+        hideMcOverlay();
+        var btn = $('downloadBtn');
+        if(btn) btn.classList.remove('loading');
+        showToast('Lỗi tạo file');
+        isDownloading = false;
+        updateDownloadBtn();
     }
 }
 
-// ============================================================
-// 16. LOGOUT
-// ============================================================
+// =============== LOGOUT ===============
 function handleLogout(){
     var ok = true;
     try { ok = confirm('Bạn chắc chắn muốn thoát? Key sẽ bị xóa khỏi thiết bị này.'); } catch(e){ ok = true; }
     if(!ok) return;
     removeCurrentActivation();
-    stopBackgroundServices();
+    JsonEngine.stop();
     if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
     selectedConfigId = null;
-    lsRemove('xlock_selected_config');
+    lsRemove('xlock_cfg_v51');
     showKeyScreen();
-    showToast('🔒 ĐÃ THOÁT · NHẬP KEY ĐỂ TIẾP TỤC');
+    showToast('Đã thoát · Nhập key để tiếp tục');
 }
 
-// ============================================================
-// 17. RESTORE SESSION
-// ============================================================
+// =============== RESTORE ===============
 function restoreSession(){
-    log('Restoring session...');
     getDeviceId();
     var activation = findCurrentActivation();
-    if(!activation){ showKeyScreen(); return; }
+    if(!activation){
+        showKeyScreen();
+        return;
+    }
     var now = Date.now();
     var isForever = (activation.type === 'forever') || (activation.expiresAt === null);
     if(isForever){
         showMainScreen({
-            key: activation.key, type: activation.type, seconds: Infinity,
-            label: activation.label, activatedAt: activation.activatedAt, expiresAt: null
+            key: activation.key,
+            type: activation.type,
+            seconds: Infinity,
+            label: activation.label,
+            activatedAt: activation.activatedAt,
+            expiresAt: null
         });
         return;
     }
     if(activation.expiresAt && now < activation.expiresAt){
         showMainScreen({
-            key: activation.key, type: activation.type,
+            key: activation.key,
+            type: activation.type,
             seconds: activation.seconds === 'Infinity' ? Infinity : activation.seconds,
-            label: activation.label, activatedAt: activation.activatedAt, expiresAt: activation.expiresAt
+            label: activation.label,
+            activatedAt: activation.activatedAt,
+            expiresAt: activation.expiresAt
         });
     } else {
         removeCurrentActivation();
         showKeyScreen();
-        showToast('⏰ KEY TRƯỚC ĐÃ HẾT HẠN');
+        showToast('Key trước đã hết hạn');
     }
 }
 
-// ============================================================
-// 18. INIT
-// ============================================================
+// =============== INIT ===============
 function init(){
-    log('=== INIT ===');
-
     var activateBtn = $('activateBtn');
     var keyInput = $('keyInput');
     var downloadBtn = $('downloadBtn');
     var logoutBtn = $('logoutBtn');
+    var dnsApplyBtn = $('dnsApplyBtn');
+    var aimToggle = $('aimToggle');
+    var aimApply = $('aimApply');
+    var aimReset = $('aimReset');
 
     if(activateBtn){
-        activateBtn.addEventListener('click', function(e){ e.preventDefault(); handleActivate(); });
-        activateBtn.addEventListener('touchend', function(e){ e.preventDefault(); handleActivate(); }, {passive:false});
+        activateBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            handleActivate();
+        });
     }
     if(keyInput){
         keyInput.addEventListener('keydown', function(e){
-            if(e.key === 'Enter' || e.keyCode === 13){ e.preventDefault(); handleActivate(); }
+            if(e.key === 'Enter' || e.keyCode === 13){
+                e.preventDefault();
+                handleActivate();
+            }
         });
         keyInput.addEventListener('input', function(){
             this.value = this.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
         });
     }
-    if(downloadBtn) downloadBtn.addEventListener('click', function(e){ e.preventDefault(); downloadMobileConfig(); });
-    if(logoutBtn) logoutBtn.addEventListener('click', function(e){ e.preventDefault(); handleLogout(); });
-
-    // DNS Custom apply
-    var dnsCustomApply = $('dnsCustomApply');
-    if(dnsCustomApply) dnsCustomApply.addEventListener('click', function(e){ e.preventDefault(); applyCustomDns(); });
-
-    // AIM Editor
-    var aimToggle = $('aimToggle');
-    if(aimToggle) aimToggle.addEventListener('click', function(e){ e.preventDefault(); toggleAIMEditor(); });
-    var aimApply = $('aimApply');
-    if(aimApply) aimApply.addEventListener('click', function(e){ e.preventDefault(); applyAIMEditor(); });
-    var aimReset = $('aimReset');
-    if(aimReset) aimReset.addEventListener('click', function(e){ e.preventDefault(); resetAIMEditor(); });
-
-    ['aimSens','aimHead','aimSmooth','aimRange','aimDrag','aimTrig'].forEach(function(id){
-        var el = $(id);
-        if(el){
-            el.addEventListener('change', function(){
-                log('AIM field changed:', id, '=', el.value);
-            });
-        }
-    });
+    if(downloadBtn){
+        downloadBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            downloadMobileConfig();
+        });
+    }
+    if(logoutBtn){
+        logoutBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            handleLogout();
+        });
+    }
+    if(dnsApplyBtn){
+        dnsApplyBtn.addEventListener('click', function(e){
+            e.preventDefault();
+            applyDnsInput();
+        });
+    }
+    if(aimToggle){
+        aimToggle.addEventListener('click', function(e){
+            e.preventDefault();
+            toggleAIMEditor();
+        });
+    }
+    if(aimApply){
+        aimApply.addEventListener('click', function(e){
+            e.preventDefault();
+            applyAIMEditor();
+        });
+    }
+    if(aimReset){
+        aimReset.addEventListener('click', function(e){
+            e.preventDefault();
+            resetAIMEditor();
+        });
+    }
 
     restoreSession();
 
-    if(!$('keyScreen').classList.contains('hidden')){
-        setTimeout(function(){ try{ keyInput.focus(); }catch(e){} }, 400);
+    if($('keyScreen') && !$('keyScreen').classList.contains('hidden')){
+        setTimeout(function(){
+            try { if(keyInput) keyInput.focus(); } catch(e){}
+        }, 400);
     }
 
     document.addEventListener('visibilitychange', function(){
-        if(document.hidden){
-            log('App hidden · BG still running');
-        } else {
-            log('App visible · Sync state');
+        if(!document.hidden){
             var act = findCurrentActivation();
             if(act && act.expiresAt && Date.now() >= act.expiresAt) handleExpiry();
         }
@@ -1111,11 +1288,14 @@ function init(){
         if(act && act.expiresAt && Date.now() >= act.expiresAt) handleExpiry();
     }, 30000);
 
-    log('=== INIT COMPLETE ===');
+    if(window.console) console.log('%c[X LOCK] v5.1 READY', 'color:#FF2EF7;font-weight:bold;font-size:14px');
 }
 
-if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-else init();
+if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
 
 })();
 </script>
