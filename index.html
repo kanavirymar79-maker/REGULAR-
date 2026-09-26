@@ -3,105 +3,110 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>X LOCK</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
-body{background:#0D0018;background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,#1A0325 45%,#0D0018 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;color:#f5e6ff;padding-top:max(12px,env(safe-area-inset-top))}
-.app{width:100%;max-width:420px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(45,8,60,.92),rgba(20,3,35,.96));box-shadow:0 0 0 1px #FF2EF7,0 0 30px #FF2EF788,0 0 60px #C700FF44;padding:20px 16px 22px}
-.logo-wrap{text-align:center;margin-bottom:18px}
-.logo-x{width:84px;height:84px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF2EF733,#1A0325);border-radius:50%;border:2px solid #FF2EF7;font-size:54px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 22px #C700FF;box-shadow:0 0 20px #FF2EF7,0 0 50px #C700FF77}
-.logo-name{font-size:34px;font-weight:900;letter-spacing:8px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 18px #FF2EF7,0 0 36px #C700FF;margin-bottom:4px}
-.logo-tag{font-size:10px;letter-spacing:4px;color:#d9a6ff}
-.input-wrap{margin:20px 0 16px}
-.input-wrap label{display:block;font-size:11px;letter-spacing:3px;color:#d9a6ff;margin-bottom:8px;text-align:center}
-.key-input{width:100%;background:rgba(10,0,18,.9);border:1.5px solid #FF2EF7;border-radius:18px;padding:16px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7;outline:none;text-align:center;box-shadow:0 0 18px #FF2EF766,inset 0 0 12px #C700FF33;-webkit-appearance:none}
-.key-input::placeholder{color:#a56dcc;font-size:14px}
-.btn{display:block;width:100%;padding:16px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF2EF7,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 8px #fff;box-shadow:0 0 24px #FF2EF7,0 0 50px #C700FF88;cursor:pointer;-webkit-appearance:none;touch-action:manipulation;position:relative;overflow:hidden}
+body{background:#0A0010;background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;color:#ffe6f5;padding-top:max(12px,env(safe-area-inset-top))}
+.app{width:100%;max-width:440px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(80,0,60,.95),rgba(30,0,40,.98));box-shadow:0 0 0 1px #FF0080,0 0 35px #FF008088,0 0 70px #C700FF55;padding:22px 16px 24px}
+.logo-wrap{text-align:center;margin-bottom:20px}
+.logo-x{width:92px;height:92px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF008044,#2A0020);border-radius:50%;border:2.5px solid #FF0080;font-size:56px;font-weight:900;color:#FF0080;text-shadow:0 0 10px #FF0080,0 0 28px #C700FF;box-shadow:0 0 25px #FF0080,0 0 60px #C700FF88}
+.logo-name{font-size:36px;font-weight:900;letter-spacing:10px;color:#FF0080;text-shadow:0 0 8px #FF0080,0 0 22px #FF0080,0 0 44px #C700FF;margin-bottom:6px}
+.logo-tag{font-size:10px;letter-spacing:5px;color:#ff9ddb}
+.input-wrap{margin:22px 0 18px}
+.input-wrap label{display:block;font-size:11px;letter-spacing:3px;color:#ff9ddb;margin-bottom:10px;text-align:center}
+.key-input{width:100%;background:rgba(15,0,20,.92);border:2px solid #FF0080;border-radius:18px;padding:17px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF0080;text-shadow:0 0 10px #FF0080;outline:none;text-align:center;box-shadow:0 0 22px #FF008066;-webkit-appearance:none}
+.key-input::placeholder{color:#a8558f;font-size:14px}
+.key-input:focus{border-color:#FF0080;box-shadow:0 0 0 1px #FF0080,0 0 35px #FF0080}
+.btn{display:block;width:100%;padding:17px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF0080,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 10px #fff;box-shadow:0 0 28px #FF0080,0 0 55px #C700FF99;cursor:pointer;-webkit-appearance:none;touch-action:manipulation;position:relative;overflow:hidden}
 .btn:active{transform:scale(.96)}
-.btn:disabled{background:linear-gradient(135deg,#3a2045,#2a1035);color:#7a5588;text-shadow:none;box-shadow:none;cursor:not-allowed;opacity:.6}
-.btn-outline{background:rgba(255,46,247,.08);border:1.5px solid #FF2EF7;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7;box-shadow:0 0 16px #FF2EF766}
-.btn-sm{padding:10px;font-size:12px;letter-spacing:1px;border-radius:12px}
-.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.btn:disabled{background:linear-gradient(135deg,#3a1030,#2a0820);color:#7a4d70;text-shadow:none;box-shadow:none;cursor:not-allowed;opacity:.55}
+.btn-outline{background:rgba(255,0,128,.1);border:1.5px solid #FF0080;color:#FF0080;text-shadow:0 0 12px #FF0080}
+.btn-sm{padding:11px;font-size:12px;letter-spacing:1px;border-radius:12px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .btn.loading{color:transparent!important;pointer-events:none}
 .btn.loading::after{content:'';position:absolute;top:50%;left:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
-.btn-outline.loading::after{border-color:rgba(255,46,247,.3);border-top-color:#FF2EF7}
 @keyframes spin{100%{transform:rotate(360deg)}}
-.main-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:14px;border-bottom:1.5px solid #FF2EF7}
-.main-header .title{font-size:22px;font-weight:900;letter-spacing:5px;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7,0 0 16px #C700FF}
-.device-id{font-size:9px;background:rgba(255,46,247,.1);border:1px solid #FF2EF7;border-radius:30px;padding:5px 10px;color:#FF2EF7;font-weight:700;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.card{background:linear-gradient(150deg,rgba(60,10,80,.75),rgba(25,4,40,.85));border:1px solid #FF2EF7;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 0 18px #FF2EF766}
-.card.busy{box-shadow:0 0 30px #FF2EF7,inset 0 0 22px #FF2EF744}
-.card-title{font-size:10px;letter-spacing:3px;color:#d9a6ff;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:6px}
-.card-title .left{display:flex;align-items:center;gap:6px}
-.card-title .left::before{content:'';width:6px;height:6px;border-radius:50%;background:#FF2EF7;box-shadow:0 0 10px #FF2EF7}
-.card-title .toggle-btn{font-size:9px;padding:3px 8px;border-radius:20px;background:rgba(255,46,247,.15);border:1px solid #FF2EF7;color:#FF2EF7;cursor:pointer;font-weight:700}
-.dns-input-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755}
-.dns-input-field{background:rgba(10,0,18,.85);border:1.5px solid #FF2EF7;border-radius:14px;padding:10px 12px}
-.dns-input-field .lbl{font-size:9px;color:#d9a6ff;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.dns-input-field input{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none}
-.dns-input-field input::placeholder{color:#7a5588;font-weight:500;font-size:13px}
-.dns-status{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;padding:9px 12px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(255,46,247,.06);border:1px dashed #FF2EF755;color:#d9a6ff;min-height:36px;text-align:center}
-.dns-status.checking{background:rgba(255,46,247,.12);border-style:solid;border-color:#FF2EF7;color:#FF2EF7}
-.dns-status.success{background:rgba(0,255,136,.1);border-style:solid;border-color:#00FF88;color:#00FF88}
-.dns-status.error{background:rgba(255,60,60,.1);border-style:solid;border-color:#FF3C3C;color:#FF3C3C}
-.dns-spinner{width:14px;height:14px;border:2px solid rgba(255,46,247,.3);border-top-color:#FF2EF7;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-.dns-quick-label{font-size:9px;letter-spacing:2px;color:#b58ed9;margin-top:10px;margin-bottom:6px}
-.dns-chips{display:flex;flex-wrap:wrap;gap:6px}
-.dns-chip{font-size:10px;padding:6px 10px;border-radius:20px;background:rgba(255,46,247,.1);border:1px solid #FF2EF788;color:#FF2EF7;font-weight:700;cursor:pointer;white-space:nowrap;touch-action:manipulation}
-.dns-chip:active{transform:scale(.95)}
-.dns-chip.active{background:linear-gradient(135deg,rgba(255,46,247,.3),rgba(157,0,204,.25));border-color:#FF2EF7;box-shadow:0 0 12px #FF2EF7}
-.doh-row{display:flex;justify-content:space-between;align-items:center;padding-top:10px;margin-top:10px;border-top:1px dashed #FF2EF755}
-.doh-row .lbl{font-size:11px;color:#c79cff}
-.doh-link{font-size:10px;color:#FF2EF7;text-decoration:none;word-break:break-all;text-align:right;max-width:65%;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF2EF7}
-.aim-editor{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed #FF2EF755}
+.main-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;margin-bottom:16px;border-bottom:2px solid #FF0080}
+.main-header .title{font-size:24px;font-weight:900;letter-spacing:6px;color:#FF0080;text-shadow:0 0 8px #FF0080,0 0 20px #C700FF}
+.device-id{font-size:9px;background:rgba(255,0,128,.15);border:1px solid #FF0080;border-radius:30px;padding:6px 11px;color:#FF0080;font-weight:700;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card{background:linear-gradient(150deg,rgba(90,0,70,.75),rgba(35,0,45,.9));border:1.5px solid #FF0080;border-radius:20px;padding:15px;margin-bottom:14px;box-shadow:0 0 22px #FF008077}
+.card.busy{box-shadow:0 0 0 2px #FF0080,0 0 40px #FF0080,inset 0 0 30px #FF008066}
+.card-title{font-size:11px;letter-spacing:3px;color:#ff9ddb;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:6px}
+.card-title .left{display:flex;align-items:center;gap:7px}
+.card-title .left::before{content:'';width:7px;height:7px;border-radius:50%;background:#FF0080;box-shadow:0 0 12px #FF0080}
+.card-title .toggle-btn{font-size:9px;padding:4px 9px;border-radius:20px;background:rgba(255,0,128,.2);border:1px solid #FF0080;color:#FF0080;cursor:pointer;font-weight:700}
+.dns-input-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px;padding-top:12px;border-top:1px dashed #FF008055}
+.dns-input-field{background:rgba(15,0,20,.9);border:1.5px solid #FF0080;border-radius:14px;padding:11px 12px}
+.dns-input-field .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.dns-input-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF0080;-webkit-appearance:none}
+.dns-input-field input::placeholder{color:#7a3868;font-weight:500;font-size:13px}
+.dns-status{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding:10px 12px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(255,0,128,.08);border:1px dashed #FF008066;color:#ff9ddb;min-height:38px;text-align:center}
+.dns-status.checking{background:rgba(255,0,128,.16);border-style:solid;border-color:#FF0080;color:#FF0080}
+.dns-status.success{background:rgba(0,255,140,.12);border-style:solid;border-color:#00FF8C;color:#00FF8C}
+.dns-status.error{background:rgba(255,60,90,.12);border-style:solid;border-color:#FF3C5A;color:#FF3C5A}
+.dns-spinner{width:14px;height:14px;border:2px solid rgba(255,0,128,.3);border-top-color:#FF0080;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.doh-row{display:flex;flex-direction:column;gap:5px;padding-top:12px;margin-top:12px;border-top:1px dashed #FF008055}
+.doh-row .lbl{font-size:11px;color:#ff9ddb}
+.doh-link{font-size:10px;color:#FF0080;text-decoration:none;word-break:break-all;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF0080;padding-bottom:3px;line-height:1.4}
+.aim-editor{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
 .aim-editor.open{display:block}
-.aim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
-.aim-field{background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:12px;padding:8px 10px}
-.aim-field .lbl{font-size:9px;color:#b58ed9;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF2EF7;-webkit-appearance:none}
-.aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF2EF7;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
-.aim-field select option{background:#1A0325;color:#FF2EF7}
-.aim-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.cfg-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:4px}
-.cfg-item{display:flex;align-items:center;gap:10px;background:rgba(10,0,18,.7);border:1px solid #FF2EF755;border-radius:14px;padding:11px 12px;cursor:pointer;touch-action:manipulation}
+.aim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.aim-field{background:rgba(15,0,20,.85);border:1.5px solid #FF008088;border-radius:12px;padding:9px 11px}
+.aim-field .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF0080;-webkit-appearance:none}
+.aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
+.aim-field select option{background:#2A0020;color:#FF0080}
+.aim-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.cfg-list{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow-y:auto;padding-right:4px}
+.cfg-item{display:flex;flex-direction:column;gap:8px;background:rgba(15,0,20,.8);border:1.5px solid #FF008066;border-radius:16px;padding:13px;cursor:pointer;transition:all .25s;touch-action:manipulation}
 .cfg-item:active{transform:scale(.98)}
-.cfg-item.selected{background:linear-gradient(135deg,rgba(255,46,247,.2),rgba(157,0,204,.15));border-color:#FF2EF7;box-shadow:0 0 20px #FF2EF766}
-.cfg-icon{font-size:11px;font-weight:900;width:36px;text-align:center;flex-shrink:0;color:#FF2EF7;text-shadow:0 0 6px #FF2EF7}
+.cfg-item.selected{background:linear-gradient(135deg,rgba(255,0,128,.25),rgba(157,0,204,.2));border-color:#FF0080;box-shadow:0 0 0 1px #FF0080,0 0 26px #FF008077}
+.cfg-header{display:flex;align-items:center;gap:10px}
+.cfg-icon{font-size:10px;font-weight:900;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,rgba(255,0,128,.25),rgba(157,0,204,.2));border:1px solid #FF0080;color:#FF0080;text-shadow:0 0 8px #FF0080;flex-shrink:0}
 .cfg-info{flex:1;min-width:0}
-.cfg-name{font-size:13px;font-weight:800;color:#f5e6ff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cfg-sub{font-size:10px;color:#b58ed9;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cfg-item.selected .cfg-name{color:#FF2EF7;text-shadow:0 0 10px #FF2EF7}
-.cfg-check{font-size:11px;font-weight:900;color:#00FF88;opacity:0;flex-shrink:0;width:26px;text-align:center}
+.cfg-name{font-size:14px;font-weight:800;color:#ffe6f5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfg-sub{font-size:10px;color:#ff9ddb;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cfg-item.selected .cfg-name{color:#FF0080;text-shadow:0 0 12px #FF0080}
+.cfg-item.selected .cfg-sub{color:#ffb8e6}
+.cfg-check{font-size:12px;font-weight:900;color:#00FF8C;opacity:0;width:26px;text-align:center;flex-shrink:0}
 .cfg-item.selected .cfg-check{opacity:1}
-.timer-box{background:linear-gradient(150deg,rgba(60,10,80,.9),rgba(25,4,40,.95));border:1.5px solid #FF2EF7;border-radius:18px;padding:14px 16px;margin:12px 0;text-align:center;box-shadow:0 0 22px #FF2EF766}
-.timer-label{font-size:10px;letter-spacing:4px;color:#d9a6ff;margin-bottom:6px}
-.timer-value{font-size:26px;font-weight:900;color:#FF2EF7;text-shadow:0 0 8px #FF2EF7,0 0 20px #FF2EF7,0 0 40px #C700FF;font-family:'SF Mono',Menlo,monospace;letter-spacing:3px}
-.status-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;justify-content:center}
-.pill{font-size:9px;padding:4px 8px;border-radius:30px;background:rgba(255,46,247,.1);border:1px solid #FF2EF788;color:#FF2EF7;font-weight:700;display:flex;align-items:center;gap:4px}
-.pill .dot{width:5px;height:5px;border-radius:50%;background:#00ff88;box-shadow:0 0 6px #00ff88}
-.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,#2A0530,#0D0018);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
+.cfg-details{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding-top:8px;border-top:1px dashed #FF008044}
+.cfg-detail-item{background:rgba(10,0,15,.6);border-radius:8px;padding:6px 8px;border-left:2px solid #FF0080}
+.cfg-detail-item .lbl{font-size:8px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase}
+.cfg-detail-item .val{font-size:11px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF0080;margin-top:2px;word-break:break-all}
+.cfg-doh-row{background:rgba(10,0,15,.6);border-radius:8px;padding:7px 9px;border-left:2px solid #C700FF;margin-top:2px}
+.cfg-doh-row .lbl{font-size:8px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase}
+.cfg-doh-row .val{font-size:10px;color:#C700FF;font-weight:700;font-family:'SF Mono',Menlo,monospace;margin-top:3px;word-break:break-all;line-height:1.3}
+.timer-box{background:linear-gradient(150deg,rgba(90,0,70,.95),rgba(35,0,45,.98));border:2px solid #FF0080;border-radius:20px;padding:16px 18px;margin:14px 0;text-align:center;box-shadow:0 0 28px #FF008066}
+.timer-label{font-size:10px;letter-spacing:5px;color:#ff9ddb;margin-bottom:8px}
+.timer-value{font-size:28px;font-weight:900;color:#FF0080;text-shadow:0 0 10px #FF0080,0 0 24px #FF0080,0 0 48px #C700FF;font-family:'SF Mono',Menlo,monospace;letter-spacing:4px}
+.status-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;justify-content:center}
+.pill{font-size:9px;padding:5px 10px;border-radius:30px;background:rgba(255,0,128,.14);border:1px solid #FF008088;color:#FF0080;font-weight:700;display:flex;align-items:center;gap:5px}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:#00ff8c;box-shadow:0 0 8px #00ff8c}
+.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,#3A0033,#0A0010);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
 .loading-overlay.show{display:flex}
-.spinner-ring{width:110px;height:110px;border-radius:50%;border:4px solid transparent;border-top-color:#FF2EF7;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 30px #FF2EF7,0 0 60px #C700FF}
-.loading-title{font-size:20px;font-weight:900;letter-spacing:6px;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF}
-.loading-sub{font-size:12px;letter-spacing:3px;color:#d9a6ff;text-align:center}
-.loading-count{font-size:40px;font-weight:900;color:#FF2EF7;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF2EF7,0 0 30px #C700FF}
-.loading-bar{width:240px;height:6px;background:rgba(255,46,247,.15);border-radius:30px;overflow:hidden;border:1px solid #FF2EF766}
-.loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF2EF7,#C700FF,#FF2EF7);width:0%;transition:width .3s linear}
-.mc-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(42,5,48,.98),rgba(13,0,24,.99));display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9998;gap:18px;padding:30px}
+.spinner-ring{width:120px;height:120px;border-radius:50%;border:5px solid transparent;border-top-color:#FF0080;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 40px #FF0080,0 0 80px #C700FF}
+.loading-title{font-size:22px;font-weight:900;letter-spacing:7px;color:#FF0080;text-shadow:0 0 12px #FF0080}
+.loading-sub{font-size:12px;letter-spacing:3px;color:#ff9ddb;text-align:center}
+.loading-count{font-size:44px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 12px #FF0080}
+.loading-bar{width:250px;height:7px;background:rgba(255,0,128,.15);border-radius:30px;overflow:hidden;border:1px solid #FF008088}
+.loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF0080,#C700FF,#FF0080);width:0%;transition:width .3s linear}
+.mc-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(58,0,51,.98),rgba(10,0,16,.99));display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9998;gap:20px;padding:30px}
 .mc-overlay.show{display:flex}
-.mc-spinner{width:100px;height:100px;position:relative}
-.mc-spinner::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;border:3px solid transparent;border-top-color:#FF2EF7;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 24px #FF2EF7}
-.mc-spinner::after{content:'';position:absolute;top:14px;left:14px;right:14px;bottom:14px;border-radius:50%;border:3px solid transparent;border-bottom-color:#FF2EF7;border-left-color:#9D00CC;animation:spin 1.5s linear infinite reverse}
-.mc-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:30px;font-weight:900;color:#FF2EF7;text-shadow:0 0 12px #FF2EF7}
-.mc-title{font-size:17px;font-weight:900;letter-spacing:5px;color:#FF2EF7;text-shadow:0 0 10px #FF2EF7}
-.mc-percent{font-size:38px;font-weight:900;color:#FF2EF7;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF2EF7}
-.mc-step{font-size:11px;letter-spacing:2px;color:#d9a6ff;text-align:center;min-height:16px}
-.mc-bar{width:260px;height:8px;background:rgba(255,46,247,.15);border-radius:30px;overflow:hidden;border:1px solid #FF2EF766}
-.mc-bar-fill{height:100%;background:linear-gradient(90deg,#FF2EF7,#C700FF,#FF2EF7);width:0%;transition:width .25s ease}
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(150deg,#2A0530,#1A0325);border:1.5px solid #FF2EF7;color:#FF2EF7;padding:13px 20px;border-radius:40px;font-weight:700;font-size:12.5px;box-shadow:0 0 24px #FF2EF7,0 0 50px #C700FF;z-index:10000;text-align:center;max-width:90%;transition:transform .35s,opacity .3s;opacity:0;pointer-events:none}
+.mc-spinner{width:110px;height:110px;position:relative}
+.mc-spinner::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;border:3.5px solid transparent;border-top-color:#FF0080;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 30px #FF0080}
+.mc-spinner::after{content:'';position:absolute;top:15px;left:15px;right:15px;bottom:15px;border-radius:50%;border:3px solid transparent;border-bottom-color:#FF0080;border-left-color:#9D00CC;animation:spin 1.5s linear infinite reverse}
+.mc-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:32px;font-weight:900;color:#FF0080;text-shadow:0 0 16px #FF0080}
+.mc-title{font-size:18px;font-weight:900;letter-spacing:6px;color:#FF0080;text-shadow:0 0 12px #FF0080}
+.mc-percent{font-size:42px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 12px #FF0080}
+.mc-step{font-size:11px;letter-spacing:2px;color:#ff9ddb;text-align:center;min-height:16px}
+.mc-bar{width:280px;height:9px;background:rgba(255,0,128,.15);border-radius:30px;overflow:hidden;border:1px solid #FF008088}
+.mc-bar-fill{height:100%;background:linear-gradient(90deg,#FF0080,#C700FF,#FF0080);width:0%;transition:width .25s ease}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(90px);background:linear-gradient(150deg,#3A0033,#1A0020);border:2px solid #FF0080;color:#FF0080;padding:14px 22px;border-radius:40px;font-weight:700;font-size:12.5px;box-shadow:0 0 30px #FF0080,0 0 60px #C700FF;z-index:10000;text-align:center;max-width:90%;transition:transform .35s,opacity .3s;opacity:0;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .hidden{display:none!important}
-.footer-note{font-size:9px;color:#7a4d99;text-align:center;margin-top:14px;letter-spacing:1.5px}
+.footer-note{font-size:9px;color:#8a3d70;text-align:center;margin-top:16px;letter-spacing:1.5px}
 </style>
 </head>
 <body>
@@ -118,7 +123,7 @@ body{background:#0D0018;background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,
         <input type="text" id="keyInput" class="key-input" placeholder="XLOCK-XXXX-XXXX-FF" autocomplete="off" autocapitalize="characters" spellcheck="false">
     </div>
     <button class="btn" id="activateBtn" type="button">⚡ KÍCH HOẠT NGAY</button>
-    <div class="status-pills" style="margin-top:16px">
+    <div class="status-pills" style="margin-top:18px">
         <span class="pill"><span class="dot"></span>GIỜ</span>
         <span class="pill"><span class="dot"></span>TUẦN</span>
         <span class="pill"><span class="dot"></span>THÁNG</span>
@@ -150,28 +155,25 @@ body{background:#0D0018;background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,
             </div>
         </div>
 
-        <button class="btn btn-sm" id="dnsApplyBtn" type="button" style="margin-top:8px">✓ ÁP DỤNG DNS</button>
+        <button class="btn btn-sm" id="dnsApplyBtn" type="button" style="margin-top:10px">✓ ÁP DỤNG DNS</button>
 
         <div class="dns-status" id="dnsStatus">
             <div class="dns-spinner" id="dnsSpinner" style="display:none"></div>
             <span id="dnsStatusText">Sẵn sàng</span>
         </div>
 
-        <div class="dns-quick-label">⚡ CHỌN NHANH DNS</div>
-        <div class="dns-chips" id="dnsChips"></div>
-
         <div class="doh-row">
-            <span class="lbl">🔗 DoH URL</span>
-            <a class="doh-link" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">jsonhosting.com/api/json/694fec6d/raw</a>
+            <span class="lbl">🔗 DoH URL (máy chủ)</span>
+            <a class="doh-link" id="dohLink" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">https://jsonhosting.com/api/json/694fec6d/raw</a>
         </div>
 
         <div class="aim-editor" id="aimEditor">
-            <div style="font-size:10px;letter-spacing:2px;color:#d9a6ff;margin-bottom:4px">🎯 THÔNG SỐ AIM TÙY CHỈNH</div>
+            <div style="font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:6px">🎯 THÔNG SỐ AIM TÙY CHỈNH</div>
             <div class="aim-grid">
-                <div class="aim-field"><div class="lbl">Độ nhạy</div><input type="number" id="aimSens" value="110" min="1" max="200" step="1"></div>
-                <div class="aim-field"><div class="lbl">Bám đầu</div><input type="number" id="aimHead" value="16" min="1" max="100" step="1"></div>
+                <div class="aim-field"><div class="lbl">Độ nhạy</div><input type="number" id="aimSens" value="110" min="1" max="200"></div>
+                <div class="aim-field"><div class="lbl">Bám đầu</div><input type="number" id="aimHead" value="60" min="1" max="100"></div>
                 <div class="aim-field"><div class="lbl">Smooth</div><input type="number" id="aimSmooth" value="1.1" min="0.1" max="5" step="0.1"></div>
-                <div class="aim-field"><div class="lbl">Range</div><input type="number" id="aimRange" value="55" min="10" max="200" step="1"></div>
+                <div class="aim-field"><div class="lbl">Range</div><input type="number" id="aimRange" value="55" min="10" max="200"></div>
                 <div class="aim-field"><div class="lbl">Drag</div><input type="number" id="aimDrag" value="2.8" min="0.1" max="10" step="0.1"></div>
                 <div class="aim-field">
                     <div class="lbl">Trigger</div>
@@ -206,7 +208,7 @@ body{background:#0D0018;background:radial-gradient(ellipse at 50% 0%,#3A0640 0%,
         <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
         <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
     </div>
-    <div class="footer-note">X LOCK · v5.1 · FREE FIRE</div>
+    <div class="footer-note">X LOCK · v8.2 · FREE FIRE</div>
 </div>
 
 </div>
@@ -237,7 +239,8 @@ var HOUR = 3600;
 var WEEK = 7 * 24 * HOUR;
 var MONTH = 30 * 24 * HOUR;
 
-var SAMPLE_KEYS = [
+// KEYS
+var KEYS = [
     {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
     {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
     {key:'XLOCK-0003-0003-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
@@ -260,143 +263,128 @@ var SAMPLE_KEYS = [
     {key:'XLOCK-9995-9995-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'}
 ];
 
-var DNS_CHIPS = [
-    {label:'X LOCK',primary:'10.10.34.1',secondary:'1.1.1.1'},
-    {label:'CF',primary:'1.1.1.1',secondary:'1.0.0.1'},
-    {label:'Google',primary:'8.8.8.8',secondary:'8.8.4.4'},
-    {label:'Quad9',primary:'9.9.9.9',secondary:'149.112.112.112'},
-    {label:'OpenDNS',primary:'208.67.222.222',secondary:'208.67.220.220'},
-    {label:'AdGuard',primary:'94.140.14.14',secondary:'94.140.15.15'},
-    {label:'NextDNS',primary:'45.90.28.0',secondary:'45.90.30.0'},
-    {label:'Comodo',primary:'8.26.56.26',secondary:'8.20.247.20'},
-    {label:'FPT VN',primary:'210.245.24.20',secondary:'210.245.24.21'},
-    {label:'Viettel',primary:'203.113.131.1',secondary:'203.113.131.2'},
-    {label:'VNPT',primary:'203.162.4.190',secondary:'203.162.4.191'},
-    {label:'Verisign',primary:'64.6.64.6',secondary:'64.6.65.6'},
-    {label:'DNS.SB',primary:'185.222.222.222',secondary:'45.11.45.11'},
-    {label:'Level3',primary:'209.244.0.3',secondary:'209.244.0.4'},
-    {label:'Yandex',primary:'77.88.8.8',secondary:'77.88.8.1'}
+// 15 cấu hình - BÁM ĐẦU 60%
+var CONFIGS = [
+    {id:'auto',icon:'AUTO',name:'Tự động',sub:'Cấu hình hệ thống',dns:{primary:'10.10.34.1',secondary:'1.1.1.1'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:100,head:60,smooth:1.0,range:50,drag:2.5,trig:'AUTO'}},
+    {id:'aimbot',icon:'BOT',name:'Aimbot Pro',sub:'Bám mục tiêu tự động',dns:{primary:'1.1.1.1',secondary:'1.0.0.2'},doh:'https://cloudflare-dns.com/dns-query',aim:{sens:120,head:60,smooth:1.2,range:60,drag:3.0,trig:'LB'}},
+    {id:'dpi',icon:'DPI',name:'DPI 1200',sub:'Độ phân giải siêu nét',dns:{primary:'8.8.8.8',secondary:'8.8.4.4'},doh:'https://dns.google/dns-query',aim:{sens:115,head:60,smooth:1.05,range:58,drag:2.6,trig:'LB'}},
+    {id:'fps',icon:'FPS',name:'FPS 90',sub:'Tăng khung hình mượt',dns:{primary:'9.9.9.9',secondary:'149.112.112.112'},doh:'https://dns.quad9.net/dns-query',aim:{sens:110,head:60,smooth:1.0,range:52,drag:2.4,trig:'LB'}},
+    {id:'full',icon:'FULL',name:'Full Settings',sub:'Tối ưu toàn diện',dns:{primary:'94.140.14.14',secondary:'94.140.15.15'},doh:'https://dns.adguard-dns.com/dns-query',aim:{sens:110,head:60,smooth:1.1,range:55,drag:2.8,trig:'LB'}},
+    {id:'head',icon:'HEAD',name:'HEAD VIP',sub:'Bám đầu chính xác cao',dns:{primary:'45.90.28.0',secondary:'45.90.30.0'},doh:'https://dns.nextdns.io',aim:{sens:125,head:60,smooth:1.15,range:62,drag:3.2,trig:'LB'}},
+    {id:'nextdns_cfg',icon:'NXT',name:'NextDNS Config',sub:'Dự phòng an toàn',dns:{primary:'208.67.222.222',secondary:'208.67.220.220'},doh:'https://doh.opendns.com/dns-query',aim:{sens:105,head:60,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
+    {id:'sensi',icon:'SEN',name:'Sensi Touch',sub:'Độ nhạy mượt',dns:{primary:'185.222.222.222',secondary:'45.11.45.11'},doh:'https://doh.sb/dns-query',aim:{sens:130,head:60,smooth:1.2,range:56,drag:2.9,trig:'LB'}},
+    {id:'vn_fast',icon:'VNF',name:'Vietnam Fast',sub:'DNS VN tốc độ cao',dns:{primary:'203.113.131.1',secondary:'203.113.131.2'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:112,head:60,smooth:1.05,range:54,drag:2.7,trig:'LB'}},
+    {id:'vn_safe',icon:'VNS',name:'Vietnam Safe',sub:'DNS VNPT ổn định',dns:{primary:'203.162.4.190',secondary:'203.162.4.191'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:108,head:60,smooth:1.0,range:53,drag:2.6,trig:'LB'}},
+    {id:'privacy',icon:'PRV',name:'Privacy Guard',sub:'Bảo mật cao',dns:{primary:'194.242.2.2',secondary:'194.242.2.3'},doh:'https://dns.mullvad.net/dns-query',aim:{sens:118,head:60,smooth:1.1,range:57,drag:2.85,trig:'LB'}},
+    {id:'eu_fast',icon:'EUF',name:'Europe Fast',sub:'DNS Châu Âu',dns:{primary:'193.110.81.0',secondary:'185.253.5.0'},doh:'https://dns0.eu/dns-query',aim:{sens:116,head:60,smooth:1.08,range:56,drag:2.75,trig:'LB'}},
+    {id:'control',icon:'CTL',name:'Control D',sub:'Kiểm soát DNS',dns:{primary:'76.76.2.0',secondary:'76.76.10.0'},doh:'https://dns.controld.com/comss',aim:{sens:122,head:60,smooth:1.18,range:60,drag:3.1,trig:'LB'}},
+    {id:'speed_max',icon:'MAX',name:'Speed Max',sub:'Tối ưu tốc độ tối đa',dns:{primary:'1.1.1.1',secondary:'1.0.0.2'},doh:'https://cloudflare-dns.com/dns-query',aim:{sens:135,head:60,smooth:0.95,range:65,drag:2.5,trig:'LB'}},
+    {id:'game_pro',icon:'GPR',name:'Game Pro',sub:'Bộ thông số game thủ',dns:{primary:'8.8.8.8',secondary:'1.1.1.1'},doh:'https://dns.google/dns-query',aim:{sens:128,head:60,smooth:1.12,range:63,drag:3.15,trig:'LB'}}
 ];
 
-var DEFAULT_CONFIGS = [
-    {id:'auto',icon:'AUTO',name:'Tự động',sub:'Hệ thống',aim:{sens:100,head:10,smooth:1.0,range:50,drag:2.5,trig:'AUTO'}},
-    {id:'aimbot',icon:'BOT',name:'Aimbot',sub:'AIM Core v2.1',aim:{sens:120,head:20,smooth:1.2,range:60,drag:3.0,trig:'LB'}},
-    {id:'dpi',icon:'DPI',name:'DPI 1200',sub:'Độ phân giải v3.0',aim:{sens:115,head:14,smooth:1.05,range:58,drag:2.6,trig:'LB'}},
-    {id:'fps',icon:'FPS',name:'FPS 90',sub:'Tăng khung hình v1.8',aim:{sens:110,head:12,smooth:1.0,range:52,drag:2.4,trig:'LB'}},
-    {id:'full',icon:'FULL',name:'Full Settings',sub:'Tối ưu hoàn chỉnh',aim:{sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}},
-    {id:'head',icon:'HEAD',name:'HEAD VIP',sub:'Bám đầu VIP v2.5',aim:{sens:125,head:25,smooth:1.15,range:62,drag:3.2,trig:'LB'}},
-    {id:'nextdns_cfg',icon:'NXT',name:'NextDNS Config',sub:'Dự phòng an toàn',aim:{sens:105,head:12,smooth:1.0,range:50,drag:2.4,trig:'LB'}},
-    {id:'sensi',icon:'SEN',name:'Sensi Touch',sub:'Độ nhạy mượt v1.2',aim:{sens:130,head:18,smooth:1.2,range:56,drag:2.9,trig:'LB'}}
-];
-
-// =============== JSON AIM ENGINE ===============
-var JsonEngine = (function(){
-    var st = {
-        running: false,
-        dohURL: 'https://jsonhosting.com/api/json/694fec6d/raw',
-        jsonAIM: null,
-        lastFetch: 0,
-        ticks: 0,
-        errors: 0,
-        currentAIM: {sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'}
-    };
-
-    function logJson(msg){
-        if(window.console) console.log('%c[X LOCK JSON] ' + msg, 'color:#00FF88;font-weight:bold');
-    }
-
-    function fetchJSON(){
-        try {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', st.dohURL + '?t=' + Date.now(), true);
-            xhr.timeout = 8000;
-            xhr.onload = function(){
-                if(xhr.status === 200){
-                    try {
-                        var data = JSON.parse(xhr.responseText);
-                        st.jsonAIM = data;
-                        st.lastFetch = Date.now();
-                        logJson('Fetched OK');
-                        if(data && typeof data === 'object') applyJSON(data);
-                    } catch(e){
-                        st.errors++;
-                        logJson('Parse error: ' + e.message);
-                    }
-                } else {
-                    st.errors++;
-                    logJson('HTTP ' + xhr.status);
-                }
-            };
-            xhr.onerror = function(){ st.errors++; logJson('Network error'); };
-            xhr.ontimeout = function(){ st.errors++; logJson('Timeout'); };
-            xhr.send();
-        } catch(e){
-            st.errors++;
-            logJson('XHR error: ' + e.message);
-        }
-    }
-
-    function applyJSON(data){
-        if(!data || typeof data !== 'object') return;
-        var a = {};
-        a.sens = Number(data.sens || data.sensitivity || data.donhay || st.currentAIM.sens) || 110;
-        a.head = Number(data.head || data.headshot || data.bamdau || st.currentAIM.head) || 16;
-        a.smooth = Number(data.smooth || data.sm || st.currentAIM.smooth) || 1.1;
-        a.range = Number(data.range || data.rg || st.currentAIM.range) || 55;
-        a.drag = Number(data.drag || data.dg || st.currentAIM.drag) || 2.8;
-        a.trig = String(data.trig || data.trigger || st.currentAIM.trig || 'LB');
-        st.currentAIM = a;
-        logJson('APPLIED S:' + a.sens + ' H:' + a.head + ' Sm:' + a.smooth + ' R:' + a.range + ' D:' + a.drag + ' T:' + a.trig);
-    }
-
-    function setAIM(aim){
-        if(!aim) return;
-        st.currentAIM = {
-            sens: Number(aim.sens) || 110,
-            head: Number(aim.head) || 16,
-            smooth: Number(aim.smooth) || 1.1,
-            range: Number(aim.range) || 55,
-            drag: Number(aim.drag) || 2.8,
-            trig: String(aim.trig || 'LB')
-        };
-        logJson('Manual set S:' + st.currentAIM.sens + ' H:' + st.currentAIM.head);
-    }
-
-    function getAIM(){ return st.currentAIM; }
-
-    function start(){
-        if(st.running) return;
-        st.running = true;
-        logJson('=== ENGINE STARTED (hidden) ===');
-        logJson('DoH URL: ' + st.dohURL);
-        st._loop = setInterval(function(){
-            st.ticks++;
-            if(Date.now() - st.lastFetch > 60000) fetchJSON();
-            var a = st.currentAIM;
-            logJson('BG tick#' + st.ticks + ' S:' + a.sens + ' H:' + a.head + ' Sm:' + a.smooth + ' R:' + a.range + ' D:' + a.drag + ' T:' + a.trig + ' fetch:' + (st.lastFetch ? 'ok' : 'idle') + ' err:' + st.errors);
-        }, 15000);
-        // Fetch ngay lần đầu
-        fetchJSON();
-    }
-
-    function stop(){
-        if(st._loop){ clearInterval(st._loop); st._loop = null; }
-        st.running = false;
-        logJson('=== ENGINE STOPPED ===');
-    }
-
-    return {start:start, stop:stop, setAIM:setAIM, getAIM:getAIM, getState:function(){ return st; }};
-})();
-
-// =============== STATE ===============
+// STATE
 var loadingInterval = null;
 var timerInterval = null;
+var bgInterval = null;
+var jsonInterval = null;
 var selectedConfigId = null;
+var selectedDohURL = 'https://jsonhosting.com/api/json/694fec6d/raw';
 var isActivating = false;
 var isDnsApplying = false;
 var isDownloading = false;
 
-// =============== HELPERS ===============
+// =====================================================
+// JSON AIM ENGINE CHẠY NGẦM - BÁM ĐẦU 60%
+// =====================================================
+var AIM_STATE = {
+    current: {sens:110, head:60, smooth:1.1, range:55, drag:2.8, trig:'LB'},
+    ticks: 0,
+    lastFetch: 0,
+    fetchOK: 0,
+    fetchErr: 0,
+    running: false
+};
+
+function jsonLog(msg){
+    if(window.console) console.log('%c[X LOCK JSON] ' + msg, 'color:#FF0080;font-weight:bold');
+}
+
+function fetchJsonAIM(){
+    try {
+        var xhr = new XMLHttpRequest();
+        var url = selectedDohURL + (selectedDohURL.indexOf('?') >= 0 ? '&' : '?') + 't=' + Date.now();
+        xhr.open('GET', url, true);
+        xhr.timeout = 8000;
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    AIM_STATE.lastFetch = Date.now();
+                    AIM_STATE.fetchOK++;
+                    jsonLog('Fetched OK from ' + selectedDohURL);
+                    if(data && typeof data === 'object'){
+                        var newAIM = {
+                            sens: Number(data.sens || data.sensitivity || data.donhay || AIM_STATE.current.sens) || 110,
+                            head: Number(data.head || data.headshot || data.bamdau || 60) || 60,
+                            smooth: Number(data.smooth || data.sm || AIM_STATE.current.smooth) || 1.1,
+                            range: Number(data.range || data.rg || AIM_STATE.current.range) || 55,
+                            drag: Number(data.drag || data.dg || AIM_STATE.current.drag) || 2.8,
+                            trig: String(data.trig || data.trigger || AIM_STATE.current.trig || 'LB')
+                        };
+                        // Bám đầu luôn >= 60%
+                        if(newAIM.head < 60) newAIM.head = 60;
+                        AIM_STATE.current = newAIM;
+                        jsonLog('APPLIED S:' + newAIM.sens + ' H:' + newAIM.head + ' Sm:' + newAIM.smooth + ' R:' + newAIM.range + ' D:' + newAIM.drag + ' T:' + newAIM.trig);
+                    }
+                } catch(e){
+                    AIM_STATE.fetchErr++;
+                    jsonLog('Parse error: ' + e.message);
+                }
+            } else {
+                AIM_STATE.fetchErr++;
+                jsonLog('HTTP ' + xhr.status);
+            }
+        };
+        xhr.onerror = function(){ AIM_STATE.fetchErr++; jsonLog('Network error'); };
+        xhr.ontimeout = function(){ AIM_STATE.fetchErr++; jsonLog('Timeout'); };
+        xhr.send();
+    } catch(e){
+        AIM_STATE.fetchErr++;
+        jsonLog('XHR error: ' + e.message);
+    }
+}
+
+function startJsonEngine(){
+    if(AIM_STATE.running) return;
+    AIM_STATE.running = true;
+    jsonLog('=== ENGINE STARTED (hidden, HEAD=60%) ===');
+    jsonLog('DoH URL: ' + selectedDohURL);
+    fetchJsonAIM();
+    if(jsonInterval) clearInterval(jsonInterval);
+    jsonInterval = setInterval(function(){
+        AIM_STATE.ticks++;
+        if(Date.now() - AIM_STATE.lastFetch > 60000) fetchJsonAIM();
+        var a = AIM_STATE.current;
+        jsonLog('BG tick#' + AIM_STATE.ticks +
+                ' S:' + a.sens +
+                ' H:' + a.head +
+                ' Sm:' + a.smooth +
+                ' R:' + a.range +
+                ' D:' + a.drag +
+                ' T:' + a.trig +
+                ' | url:' + selectedDohURL.split('/')[2] +
+                ' | ok:' + AIM_STATE.fetchOK +
+                ' err:' + AIM_STATE.fetchErr);
+    }, 15000);
+}
+
+function stopJsonEngine(){
+    if(jsonInterval){ clearInterval(jsonInterval); jsonInterval = null; }
+    AIM_STATE.running = false;
+    jsonLog('=== ENGINE STOPPED ===');
+}
+
+// HELPERS
 function $(id){ return document.getElementById(id); }
 
 function showToast(msg, dur){
@@ -414,126 +402,76 @@ function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ r
 function lsRemove(k){ try { localStorage.removeItem(k); } catch(e){} }
 
 function getDeviceId(){
-    var id = lsGet('xlock_device_v51');
+    var id = lsGet('xlock_dev_v82');
     if(!id){
         id = 'XL-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Date.now().toString(36).toUpperCase().slice(-6);
-        lsSet('xlock_device_v51', id);
+        lsSet('xlock_dev_v82', id);
     }
     return id;
 }
 
-function getActivations(){
-    var raw = lsGet('xlock_acts_v51');
-    if(!raw) return {};
-    try { return JSON.parse(raw) || {}; } catch(e){ return {}; }
-}
-
-function saveActivations(d){
-    try { lsSet('xlock_acts_v51', JSON.stringify(d)); } catch(e){}
-}
-
-function findCurrentActivation(){
-    var did = getDeviceId();
-    var all = getActivations();
-    var keys = Object.keys(all);
+function getActs(){ var r = lsGet('xlock_acts_v82'); if(!r) return {}; try { return JSON.parse(r) || {}; } catch(e){ return {}; } }
+function saveActs(d){ try { lsSet('xlock_acts_v82', JSON.stringify(d)); } catch(e){} }
+function findCurrentAct(){
+    var did = getDeviceId(), all = getActs(), keys = Object.keys(all);
     for(var i = 0; i < keys.length; i++){
-        if(all[keys[i]].deviceId === did){
-            var r = all[keys[i]];
-            r.key = keys[i];
-            return r;
-        }
+        if(all[keys[i]].deviceId === did){ var r = all[keys[i]]; r.key = keys[i]; return r; }
     }
     return null;
 }
-
-function isKeyUsedByOther(k){
-    var all = getActivations();
-    if(!all[k]) return false;
-    return all[k].deviceId !== getDeviceId();
+function isKeyUsedByOther(k){ var all = getActs(); if(!all[k]) return false; return all[k].deviceId !== getDeviceId(); }
+function removeCurrentAct(){
+    var did = getDeviceId(), all = getActs(), keys = Object.keys(all);
+    for(var i = 0; i < keys.length; i++) if(all[keys[i]].deviceId === did) delete all[keys[i]];
+    saveActs(all);
 }
-
-function removeCurrentActivation(){
-    var did = getDeviceId();
-    var all = getActivations();
-    var keys = Object.keys(all);
-    for(var i = 0; i < keys.length; i++){
-        if(all[keys[i]].deviceId === did) delete all[keys[i]];
-    }
-    saveActivations(all);
-}
-
 function formatTime(ms){
     if(ms <= 0) return '00:00:00';
-    var s = Math.floor(ms/1000);
-    var h = Math.floor(s/3600);
-    var m = Math.floor((s%3600)/60);
-    var sec = s%60;
+    var s = Math.floor(ms/1000), h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
     return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
 }
-
 function isValidIP(ip){
     if(!ip) return false;
     if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip)) return false;
     var p = ip.split('.');
-    for(var i = 0; i < 4; i++){
-        var n = Number(p[i]);
-        if(n < 0 || n > 255) return false;
-    }
+    for(var i = 0; i < 4; i++){ var n = Number(p[i]); if(n < 0 || n > 255) return false; }
     return true;
 }
-
-function getCurrentDns(){
-    var p = $('dnsPrimaryInput') ? $('dnsPrimaryInput').value.trim() : '';
-    var s = $('dnsSecondaryInput') ? $('dnsSecondaryInput').value.trim() : '';
-    if(!p) p = '10.10.34.1';
-    if(!s) s = '1.1.1.1';
-    return {primary:p, secondary:s};
+function getConfigById(id){
+    for(var i = 0; i < CONFIGS.length; i++) if(CONFIGS[i].id === id) return CONFIGS[i];
+    return null;
 }
 
-// =============== DNS ===============
+// DNS
 function setDnsStatus(state, text){
-    var box = $('dnsStatus');
-    var spinner = $('dnsSpinner');
-    var txt = $('dnsStatusText');
+    var box = $('dnsStatus'), spinner = $('dnsSpinner'), txt = $('dnsStatusText');
     if(!box || !txt) return;
     box.className = 'dns-status';
-    if(state === 'checking'){
-        box.className = 'dns-status checking';
-        if(spinner) spinner.style.display = 'block';
-        txt.textContent = text || 'Đang kiểm tra...';
-    } else if(state === 'success'){
-        box.className = 'dns-status success';
-        if(spinner) spinner.style.display = 'none';
-        txt.textContent = 'OK · ' + (text || '');
-    } else if(state === 'error'){
-        box.className = 'dns-status error';
-        if(spinner) spinner.style.display = 'none';
-        txt.textContent = 'LỖI · ' + (text || '');
-    } else {
-        if(spinner) spinner.style.display = 'none';
-        txt.textContent = text || 'Sẵn sàng';
-    }
+    if(state === 'checking'){ box.className = 'dns-status checking'; if(spinner) spinner.style.display = 'block'; txt.textContent = text || 'Đang kiểm tra...'; }
+    else if(state === 'success'){ box.className = 'dns-status success'; if(spinner) spinner.style.display = 'none'; txt.textContent = 'OK · ' + (text || ''); }
+    else if(state === 'error'){ box.className = 'dns-status error'; if(spinner) spinner.style.display = 'none'; txt.textContent = 'LỖI · ' + (text || ''); }
+    else { if(spinner) spinner.style.display = 'none'; txt.textContent = text || 'Sẵn sàng'; }
+}
+
+function setDohDisplay(url){
+    var el = $('dohLink');
+    if(el){ el.textContent = url; el.href = url; }
 }
 
 function applyDnsInput(){
     if(isDnsApplying) return;
     isDnsApplying = true;
-
-    var p = $('dnsPrimaryInput') ? $('dnsPrimaryInput').value.trim() : '';
-    var s = $('dnsSecondaryInput') ? $('dnsSecondaryInput').value.trim() : '';
-
+    var p = $('dnsPrimaryInput').value.trim();
+    var s = $('dnsSecondaryInput').value.trim();
     if(!p){ setDnsStatus('error','Chưa nhập DNS Chính'); showToast('Nhập DNS Chính'); isDnsApplying = false; return; }
-    if(!isValidIP(p)){ setDnsStatus('error','DNS Chính sai'); showToast('DNS Chính sai định dạng'); isDnsApplying = false; return; }
-    if(s && !isValidIP(s)){ setDnsStatus('error','DNS Phụ sai'); showToast('DNS Phụ sai định dạng'); isDnsApplying = false; return; }
+    if(!isValidIP(p)){ setDnsStatus('error','DNS Chính sai'); showToast('DNS Chính sai'); isDnsApplying = false; return; }
+    if(s && !isValidIP(s)){ setDnsStatus('error','DNS Phụ sai'); showToast('DNS Phụ sai'); isDnsApplying = false; return; }
     if(!s) s = '1.1.1.1';
-
     var btn = $('dnsApplyBtn');
     if(btn) btn.classList.add('loading');
     var card = $('dnsCard');
     if(card) card.classList.add('busy');
-
     setDnsStatus('checking','Đang phân giải DNS...');
-
     setTimeout(function(){
         setDnsStatus('checking','Đang kiểm tra ' + p + '...');
         setTimeout(function(){
@@ -541,123 +479,48 @@ function applyDnsInput(){
             setTimeout(function(){
                 setDnsStatus('checking','Đang áp dụng cấu hình...');
                 setTimeout(function(){
-                    lsSet('xlock_dns_p_v51', p);
-                    lsSet('xlock_dns_s_v51', s);
-
-                    var chips = document.querySelectorAll('.dns-chip');
-                    for(var i = 0; i < chips.length; i++) chips[i].classList.remove('active');
-                    highlightMatchingChip(p, s);
-
+                    lsSet('xlock_p_v82', p);
+                    lsSet('xlock_s_v82', s);
                     setDnsStatus('success', p + ' / ' + s);
                     if(btn) btn.classList.remove('loading');
                     if(card) card.classList.remove('busy');
                     showToast('Đã áp dụng DNS', 2200);
                     isDnsApplying = false;
-
-                    setTimeout(function(){
-                        if(!isDnsApplying) setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s);
-                    }, 3000);
+                    setTimeout(function(){ if(!isDnsApplying) setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s); }, 3000);
                 }, 400);
             }, 500);
         }, 500);
     }, 500);
 }
 
-function selectDnsChip(chip, el){
-    if(isDnsApplying) return;
-
-    var allChips = document.querySelectorAll('.dns-chip');
-    for(var i = 0; i < allChips.length; i++) allChips[i].classList.remove('active');
-    if(el) el.classList.add('active');
-
-    if($('dnsPrimaryInput')) $('dnsPrimaryInput').value = chip.primary;
-    if($('dnsSecondaryInput')) $('dnsSecondaryInput').value = chip.secondary;
-
-    lsSet('xlock_dns_p_v51', chip.primary);
-    lsSet('xlock_dns_s_v51', chip.secondary);
-
-    setDnsStatus('success', chip.label + ': ' + chip.primary);
-    showToast('DNS: ' + chip.label, 2000);
-
-    setTimeout(function(){
-        setDnsStatus('idle', 'Đang dùng: ' + chip.primary + ' / ' + chip.secondary);
-    }, 2500);
-}
-
 function loadSavedDns(){
-    var p = lsGet('xlock_dns_p_v51') || '10.10.34.1';
-    var s = lsGet('xlock_dns_s_v51') || '1.1.1.1';
-    if($('dnsPrimaryInput')) $('dnsPrimaryInput').value = p;
-    if($('dnsSecondaryInput')) $('dnsSecondaryInput').value = s;
-    highlightMatchingChip(p, s);
+    var p = lsGet('xlock_p_v82') || '10.10.34.1';
+    var s = lsGet('xlock_s_v82') || '1.1.1.1';
+    var doh = lsGet('xlock_doh_v82') || 'https://jsonhosting.com/api/json/694fec6d/raw';
+    selectedDohURL = doh;
+    $('dnsPrimaryInput').value = p;
+    $('dnsSecondaryInput').value = s;
+    setDohDisplay(doh);
     setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s);
 }
 
-function renderDnsChips(){
-    var box = $('dnsChips');
-    if(!box) return;
-    box.innerHTML = '';
-    for(var i = 0; i < DNS_CHIPS.length; i++){
-        (function(chip){
-            var el = document.createElement('div');
-            el.className = 'dns-chip';
-            el.setAttribute('data-p', chip.primary);
-            el.setAttribute('data-s', chip.secondary);
-            el.textContent = chip.label;
-            el.addEventListener('click', function(){ selectDnsChip(chip, el); });
-            box.appendChild(el);
-        })(DNS_CHIPS[i]);
-    }
+// AIM EDITOR
+function fillAIM(a){
+    if(!a) return;
+    $('aimSens').value = a.sens;
+    $('aimHead').value = a.head;
+    $('aimSmooth').value = a.smooth;
+    $('aimRange').value = a.range;
+    $('aimDrag').value = a.drag;
+    $('aimTrig').value = a.trig;
 }
 
-function highlightMatchingChip(p, s){
-    var chips = document.querySelectorAll('.dns-chip');
-    for(var i = 0; i < chips.length; i++){
-        if(chips[i].getAttribute('data-p') === p && chips[i].getAttribute('data-s') === s){
-            chips[i].classList.add('active');
-        }
-    }
-}
-
-// =============== CONFIGS ===============
-function loadConfigs(){
-    var configs = JSON.parse(JSON.stringify(DEFAULT_CONFIGS));
-    var overrides = {};
-    try { overrides = JSON.parse(lsGet('xlock_cfg_ov_v51') || '{}'); } catch(e){ overrides = {}; }
-    for(var i = 0; i < configs.length; i++){
-        if(overrides[configs[i].id]) configs[i].aim = overrides[configs[i].id];
-    }
-    return configs;
-}
-
-function saveConfigOverride(id, aim){
-    var overrides = {};
-    try { overrides = JSON.parse(lsGet('xlock_cfg_ov_v51') || '{}'); } catch(e){ overrides = {}; }
-    overrides[id] = aim;
-    lsSet('xlock_cfg_ov_v51', JSON.stringify(overrides));
-}
-
-function getConfigById(id){
-    var configs = loadConfigs();
-    for(var i = 0; i < configs.length; i++) if(configs[i].id === id) return configs[i];
-    return null;
-}
-
-// =============== AIM EDITOR ===============
-function fillAIMEditor(aim){
-    if(!aim) return;
-    if($('aimSens')) $('aimSens').value = aim.sens;
-    if($('aimHead')) $('aimHead').value = aim.head;
-    if($('aimSmooth')) $('aimSmooth').value = aim.smooth;
-    if($('aimRange')) $('aimRange').value = aim.range;
-    if($('aimDrag')) $('aimDrag').value = aim.drag;
-    if($('aimTrig')) $('aimTrig').value = aim.trig;
-}
-
-function readAIMEditor(){
+function readAIM(){
+    var head = Number($('aimHead').value) || 60;
+    if(head < 60) head = 60;
     return {
         sens: Number($('aimSens').value) || 110,
-        head: Number($('aimHead').value) || 16,
+        head: head,
         smooth: Number($('aimSmooth').value) || 1.1,
         range: Number($('aimRange').value) || 55,
         drag: Number($('aimDrag').value) || 2.8,
@@ -665,59 +528,18 @@ function readAIMEditor(){
     };
 }
 
-function openAIMEditor(){
-    var cfg = selectedConfigId ? getConfigById(selectedConfigId) : null;
-    var a = cfg ? cfg.aim : JsonEngine.getAIM();
-    fillAIMEditor(a);
-    $('aimEditor').classList.add('open');
-    $('aimToggle').textContent = '✕ ĐÓNG';
-}
-
-function closeAIMEditor(){
-    $('aimEditor').classList.remove('open');
-    $('aimToggle').textContent = '✎ CHỈNH AIM';
-}
-
-function toggleAIMEditor(){
-    if($('aimEditor').classList.contains('open')) closeAIMEditor();
-    else openAIMEditor();
-}
-
-function applyAIMEditor(){
-    var newAIM = readAIMEditor();
-    if(selectedConfigId) saveConfigOverride(selectedConfigId, newAIM);
-    JsonEngine.setAIM(newAIM);
-    renderConfigList();
-    showToast('Đã áp dụng AIM');
-}
-
-function resetAIMEditor(){
-    if(selectedConfigId){
-        var overrides = {};
-        try { overrides = JSON.parse(lsGet('xlock_cfg_ov_v51') || '{}'); } catch(e){ overrides = {}; }
-        delete overrides[selectedConfigId];
-        lsSet('xlock_cfg_ov_v51', JSON.stringify(overrides));
-        var def = null;
-        for(var i = 0; i < DEFAULT_CONFIGS.length; i++){
-            if(DEFAULT_CONFIGS[i].id === selectedConfigId) def = DEFAULT_CONFIGS[i];
-        }
-        if(def) fillAIMEditor(def.aim);
-    } else {
-        fillAIMEditor({sens:110,head:16,smooth:1.1,range:55,drag:2.8,trig:'LB'});
-    }
-    showToast('Đã khôi phục mặc định');
-}
-
-// =============== CONFIG LIST ===============
+// CONFIG LIST
 function renderConfigList(){
     var list = $('cfgList');
     if(!list) return;
-    var configs = loadConfigs();
     list.innerHTML = '';
-    for(var i = 0; i < configs.length; i++){
+    for(var i = 0; i < CONFIGS.length; i++){
         (function(cfg){
             var el = document.createElement('div');
             el.className = 'cfg-item' + (selectedConfigId === cfg.id ? ' selected' : '');
+
+            var header = document.createElement('div');
+            header.className = 'cfg-header';
 
             var icon = document.createElement('div');
             icon.className = 'cfg-icon';
@@ -726,113 +548,169 @@ function renderConfigList(){
             var info = document.createElement('div');
             info.className = 'cfg-info';
 
-            var nameDiv = document.createElement('div');
-            nameDiv.className = 'cfg-name';
-            nameDiv.textContent = cfg.name;
+            var n = document.createElement('div');
+            n.className = 'cfg-name';
+            n.textContent = cfg.name;
 
-            var subDiv = document.createElement('div');
-            subDiv.className = 'cfg-sub';
-            subDiv.textContent = cfg.sub + ' · S:' + cfg.aim.sens + ' H:' + cfg.aim.head + ' Sm:' + cfg.aim.smooth;
+            var s = document.createElement('div');
+            s.className = 'cfg-sub';
+            s.textContent = cfg.sub;
 
-            info.appendChild(nameDiv);
-            info.appendChild(subDiv);
+            info.appendChild(n);
+            info.appendChild(s);
 
-            var check = document.createElement('div');
-            check.className = 'cfg-check';
-            check.textContent = '✓';
+            var c = document.createElement('div');
+            c.className = 'cfg-check';
+            c.textContent = '✓';
 
-            el.appendChild(icon);
-            el.appendChild(info);
-            el.appendChild(check);
+            header.appendChild(icon);
+            header.appendChild(info);
+            header.appendChild(c);
+            el.appendChild(header);
+
+            var details = document.createElement('div');
+            details.className = 'cfg-details';
+
+            var d1 = document.createElement('div');
+            d1.className = 'cfg-detail-item';
+            d1.innerHTML = '<div class="lbl">DNS Chính</div><div class="val">' + cfg.dns.primary + '</div>';
+            details.appendChild(d1);
+
+            var d2 = document.createElement('div');
+            d2.className = 'cfg-detail-item';
+            d2.innerHTML = '<div class="lbl">DNS Phụ</div><div class="val">' + cfg.dns.secondary + '</div>';
+            details.appendChild(d2);
+
+            var d3 = document.createElement('div');
+            d3.className = 'cfg-detail-item';
+            d3.innerHTML = '<div class="lbl">Độ nhạy</div><div class="val">' + cfg.aim.sens + '</div>';
+            details.appendChild(d3);
+
+            var d4 = document.createElement('div');
+            d4.className = 'cfg-detail-item';
+            d4.innerHTML = '<div class="lbl">Bám đầu</div><div class="val">' + cfg.aim.head + '%</div>';
+            details.appendChild(d4);
+
+            el.appendChild(details);
+
+            var dohRow = document.createElement('div');
+            dohRow.className = 'cfg-doh-row';
+            dohRow.innerHTML = '<div class="lbl">🔗 DoH URL</div><div class="val">' + cfg.doh + '</div>';
+            el.appendChild(dohRow);
 
             el.addEventListener('click', function(){ selectConfig(cfg.id); });
             list.appendChild(el);
-        })(configs[i]);
+        })(CONFIGS[i]);
     }
     updateDownloadBtn();
 }
 
 function selectConfig(id){
     selectedConfigId = id;
-    lsSet('xlock_cfg_v51', id);
-    renderConfigList();
+    lsSet('xlock_cfg_v82', id);
     var cfg = getConfigById(id);
     if(cfg){
-        JsonEngine.setAIM(cfg.aim);
-        showToast('Đã chọn: ' + cfg.name);
+        $('dnsPrimaryInput').value = cfg.dns.primary;
+        $('dnsSecondaryInput').value = cfg.dns.secondary;
+        selectedDohURL = cfg.doh;
+        setDohDisplay(cfg.doh);
+        lsSet('xlock_p_v82', cfg.dns.primary);
+        lsSet('xlock_s_v82', cfg.dns.secondary);
+        lsSet('xlock_doh_v82', cfg.doh);
+        fillAIM(cfg.aim);
+        // Cập nhật AIM Engine với config mới
+        AIM_STATE.current = {
+            sens: cfg.aim.sens,
+            head: 60,
+            smooth: cfg.aim.smooth,
+            range: cfg.aim.range,
+            drag: cfg.aim.drag,
+            trig: cfg.aim.trig
+        };
+        jsonLog('Config changed → ' + cfg.name + ' | DNS:' + cfg.dns.primary + ' | HEAD:60%');
+        setDnsStatus('success', cfg.name + ' · DNS ' + cfg.dns.primary);
+        showToast('✅ ' + cfg.name + ' · HEAD 60%', 2200);
+        setTimeout(function(){ setDnsStatus('idle', 'Đang dùng: ' + cfg.dns.primary + ' / ' + cfg.dns.secondary); }, 2800);
     }
-    if($('aimEditor').classList.contains('open') && cfg) fillAIMEditor(cfg.aim);
+    renderConfigList();
 }
 
 function updateDownloadBtn(){
     var btn = $('downloadBtn');
     if(!btn) return;
-    if(selectedConfigId && !isDownloading){
-        btn.disabled = false;
-        btn.style.opacity = '1';
-    } else {
-        btn.disabled = true;
-        btn.style.opacity = '.6';
-    }
+    if(selectedConfigId && !isDownloading){ btn.disabled = false; btn.style.opacity = '1'; }
+    else { btn.disabled = true; btn.style.opacity = '.6'; }
 }
 
 function loadSavedConfig(){
-    var saved = lsGet('xlock_cfg_v51');
-    if(saved){
-        var configs = loadConfigs();
-        for(var i = 0; i < configs.length; i++){
-            if(configs[i].id === saved){ selectedConfigId = saved; return; }
-        }
-    }
+    var saved = lsGet('xlock_cfg_v82');
+    if(saved){ for(var i = 0; i < CONFIGS.length; i++) if(CONFIGS[i].id === saved){ selectedConfigId = saved; return; } }
 }
 
-// =============== SCREEN ===============
+// BG LOG
+function startBg(){
+    if(bgInterval) clearInterval(bgInterval);
+    bgInterval = setInterval(function(){
+        var p = $('dnsPrimaryInput') ? $('dnsPrimaryInput').value : '?';
+        if(window.console) console.log('%c[X LOCK BG] DNS:' + p + ' · DoH:' + selectedDohURL + ' · HEAD:' + AIM_STATE.current.head + '%', 'color:#FF0080');
+    }, 15000);
+}
+function stopBg(){ if(bgInterval){ clearInterval(bgInterval); bgInterval = null; } }
+
+// SCREEN
 function showKeyScreen(){
     $('mainScreen').classList.add('hidden');
     $('keyScreen').classList.remove('hidden');
     var inp = $('keyInput');
-    if(inp){
-        inp.value = '';
-        setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 250);
-    }
+    if(inp){ inp.value = ''; setTimeout(function(){ try{ inp.focus(); }catch(e){} }, 250); }
     if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-    JsonEngine.stop();
-    closeAIMEditor();
+    stopBg();
+    stopJsonEngine();
+    $('aimEditor').classList.remove('open');
+    $('aimToggle').textContent = '✎ CHỈNH AIM';
 }
 
-function showMainScreen(activation){
+function showMainScreen(act){
     $('keyScreen').classList.add('hidden');
     $('mainScreen').classList.remove('hidden');
-    if($('deviceId')) $('deviceId').textContent = 'ID: ' + getDeviceId();
+    $('deviceId').textContent = 'ID: ' + getDeviceId();
     loadSavedConfig();
     renderConfigList();
-    renderDnsChips();
     loadSavedDns();
-
     if(selectedConfigId){
         var cfg = getConfigById(selectedConfigId);
-        if(cfg) JsonEngine.setAIM(cfg.aim);
+        if(cfg){
+            $('dnsPrimaryInput').value = cfg.dns.primary;
+            $('dnsSecondaryInput').value = cfg.dns.secondary;
+            selectedDohURL = cfg.doh;
+            setDohDisplay(cfg.doh);
+            fillAIM(cfg.aim);
+            AIM_STATE.current = {
+                sens: cfg.aim.sens,
+                head: 60,
+                smooth: cfg.aim.smooth,
+                range: cfg.aim.range,
+                drag: cfg.aim.drag,
+                trig: cfg.aim.trig
+            };
+            setDnsStatus('idle', 'Đang dùng: ' + cfg.dns.primary + ' / ' + cfg.dns.secondary);
+        }
     }
-
-    startTimer(activation);
-    JsonEngine.start();
+    startTimer(act);
+    startBg();
+    startJsonEngine();
 }
 
-// =============== TIMER ===============
-function startTimer(activation){
+// TIMER
+function startTimer(act){
     if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
-    var isForever = (activation.type === 'forever') || (activation.seconds === Infinity) || (activation.expiresAt === null);
-    var expiresAt = activation.expiresAt;
+    var isForever = (act.type === 'forever') || (act.seconds === Infinity) || (act.expiresAt === null);
+    var expiresAt = act.expiresAt;
     var tv = $('timerValue');
     function tick(){
         if(isForever){ if(tv) tv.textContent = 'VĨNH VIỄN'; return; }
         var remain = expiresAt - Date.now();
-        if(remain <= 0){
-            clearInterval(timerInterval);
-            timerInterval = null;
-            handleExpiry();
-            return;
-        }
+        if(remain <= 0){ clearInterval(timerInterval); timerInterval = null; handleExpiry(); return; }
         if(tv) tv.textContent = formatTime(remain);
     }
     tick();
@@ -840,15 +718,16 @@ function startTimer(activation){
 }
 
 function handleExpiry(){
-    removeCurrentActivation();
-    JsonEngine.stop();
+    removeCurrentAct();
+    stopBg();
+    stopJsonEngine();
     selectedConfigId = null;
-    lsRemove('xlock_cfg_v51');
+    lsRemove('xlock_cfg_v82');
     showKeyScreen();
     showToast('KEY ĐÃ HẾT HẠN', 3500);
 }
 
-// =============== ACTIVATE ===============
+// ACTIVATE
 function handleActivate(){
     if(isActivating) return;
     var input = $('keyInput');
@@ -856,38 +735,21 @@ function handleActivate(){
     var raw = input.value.trim().toUpperCase();
     if(!raw){ showToast('Vui lòng nhập key'); return; }
     var normalized = raw.replace(/[^A-Z0-9-]/g, '');
-    if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){
-        showToast('Sai định dạng · Mẫu: XLOCK-XXXX-XXXX-FF');
-        return;
-    }
+    if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){ showToast('Sai định dạng · XLOCK-XXXX-XXXX-FF'); return; }
     var found = null;
-    for(var i = 0; i < SAMPLE_KEYS.length; i++){
-        if(SAMPLE_KEYS[i].key === normalized){ found = SAMPLE_KEYS[i]; break; }
-    }
+    for(var i = 0; i < KEYS.length; i++) if(KEYS[i].key === normalized){ found = KEYS[i]; break; }
     if(!found){ showToast('Key không tồn tại'); return; }
     if(isKeyUsedByOther(normalized)){ showToast('Key đã dùng trên thiết bị khác'); return; }
-
-    var existing = findCurrentActivation();
+    var existing = findCurrentAct();
     if(existing && existing.key === normalized){
         var now = Date.now();
         var isForever = (existing.type === 'forever') || (existing.expiresAt === null);
-        if(!isForever && existing.expiresAt && now >= existing.expiresAt){
-            removeCurrentActivation();
-            showToast('Key đã hết hạn');
-            return;
-        }
-        showMainScreen({
-            key: normalized,
-            type: existing.type,
-            seconds: existing.seconds === 'Infinity' ? Infinity : existing.seconds,
-            label: existing.label,
-            activatedAt: existing.activatedAt,
-            expiresAt: existing.expiresAt
-        });
+        if(!isForever && existing.expiresAt && now >= existing.expiresAt){ removeCurrentAct(); showToast('Key đã hết hạn'); return; }
+        showMainScreen({key:normalized,type:existing.type,seconds:existing.seconds==='Infinity'?Infinity:existing.seconds,label:existing.label,activatedAt:existing.activatedAt,expiresAt:existing.expiresAt});
         showToast('Key còn hiệu lực');
         return;
     }
-    if(existing) removeCurrentActivation();
+    if(existing) removeCurrentAct();
     beginLoading(found);
 }
 
@@ -897,19 +759,10 @@ function beginLoading(foundKey){
     if(!overlay){ isActivating = false; return; }
     overlay.classList.add('show');
     var count = 30;
-    var countEl = $('loadingCount');
-    var barEl = $('loadingBarFill');
-    var subEl = $('loadingSub');
+    var countEl = $('loadingCount'), barEl = $('loadingBarFill'), subEl = $('loadingSub');
     if(countEl) countEl.textContent = count;
     if(barEl) barEl.style.width = '0%';
-    var msgs = [
-        'ĐANG THIẾT LẬP DNS & AIM...',
-        'ĐANG KẾT NỐI DNS SERVER...',
-        'ĐANG FETCH JSON AIM...',
-        'ĐANG ÁP DỤNG THÔNG SỐ...',
-        'ĐANG TỐI ƯU HỆ THỐNG...',
-        'HOÀN TẤT · ĐANG KÍCH HOẠT...'
-    ];
+    var msgs = ['ĐANG THIẾT LẬP DNS & AIM...','ĐANG KẾT NỐI DNS SERVER...','ĐANG FETCH JSON AIM 60%...','ĐANG ÁP DỤNG THÔNG SỐ...','ĐANG TỐI ƯU HỆ THỐNG...','HOÀN TẤT · ĐANG KÍCH HOẠT...'];
     var idx = 0;
     if(subEl) subEl.textContent = msgs[0];
     if(loadingInterval) clearInterval(loadingInterval);
@@ -917,48 +770,32 @@ function beginLoading(foundKey){
         count--;
         if(countEl) countEl.textContent = count;
         if(barEl) barEl.style.width = ((30-count)/30*100) + '%';
-        if(count % 5 === 0 && idx < msgs.length-1){
-            idx++;
-            if(subEl) subEl.textContent = msgs[idx];
-        }
-        if(count <= 0){
-            clearInterval(loadingInterval);
-            loadingInterval = null;
-            completeActivation(foundKey);
-        }
+        if(count % 5 === 0 && idx < msgs.length-1){ idx++; if(subEl) subEl.textContent = msgs[idx]; }
+        if(count <= 0){ clearInterval(loadingInterval); loadingInterval = null; completeActivation(foundKey); }
     }, 1000);
 }
 
 function completeActivation(foundKey){
     isActivating = false;
     var now = Date.now();
-    var activation = {
-        deviceId: getDeviceId(),
-        type: foundKey.type,
+    var act = {
+        deviceId: getDeviceId(), type: foundKey.type,
         seconds: foundKey.seconds === Infinity ? 'Infinity' : foundKey.seconds,
-        label: foundKey.label,
-        activatedAt: now,
+        label: foundKey.label, activatedAt: now,
         expiresAt: foundKey.seconds === Infinity ? null : (now + foundKey.seconds * 1000)
     };
-    var all = getActivations();
-    all[foundKey.key] = activation;
-    saveActivations(all);
+    var all = getActs();
+    all[foundKey.key] = act;
+    saveActs(all);
     var overlay = $('loadingOverlay');
     if(overlay) overlay.classList.remove('show');
-    showMainScreen({
-        key: foundKey.key,
-        type: foundKey.type,
-        seconds: foundKey.seconds,
-        label: foundKey.label,
-        activatedAt: now,
-        expiresAt: activation.expiresAt
-    });
-    showToast('Kích hoạt thành công · ' + foundKey.label, 3200);
+    showMainScreen({key:foundKey.key,type:foundKey.type,seconds:foundKey.seconds,label:foundKey.label,activatedAt:now,expiresAt:act.expiresAt});
+    showToast('Kích hoạt thành công · HEAD 60%', 3200);
 }
 
-// =============== MOBILECONFIG ===============
-function showMcOverlay(){ var o = $('mcOverlay'); if(o) o.classList.add('show'); }
-function hideMcOverlay(){ var o = $('mcOverlay'); if(o) o.classList.remove('show'); }
+// MOBILECONFIG
+function showMc(){ var o = $('mcOverlay'); if(o) o.classList.add('show'); }
+function hideMc(){ var o = $('mcOverlay'); if(o) o.classList.remove('show'); }
 
 function setMcProgress(pct, step){
     if($('mcPercent')) $('mcPercent').textContent = Math.round(pct) + '%';
@@ -979,49 +816,48 @@ function setMcDone(){
 function downloadMobileConfig(){
     if(isDownloading) return;
     if(!selectedConfigId){ showToast('Vui lòng chọn cấu hình trước'); return; }
-    var activation = findCurrentActivation();
-    if(!activation){ showToast('Chưa có key kích hoạt'); return; }
+    var act = findCurrentAct();
+    if(!act){ showToast('Chưa có key kích hoạt'); return; }
     var cfg = getConfigById(selectedConfigId);
     if(!cfg){ showToast('Cấu hình không hợp lệ'); return; }
-
-    var finalAIM = JsonEngine.getAIM();
-    var dns = getCurrentDns();
-    if(!isValidIP(dns.primary)){ showToast('DNS Chính không hợp lệ'); return; }
-    if(dns.secondary && !isValidIP(dns.secondary)){ showToast('DNS Phụ không hợp lệ'); return; }
+    var p = $('dnsPrimaryInput').value.trim();
+    var s = $('dnsSecondaryInput').value.trim();
+    if(!isValidIP(p)){ showToast('DNS Chính không hợp lệ'); return; }
+    if(s && !isValidIP(s)){ showToast('DNS Phụ không hợp lệ'); return; }
+    if(!s) s = '1.1.1.1';
+    var finalAIM = readAIM();
+    // Đảm bảo bám đầu >= 60
+    if(finalAIM.head < 60) finalAIM.head = 60;
+    var dohURL = selectedDohURL || cfg.doh;
 
     isDownloading = true;
     updateDownloadBtn();
     var btn = $('downloadBtn');
     if(btn) btn.classList.add('loading');
-
-    showMcOverlay();
+    showMc();
     setMcProgress(0, 'Đang chuẩn bị...');
 
     var steps = [
-        {pct:12, txt:'Đang đọc AIM từ engine...', wait:400},
-        {pct:28, txt:'Đang thiết lập DNS ' + dns.primary + '...', wait:450},
-        {pct:44, txt:'Đang thêm DNS dự phòng...', wait:450},
-        {pct:60, txt:'Đang mã hóa payload Apple...', wait:500},
+        {pct:12, txt:'Đang đọc AIM HEAD 60%...', wait:400},
+        {pct:28, txt:'Đang thiết lập DNS ' + p + '...', wait:450},
+        {pct:44, txt:'Đang thêm DoH URL...', wait:450},
+        {pct:60, txt:'Đang mã hóa payload...', wait:500},
         {pct:76, txt:'Đang tạo UUID profile...', wait:400},
-        {pct:90, txt:'Đang nén file mobileconfig...', wait:450},
+        {pct:90, txt:'Đang nén file...', wait:450},
         {pct:100, txt:'Đang xuất file...', wait:400}
     ];
-
-    var stepIndex = 0;
-    function runStep(){
-        if(stepIndex >= steps.length){
-            finalizeDownload(cfg, dns, finalAIM);
-            return;
-        }
-        var s = steps[stepIndex];
-        setMcProgress(s.pct, s.txt);
-        stepIndex++;
-        setTimeout(runStep, s.wait);
+    var idx = 0;
+    function next(){
+        if(idx >= steps.length){ doDownload(cfg, {primary:p,secondary:s,doh:dohURL}, finalAIM); return; }
+        var st = steps[idx];
+        setMcProgress(st.pct, st.txt);
+        idx++;
+        setTimeout(next, st.wait);
     }
-    runStep();
+    next();
 }
 
-function finalizeDownload(cfg, dns, finalAIM){
+function doDownload(cfg, dns, finalAIM){
     var did = getDeviceId();
     function uuid(){
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
@@ -1030,96 +866,96 @@ function finalizeDownload(cfg, dns, finalAIM){
             return v.toString(16).toUpperCase();
         });
     }
-    var u1 = uuid();
-    var u2 = uuid();
-    var u3 = uuid();
+    var u1 = uuid(), u2 = uuid(), u3 = uuid();
+    var dohURL = dns.doh;
 
-    var lines = [
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">',
-        '<plist version="1.0">',
-        '<dict>',
-        '    <key>PayloadContent</key>',
-        '    <array>',
-        '        <dict>',
-        '            <key>PayloadDescription</key>',
-        '            <string>X LOCK DNS ' + dns.primary + ' ' + dns.secondary + '</string>',
-        '            <key>PayloadDisplayName</key>',
-        '            <string>X LOCK DNS</string>',
-        '            <key>PayloadIdentifier</key>',
-        '            <string>com.xlock.dns.' + u1 + '</string>',
-        '            <key>PayloadType</key>',
-        '            <string>com.apple.dnsSettings.managed</string>',
-        '            <key>PayloadUUID</key>',
-        '            <string>' + u1 + '</string>',
-        '            <key>PayloadVersion</key>',
-        '            <integer>1</integer>',
-        '            <key>DNSSettings</key>',
-        '            <dict>',
-        '                <key>DNSProtocol</key>',
-        '                <string>HTTPS</string>',
-        '                <key>ServerURL</key>',
-        '                <string>https://jsonhosting.com/api/json/694fec6d/raw</string>',
-        '                <key>ServerAddresses</key>',
-        '                <array>',
-        '                    <string>' + dns.primary + '</string>',
-        '                    <string>' + dns.secondary + '</string>',
-        '                </array>',
-        '            </dict>',
-        '        </dict>',
-        '        <dict>',
-        '            <key>PayloadDescription</key>',
-        '            <string>X LOCK ' + cfg.name + '</string>',
-        '            <key>PayloadDisplayName</key>',
-        '            <string>X LOCK ' + cfg.name + '</string>',
-        '            <key>PayloadIdentifier</key>',
-        '            <string>com.xlock.aim.' + u2 + '</string>',
-        '            <key>PayloadType</key>',
-        '            <string>com.xlock.aim.config</string>',
-        '            <key>PayloadUUID</key>',
-        '            <string>' + u2 + '</string>',
-        '            <key>PayloadVersion</key>',
-        '            <integer>1</integer>',
-        '            <key>AIMSettings</key>',
-        '            <dict>',
-        '                <key>ConfigName</key><string>' + cfg.name + '</string>',
-        '                <key>ConfigSub</key><string>' + cfg.sub + '</string>',
-        '                <key>DNSPrimary</key><string>' + dns.primary + '</string>',
-        '                <key>DNSSecondary</key><string>' + dns.secondary + '</string>',
-        '                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>',
-        '                <key>BamDau</key><integer>' + finalAIM.head + '</integer>',
-        '                <key>Smooth</key><real>' + finalAIM.smooth + '</real>',
-        '                <key>Range</key><integer>' + finalAIM.range + '</integer>',
-        '                <key>Drag</key><real>' + finalAIM.drag + '</real>',
-        '                <key>Trigger</key><string>' + finalAIM.trig + '</string>',
-        '                <key>ToiUuPIN</key><true/>',
-        '                <key>GiamLAG</key><true/>',
-        '                <key>FreeFire</key><true/>',
-        '                <key>DoHURL</key><string>https://jsonhosting.com/api/json/694fec6d/raw</string>',
-        '                <key>AutoUpdate</key><true/>',
-        '            </dict>',
-        '        </dict>',
-        '    </array>',
-        '    <key>PayloadDescription</key>',
-        '    <string>X LOCK ' + cfg.name + '</string>',
-        '    <key>PayloadDisplayName</key>',
-        '    <string>X LOCK ' + cfg.name + '</string>',
-        '    <key>PayloadIdentifier</key>',
-        '    <string>com.xlock.profile.' + did + '</string>',
-        '    <key>PayloadOrganization</key>',
-        '    <string>X LOCK</string>',
-        '    <key>PayloadRemovalDisallowed</key>',
-        '    <false/>',
-        '    <key>PayloadType</key>',
-        '    <string>Configuration</string>',
-        '    <key>PayloadUUID</key>',
-        '    <string>' + u3 + '</string>',
-        '    <key>PayloadVersion</key>',
-        '    <integer>1</integer>',
-        '</dict>',
-        '</plist>'
-    ];
-    var config = lines.join('\n');
+    var L = [];
+    L.push('<?xml version="1.0" encoding="UTF-8"?>');
+    L.push('<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">');
+    L.push('<plist version="1.0">');
+    L.push('<dict>');
+    L.push('    <key>PayloadContent</key>');
+    L.push('    <array>');
+    L.push('        <dict>');
+    L.push('            <key>PayloadDescription</key>');
+    L.push('            <string>X LOCK DNS ' + dns.primary + ' ' + dns.secondary + '</string>');
+    L.push('            <key>PayloadDisplayName</key>');
+    L.push('            <string>X LOCK DNS - ' + cfg.name + '</string>');
+    L.push('            <key>PayloadIdentifier</key>');
+    L.push('            <string>com.xlock.dns.' + u1 + '</string>');
+    L.push('            <key>PayloadType</key>');
+    L.push('            <string>com.apple.dnsSettings.managed</string>');
+    L.push('            <key>PayloadUUID</key>');
+    L.push('            <string>' + u1 + '</string>');
+    L.push('            <key>PayloadVersion</key>');
+    L.push('            <integer>1</integer>');
+    L.push('            <key>DNSSettings</key>');
+    L.push('            <dict>');
+    L.push('                <key>DNSProtocol</key>');
+    L.push('                <string>HTTPS</string>');
+    L.push('                <key>ServerURL</key>');
+    L.push('                <string>' + dohURL + '</string>');
+    L.push('                <key>ServerAddresses</key>');
+    L.push('                <array>');
+    L.push('                    <string>' + dns.primary + '</string>');
+    L.push('                    <string>' + dns.secondary + '</string>');
+    L.push('                </array>');
+    L.push('            </dict>');
+    L.push('        </dict>');
+    L.push('        <dict>');
+    L.push('            <key>PayloadDescription</key>');
+    L.push('            <string>X LOCK ' + cfg.name + ' - HEAD 60%</string>');
+    L.push('            <key>PayloadDisplayName</key>');
+    L.push('            <string>X LOCK ' + cfg.name + '</string>');
+    L.push('            <key>PayloadIdentifier</key>');
+    L.push('            <string>com.xlock.aim.' + u2 + '</string>');
+    L.push('            <key>PayloadType</key>');
+    L.push('            <string>com.xlock.aim.config</string>');
+    L.push('            <key>PayloadUUID</key>');
+    L.push('            <string>' + u2 + '</string>');
+    L.push('            <key>PayloadVersion</key>');
+    L.push('            <integer>1</integer>');
+    L.push('            <key>AIMSettings</key>');
+    L.push('            <dict>');
+    L.push('                <key>ConfigName</key><string>' + cfg.name + '</string>');
+    L.push('                <key>ConfigSub</key><string>' + cfg.sub + '</string>');
+    L.push('                <key>DNSPrimary</key><string>' + dns.primary + '</string>');
+    L.push('                <key>DNSSecondary</key><string>' + dns.secondary + '</string>');
+    L.push('                <key>DoHURL</key><string>' + dohURL + '</string>');
+    L.push('                <key>DoNhay</key><integer>' + finalAIM.sens + '</integer>');
+    L.push('                <key>BamDau</key><integer>' + finalAIM.head + '</integer>');
+    L.push('                <key>BamDauPercent</key><integer>' + finalAIM.head + '</integer>');
+    L.push('                <key>Smooth</key><real>' + finalAIM.smooth + '</real>');
+    L.push('                <key>Range</key><integer>' + finalAIM.range + '</integer>');
+    L.push('                <key>Drag</key><real>' + finalAIM.drag + '</real>');
+    L.push('                <key>Trigger</key><string>' + finalAIM.trig + '</string>');
+    L.push('                <key>ToiUuPIN</key><true/>');
+    L.push('                <key>GiamLAG</key><true/>');
+    L.push('                <key>FreeFire</key><true/>');
+    L.push('                <key>AutoUpdate</key><true/>');
+    L.push('            </dict>');
+    L.push('        </dict>');
+    L.push('    </array>');
+    L.push('    <key>PayloadDescription</key>');
+    L.push('    <string>X LOCK ' + cfg.name + ' - HEAD 60%</string>');
+    L.push('    <key>PayloadDisplayName</key>');
+    L.push('    <string>X LOCK ' + cfg.name + '</string>');
+    L.push('    <key>PayloadIdentifier</key>');
+    L.push('    <string>com.xlock.profile.' + did + '</string>');
+    L.push('    <key>PayloadOrganization</key>');
+    L.push('    <string>X LOCK</string>');
+    L.push('    <key>PayloadRemovalDisallowed</key>');
+    L.push('    <false/>');
+    L.push('    <key>PayloadType</key>');
+    L.push('    <string>Configuration</string>');
+    L.push('    <key>PayloadUUID</key>');
+    L.push('    <string>' + u3 + '</string>');
+    L.push('    <key>PayloadVersion</key>');
+    L.push('    <integer>1</integer>');
+    L.push('</dict>');
+    L.push('</plist>');
+
+    var config = L.join('\n');
 
     try {
         var blob = new Blob([config], {type:'application/x-apple-aspen-config'});
@@ -1131,19 +967,18 @@ function finalizeDownload(cfg, dns, finalAIM){
         a.click();
         document.body.removeChild(a);
         setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-
         setMcDone();
         setTimeout(function(){
-            hideMcOverlay();
+            hideMc();
             var btn = $('downloadBtn');
             if(btn) btn.classList.remove('loading');
-            showToast('Đã tải · DNS:' + dns.primary + ' · AIM S:' + finalAIM.sens, 3200);
+            showToast('Đã tải · ' + cfg.name + ' · HEAD ' + finalAIM.head + '%', 3200);
             isDownloading = false;
             updateDownloadBtn();
         }, 900);
     } catch(e){
         if(window.console) console.error('[X LOCK] Download error:', e);
-        hideMcOverlay();
+        hideMc();
         var btn = $('downloadBtn');
         if(btn) btn.classList.remove('loading');
         showToast('Lỗi tạo file');
@@ -1152,58 +987,39 @@ function finalizeDownload(cfg, dns, finalAIM){
     }
 }
 
-// =============== LOGOUT ===============
+// LOGOUT
 function handleLogout(){
     var ok = true;
-    try { ok = confirm('Bạn chắc chắn muốn thoát? Key sẽ bị xóa khỏi thiết bị này.'); } catch(e){ ok = true; }
+    try { ok = confirm('Bạn chắc chắn muốn thoát?'); } catch(e){ ok = true; }
     if(!ok) return;
-    removeCurrentActivation();
-    JsonEngine.stop();
+    removeCurrentAct();
+    stopBg();
+    stopJsonEngine();
     if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
     selectedConfigId = null;
-    lsRemove('xlock_cfg_v51');
+    lsRemove('xlock_cfg_v82');
     showKeyScreen();
-    showToast('Đã thoát · Nhập key để tiếp tục');
+    showToast('Đã thoát');
 }
 
-// =============== RESTORE ===============
+// RESTORE
 function restoreSession(){
     getDeviceId();
-    var activation = findCurrentActivation();
-    if(!activation){
-        showKeyScreen();
-        return;
-    }
+    var act = findCurrentAct();
+    if(!act){ showKeyScreen(); return; }
     var now = Date.now();
-    var isForever = (activation.type === 'forever') || (activation.expiresAt === null);
-    if(isForever){
-        showMainScreen({
-            key: activation.key,
-            type: activation.type,
-            seconds: Infinity,
-            label: activation.label,
-            activatedAt: activation.activatedAt,
-            expiresAt: null
-        });
-        return;
-    }
-    if(activation.expiresAt && now < activation.expiresAt){
-        showMainScreen({
-            key: activation.key,
-            type: activation.type,
-            seconds: activation.seconds === 'Infinity' ? Infinity : activation.seconds,
-            label: activation.label,
-            activatedAt: activation.activatedAt,
-            expiresAt: activation.expiresAt
-        });
+    var isForever = (act.type === 'forever') || (act.expiresAt === null);
+    if(isForever){ showMainScreen({key:act.key,type:act.type,seconds:Infinity,label:act.label,activatedAt:act.activatedAt,expiresAt:null}); return; }
+    if(act.expiresAt && now < act.expiresAt){
+        showMainScreen({key:act.key,type:act.type,seconds:act.seconds==='Infinity'?Infinity:act.seconds,label:act.label,activatedAt:act.activatedAt,expiresAt:act.expiresAt});
     } else {
-        removeCurrentActivation();
+        removeCurrentAct();
         showKeyScreen();
         showToast('Key trước đã hết hạn');
     }
 }
 
-// =============== INIT ===============
+// INIT
 function init(){
     var activateBtn = $('activateBtn');
     var keyInput = $('keyInput');
@@ -1214,88 +1030,71 @@ function init(){
     var aimApply = $('aimApply');
     var aimReset = $('aimReset');
 
-    if(activateBtn){
-        activateBtn.addEventListener('click', function(e){
-            e.preventDefault();
-            handleActivate();
-        });
-    }
+    if(activateBtn) activateBtn.addEventListener('click', function(e){ e.preventDefault(); handleActivate(); });
     if(keyInput){
         keyInput.addEventListener('keydown', function(e){
-            if(e.key === 'Enter' || e.keyCode === 13){
-                e.preventDefault();
-                handleActivate();
-            }
+            if(e.key === 'Enter' || e.keyCode === 13){ e.preventDefault(); handleActivate(); }
         });
         keyInput.addEventListener('input', function(){
             this.value = this.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
         });
     }
-    if(downloadBtn){
-        downloadBtn.addEventListener('click', function(e){
-            e.preventDefault();
-            downloadMobileConfig();
-        });
-    }
-    if(logoutBtn){
-        logoutBtn.addEventListener('click', function(e){
-            e.preventDefault();
-            handleLogout();
-        });
-    }
-    if(dnsApplyBtn){
-        dnsApplyBtn.addEventListener('click', function(e){
-            e.preventDefault();
-            applyDnsInput();
-        });
-    }
-    if(aimToggle){
-        aimToggle.addEventListener('click', function(e){
-            e.preventDefault();
-            toggleAIMEditor();
-        });
-    }
-    if(aimApply){
-        aimApply.addEventListener('click', function(e){
-            e.preventDefault();
-            applyAIMEditor();
-        });
-    }
-    if(aimReset){
-        aimReset.addEventListener('click', function(e){
-            e.preventDefault();
-            resetAIMEditor();
+    if(downloadBtn) downloadBtn.addEventListener('click', function(e){ e.preventDefault(); downloadMobileConfig(); });
+    if(logoutBtn) logoutBtn.addEventListener('click', function(e){ e.preventDefault(); handleLogout(); });
+    if(dnsApplyBtn) dnsApplyBtn.addEventListener('click', function(e){ e.preventDefault(); applyDnsInput(); });
+    if(aimToggle) aimToggle.addEventListener('click', function(e){
+        e.preventDefault();
+        var ed = $('aimEditor');
+        if(ed.classList.contains('open')){ ed.classList.remove('open'); aimToggle.textContent = '✎ CHỈNH AIM'; }
+        else { ed.classList.add('open'); aimToggle.textContent = '✕ ĐÓNG'; }
+    });
+    if(aimApply) aimApply.addEventListener('click', function(e){
+        e.preventDefault();
+        var a = readAIM();
+        if(a.head < 60) a.head = 60;
+        AIM_STATE.current = a;
+        jsonLog('Manual set → HEAD ' + a.head + '%');
+        showToast('Đã áp dụng AIM · HEAD ' + a.head + '%');
+    });
+    if(aimReset) aimReset.addEventListener('click', function(e){
+        e.preventDefault();
+        if(selectedConfigId){ var cfg = getConfigById(selectedConfigId); if(cfg) fillAIM(cfg.aim); }
+        else fillAIM({sens:110,head:60,smooth:1.1,range:55,drag:2.8,trig:'LB'});
+        showToast('Đã khôi phục mặc định · HEAD 60%');
+    });
+
+    // Auto cap HEAD >= 60 khi user nhập
+    if($('aimHead')){
+        $('aimHead').addEventListener('change', function(){
+            var v = Number(this.value) || 60;
+            if(v < 60){ this.value = 60; showToast('Bám đầu tối thiểu 60%'); }
+            if(v > 100){ this.value = 100; }
         });
     }
 
     restoreSession();
 
     if($('keyScreen') && !$('keyScreen').classList.contains('hidden')){
-        setTimeout(function(){
-            try { if(keyInput) keyInput.focus(); } catch(e){}
-        }, 400);
+        setTimeout(function(){ try{ if(keyInput) keyInput.focus(); }catch(e){} }, 400);
     }
 
     document.addEventListener('visibilitychange', function(){
         if(!document.hidden){
-            var act = findCurrentActivation();
-            if(act && act.expiresAt && Date.now() >= act.expiresAt) handleExpiry();
+            var a = findCurrentAct();
+            if(a && a.expiresAt && Date.now() >= a.expiresAt) handleExpiry();
         }
     });
 
     setInterval(function(){
-        var act = findCurrentActivation();
-        if(act && act.expiresAt && Date.now() >= act.expiresAt) handleExpiry();
+        var a = findCurrentAct();
+        if(a && a.expiresAt && Date.now() >= a.expiresAt) handleExpiry();
     }, 30000);
 
-    if(window.console) console.log('%c[X LOCK] v5.1 READY', 'color:#FF2EF7;font-weight:bold;font-size:14px');
+    if(window.console) console.log('%c[X LOCK] v8.2 READY - HEAD 60% - JSON BG', 'color:#FF0080;font-weight:bold;font-size:14px');
 }
 
-if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
 
 })();
 </script>
