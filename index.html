@@ -9,21 +9,15 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
 body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010 100%);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:12px;color:#ffe6f5;padding-top:max(12px,env(safe-area-inset-top))}
 .app{width:100%;max-width:440px;margin:0 auto;border-radius:28px;background:linear-gradient(160deg,rgba(80,0,60,.95),rgba(30,0,40,.98));box-shadow:0 0 0 1px #FF0080,0 0 35px #FF008088,0 0 70px #C700FF55;padding:22px 16px 24px}
-
-/* LOGO */
 .logo-wrap{text-align:center;margin-bottom:20px}
 .logo-x{width:92px;height:92px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,#FF008044,#2A0020);border-radius:50%;border:2.5px solid #FF0080;font-size:56px;font-weight:900;color:#FF0080;text-shadow:0 0 10px #FF0080,0 0 28px #C700FF;box-shadow:0 0 25px #FF0080,0 0 60px #C700FF88}
 .logo-name{font-size:36px;font-weight:900;letter-spacing:10px;color:#FF0080;text-shadow:0 0 8px #FF0080,0 0 22px #FF0080,0 0 44px #C700FF;margin-bottom:6px}
 .logo-tag{font-size:10px;letter-spacing:5px;color:#ff9ddb}
-
-/* KEY INPUT */
 .input-wrap{margin:22px 0 18px}
 .input-wrap label{display:block;font-size:11px;letter-spacing:3px;color:#ff9ddb;margin-bottom:10px;text-align:center}
 .key-input{width:100%;background:rgba(15,0,20,.92);border:2px solid #FF0080;border-radius:18px;padding:17px 14px;font-size:17px;font-weight:700;letter-spacing:1.5px;color:#FF0080;text-shadow:0 0 10px #FF0080;outline:none;text-align:center;box-shadow:0 0 22px #FF008066;-webkit-appearance:none}
 .key-input::placeholder{color:#a8558f;font-size:14px}
 .key-input:focus{border-color:#FF0080;box-shadow:0 0 0 1px #FF0080,0 0 35px #FF0080}
-
-/* BUTTONS */
 .btn{display:block;width:100%;padding:17px;border:none;border-radius:18px;font-size:15px;font-weight:800;letter-spacing:2px;background:linear-gradient(135deg,#FF0080,#C700FF,#9D00CC);color:#fff;text-shadow:0 0 10px #fff;box-shadow:0 0 28px #FF0080,0 0 55px #C700FF99;cursor:pointer;-webkit-appearance:none;touch-action:manipulation;position:relative;overflow:hidden}
 .btn:active{transform:scale(.96)}
 .btn:disabled{background:linear-gradient(135deg,#3a1030,#2a0820);color:#7a4d70;text-shadow:none;box-shadow:none;cursor:not-allowed;opacity:.55}
@@ -33,8 +27,6 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 .btn.loading{color:transparent!important;pointer-events:none}
 .btn.loading::after{content:'';position:absolute;top:50%;left:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{100%{transform:rotate(360deg)}}
-
-/* HEADER */
 .main-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:14px;margin-bottom:16px;border-bottom:2px solid #FF0080;gap:10px}
 .main-header .left-side{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
 .main-header .title{font-size:24px;font-weight:900;letter-spacing:6px;color:#FF0080;text-shadow:0 0 8px #FF0080,0 0 20px #C700FF}
@@ -42,71 +34,50 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 .header-timer{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;padding:8px 11px;background:linear-gradient(135deg,rgba(255,0,128,.18),rgba(157,0,204,.14));border:1.5px solid #FF0080;border-radius:14px;box-shadow:0 0 18px #FF008066;min-width:112px}
 .header-timer .hdr-lbl{font-size:8px;letter-spacing:2px;color:#ff9ddb;font-weight:700;text-transform:uppercase}
 .header-timer .hdr-val{font-size:16px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace;letter-spacing:1.5px;text-shadow:0 0 10px #FF0080,0 0 20px #C700FF;white-space:nowrap}
-
-/* CARD */
 .card{background:linear-gradient(150deg,rgba(90,0,70,.75),rgba(35,0,45,.9));border:1.5px solid #FF0080;border-radius:20px;padding:15px;margin-bottom:14px;box-shadow:0 0 22px #FF008077}
 .card.busy{box-shadow:0 0 0 2px #FF0080,0 0 40px #FF0080,inset 0 0 30px #FF008066}
 .card-title{font-size:11px;letter-spacing:3px;color:#ff9ddb;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:6px}
 .card-title .left{display:flex;align-items:center;gap:7px}
 .card-title .left::before{content:'';width:7px;height:7px;border-radius:50%;background:#FF0080;box-shadow:0 0 12px #FF0080}
 .card-title .toggle-btn{font-size:9px;padding:4px 9px;border-radius:20px;background:rgba(255,0,128,.2);border:1px solid #FF0080;color:#FF0080;cursor:pointer;font-weight:700}
-
-/* DNS */
 .dns-input-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px;padding-top:12px;border-top:1px dashed #FF008055}
 .dns-input-field{background:rgba(15,0,20,.9);border:1.5px solid #FF0080;border-radius:14px;padding:11px 12px}
 .dns-input-field .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
 .dns-input-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF0080;-webkit-appearance:none}
 .dns-input-field input::placeholder{color:#7a3868;font-weight:500;font-size:13px}
-
 .dns-status{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;padding:10px 12px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(255,0,128,.08);border:1px dashed #FF008066;color:#ff9ddb;min-height:38px;text-align:center}
 .dns-status.checking{background:rgba(255,0,128,.16);border-style:solid;border-color:#FF0080;color:#FF0080}
 .dns-status.success{background:rgba(0,255,140,.12);border-style:solid;border-color:#00FF8C;color:#00FF8C}
 .dns-status.error{background:rgba(255,60,90,.12);border-style:solid;border-color:#FF3C5A;color:#FF3C5A}
 .dns-spinner{width:14px;height:14px;border:2px solid rgba(255,0,128,.3);border-top-color:#FF0080;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-
 .doh-row{display:flex;flex-direction:column;gap:5px;padding-top:12px;margin-top:12px;border-top:1px dashed #FF008055}
 .doh-row .lbl{font-size:11px;color:#ff9ddb}
 .doh-link{font-size:10px;color:#FF0080;text-decoration:none;word-break:break-all;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF0080;padding-bottom:3px;line-height:1.4}
-
-/* JSON STATUS */
-.json-status{margin-top:12px;padding:12px;background:rgba(10,0,15,.6);border-radius:14px;border-left:3px solid #00FF8C}
-.json-status-head{display:flex;align-items:center;gap:8px}
-#conn-dot{width:8px;height:8px;border-radius:50%;background:#ff9d00;box-shadow:0 0 10px #ff9d00;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
-#conn-status{font-size:11px;color:#ff9ddb;font-weight:700;letter-spacing:.5px}
-.json-values{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.json-val-box{background:rgba(255,0,128,.08);border-radius:10px;padding:8px 10px;border:1px solid #FF008044}
-.json-val-box .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px}
-.json-val-box .val{font-size:13px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;margin-top:3px}
-.json-modules{margin-top:10px;display:flex;flex-direction:column;gap:5px}
-.json-mod-row{display:flex;justify-content:space-between;align-items:center}
-.json-mod-row .m-lbl{font-size:10px;color:#ff9ddb}
-.json-mod-row .m-val{font-size:10px;color:#7a4d70;font-weight:800}
-
-/* MODULES */
 .bg-status{margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
 .bg-status-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(10,0,15,.6);border-radius:10px;margin-bottom:6px;border-left:3px solid #FF0080}
 .bg-status-row:last-child{margin-bottom:0}
 .bg-status-row .dot{width:7px;height:7px;border-radius:50%;background:#00ff8c;box-shadow:0 0 8px #00ff8c;flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 .bg-status-row .name{font-size:10px;font-weight:800;color:#FF0080;letter-spacing:.5px;flex:1}
 .bg-status-row .val{font-size:9px;color:#ff9ddb;font-family:'SF Mono',Menlo,monospace;font-weight:700}
-
-/* AIM EDITOR */
 .aim-editor{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
 .aim-editor.open{display:block}
+.editor-title{font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:6px;text-align:center}
+.editor-config{font-size:11px;font-weight:800;color:#FF0080;text-align:center;margin-bottom:10px;letter-spacing:.5px}
 .aim-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .aim-field{background:rgba(15,0,20,.85);border:1.5px solid #FF008088;border-radius:12px;padding:9px 11px}
 .aim-field .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
-.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 10px #FF0080;-webkit-appearance:none}
+.aim-field input{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:15px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
 .aim-field select{width:100%;background:transparent;border:none;outline:none;color:#FF0080;font-size:14px;font-weight:800;font-family:'SF Mono',Menlo,monospace;-webkit-appearance:none}
 .aim-field select option{background:#2A0020;color:#FF0080}
 .aim-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-
-/* CONFIG LIST */
+.aim-save-note{font-size:9px;color:#ff9ddb;text-align:center;margin-top:8px;letter-spacing:.5px;line-height:1.5}
+.aim-save-note b{color:#00FF8C}
 .cfg-list{display:flex;flex-direction:column;gap:10px;max-height:520px;overflow-y:auto;padding-right:4px}
-.cfg-item{display:flex;flex-direction:column;gap:8px;background:rgba(15,0,20,.8);border:1.5px solid #FF008066;border-radius:16px;padding:13px;cursor:pointer;transition:all .25s;touch-action:manipulation}
+.cfg-item{display:flex;flex-direction:column;gap:8px;background:rgba(15,0,20,.8);border:1.5px solid #FF008066;border-radius:16px;padding:13px;cursor:pointer;transition:all .25s;touch-action:manipulation;position:relative}
 .cfg-item:active{transform:scale(.98)}
 .cfg-item.selected{background:linear-gradient(135deg,rgba(255,0,128,.25),rgba(157,0,204,.2));border-color:#FF0080;box-shadow:0 0 0 1px #FF0080,0 0 26px #FF008077}
+.cfg-custom-badge{position:absolute;top:8px;right:8px;font-size:8px;background:rgba(0,255,140,.15);border:1px solid #00FF8C;color:#00FF8C;padding:2px 6px;border-radius:10px;font-weight:800;letter-spacing:.5px;z-index:1}
 .cfg-header{display:flex;align-items:center;gap:10px}
 .cfg-icon{font-size:10px;font-weight:900;width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:linear-gradient(135deg,rgba(255,0,128,.25),rgba(157,0,204,.2));border:1px solid #FF0080;color:#FF0080;text-shadow:0 0 8px #FF0080;flex-shrink:0}
 .cfg-info{flex:1;min-width:0}
@@ -119,17 +90,13 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 .cfg-details{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding-top:8px;border-top:1px dashed #FF008044}
 .cfg-detail-item{background:rgba(10,0,15,.6);border-radius:8px;padding:6px 8px;border-left:2px solid #FF0080}
 .cfg-detail-item .lbl{font-size:8px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase}
-.cfg-detail-item .val{font-size:11px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;text-shadow:0 0 8px #FF0080;margin-top:2px;word-break:break-all}
+.cfg-detail-item .val{font-size:11px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;margin-top:2px;word-break:break-all}
 .cfg-doh-row{background:rgba(10,0,15,.6);border-radius:8px;padding:7px 9px;border-left:2px solid #C700FF;margin-top:2px}
 .cfg-doh-row .lbl{font-size:8px;color:#ff9ddb;letter-spacing:1px;text-transform:uppercase}
 .cfg-doh-row .val{font-size:10px;color:#C700FF;font-weight:700;font-family:'SF Mono',Menlo,monospace;margin-top:3px;word-break:break-all;line-height:1.3}
-
-/* PILLS */
 .status-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;justify-content:center}
 .pill{font-size:9px;padding:5px 10px;border-radius:30px;background:rgba(255,0,128,.14);border:1px solid #FF008088;color:#FF0080;font-weight:700;display:flex;align-items:center;gap:5px}
 .pill .dot{width:6px;height:6px;border-radius:50%;background:#00ff8c;box-shadow:0 0 8px #00ff8c}
-
-/* LOADING OVERLAY */
 .loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,#3A0033,#0A0010);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:22px;padding:30px}
 .loading-overlay.show{display:flex}
 .spinner-ring{width:120px;height:120px;border-radius:50%;border:5px solid transparent;border-top-color:#FF0080;border-right-color:#C700FF;animation:spin 1s linear infinite;box-shadow:0 0 40px #FF0080,0 0 80px #C700FF}
@@ -138,8 +105,6 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 .loading-count{font-size:44px;font-weight:900;color:#FF0080;font-family:'SF Mono',Menlo,monospace}
 .loading-bar{width:250px;height:7px;background:rgba(255,0,128,.15);border-radius:30px;overflow:hidden;border:1px solid #FF008088}
 .loading-bar-fill{height:100%;background:linear-gradient(90deg,#FF0080,#C700FF,#FF0080);width:0%;transition:width .3s linear}
-
-/* MC OVERLAY */
 .mc-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at center,rgba(58,0,51,.98),rgba(10,0,16,.99));display:none;flex-direction:column;align-items:center;justify-content:center;z-index:9998;gap:20px;padding:30px}
 .mc-overlay.show{display:flex}
 .mc-spinner{width:110px;height:110px;position:relative}
@@ -151,8 +116,6 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 .mc-step{font-size:11px;letter-spacing:2px;color:#ff9ddb;text-align:center;min-height:16px}
 .mc-bar{width:280px;height:9px;background:rgba(255,0,128,.15);border-radius:30px;overflow:hidden;border:1px solid #FF008088}
 .mc-bar-fill{height:100%;background:linear-gradient(90deg,#FF0080,#C700FF,#FF0080);width:0%;transition:width .25s ease}
-
-/* TOAST */
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(90px);background:linear-gradient(150deg,#3A0033,#1A0020);border:2px solid #FF0080;color:#FF0080;padding:14px 22px;border-radius:40px;font-weight:700;font-size:12.5px;box-shadow:0 0 30px #FF0080,0 0 60px #C700FF;z-index:10000;text-align:center;max-width:90%;transition:transform .35s,opacity .3s;opacity:0;pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .hidden{display:none!important}
@@ -223,74 +186,16 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
             <a class="doh-link" id="dohLink" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">https://jsonhosting.com/api/json/694fec6d/raw</a>
         </div>
 
-        <div class="json-status">
-            <div class="json-status-head">
-                <div id="conn-dot"></div>
-                <span id="conn-status">Đang kết nối X LOCK...</span>
-            </div>
-            <div class="json-values">
-                <div class="json-val-box">
-                    <div class="lbl">DNS CHÍNH</div>
-                    <div id="cfg-dns-primary" class="val">--</div>
-                </div>
-                <div class="json-val-box">
-                    <div class="lbl">DNS PHỤ</div>
-                    <div id="cfg-dns-secondary" class="val">--</div>
-                </div>
-                <div class="json-val-box">
-                    <div class="lbl">ĐỘ NHẠY</div>
-                    <div id="cfg-sens" class="val">--</div>
-                </div>
-                <div class="json-val-box">
-                    <div class="lbl">BÁM ĐẦU</div>
-                    <div id="cfg-head" class="val">--</div>
-                </div>
-                <div class="json-val-box">
-                    <div class="lbl">RUNG TÂM</div>
-                    <div id="cfg-rungtam" class="val">--</div>
-                </div>
-                <div class="json-val-box">
-                    <div class="lbl">TRIGGER</div>
-                    <div id="cfg-trig" class="val">--</div>
-                </div>
-            </div>
-            <div class="json-modules">
-                <div class="json-mod-row">
-                    <span class="m-lbl">Fix Rung Tâm</span>
-                    <span class="m-val" id="cfg-onoff-rungtam">TẮT</span>
-                </div>
-                <div class="json-mod-row">
-                    <span class="m-lbl">Tăng Nhạy</span>
-                    <span class="m-val" id="cfg-onoff-tangnhay">TẮT</span>
-                </div>
-                <div class="json-mod-row">
-                    <span class="m-lbl">JSON AIM</span>
-                    <span class="m-val" id="cfg-onoff-jsonaim">TẮT</span>
-                </div>
-            </div>
-        </div>
-
         <div class="bg-status">
             <div style="font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:8px">⚙️ MODULE CHẠY NGẦM</div>
-            <div class="bg-status-row">
-                <div class="dot"></div>
-                <div class="name">FIX RUNG TÂM</div>
-                <div class="val" id="statusRungTam">OFF</div>
-            </div>
-            <div class="bg-status-row">
-                <div class="dot"></div>
-                <div class="name">TĂNG NHẠY</div>
-                <div class="val" id="statusTangNhay">OFF</div>
-            </div>
-            <div class="bg-status-row">
-                <div class="dot"></div>
-                <div class="name">JSON AIM</div>
-                <div class="val" id="statusJsonAim">OFF</div>
-            </div>
+            <div class="bg-status-row"><div class="dot"></div><div class="name">FIX RUNG TÂM</div><div class="val" id="statusRungTam">OFF</div></div>
+            <div class="bg-status-row"><div class="dot"></div><div class="name">TĂNG NHẠY</div><div class="val" id="statusTangNhay">OFF</div></div>
+            <div class="bg-status-row"><div class="dot"></div><div class="name">JSON AIM</div><div class="val" id="statusJsonAim">OFF</div></div>
         </div>
 
         <div class="aim-editor" id="aimEditor">
-            <div style="font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:6px">🎯 THÔNG SỐ AIM TÙY CHỈNH</div>
+            <div class="editor-title">🎯 CHỈNH THÔNG SỐ AIM</div>
+            <div class="editor-config" id="aimEditorConfigName">📦 CHƯA CHỌN CẤU HÌNH</div>
             <div class="aim-grid">
                 <div class="aim-field"><div class="lbl">Độ nhạy</div><input type="number" id="aimSens" value="135" min="135" max="200"></div>
                 <div class="aim-field"><div class="lbl">Bám đầu %</div><input type="number" id="aimHead" value="60" min="60" max="100"></div>
@@ -312,8 +217,9 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
             </div>
             <div class="aim-actions">
                 <button class="btn btn-outline btn-sm" id="aimReset" type="button">↺ MẶC ĐỊNH</button>
-                <button class="btn btn-sm" id="aimApply" type="button">✓ ÁP DỤNG</button>
+                <button class="btn btn-sm" id="aimApply" type="button">💾 LƯU VÀO CẤU HÌNH</button>
             </div>
+            <div class="aim-save-note">Thông số sẽ <b>lưu vào cấu hình đang chọn</b></div>
         </div>
     </div>
 
@@ -326,7 +232,7 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
         <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
         <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
     </div>
-    <div class="footer-note">X LOCK · v10.0 · FREE FIRE</div>
+    <div class="footer-note">X LOCK · v14.0 · FREE FIRE</div>
 </div>
 
 </div>
@@ -350,11 +256,17 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 <div id="toast" class="toast"></div>
 
 <script>
+// ============================================================
+// X LOCK v14.0 - LOGIC ĐƠN GIẢN, CHẮC CHẮN CHẠY
+// ============================================================
 (function(){
 'use strict';
 
-var HOUR = 3600, WEEK = 7*24*HOUR, MONTH = 30*24*HOUR;
+var HOUR = 3600;
+var WEEK = 7 * 24 * HOUR;
+var MONTH = 30 * 24 * HOUR;
 
+// Danh sách key hợp lệ
 var KEYS = [
     {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
     {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
@@ -408,7 +320,7 @@ var isDownloading = false;
 var AIM = { sens:135, head:60, smooth:1.1, range:55, drag:2.8, rungTam:0.96, trig:'LB' };
 var RUNG_TAM = { running:false, ticks:0, value:0.96, fixCount:0 };
 var TANG_NHAY = { running:false, ticks:0, base:135, boost:1.15, effective:155 };
-var JSON_ENGINE = { running:false, ticks:0, ok:0, err:0, lastFetch:0 };
+var JSON_ENGINE = { running:false, ticks:0 };
 
 function $(id){ return document.getElementById(id); }
 
@@ -422,52 +334,108 @@ function showToast(msg, dur){
     t._t = setTimeout(function(){ t.classList.remove('show'); }, dur);
 }
 
+// LocalStorage đơn giản
 function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
 function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
 function lsRemove(k){ try { localStorage.removeItem(k); } catch(e){} }
 
+// Device ID
 function getDeviceId(){
-    var id = lsGet('xlock_dev_v10');
+    var id = lsGet('xlock_device');
     if(!id){
         id = 'XL-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Math.random().toString(36).substring(2,6).toUpperCase() + '-' + Date.now().toString(36).toUpperCase().slice(-6);
-        lsSet('xlock_dev_v10', id);
+        lsSet('xlock_device', id);
     }
     return id;
 }
 
-function getActs(){ var r = lsGet('xlock_acts_v10'); if(!r) return {}; try { return JSON.parse(r) || {}; } catch(e){ return {}; } }
-function saveActs(d){ try { lsSet('xlock_acts_v10', JSON.stringify(d)); } catch(e){} }
+// Activations
+function getActs(){
+    var r = lsGet('xlock_acts');
+    if(!r) return {};
+    try { return JSON.parse(r) || {}; } catch(e){ return {}; }
+}
+function saveActs(d){ try { lsSet('xlock_acts', JSON.stringify(d)); } catch(e){} }
 function findCurrentAct(){
-    var did = getDeviceId(), all = getActs(), keys = Object.keys(all);
+    var did = getDeviceId();
+    var all = getActs();
+    var keys = Object.keys(all);
     for(var i = 0; i < keys.length; i++){
-        if(all[keys[i]].deviceId === did){ var r = all[keys[i]]; r.key = keys[i]; return r; }
+        if(all[keys[i]].deviceId === did){
+            var r = all[keys[i]];
+            r.key = keys[i];
+            return r;
+        }
     }
     return null;
 }
-function isKeyUsedByOther(k){ var all = getActs(); if(!all[k]) return false; return all[k].deviceId !== getDeviceId(); }
+function isKeyUsedByOther(k){
+    var all = getActs();
+    if(!all[k]) return false;
+    return all[k].deviceId !== getDeviceId();
+}
 function removeCurrentAct(){
-    var did = getDeviceId(), all = getActs(), keys = Object.keys(all);
-    for(var i = 0; i < keys.length; i++) if(all[keys[i]].deviceId === did) delete all[keys[i]];
+    var did = getDeviceId();
+    var all = getActs();
+    var keys = Object.keys(all);
+    for(var i = 0; i < keys.length; i++){
+        if(all[keys[i]].deviceId === did) delete all[keys[i]];
+    }
     saveActs(all);
 }
+
 function formatTime(ms){
     if(ms <= 0) return '00:00:00';
-    var s = Math.floor(ms/1000), h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+    var s = Math.floor(ms/1000);
+    var h = Math.floor(s/3600);
+    var m = Math.floor((s%3600)/60);
+    var sec = s%60;
     return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
 }
+
 function isValidIP(ip){
     if(!ip) return false;
     if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip)) return false;
     var p = ip.split('.');
-    for(var i = 0; i < 4; i++){ var n = Number(p[i]); if(n < 0 || n > 255) return false; }
+    for(var i = 0; i < 4; i++){
+        var n = Number(p[i]);
+        if(n < 0 || n > 255) return false;
+    }
     return true;
+}
+
+// Config overrides
+function getConfigOverrides(){
+    var raw = lsGet('xlock_cfg_ov');
+    if(!raw) return {};
+    try { return JSON.parse(raw) || {}; } catch(e){ return {}; }
+}
+function saveConfigOverride(cfgId, aim){
+    var ov = getConfigOverrides();
+    ov[cfgId] = aim;
+    lsSet('xlock_cfg_ov', JSON.stringify(ov));
+}
+function clearConfigOverride(cfgId){
+    var ov = getConfigOverrides();
+    delete ov[cfgId];
+    lsSet('xlock_cfg_ov', JSON.stringify(ov));
+}
+function getEffectiveAIM(cfg){
+    if(!cfg) return AIM;
+    var ov = getConfigOverrides();
+    if(ov[cfg.id]) return ov[cfg.id];
+    return cfg.aim;
+}
+function hasCustomAIM(cfg){
+    if(!cfg) return false;
+    return !!getConfigOverrides()[cfg.id];
 }
 function getConfigById(id){
     for(var i = 0; i < CONFIGS.length; i++) if(CONFIGS[i].id === id) return CONFIGS[i];
     return null;
 }
 
-// MODULE 1: FIX RUNG TÂM
+// BG Modules
 function startRungTam(){
     if(RUNG_TAM.running) return;
     RUNG_TAM.running = true;
@@ -483,7 +451,6 @@ function startRungTam(){
 }
 function stopRungTam(){ if(RUNG_TAM._loop){ clearInterval(RUNG_TAM._loop); RUNG_TAM._loop = null; } RUNG_TAM.running = false; }
 
-// MODULE 2: TĂNG NHẠY
 function startTangNhay(){
     if(TANG_NHAY.running) return;
     TANG_NHAY.running = true;
@@ -495,7 +462,6 @@ function startTangNhay(){
 }
 function stopTangNhay(){ if(TANG_NHAY._loop){ clearInterval(TANG_NHAY._loop); TANG_NHAY._loop = null; } TANG_NHAY.running = false; }
 
-// MODULE 3: JSON ENGINE
 function startJsonEngine(){
     if(JSON_ENGINE.running) return;
     JSON_ENGINE.running = true;
@@ -555,8 +521,8 @@ function applyDnsInput(){
             setTimeout(function(){
                 setDnsStatus('checking','Đang áp dụng cấu hình...');
                 setTimeout(function(){
-                    lsSet('xlock_p_v10', p);
-                    lsSet('xlock_s_v10', s);
+                    lsSet('xlock_dns_p', p);
+                    lsSet('xlock_dns_s', s);
                     setDnsStatus('success', p + ' / ' + s);
                     if(btn) btn.classList.remove('loading');
                     if(card) card.classList.remove('busy');
@@ -570,9 +536,9 @@ function applyDnsInput(){
 }
 
 function loadSavedDns(){
-    var p = lsGet('xlock_p_v10') || '10.10.34.1';
-    var s = lsGet('xlock_s_v10') || '1.1.1.1';
-    var doh = lsGet('xlock_doh_v10') || 'https://jsonhosting.com/api/json/694fec6d/raw';
+    var p = lsGet('xlock_dns_p') || '10.10.34.1';
+    var s = lsGet('xlock_dns_s') || '1.1.1.1';
+    var doh = lsGet('xlock_doh') || 'https://jsonhosting.com/api/json/694fec6d/raw';
     selectedDohURL = doh;
     $('dnsPrimaryInput').value = p;
     $('dnsSecondaryInput').value = s;
@@ -580,6 +546,7 @@ function loadSavedDns(){
     setDnsStatus('idle', 'Đang dùng: ' + p + ' / ' + s);
 }
 
+// AIM
 function fillAIM(a){
     if(!a) return;
     $('aimSens').value = a.sens;
@@ -611,6 +578,22 @@ function readAIM(){
     };
 }
 
+function updateEditorConfigName(){
+    var el = $('aimEditorConfigName');
+    if(!el) return;
+    if(selectedConfigId){
+        var cfg = getConfigById(selectedConfigId);
+        if(cfg){
+            var custom = hasCustomAIM(cfg) ? ' ✎' : '';
+            el.textContent = '📦 ' + cfg.name + custom;
+            el.style.color = hasCustomAIM(cfg) ? '#00FF8C' : '#FF0080';
+            return;
+        }
+    }
+    el.textContent = '📦 CHƯA CHỌN CẤU HÌNH';
+    el.style.color = '#FF0080';
+}
+
 function renderConfigList(){
     var list = $('cfgList');
     if(!list) return;
@@ -619,6 +602,16 @@ function renderConfigList(){
         (function(cfg){
             var el = document.createElement('div');
             el.className = 'cfg-item' + (selectedConfigId === cfg.id ? ' selected' : '');
+
+            var custom = hasCustomAIM(cfg);
+            var effectiveAIM = getEffectiveAIM(cfg);
+
+            if(custom){
+                var badge = document.createElement('div');
+                badge.className = 'cfg-custom-badge';
+                badge.textContent = '✎ ĐÃ CHỈNH';
+                el.appendChild(badge);
+            }
 
             var header = document.createElement('div');
             header.className = 'cfg-header';
@@ -662,22 +655,22 @@ function renderConfigList(){
 
             var d3 = document.createElement('div');
             d3.className = 'cfg-detail-item';
-            d3.innerHTML = '<div class="lbl">Độ nhạy</div><div class="val">' + cfg.aim.sens + '</div>';
+            d3.innerHTML = '<div class="lbl">Độ nhạy</div><div class="val">' + effectiveAIM.sens + '</div>';
             details.appendChild(d3);
 
             var d4 = document.createElement('div');
             d4.className = 'cfg-detail-item';
-            d4.innerHTML = '<div class="lbl">Bám đầu</div><div class="val">' + cfg.aim.head + '%</div>';
+            d4.innerHTML = '<div class="lbl">Bám đầu</div><div class="val">' + effectiveAIM.head + '%</div>';
             details.appendChild(d4);
 
             var d5 = document.createElement('div');
             d5.className = 'cfg-detail-item';
-            d5.innerHTML = '<div class="lbl">Rung tâm</div><div class="val">' + (cfg.aim.rungTam || 0.96) + '</div>';
+            d5.innerHTML = '<div class="lbl">Rung tâm</div><div class="val">' + (effectiveAIM.rungTam || 0.96) + '</div>';
             details.appendChild(d5);
 
             var d6 = document.createElement('div');
             d6.className = 'cfg-detail-item';
-            d6.innerHTML = '<div class="lbl">Trigger</div><div class="val">' + cfg.aim.trig + '</div>';
+            d6.innerHTML = '<div class="lbl">Trigger</div><div class="val">' + effectiveAIM.trig + '</div>';
             details.appendChild(d6);
 
             el.appendChild(details);
@@ -696,34 +689,38 @@ function renderConfigList(){
 
 function selectConfig(id){
     selectedConfigId = id;
-    lsSet('xlock_cfg_v10', id);
+    lsSet('xlock_cfg_sel', id);
     var cfg = getConfigById(id);
     if(cfg){
         $('dnsPrimaryInput').value = cfg.dns.primary;
         $('dnsSecondaryInput').value = cfg.dns.secondary;
         selectedDohURL = cfg.doh;
         setDohDisplay(cfg.doh);
-        lsSet('xlock_p_v10', cfg.dns.primary);
-        lsSet('xlock_s_v10', cfg.dns.secondary);
-        lsSet('xlock_doh_v10', cfg.doh);
-        fillAIM(cfg.aim);
+        lsSet('xlock_dns_p', cfg.dns.primary);
+        lsSet('xlock_dns_s', cfg.dns.secondary);
+        lsSet('xlock_doh', cfg.doh);
 
-        AIM.sens = cfg.aim.sens;
-        AIM.head = 60;
-        AIM.smooth = cfg.aim.smooth;
-        AIM.range = cfg.aim.range;
-        AIM.drag = cfg.aim.drag;
-        AIM.rungTam = cfg.aim.rungTam || 0.96;
-        AIM.trig = cfg.aim.trig;
+        var effectiveAIM = getEffectiveAIM(cfg);
+        fillAIM(effectiveAIM);
+
+        AIM.sens = effectiveAIM.sens;
+        AIM.head = effectiveAIM.head;
+        AIM.smooth = effectiveAIM.smooth;
+        AIM.range = effectiveAIM.range;
+        AIM.drag = effectiveAIM.drag;
+        AIM.rungTam = effectiveAIM.rungTam;
+        AIM.trig = effectiveAIM.trig;
 
         RUNG_TAM.value = AIM.rungTam;
         TANG_NHAY.base = AIM.sens;
         TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
 
+        var note = hasCustomAIM(cfg) ? ' (AIM tùy chỉnh)' : '';
         setDnsStatus('success', cfg.name + ' · DNS ' + cfg.dns.primary);
-        showToast('✅ ' + cfg.name + ' · HEAD 60% · Tâm ' + RUNG_TAM.value.toFixed(2), 2400);
+        showToast('✅ ' + cfg.name + note, 2400);
         setTimeout(function(){ setDnsStatus('idle', 'Đang dùng: ' + cfg.dns.primary + ' / ' + cfg.dns.secondary); }, 2800);
         updateBgUI();
+        updateEditorConfigName();
     }
     renderConfigList();
 }
@@ -736,7 +733,7 @@ function updateDownloadBtn(){
 }
 
 function loadSavedConfig(){
-    var saved = lsGet('xlock_cfg_v10');
+    var saved = lsGet('xlock_cfg_sel');
     if(saved){ for(var i = 0; i < CONFIGS.length; i++) if(CONFIGS[i].id === saved){ selectedConfigId = saved; return; } }
 }
 
@@ -766,20 +763,22 @@ function showMainScreen(act){
             $('dnsSecondaryInput').value = cfg.dns.secondary;
             selectedDohURL = cfg.doh;
             setDohDisplay(cfg.doh);
-            fillAIM(cfg.aim);
-            AIM.sens = cfg.aim.sens;
-            AIM.head = 60;
-            AIM.smooth = cfg.aim.smooth;
-            AIM.range = cfg.aim.range;
-            AIM.drag = cfg.aim.drag;
-            AIM.rungTam = cfg.aim.rungTam || 0.96;
-            AIM.trig = cfg.aim.trig;
+            var effAIM = getEffectiveAIM(cfg);
+            fillAIM(effAIM);
+            AIM.sens = effAIM.sens;
+            AIM.head = effAIM.head;
+            AIM.smooth = effAIM.smooth;
+            AIM.range = effAIM.range;
+            AIM.drag = effAIM.drag;
+            AIM.rungTam = effAIM.rungTam;
+            AIM.trig = effAIM.trig;
             RUNG_TAM.value = AIM.rungTam;
             TANG_NHAY.base = AIM.sens;
             TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
             setDnsStatus('idle', 'Đang dùng: ' + cfg.dns.primary + ' / ' + cfg.dns.secondary);
         }
     }
+    updateEditorConfigName();
     startTimer(act);
     startBgLoop();
     startAllModules();
@@ -805,32 +804,65 @@ function handleExpiry(){
     stopBgLoop();
     stopAllModules();
     selectedConfigId = null;
-    lsRemove('xlock_cfg_v10');
+    lsRemove('xlock_cfg_sel');
     showKeyScreen();
     showToast('KEY ĐÃ HẾT HẠN', 3500);
 }
 
+// ============================================================
+// KÍCH HOẠT KEY - LOGIC ĐƠN GIẢN NHẤT
+// ============================================================
 function handleActivate(){
     if(isActivating) return;
+
     var input = $('keyInput');
     if(!input) return;
+
     var raw = input.value.trim().toUpperCase();
     if(!raw){ showToast('Vui lòng nhập key'); return; }
+
     var normalized = raw.replace(/[^A-Z0-9-]/g, '');
-    if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){ showToast('Sai định dạng · XLOCK-XXXX-XXXX-FF'); return; }
+
+    if(!/^XLOCK-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/.test(normalized)){
+        showToast('❌ Sai định dạng · XLOCK-XXXX-XXXX-FF');
+        return;
+    }
+
     var found = null;
-    for(var i = 0; i < KEYS.length; i++) if(KEYS[i].key === normalized){ found = KEYS[i]; break; }
-    if(!found){ showToast('Key không tồn tại'); return; }
-    if(isKeyUsedByOther(normalized)){ showToast('Key đã dùng trên thiết bị khác'); return; }
+    for(var i = 0; i < KEYS.length; i++){
+        if(KEYS[i].key === normalized){ found = KEYS[i]; break; }
+    }
+    if(!found){
+        showToast('❌ Key không tồn tại');
+        return;
+    }
+
+    if(isKeyUsedByOther(normalized)){
+        showToast('❌ Key đã dùng trên thiết bị khác');
+        return;
+    }
+
     var existing = findCurrentAct();
     if(existing && existing.key === normalized){
         var now = Date.now();
         var isForever = (existing.type === 'forever') || (existing.expiresAt === null);
-        if(!isForever && existing.expiresAt && now >= existing.expiresAt){ removeCurrentAct(); showToast('Key đã hết hạn'); return; }
-        showMainScreen({key:normalized,type:existing.type,seconds:existing.seconds==='Infinity'?Infinity:existing.seconds,label:existing.label,activatedAt:existing.activatedAt,expiresAt:existing.expiresAt});
-        showToast('Key còn hiệu lực');
+        if(!isForever && existing.expiresAt && now >= existing.expiresAt){
+            removeCurrentAct();
+            showToast('❌ Key đã hết hạn');
+            return;
+        }
+        showMainScreen({
+            key: normalized,
+            type: existing.type,
+            seconds: existing.seconds === 'Infinity' ? Infinity : existing.seconds,
+            label: existing.label,
+            activatedAt: existing.activatedAt,
+            expiresAt: existing.expiresAt
+        });
+        showToast('✅ Key còn hiệu lực');
         return;
     }
+
     if(existing) removeCurrentAct();
     beginLoading(found);
 }
@@ -840,20 +872,40 @@ function beginLoading(foundKey){
     var overlay = $('loadingOverlay');
     if(!overlay){ isActivating = false; return; }
     overlay.classList.add('show');
+
     var count = 30;
-    var countEl = $('loadingCount'), barEl = $('loadingBarFill'), subEl = $('loadingSub');
+    var countEl = $('loadingCount');
+    var barEl = $('loadingBarFill');
+    var subEl = $('loadingSub');
+
     if(countEl) countEl.textContent = count;
     if(barEl) barEl.style.width = '0%';
-    var msgs = ['ĐANG THIẾT LẬP DNS & AIM...','ĐANG FIX RUNG TÂM...','ĐANG TĂNG NHẠY 135%...','ĐANG KẾT NỐI X LOCK...','ĐANG ÁP DỤNG HEAD 60%...','HOÀN TẤT · ĐANG KÍCH HOẠT...'];
+
+    var msgs = [
+        'ĐANG THIẾT LẬP DNS & AIM...',
+        'ĐANG FIX RUNG TÂM...',
+        'ĐANG TĂNG NHẠY 135%...',
+        'ĐANG KẾT NỐI X LOCK...',
+        'ĐANG ÁP DỤNG HEAD 60%...',
+        'HOÀN TẤT · ĐANG KÍCH HOẠT...'
+    ];
     var idx = 0;
     if(subEl) subEl.textContent = msgs[0];
+
     if(loadingInterval) clearInterval(loadingInterval);
     loadingInterval = setInterval(function(){
         count--;
         if(countEl) countEl.textContent = count;
-        if(barEl) barEl.style.width = ((30-count)/30*100) + '%';
-        if(count % 5 === 0 && idx < msgs.length-1){ idx++; if(subEl) subEl.textContent = msgs[idx]; }
-        if(count <= 0){ clearInterval(loadingInterval); loadingInterval = null; completeActivation(foundKey); }
+        if(barEl) barEl.style.width = ((30 - count) / 30 * 100) + '%';
+        if(count % 5 === 0 && idx < msgs.length - 1){
+            idx++;
+            if(subEl) subEl.textContent = msgs[idx];
+        }
+        if(count <= 0){
+            clearInterval(loadingInterval);
+            loadingInterval = null;
+            completeActivation(foundKey);
+        }
     }, 1000);
 }
 
@@ -861,20 +913,34 @@ function completeActivation(foundKey){
     isActivating = false;
     var now = Date.now();
     var act = {
-        deviceId: getDeviceId(), type: foundKey.type,
+        deviceId: getDeviceId(),
+        type: foundKey.type,
         seconds: foundKey.seconds === Infinity ? 'Infinity' : foundKey.seconds,
-        label: foundKey.label, activatedAt: now,
+        label: foundKey.label,
+        activatedAt: now,
         expiresAt: foundKey.seconds === Infinity ? null : (now + foundKey.seconds * 1000)
     };
+
     var all = getActs();
     all[foundKey.key] = act;
     saveActs(all);
+
     var overlay = $('loadingOverlay');
     if(overlay) overlay.classList.remove('show');
-    showMainScreen({key:foundKey.key,type:foundKey.type,seconds:foundKey.seconds,label:foundKey.label,activatedAt:now,expiresAt:act.expiresAt});
-    showToast('Kích hoạt thành công · Tâm fix + Nhạy 135%', 3200);
+
+    showMainScreen({
+        key: foundKey.key,
+        type: foundKey.type,
+        seconds: foundKey.seconds,
+        label: foundKey.label,
+        activatedAt: now,
+        expiresAt: act.expiresAt
+    });
+
+    showToast('🎉 Kích hoạt thành công · ' + foundKey.label, 3200);
 }
 
+// MOBILECONFIG
 function showMc(){ var o = $('mcOverlay'); if(o) o.classList.add('show'); }
 function hideMc(){ var o = $('mcOverlay'); if(o) o.classList.remove('show'); }
 
@@ -906,9 +972,20 @@ function downloadMobileConfig(){
     if(!isValidIP(p)){ showToast('DNS Chính không hợp lệ'); return; }
     if(s && !isValidIP(s)){ showToast('DNS Phụ không hợp lệ'); return; }
     if(!s) s = '1.1.1.1';
-    var finalAIM = readAIM();
-    finalAIM.rungTam = RUNG_TAM.value;
+
+    var effectiveAIM = getEffectiveAIM(cfg);
+    var finalAIM = {
+        sens: effectiveAIM.sens,
+        head: effectiveAIM.head,
+        smooth: effectiveAIM.smooth,
+        range: effectiveAIM.range,
+        drag: effectiveAIM.drag,
+        rungTam: effectiveAIM.rungTam || 0.96,
+        trig: effectiveAIM.trig
+    };
     var dohURL = selectedDohURL || cfg.doh;
+    var hasCustom = hasCustomAIM(cfg);
+    var note = hasCustom ? ' (AIM tùy chỉnh)' : '';
 
     isDownloading = true;
     updateDownloadBtn();
@@ -918,7 +995,7 @@ function downloadMobileConfig(){
     setMcProgress(0, 'Đang chuẩn bị...');
 
     var steps = [
-        {pct:12, txt:'Đang đọc AIM HEAD 60%...', wait:400},
+        {pct:12, txt:'Đang đọc AIM' + note + '...', wait:400},
         {pct:28, txt:'Đang thiết lập DNS ' + p + '...', wait:450},
         {pct:44, txt:'Đang ghi Fix Rung Tâm...', wait:450},
         {pct:60, txt:'Đang ghi Tăng Nhạy ' + TANG_NHAY.effective + '...', wait:500},
@@ -928,7 +1005,7 @@ function downloadMobileConfig(){
     ];
     var idx = 0;
     function next(){
-        if(idx >= steps.length){ doDownload(cfg, {primary:p,secondary:s,doh:dohURL}, finalAIM); return; }
+        if(idx >= steps.length){ doDownload(cfg, {primary:p,secondary:s,doh:dohURL}, finalAIM, note); return; }
         var st = steps[idx];
         setMcProgress(st.pct, st.txt);
         idx++;
@@ -937,7 +1014,8 @@ function downloadMobileConfig(){
     next();
 }
 
-function doDownload(cfg, dns, finalAIM){
+function doDownload(cfg, dns, finalAIM, note){
+    note = note || '';
     var did = getDeviceId();
     function uuid(){
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
@@ -984,9 +1062,9 @@ function doDownload(cfg, dns, finalAIM){
     L.push('        </dict>');
     L.push('        <dict>');
     L.push('            <key>PayloadDescription</key>');
-    L.push('            <string>X LOCK ' + cfg.name + ' - HEAD 60% - Nhạy ' + TANG_NHAY.effective + '</string>');
+    L.push('            <string>X LOCK ' + cfg.name + ' - HEAD ' + finalAIM.head + '%' + note + '</string>');
     L.push('            <key>PayloadDisplayName</key>');
-    L.push('            <string>X LOCK ' + cfg.name + '</string>');
+    L.push('            <string>X LOCK ' + cfg.name + note + '</string>');
     L.push('            <key>PayloadIdentifier</key>');
     L.push('            <string>com.xlock.aim.' + u2 + '</string>');
     L.push('            <key>PayloadType</key>');
@@ -999,6 +1077,7 @@ function doDownload(cfg, dns, finalAIM){
     L.push('            <dict>');
     L.push('                <key>ConfigName</key><string>' + cfg.name + '</string>');
     L.push('                <key>ConfigSub</key><string>' + cfg.sub + '</string>');
+    L.push('                <key>CustomAIM</key><' + (note ? 'true' : 'false') + '/>');
     L.push('                <key>DNSPrimary</key><string>' + dns.primary + '</string>');
     L.push('                <key>DNSSecondary</key><string>' + dns.secondary + '</string>');
     L.push('                <key>DoHURL</key><string>' + dohURL + '</string>');
@@ -1019,7 +1098,7 @@ function doDownload(cfg, dns, finalAIM){
     L.push('        </dict>');
     L.push('    </array>');
     L.push('    <key>PayloadDescription</key>');
-    L.push('    <string>X LOCK ' + cfg.name + ' - HEAD 60% - Tâm ' + finalAIM.rungTam.toFixed(2) + '</string>');
+    L.push('    <string>X LOCK ' + cfg.name + note + '</string>');
     L.push('    <key>PayloadDisplayName</key>');
     L.push('    <string>X LOCK ' + cfg.name + '</string>');
     L.push('    <key>PayloadIdentifier</key>');
@@ -1044,7 +1123,7 @@ function doDownload(cfg, dns, finalAIM){
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
         a.href = url;
-        a.download = 'XLOCK_' + cfg.id + '_' + did.slice(-6) + '.mobileconfig';
+        a.download = 'XLOCK_' + cfg.id + (note ? '_custom' : '') + '_' + did.slice(-6) + '.mobileconfig';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1054,7 +1133,7 @@ function doDownload(cfg, dns, finalAIM){
             hideMc();
             var btn = $('downloadBtn');
             if(btn) btn.classList.remove('loading');
-            showToast('Đã tải · HEAD 60% · Nhạy ' + TANG_NHAY.effective + ' · Tâm ' + finalAIM.rungTam.toFixed(2), 3200);
+            showToast('Đã tải · ' + cfg.name + note + ' · Nhạy ' + finalAIM.sens, 3200);
             isDownloading = false;
             updateDownloadBtn();
         }, 900);
@@ -1077,7 +1156,7 @@ function handleLogout(){
     stopAllModules();
     if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
     selectedConfigId = null;
-    lsRemove('xlock_cfg_v10');
+    lsRemove('xlock_cfg_sel');
     showKeyScreen();
     showToast('Đã thoát');
 }
@@ -1088,13 +1167,19 @@ function restoreSession(){
     if(!act){ showKeyScreen(); return; }
     var now = Date.now();
     var isForever = (act.type === 'forever') || (act.expiresAt === null);
-    if(isForever){ showMainScreen({key:act.key,type:act.type,seconds:Infinity,label:act.label,activatedAt:act.activatedAt,expiresAt:null}); return; }
+    if(isForever){
+        showMainScreen({key:act.key,type:act.type,seconds:Infinity,label:act.label,activatedAt:act.activatedAt,expiresAt:null});
+        return;
+    }
     if(act.expiresAt && now < act.expiresAt){
-        showMainScreen({key:act.key,type:act.type,seconds:act.seconds==='Infinity'?Infinity:act.seconds,label:act.label,activatedAt:act.activatedAt,expiresAt:act.expiresAt});
+        showMainScreen({
+            key:act.key,type:act.type,
+            seconds:act.seconds==='Infinity'?Infinity:act.seconds,
+            label:act.label,activatedAt:act.activatedAt,expiresAt:act.expiresAt
+        });
     } else {
         removeCurrentAct();
         showKeyScreen();
-        showToast('Key trước đã hết hạn');
     }
 }
 
@@ -1120,33 +1205,80 @@ function init(){
     if(downloadBtn) downloadBtn.addEventListener('click', function(e){ e.preventDefault(); downloadMobileConfig(); });
     if(logoutBtn) logoutBtn.addEventListener('click', function(e){ e.preventDefault(); handleLogout(); });
     if(dnsApplyBtn) dnsApplyBtn.addEventListener('click', function(e){ e.preventDefault(); applyDnsInput(); });
+
     if(aimToggle) aimToggle.addEventListener('click', function(e){
         e.preventDefault();
         var ed = $('aimEditor');
-        if(ed.classList.contains('open')){ ed.classList.remove('open'); aimToggle.textContent = '✎ CHỈNH AIM'; }
-        else { ed.classList.add('open'); aimToggle.textContent = '✕ ĐÓNG'; }
+        if(ed.classList.contains('open')){
+            ed.classList.remove('open');
+            aimToggle.textContent = '✎ CHỈNH AIM';
+        } else {
+            if(selectedConfigId){
+                var cfg = getConfigById(selectedConfigId);
+                if(cfg) fillAIM(getEffectiveAIM(cfg));
+            }
+            updateEditorConfigName();
+            ed.classList.add('open');
+            aimToggle.textContent = '✕ ĐÓNG';
+        }
     });
+
     if(aimApply) aimApply.addEventListener('click', function(e){
         e.preventDefault();
-        var a = readAIM();
-        AIM.sens = a.sens;
-        AIM.head = a.head;
-        AIM.smooth = a.smooth;
-        AIM.range = a.range;
-        AIM.drag = a.drag;
-        AIM.rungTam = a.rungTam;
-        AIM.trig = a.trig;
-        RUNG_TAM.value = a.rungTam;
-        TANG_NHAY.base = a.sens;
+        if(!selectedConfigId){ showToast('⚠️ Vui lòng chọn cấu hình trước'); return; }
+        var cfg = getConfigById(selectedConfigId);
+        if(!cfg){ showToast('⚠️ Cấu hình không hợp lệ'); return; }
+        var newAIM = readAIM();
+        saveConfigOverride(cfg.id, newAIM);
+
+        AIM.sens = newAIM.sens;
+        AIM.head = newAIM.head;
+        AIM.smooth = newAIM.smooth;
+        AIM.range = newAIM.range;
+        AIM.drag = newAIM.drag;
+        AIM.rungTam = newAIM.rungTam;
+        AIM.trig = newAIM.trig;
+
+        RUNG_TAM.value = newAIM.rungTam;
+        TANG_NHAY.base = newAIM.sens;
         TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-        showToast('Đã áp dụng · Nhạy ' + TANG_NHAY.effective + ' · Tâm ' + a.rungTam);
+
+        renderConfigList();
+        updateEditorConfigName();
         updateBgUI();
+
+        showToast('💾 Đã lưu vào ' + cfg.name + ' · Nhạy ' + newAIM.sens, 3200);
     });
+
     if(aimReset) aimReset.addEventListener('click', function(e){
         e.preventDefault();
-        if(selectedConfigId){ var cfg = getConfigById(selectedConfigId); if(cfg) fillAIM(cfg.aim); }
-        else fillAIM({sens:135,head:60,smooth:1.1,range:55,drag:2.8,rungTam:0.96,trig:'LB'});
-        showToast('Đã khôi phục mặc định');
+        if(!selectedConfigId){ showToast('⚠️ Vui lòng chọn cấu hình trước'); return; }
+        var cfg = getConfigById(selectedConfigId);
+        if(!cfg){ showToast('⚠️ Cấu hình không hợp lệ'); return; }
+        var ok = true;
+        try { ok = confirm('Khôi phục AIM mặc định của "' + cfg.name + '" ?'); } catch(e){ ok = true; }
+        if(!ok) return;
+
+        clearConfigOverride(cfg.id);
+        fillAIM(cfg.aim);
+
+        AIM.sens = cfg.aim.sens;
+        AIM.head = cfg.aim.head;
+        AIM.smooth = cfg.aim.smooth;
+        AIM.range = cfg.aim.range;
+        AIM.drag = cfg.aim.drag;
+        AIM.rungTam = cfg.aim.rungTam;
+        AIM.trig = cfg.aim.trig;
+
+        RUNG_TAM.value = cfg.aim.rungTam;
+        TANG_NHAY.base = cfg.aim.sens;
+        TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
+
+        renderConfigList();
+        updateEditorConfigName();
+        updateBgUI();
+
+        showToast('↺ Đã khôi phục mặc định cho ' + cfg.name, 2600);
     });
 
     if($('aimHead')){
@@ -1182,149 +1314,12 @@ function init(){
         if(a && a.expiresAt && Date.now() >= a.expiresAt) handleExpiry();
     }, 30000);
 
-    if(window.console) console.log('%c[X LOCK] v10.0 READY', 'color:#FF0080;font-weight:bold;font-size:14px');
+    if(window.console) console.log('%c[X LOCK] v14.0 READY', 'color:#FF0080;font-weight:bold;font-size:14px');
 }
 
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
 else init();
 
-})();
-
-// ============================================================
-// X LOCK JSON LOADER - CHẠY NGẦM (không hiển thị link)
-// ============================================================
-(function(){
-    'use strict';
-
-    var CONFIG_URL = "https://raw.githubusercontent.com/kanavirymar79-maker/REGULAR-/refs/heads/main/aimlock.json";
-
-    var XL_JSON = { connected: false, data: null, err: null };
-
-    function $(id){ return document.getElementById(id); }
-
-    function setConnected(ok){
-        var dot = $('conn-dot'), status = $('conn-status');
-        if(!dot || !status) return;
-        if(ok){
-            dot.style.background = '#00FF8C';
-            dot.style.boxShadow = '0 0 12px #00FF8C';
-            status.textContent = '✅ Đã kết nối X LOCK';
-            status.style.color = '#00FF8C';
-        } else {
-            dot.style.background = '#FF3C5A';
-            dot.style.boxShadow = '0 0 12px #FF3C5A';
-            status.textContent = '❌ Không kết nối · Đang thử lại...';
-            status.style.color = '#FF3C5A';
-        }
-    }
-
-    function setValue(id, val){
-        var el = $(id);
-        if(el) el.textContent = (val !== undefined && val !== null && val !== '') ? val : '--';
-    }
-
-    function setOnOff(id, on){
-        var el = $(id);
-        if(!el) return;
-        if(on){
-            el.textContent = 'BẬT';
-            el.style.color = '#00FF8C';
-            el.style.textShadow = '0 0 8px #00FF8C';
-        } else {
-            el.textContent = 'TẮT';
-            el.style.color = '#7a4d70';
-            el.style.textShadow = 'none';
-        }
-    }
-
-    function applyConfig(data){
-        if(!data || typeof data !== 'object') return;
-        XL_JSON.data = data;
-        XL_JSON.connected = true;
-        XL_JSON.err = null;
-
-        if(data.dns){
-            setValue('cfg-dns-primary', data.dns.primary);
-            setValue('cfg-dns-secondary', data.dns.secondary);
-            var pri = $('dnsPrimaryInput'), sec = $('dnsSecondaryInput');
-            if(pri && !pri.value && data.dns.primary) pri.value = data.dns.primary;
-            if(sec && !sec.value && data.dns.secondary) sec.value = data.dns.secondary;
-        }
-
-        var a = data.aim || data;
-        if(a && typeof a === 'object'){
-            var sens = a.sens || a.sensitivity || a.donhay;
-            var head = a.head || a.headshot || a.bamdau || 60;
-            var rungTam = a.rungTam || a.rungtam || 0.96;
-            var trig = a.trig || a.trigger || 'LB';
-
-            setValue('cfg-sens', sens);
-            setValue('cfg-head', head + '%');
-            setValue('cfg-rungtam', rungTam);
-            setValue('cfg-trig', trig);
-
-            if($('aimSens') && sens) $('aimSens').value = sens;
-            if($('aimHead')) $('aimHead').value = head;
-            if($('aimSmooth') && a.smooth) $('aimSmooth').value = a.smooth;
-            if($('aimRange') && a.range) $('aimRange').value = a.range;
-            if($('aimDrag') && a.drag) $('aimDrag').value = a.drag;
-            if($('aimRungTam')) $('aimRungTam').value = rungTam;
-            if($('aimTrig')) $('aimTrig').value = trig;
-
-            if(typeof AIM !== 'undefined'){
-                if(sens) AIM.sens = sens;
-                AIM.head = head;
-                if(a.smooth) AIM.smooth = a.smooth;
-                if(a.range) AIM.range = a.range;
-                if(a.drag) AIM.drag = a.drag;
-                AIM.rungTam = rungTam;
-                AIM.trig = trig;
-            }
-            if(typeof RUNG_TAM !== 'undefined') RUNG_TAM.value = rungTam;
-            if(typeof TANG_NHAY !== 'undefined' && sens){
-                TANG_NHAY.base = sens;
-                TANG_NHAY.effective = Math.round(TANG_NHAY.base * TANG_NHAY.boost);
-            }
-        }
-
-        if(data.modules){
-            setOnOff('cfg-onoff-rungtam', data.modules.fix_rung_tam !== false);
-            setOnOff('cfg-onoff-tangnhay', data.modules.tang_nhay !== false);
-            setOnOff('cfg-onoff-jsonaim', data.modules.json_aim !== false);
-        } else {
-            setOnOff('cfg-onoff-rungtam', true);
-            setOnOff('cfg-onoff-tangnhay', true);
-            setOnOff('cfg-onoff-jsonaim', true);
-        }
-
-        setConnected(true);
-        if(window.console) console.log('%c✅ Đã kết nối X LOCK', 'color:#00FF8C;font-weight:bold;font-size:13px');
-    }
-
-    function loadConfig(){
-        try {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', CONFIG_URL + '?t=' + Date.now(), true);
-            xhr.timeout = 12000;
-            xhr.onload = function(){
-                if(xhr.status === 200){
-                    try { applyConfig(JSON.parse(xhr.responseText)); }
-                    catch(e){ XL_JSON.err = 'parse'; setConnected(false); }
-                } else {
-                    XL_JSON.err = 'http_' + xhr.status;
-                    setConnected(false);
-                }
-            };
-            xhr.onerror = function(){ XL_JSON.err = 'network'; setConnected(false); };
-            xhr.ontimeout = function(){ XL_JSON.err = 'timeout'; setConnected(false); };
-            xhr.send();
-        } catch(e){ XL_JSON.err = 'xhr'; setConnected(false); }
-    }
-
-    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadConfig);
-    else loadConfig();
-
-    setInterval(function(){ if(!XL_JSON.connected) loadConfig(); }, 15000);
 })();
 </script>
 </body>
