@@ -53,11 +53,23 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 .doh-row{display:flex;flex-direction:column;gap:5px;padding-top:12px;margin-top:12px;border-top:1px dashed #FF008055}
 .doh-row .lbl{font-size:11px;color:#ff9ddb}
 .doh-link{font-size:10px;color:#FF0080;text-decoration:none;word-break:break-all;font-family:'SF Mono',Menlo,monospace;border-bottom:1px dashed #FF0080;padding-bottom:3px;line-height:1.4}
+.json-status{margin-top:12px;padding:12px;background:rgba(10,0,15,.6);border-radius:14px;border-left:3px solid #00FF8C}
+.json-status-head{display:flex;align-items:center;gap:8px}
+#conn-dot{width:8px;height:8px;border-radius:50%;background:#ff9d00;box-shadow:0 0 10px #ff9d00;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+#conn-status{font-size:11px;color:#ff9ddb;font-weight:700;letter-spacing:.5px}
+.json-values{margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.json-val-box{background:rgba(255,0,128,.08);border-radius:10px;padding:8px 10px;border:1px solid #FF008044}
+.json-val-box .lbl{font-size:9px;color:#ff9ddb;letter-spacing:1px}
+.json-val-box .val{font-size:13px;color:#FF0080;font-weight:800;font-family:'SF Mono',Menlo,monospace;margin-top:3px}
+.json-modules{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.json-mod-row{display:flex;justify-content:space-between;align-items:center}
+.json-mod-row .m-lbl{font-size:10px;color:#ff9ddb}
+.json-mod-row .m-val{font-size:10px;color:#7a4d70;font-weight:800}
 .bg-status{margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
 .bg-status-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(10,0,15,.6);border-radius:10px;margin-bottom:6px;border-left:3px solid #FF0080}
 .bg-status-row:last-child{margin-bottom:0}
 .bg-status-row .dot{width:7px;height:7px;border-radius:50%;background:#00ff8c;box-shadow:0 0 8px #00ff8c;flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 .bg-status-row .name{font-size:10px;font-weight:800;color:#FF0080;letter-spacing:.5px;flex:1}
 .bg-status-row .val{font-size:9px;color:#ff9ddb;font-family:'SF Mono',Menlo,monospace;font-weight:700}
 .aim-editor{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed #FF008055}
@@ -186,6 +198,26 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
             <a class="doh-link" id="dohLink" href="https://jsonhosting.com/api/json/694fec6d/raw" target="_blank" rel="noopener">https://jsonhosting.com/api/json/694fec6d/raw</a>
         </div>
 
+        <div class="json-status">
+            <div class="json-status-head">
+                <div id="conn-dot"></div>
+                <span id="conn-status">Đang kết nối X LOCK...</span>
+            </div>
+            <div class="json-values">
+                <div class="json-val-box"><div class="lbl">DNS CHÍNH</div><div id="cfg-dns-primary" class="val">--</div></div>
+                <div class="json-val-box"><div class="lbl">DNS PHỤ</div><div id="cfg-dns-secondary" class="val">--</div></div>
+                <div class="json-val-box"><div class="lbl">ĐỘ NHẠY</div><div id="cfg-sens" class="val">--</div></div>
+                <div class="json-val-box"><div class="lbl">BÁM ĐẦU</div><div id="cfg-head" class="val">--</div></div>
+                <div class="json-val-box"><div class="lbl">RUNG TÂM</div><div id="cfg-rungtam" class="val">--</div></div>
+                <div class="json-val-box"><div class="lbl">TRIGGER</div><div id="cfg-trig" class="val">--</div></div>
+            </div>
+            <div class="json-modules">
+                <div class="json-mod-row"><span class="m-lbl">Fix Rung Tâm</span><span class="m-val" id="cfg-onoff-rungtam">TẮT</span></div>
+                <div class="json-mod-row"><span class="m-lbl">Tăng Nhạy</span><span class="m-val" id="cfg-onoff-tangnhay">TẮT</span></div>
+                <div class="json-mod-row"><span class="m-lbl">JSON AIM</span><span class="m-val" id="cfg-onoff-jsonaim">TẮT</span></div>
+            </div>
+        </div>
+
         <div class="bg-status">
             <div style="font-size:10px;letter-spacing:2px;color:#ff9ddb;margin-bottom:8px">⚙️ MODULE CHẠY NGẦM</div>
             <div class="bg-status-row"><div class="dot"></div><div class="name">FIX RUNG TÂM</div><div class="val" id="statusRungTam">OFF</div></div>
@@ -232,7 +264,7 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
         <button class="btn btn-outline" id="logoutBtn" type="button">🚪 THOÁT</button>
         <button class="btn" id="downloadBtn" type="button" disabled>📥 TẢI CẤU HÌNH</button>
     </div>
-    <div class="footer-note">X LOCK · v14.0 · FREE FIRE</div>
+    <div class="footer-note">X LOCK · v16.0 · FREE FIRE</div>
 </div>
 
 </div>
@@ -256,17 +288,12 @@ body{background:radial-gradient(ellipse at 50% 0%,#4A0033 0%,#2A0020 40%,#0A0010
 <div id="toast" class="toast"></div>
 
 <script>
-// ============================================================
-// X LOCK v14.0 - LOGIC ĐƠN GIẢN, CHẮC CHẮN CHẠY
-// ============================================================
 (function(){
 'use strict';
 
-var HOUR = 3600;
-var WEEK = 7 * 24 * HOUR;
-var MONTH = 30 * 24 * HOUR;
+var HOUR = 3600, WEEK = 7*24*HOUR, MONTH = 30*24*HOUR;
 
-// Danh sách key hợp lệ
+// DANH SÁCH KEY
 var KEYS = [
     {key:'XLOCK-0001-0001-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
     {key:'XLOCK-0002-0002-FF',type:'hour',seconds:5*HOUR,label:'5 GIO'},
@@ -290,6 +317,7 @@ var KEYS = [
     {key:'XLOCK-9995-9995-FF',type:'forever',seconds:Infinity,label:'VINH VIEN'}
 ];
 
+// 15 CẤU HÌNH
 var CONFIGS = [
     {id:'auto',icon:'AUTO',name:'Tự động',sub:'Cấu hình hệ thống',dns:{primary:'10.10.34.1',secondary:'1.1.1.1'},doh:'https://jsonhosting.com/api/json/694fec6d/raw',aim:{sens:135,head:60,smooth:1.0,range:50,drag:2.5,rungTam:0.96,trig:'AUTO'}},
     {id:'aimbot',icon:'BOT',name:'Aimbot Pro',sub:'Bám mục tiêu',dns:{primary:'1.1.1.1',secondary:'1.0.0.2'},doh:'https://cloudflare-dns.com/dns-query',aim:{sens:135,head:60,smooth:1.2,range:60,drag:3.0,rungTam:0.96,trig:'LB'}},
@@ -320,7 +348,7 @@ var isDownloading = false;
 var AIM = { sens:135, head:60, smooth:1.1, range:55, drag:2.8, rungTam:0.96, trig:'LB' };
 var RUNG_TAM = { running:false, ticks:0, value:0.96, fixCount:0 };
 var TANG_NHAY = { running:false, ticks:0, base:135, boost:1.15, effective:155 };
-var JSON_ENGINE = { running:false, ticks:0 };
+var JSON_ENGINE = { running:false, ticks:0, ok:0, err:0, lastFetch:0, connected:false };
 
 function $(id){ return document.getElementById(id); }
 
@@ -334,12 +362,10 @@ function showToast(msg, dur){
     t._t = setTimeout(function(){ t.classList.remove('show'); }, dur);
 }
 
-// LocalStorage đơn giản
 function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
 function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
 function lsRemove(k){ try { localStorage.removeItem(k); } catch(e){} }
 
-// Device ID
 function getDeviceId(){
     var id = lsGet('xlock_device');
     if(!id){
@@ -349,7 +375,6 @@ function getDeviceId(){
     return id;
 }
 
-// Activations
 function getActs(){
     var r = lsGet('xlock_acts');
     if(!r) return {};
@@ -383,7 +408,6 @@ function removeCurrentAct(){
     }
     saveActs(all);
 }
-
 function formatTime(ms){
     if(ms <= 0) return '00:00:00';
     var s = Math.floor(ms/1000);
@@ -392,7 +416,6 @@ function formatTime(ms){
     var sec = s%60;
     return (h<10?'0':'')+h+':'+(m<10?'0':'')+m+':'+(sec<10?'0':'')+sec;
 }
-
 function isValidIP(ip){
     if(!ip) return false;
     if(!/^(\d{1,3}\.){3}\d{1,3}$/.test(ip)) return false;
@@ -404,7 +427,6 @@ function isValidIP(ip){
     return true;
 }
 
-// Config overrides
 function getConfigOverrides(){
     var raw = lsGet('xlock_cfg_ov');
     if(!raw) return {};
@@ -435,7 +457,116 @@ function getConfigById(id){
     return null;
 }
 
-// BG Modules
+// ============================================================
+// JSON ENGINE - CHẠY NGẦM
+// ============================================================
+var JSON_URL = "https://raw.githubusercontent.com/kanavirymar79-maker/REGULAR-/refs/heads/main/aimlock.json";
+
+function setConnectedUI(ok){
+    var dot = $('conn-dot'), status = $('conn-status');
+    if(!dot || !status) return;
+    if(ok){
+        dot.style.background = '#00FF8C';
+        dot.style.boxShadow = '0 0 12px #00FF8C';
+        status.textContent = '✅ Đã kết nối X LOCK';
+        status.style.color = '#00FF8C';
+    } else {
+        dot.style.background = '#FF3C5A';
+        dot.style.boxShadow = '0 0 12px #FF3C5A';
+        status.textContent = '❌ Không kết nối · Đang thử lại...';
+        status.style.color = '#FF3C5A';
+    }
+}
+
+function setJsonValue(id, val){
+    var el = $(id);
+    if(el) el.textContent = (val !== undefined && val !== null && val !== '') ? val : '--';
+}
+
+function setJsonOnOff(id, on){
+    var el = $(id);
+    if(!el) return;
+    if(on){
+        el.textContent = 'BẬT';
+        el.style.color = '#00FF8C';
+        el.style.textShadow = '0 0 8px #00FF8C';
+    } else {
+        el.textContent = 'TẮT';
+        el.style.color = '#7a4d70';
+        el.style.textShadow = 'none';
+    }
+}
+
+function applyJsonConfig(data){
+    if(!data || typeof data !== 'object') return;
+    JSON_ENGINE.connected = true;
+    JSON_ENGINE.ok++;
+
+    if(data.dns){
+        setJsonValue('cfg-dns-primary', data.dns.primary);
+        setJsonValue('cfg-dns-secondary', data.dns.secondary);
+        var pri = $('dnsPrimaryInput'), sec = $('dnsSecondaryInput');
+        if(pri && !pri.value && data.dns.primary) pri.value = data.dns.primary;
+        if(sec && !sec.value && data.dns.secondary) sec.value = data.dns.secondary;
+    }
+
+    var a = data.aim || data;
+    if(a && typeof a === 'object'){
+        var sens = a.sens || a.sensitivity || a.donhay;
+        var head = a.head || a.headshot || a.bamdau || 60;
+        var rungTam = a.rungTam || a.rungtam || 0.96;
+        var trig = a.trig || a.trigger || 'LB';
+
+        setJsonValue('cfg-sens', sens);
+        setJsonValue('cfg-head', head + '%');
+        setJsonValue('cfg-rungtam', rungTam);
+        setJsonValue('cfg-trig', trig);
+    }
+
+    if(data.modules){
+        setJsonOnOff('cfg-onoff-rungtam', data.modules.fix_rung_tam !== false);
+        setJsonOnOff('cfg-onoff-tangnhay', data.modules.tang_nhay !== false);
+        setJsonOnOff('cfg-onoff-jsonaim', data.modules.json_aim !== false);
+    } else {
+        setJsonOnOff('cfg-onoff-rungtam', true);
+        setJsonOnOff('cfg-onoff-tangnhay', true);
+        setJsonOnOff('cfg-onoff-jsonaim', true);
+    }
+
+    setConnectedUI(true);
+    if(window.console) console.log('%c✅ Đã kết nối X LOCK', 'color:#00FF8C;font-weight:bold;font-size:13px');
+}
+
+function fetchJsonConfig(){
+    JSON_ENGINE.lastFetch = Date.now();
+    try {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', JSON_URL + '?t=' + Date.now(), true);
+        xhr.timeout = 12000;
+        xhr.onload = function(){
+            if(xhr.status === 200){
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    applyJsonConfig(data);
+                } catch(e){
+                    JSON_ENGINE.err++;
+                    setConnectedUI(false);
+                }
+            } else {
+                JSON_ENGINE.err++;
+                setConnectedUI(false);
+            }
+        };
+        xhr.onerror = function(){ JSON_ENGINE.err++; setConnectedUI(false); };
+        xhr.ontimeout = function(){ JSON_ENGINE.err++; setConnectedUI(false); };
+        xhr.send();
+    } catch(e){
+        JSON_ENGINE.err++;
+        setConnectedUI(false);
+    }
+}
+
+// BG MODULES
 function startRungTam(){
     if(RUNG_TAM.running) return;
     RUNG_TAM.running = true;
@@ -465,9 +596,16 @@ function stopTangNhay(){ if(TANG_NHAY._loop){ clearInterval(TANG_NHAY._loop); TA
 function startJsonEngine(){
     if(JSON_ENGINE.running) return;
     JSON_ENGINE.running = true;
-    JSON_ENGINE._loop = setInterval(function(){ JSON_ENGINE.ticks++; }, 15000);
+    fetchJsonConfig();
+    JSON_ENGINE._loop = setInterval(function(){
+        JSON_ENGINE.ticks++;
+        if(Date.now() - JSON_ENGINE.lastFetch > 60000) fetchJsonConfig();
+    }, 15000);
 }
-function stopJsonEngine(){ if(JSON_ENGINE._loop){ clearInterval(JSON_ENGINE._loop); JSON_ENGINE._loop = null; } JSON_ENGINE.running = false; }
+function stopJsonEngine(){
+    if(JSON_ENGINE._loop){ clearInterval(JSON_ENGINE._loop); JSON_ENGINE._loop = null; }
+    JSON_ENGINE.running = false;
+}
 
 function startAllModules(){ startRungTam(); startTangNhay(); startJsonEngine(); updateBgUI(); }
 function stopAllModules(){ stopRungTam(); stopTangNhay(); stopJsonEngine(); updateBgUI(); }
@@ -475,7 +613,7 @@ function stopAllModules(){ stopRungTam(); stopTangNhay(); stopJsonEngine(); upda
 function updateBgUI(){
     if($('statusRungTam')) $('statusRungTam').textContent = RUNG_TAM.running ? 'ON · ' + RUNG_TAM.value.toFixed(2) : 'OFF';
     if($('statusTangNhay')) $('statusTangNhay').textContent = TANG_NHAY.running ? 'ON · ' + TANG_NHAY.effective + '%' : 'OFF';
-    if($('statusJsonAim')) $('statusJsonAim').textContent = JSON_ENGINE.running ? 'ON' : 'OFF';
+    if($('statusJsonAim')) $('statusJsonAim').textContent = JSON_ENGINE.running ? (JSON_ENGINE.connected ? 'ON · OK' : 'ON · Thử lại') : 'OFF';
 }
 
 function startBgLoop(){
@@ -810,7 +948,7 @@ function handleExpiry(){
 }
 
 // ============================================================
-// KÍCH HOẠT KEY - LOGIC ĐƠN GIẢN NHẤT
+// KÍCH HOẠT KEY
 // ============================================================
 function handleActivate(){
     if(isActivating) return;
@@ -832,10 +970,7 @@ function handleActivate(){
     for(var i = 0; i < KEYS.length; i++){
         if(KEYS[i].key === normalized){ found = KEYS[i]; break; }
     }
-    if(!found){
-        showToast('❌ Key không tồn tại');
-        return;
-    }
+    if(!found){ showToast('❌ Key không tồn tại'); return; }
 
     if(isKeyUsedByOther(normalized)){
         showToast('❌ Key đã dùng trên thiết bị khác');
@@ -885,7 +1020,7 @@ function beginLoading(foundKey){
         'ĐANG THIẾT LẬP DNS & AIM...',
         'ĐANG FIX RUNG TÂM...',
         'ĐANG TĂNG NHẠY 135%...',
-        'ĐANG KẾT NỐI X LOCK...',
+        'ĐANG KẾT NỐI JSON...',
         'ĐANG ÁP DỤNG HEAD 60%...',
         'HOÀN TẤT · ĐANG KÍCH HOẠT...'
     ];
@@ -1314,7 +1449,10 @@ function init(){
         if(a && a.expiresAt && Date.now() >= a.expiresAt) handleExpiry();
     }, 30000);
 
-    if(window.console) console.log('%c[X LOCK] v14.0 READY', 'color:#FF0080;font-weight:bold;font-size:14px');
+    // Fetch JSON ngầm ngay khi mở app
+    setTimeout(fetchJsonConfig, 500);
+
+    if(window.console) console.log('%c[X LOCK] v16.0 READY', 'color:#FF0080;font-weight:bold;font-size:14px');
 }
 
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
