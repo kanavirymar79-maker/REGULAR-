@@ -191,10 +191,7 @@
   .statCard .v { margin-top:6px; font-size:20px; font-weight:900; color:#FFD700; text-shadow:0 0 8px rgba(255,179,0,.5); }
   .statCard .v small { font-size:11px; color:#b8a45a; font-weight:600; }
 
-  /* ===== ĐỘ NHẠY — lưới 2 cột cho nhiều máy ===== */
-  .sensGrid {
-    display:grid; grid-template-columns:1fr 1fr; gap:8px;
-  }
+  .sensGrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
   .sensBtn {
     padding:12px 8px; border-radius:14px; cursor:pointer;
     background:#0b0b0b; border:1.5px solid #2a2408; color:#b8a45a;
@@ -232,7 +229,6 @@
 
   .footNote { margin-top:14px; text-align:center; font-size:10px; color:#5a5228; letter-spacing:1.5px; }
 
-  /* ===== MODAL ===== */
   .modalOverlay {
     position:fixed; inset:0; background:rgba(0,0,0,.85);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
@@ -346,13 +342,12 @@
   <div class="sensGrid" id="sensRow"></div>
 
   <button id="btnDownload" class="downloadBtn">⬇ TẢI CẤU HÌNH</button>
-
   <button id="btnLogout" class="logoutBtn">⎋ ĐĂNG XUẤT</button>
 
   <div class="footNote">SERENITY LOCK • v<span id="verFoot">---</span></div>
 </div>
 
-<!-- ============ MODAL XÁC NHẬN ĐĂNG XUẤT ============ -->
+<!-- ============ MODAL ĐĂNG XUẤT ============ -->
 <div id="logoutModal" class="modalOverlay">
   <div class="modalBox">
     <div class="modalIcon">⚠️</div>
@@ -372,7 +367,7 @@
 
 <script>
 /* =========================================================
-   SERENITY LOCK — thuần HTML/CSS/JS
+   SERENITY LOCK — HOÀN CHỈNH
    ========================================================= */
 
 const DATA_URL = "https://mton3702-source.github.io/Proxy/data.json";
@@ -389,9 +384,6 @@ const FEATURES = [
   { id:"khoavung",name:"KHÓA VÙNG ĐẦU", desc:"Ưu tiên kéo lên đầu" }
 ];
 
-/* =========================================================
-   ĐỘ NHẠY THEO MÁY — ĐÃ THÊM iPhone 17 & 18
-   ========================================================= */
 const SENS_OPTIONS = [
   { id:"ip8plus",  name:"iPhone 8 Plus", val:0.85 },
   { id:"ip11",     name:"iPhone 11",     val:0.95 },
@@ -610,7 +602,6 @@ function renderMain(){
   $("sRange").innerHTML    = (aim.range ?? 120) + "<small>m</small>";
   $("sSmooth").innerHTML   = (aim.smooth ?? 70) + "<small>%</small>";
 
-  // ===== ĐỘ NHẠY — lưới 2 cột cho nhiều máy =====
   const sensRow = $("sensRow"); sensRow.innerHTML = "";
   SENS_OPTIONS.forEach(s=>{
     const btn = document.createElement("div");
@@ -623,6 +614,9 @@ function renderMain(){
   $("verFoot").textContent = d.version || "1.0.0";
 }
 
+/* =========================================================
+   MOBILECONFIG — BẢN CHUẨN APPLE (ĐÃ SỬA LỖI)
+   ========================================================= */
 function downloadConfig(){
   const d = APP.data || {}, aim = d.aim || {};
   const sens = SENS_OPTIONS.find(s=>s.id===APP.sens) || SENS_OPTIONS[SENS_OPTIONS.length-1];
@@ -631,59 +625,157 @@ function downloadConfig(){
   const dns2 = d.dns?.secondary || "1.0.0.1";
   const feats = FEATURES.map(f=>`${f.name}=${APP.features[f.id]?"ON":"OFF"}`).join(" • ");
 
+  // Escape XML
+  const esc = s => String(s)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&apos;");
+
+  const uuidAim  = uuid();
+  const uuidDns1 = uuid();
+  const uuidDns2 = uuid();
+  const uuidRoot = uuid();
+
+  // Đảm bảo DNS hợp lệ
+  const isValidIp = ip => /^(\d{1,3}\.){3}\d{1,3}$/.test(ip);
+  const safeDns1 = isValidIp(dns1) ? dns1 : "1.1.1.1";
+  const safeDns2 = isValidIp(dns2) ? dns2 : "1.0.0.1";
+
   const payload = `<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-<key>PayloadContent</key><array>
-<dict><key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
-<key>PayloadIdentifier</key><string>com.serenity.dns.chinh</string>
-<key>PayloadUUID</key><string>${uuid()}</string>
-<key>PayloadDisplayName</key><string>SERENITY-DNS-Chinh</string>
-<key>PayloadVersion</key><integer>1</integer>
-<key>DNSSettings</key><dict>
-<key>DNSProtocol</key><string>HTTPS</string>
-<key>ServerURL</key><string>https://${dns1}/dns-query</string>
-<key>ServerAddresses</key><array><string>${dns1}</string></array>
-</dict></dict>
-<dict><key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
-<key>PayloadIdentifier</key><string>com.serenity.dns.phu</string>
-<key>PayloadUUID</key><string>${uuid()}</string>
-<key>PayloadDisplayName</key><string>SERENITY-DNS-Phu</string>
-<key>PayloadVersion</key><integer>1</integer>
-<key>DNSSettings</key><dict>
-<key>DNSProtocol</key><string>HTTPS</string>
-<key>ServerURL</key><string>https://${dns2}/dns-query</string>
-<key>ServerAddresses</key><array><string>${dns2}</string></array>
-</dict></dict>
-<dict><key>PayloadType</key><string>com.serenity.aim.config</string>
-<key>PayloadIdentifier</key><string>com.serenity.aim</string>
-<key>PayloadUUID</key><string>${uuid()}</string>
-<key>PayloadDisplayName</key><string>SERENITY-AIM-Config</string>
-<key>PayloadVersion</key><integer>1</integer>
-<key>Strength</key><integer>${aim.strength??85}</integer>
-<key>FOV</key><integer>${aim.fov??90}</integer>
-<key>Range</key><integer>${aim.range??120}</integer>
-<key>Smooth</key><integer>${aim.smooth??70}</integer>
-<key>Sensitivity</key><real>${sens.val}</real>
-<key>DeviceModel</key><string>${sens.name}</string>
-<key>Device</key><string>${device}</string>
-<key>Features</key><string>${feats}</string>
-<key>Expire</key><integer>${exp}</integer>
-<key>Key</key><string>${APP.key||""}</string>
-</dict></array>
-<key>PayloadDisplayName</key><string>SERENITY LOCK Config</string>
-<key>PayloadIdentifier</key><string>com.serenity.lock.profile</string>
-<key>PayloadUUID</key><string>${uuid()}</string>
-<key>PayloadVersion</key><integer>1</integer>
-</dict></plist>`;
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
 
-  const blob = new Blob([payload], { type:"application/x-apple-aspen-config" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "SERENITY-LOCK.mobileconfig";
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  setTimeout(()=>URL.revokeObjectURL(url), 4000);
-  toast("Đã tạo cấu hình — mở Cài đặt để cài đặt");
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.dnsSettings.managed</string>
+      <key>PayloadIdentifier</key>
+      <string>com.serenity.lock.dns.chinh</string>
+      <key>PayloadUUID</key>
+      <string>${uuidDns1}</string>
+      <key>PayloadDisplayName</key>
+      <string>SERENITY-DNS-Chinh</string>
+      <key>PayloadDescription</key>
+      <string>DNS chính cho SERENITY LOCK</string>
+      <key>PayloadOrganization</key>
+      <string>SERENITY</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key>
+        <string>HTTPS</string>
+        <key>ServerURL</key>
+        <string>https://${esc(safeDns1)}/dns-query</string>
+        <key>ServerAddresses</key>
+        <array>
+          <string>${esc(safeDns1)}</string>
+        </array>
+      </dict>
+    </dict>
+
+    <dict>
+      <key>PayloadType</key>
+      <string>com.apple.dnsSettings.managed</string>
+      <key>PayloadIdentifier</key>
+      <string>com.serenity.lock.dns.phu</string>
+      <key>PayloadUUID</key>
+      <string>${uuidDns2}</string>
+      <key>PayloadDisplayName</key>
+      <string>SERENITY-DNS-Phu</string>
+      <key>PayloadDescription</key>
+      <string>DNS phụ cho SERENITY LOCK</string>
+      <key>PayloadOrganization</key>
+      <string>SERENITY</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key>
+        <string>HTTPS</string>
+        <key>ServerURL</key>
+        <string>https://${esc(safeDns2)}/dns-query</string>
+        <key>ServerAddresses</key>
+        <array>
+          <string>${esc(safeDns2)}</string>
+        </array>
+      </dict>
+    </dict>
+
+    <dict>
+      <key>PayloadType</key>
+      <string>com.serenity.lock.aim</string>
+      <key>PayloadIdentifier</key>
+      <string>com.serenity.lock.aim.config</string>
+      <key>PayloadUUID</key>
+      <string>${uuidAim}</string>
+      <key>PayloadDisplayName</key>
+      <string>SERENITY-AIM-Config</string>
+      <key>PayloadDescription</key>
+      <string>Cấu hình AIM của SERENITY LOCK</string>
+      <key>PayloadOrganization</key>
+      <string>SERENITY</string>
+      <key>PayloadVersion</key>
+      <integer>1</integer>
+      <key>Strength</key>
+      <integer>${parseInt(aim.strength ?? 85)}</integer>
+      <key>FOV</key>
+      <integer>${parseInt(aim.fov ?? 90)}</integer>
+      <key>Range</key>
+      <integer>${parseInt(aim.range ?? 120)}</integer>
+      <key>Sstringmooth</key>
+      <integer>${parseInt(aim.smooth ?? 70)}</integer>
+      <key>Sensitivity</key>
+      <real>${parse>
+Float(sens.val)}</real>
+      <key>DeviceModel</key>
+      <string>${esc(sens.name)}</      <key>DeviceId</key>
+      <string>${esc(device)}</string>
+      <key>Features</key>
+      <string>${esc(feats)}</string>
+      <key>Expire</key>
+      <integer>${parseInt(exp)}</integer>
+      <key>ActivationKey</key>
+      <string>${esc(APP.key || "")}</string>
+    </dict>
+
+  </array>
+  <key>PayloadDisplayName</key>
+  <string>SERENITY LOCK</string>
+  <key>PayloadDescription</key>
+  <string>Cấu hình SERENITY LOCK cho iPhone</string>
+  <key>PayloadIdentifier</key>
+  <string>com.serenity.lock.profile</string>
+  <key>PayloadOrganization</key>
+  <string>SERENITY</string>
+  <key>PayloadRemovalDisallowed</key>
+  <false/>
+  <key>PayloadUUID</key>
+  <string>${uuidRoot}</string>
+  <key>PayloadVersion</key>
+  <integer>1</integer>
+</dict>
+</plist>`;
+
+  try {
+    const blob = new Blob([payload], { type: "application/x-apple-aspen-config" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "SERENITY-LOCK.mobileconfig";
+    document.body.appendChild(a);
+Map    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL =.revokeObjectURL(url), 5000);
+    toast("Đ {ã tạo cấu hình — mở Cài đặt để cài đặt");
+  } catch (err) {
+    live console.error("[SERENITY] Lỗi tạo mobileconfig:", err);
+    toast("Lỗi tạo cấu hình:": " + errLive.message);
+  }
 }
 
 function uuid(){
@@ -699,7 +791,7 @@ function updateBadge(){
   const nKeys = (d.keys?.length ?? d.key?.length ?? d.list?.length ?? 0);
   const ver = d.version || "1.0.0";
   badge.classList.remove("connected","error");
-  const srcMap = { live:"Live", cache:"Cache", fallback:"Offline", none:"Cache" };
+  const src", cache:"Cache", fallback:"Offline", none:"Cache" };
   const srcLabel = srcMap[APP.source] || "Live";
   if(APP.source !== "none"){
     badge.classList.add("connected");
