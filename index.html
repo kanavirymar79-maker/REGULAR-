@@ -2,275 +2,132 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>SERENITY LOCK</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-  html, body {
-    background:#000; color:#fff;
-    font-family:-apple-system, "SF Pro Text", Helvetica, Arial, sans-serif;
-    min-height:100vh; overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-  }
-  body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
-  .gold { color:#FFD700; }
+/* ========== RESET ========== */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:#000;color:#fff;font-family:-apple-system,"SF Pro Text",Helvetica,Arial,sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.gold{color:#FFD700}
 
-  .screen { display:none; min-height:100vh; padding:22px 18px 40px; }
-  .screen.active { display:flex; flex-direction:column; }
+/* ========== SCREEN ========== */
+.screen{display:none;min-height:100vh;padding:22px 18px 40px}
+.screen.active{display:flex;flex-direction:column}
 
-  /* ===== LOCK SCREEN ===== */
-  #screenLock { align-items:center; justify-content:center; text-align:center; }
-  .logoX {
-    font-size:88px; font-weight:900; line-height:1;
-    color:#FFD700; text-shadow:0 0 10px #FFD700, 0 0 28px #FFA000, 0 0 48px rgba(255,160,0,.7);
-    animation:pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100% { text-shadow:0 0 10px #FFD700, 0 0 28px #FFA000, 0 0 48px rgba(255,160,0,.7); }
-    50%     { text-shadow:0 0 16px #FFD700, 0 0 44px #FFB300, 0 0 70px rgba(255,179,0,.9); }
-  }
-  .brand {
-    margin-top:6px; font-size:22px; font-weight:800; letter-spacing:5px;
-    color:#FFD700; text-shadow:0 0 8px #FFD700, 0 0 20px rgba(255,179,0,.8);
-  }
-  .brand-sub { margin-top:4px; font-size:11px; letter-spacing:3px; color:#8a7a3a; }
+/* ========== LOCK SCREEN ========== */
+#screenLock{align-items:center;justify-content:center;text-align:center}
+.logoX{font-size:88px;font-weight:900;line-height:1;color:#FFD700;text-shadow:0 0 10px #FFD700,0 0 28px #FFA000,0 0 48px rgba(255,160,0,.7);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{text-shadow:0 0 10px #FFD700,0 0 28px #FFA000,0 0 48px rgba(255,160,0,.7)}50%{text-shadow:0 0 16px #FFD700,0 0 44px #FFB300,0 0 70px rgba(255,179,0,.9)}}
+.brand{margin-top:6px;font-size:22px;font-weight:800;letter-spacing:5px;color:#FFD700;text-shadow:0 0 8px #FFD700,0 0 20px rgba(255,179,0,.8)}
+.brand-sub{margin-top:4px;font-size:11px;letter-spacing:3px;color:#8a7a3a}
+.field{width:100%;max-width:340px;margin-top:34px}
+.field label{display:block;font-size:12px;color:#b8a45a;letter-spacing:1.5px;margin-bottom:8px;text-align:left}
+input.keyInput{width:100%;padding:15px 14px;border-radius:14px;background:#0d0d0d;border:1.5px solid #3a3312;color:#FFD700;font-size:16px;letter-spacing:1px;text-align:center;outline:none;transition:border .25s,box-shadow .25s}
+input.keyInput:focus{border-color:#FFD700;box-shadow:0 0 12px rgba(255,215,0,.5)}
+input.keyInput::placeholder{color:#4a4220;letter-spacing:2px}
+.btn{display:block;width:100%;max-width:340px;margin-top:16px;padding:16px;border:none;border-radius:999px;cursor:pointer;font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(180deg,#FFE066,#FFB300);color:#1a1400;box-shadow:0 0 18px rgba(255,179,0,.55);transition:transform .12s}
+.btn:active{transform:scale(.97)}
+.msg{margin-top:16px;font-size:14px;min-height:20px;letter-spacing:.5px}
+.msg.err{color:#ff4d4d;text-shadow:0 0 8px rgba(255,0,0,.6)}
+.msg.ok{color:#3dff88;text-shadow:0 0 8px rgba(0,255,120,.5)}
+.msg.info{color:#9a8f5a}
 
-  .field { width:100%; max-width:340px; margin-top:34px; }
-  .field label { display:block; font-size:12px; color:#b8a45a; letter-spacing:1.5px; margin-bottom:8px; text-align:left; }
-  input.keyInput {
-    width:100%; padding:15px 14px; border-radius:14px;
-    background:#0d0d0d; border:1.5px solid #3a3312; color:#FFD700;
-    font-size:16px; letter-spacing:1px; text-align:center;
-    outline:none; transition:border .25s, box-shadow .25s;
-  }
-  input.keyInput:focus { border-color:#FFD700; box-shadow:0 0 12px rgba(255,215,0,.5); }
-  input.keyInput::placeholder { color:#4a4220; letter-spacing:2px; }
+/* ========== BADGE KẾT NỐI (LOCK) ========== */
+.dataBadge{margin-top:26px;font-size:13px;letter-spacing:1.5px;font-weight:800;border:1.5px solid #2a240c;padding:12px 20px;border-radius:12px;background:#080800;color:#7a6f3a;transition:all .4s;display:inline-flex;align-items:center;gap:8px}
+.dataBadge.connected{color:#3dff88;border-color:#1d5a35;box-shadow:0 0 18px rgba(0,255,120,.35),inset 0 0 20px rgba(0,255,120,.08);background:#04120a;text-shadow:0 0 8px rgba(0,255,120,.6)}
+.dataBadge.connected .dot{width:9px;height:9px;border-radius:50%;background:#3dff88;box-shadow:0 0 10px #3dff88;animation:blink 1.4s ease-in-out infinite}
+.dataBadge.error{color:#ff4d4d;border-color:#5a1d1d;background:#120404}
+.dataBadge .sub{display:block;font-size:10.5px;font-weight:600;color:#7a8f7f;letter-spacing:1px;margin-top:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 
-  .btn {
-    display:block; width:100%; max-width:340px; margin-top:16px;
-    padding:16px; border:none; border-radius:999px; cursor:pointer;
-    font-size:16px; font-weight:800; letter-spacing:2px;
-    background:linear-gradient(180deg,#FFE066,#FFB300);
-    color:#1a1400; box-shadow:0 0 18px rgba(255,179,0,.55);
-    transition:transform .12s;
-  }
-  .btn:active { transform:scale(.97); }
+/* ========== LOADING ========== */
+#screenLoading{align-items:center;justify-content:center;text-align:center}
+.spinner{width:74px;height:74px;border-radius:50%;border:4px solid #2a2408;border-top-color:#FFD700;animation:spin 1s linear infinite;box-shadow:0 0 22px rgba(255,215,0,.4)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loadTitle{margin-top:24px;font-size:20px;font-weight:800;letter-spacing:4px;color:#FFD700}
+.loadPct{margin-top:10px;font-size:34px;font-weight:900;color:#FFD700;text-shadow:0 0 12px rgba(255,179,0,.8)}
+.loadBarWrap{width:240px;height:6px;background:#1a1505;border-radius:6px;margin-top:16px;overflow:hidden}
+.loadBar{height:100%;width:0;background:linear-gradient(90deg,#FFD700,#FFA000);box-shadow:0 0 10px #FFB300;transition:width .3s}
+.loadStep{margin-top:14px;font-size:12px;color:#8a7a3a;letter-spacing:1.5px;min-height:16px}
 
-  .msg { margin-top:16px; font-size:14px; min-height:20px; letter-spacing:.5px; }
-  .msg.err { color:#ff4d4d; text-shadow:0 0 8px rgba(255,0,0,.6); }
-  .msg.ok  { color:#3dff88; text-shadow:0 0 8px rgba(0,255,120,.5); }
-  .msg.info{ color:#9a8f5a; }
+/* ========== MAIN ========== */
+#screenMain{padding-top:16px}
+.topbar{display:flex;align-items:center;justify-content:space-between;border:1.5px solid #3a3312;border-radius:16px;padding:12px 14px;background:linear-gradient(180deg,#0c0c0c,#060606);box-shadow:0 0 14px rgba(255,179,0,.12)}
+.topbar .miniX{font-size:26px;font-weight:900;color:#FFD700;text-shadow:0 0 8px #FFD700}
+.topbar .tt{font-size:12px;letter-spacing:2px;color:#c9b65a}
+.topbar .kv{font-size:11px;color:#8a7a3a;margin-top:3px;letter-spacing:1px}
+.topbar .right{text-align:right}
 
-  .dataBadge {
-    margin-top:26px; font-size:13px; letter-spacing:1.5px; font-weight:800;
-    border:1.5px solid #2a240c; padding:12px 20px; border-radius:12px;
-    background:#080800; color:#7a6f3a; transition:all .4s;
-    display:inline-flex; align-items:center; gap:8px;
-  }
-  .dataBadge.connected {
-    color:#3dff88; border-color:#1d5a35;
-    box-shadow:0 0 18px rgba(0,255,120,.35), inset 0 0 20px rgba(0,255,120,.08);
-    background:#04120a;
-    text-shadow:0 0 8px rgba(0,255,120,.6);
-  }
-  .dataBadge.connected .dot {
-    width:9px; height:9px; border-radius:50%; background:#3dff88;
-    box-shadow:0 0 10px #3dff88;
-    animation:blink 1.4s ease-in-out infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.35;} }
-  .dataBadge.error { color:#ff4d4d; border-color:#5a1d1d; background:#120404; }
-  .dataBadge .sub {
-    display:block; font-size:10.5px; font-weight:600;
-    color:#7a8f7f; letter-spacing:1px; margin-top:2px;
-  }
+.connCard{margin-top:14px;padding:14px 16px;border-radius:16px;display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#04120a 0%,#07200f 100%);border:1.5px solid #1d5a35;box-shadow:0 0 20px rgba(0,255,120,.22),inset 0 0 24px rgba(0,255,120,.05);position:relative;overflow:hidden}
+.connCard::before{content:"";position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(61,255,136,.12),transparent);animation:sweep 3s ease-in-out infinite}
+@keyframes sweep{0%{left:-40%}60%,100%{left:140%}}
+.connCard .pulseDot{width:12px;height:12px;border-radius:50%;background:#3dff88;box-shadow:0 0 12px #3dff88,0 0 24px rgba(61,255,136,.6);flex:0 0 auto;animation:blink 1.4s ease-in-out infinite}
+.connCard .info{flex:1;text-align:left}
+.connCard .title{font-size:13px;font-weight:900;letter-spacing:2px;color:#3dff88;text-shadow:0 0 10px rgba(61,255,136,.7)}
+.connCard .detail{margin-top:4px;font-size:10.5px;letter-spacing:.8px;color:#7a8f7f;font-weight:600}
+.connCard .detail .gold{color:#FFD700;font-weight:800}
+.connCard .badgeType{font-size:9px;font-weight:900;letter-spacing:1.5px;padding:4px 9px;border-radius:999px;background:rgba(61,255,136,.12);color:#3dff88;border:1px solid rgba(61,255,136,.4);text-transform:uppercase}
 
-  /* ===== LOADING ===== */
-  #screenLoading { align-items:center; justify-content:center; text-align:center; }
-  .spinner {
-    width:74px; height:74px; border-radius:50%;
-    border:4px solid #2a2408; border-top-color:#FFD700;
-    animation:spin 1s linear infinite;
-    box-shadow:0 0 22px rgba(255,215,0,.4);
-  }
-  @keyframes spin { to { transform:rotate(360deg); } }
-  .loadTitle { margin-top:24px; font-size:20px; font-weight:800; letter-spacing:4px; color:#FFD700; }
-  .loadPct { margin-top:10px; font-size:34px; font-weight:900; color:#FFD700; text-shadow:0 0 12px rgba(255,179,0,.8); }
-  .loadBarWrap { width:240px; height:6px; background:#1a1505; border-radius:6px; margin-top:16px; overflow:hidden; }
-  .loadBar { height:100%; width:0%; background:linear-gradient(90deg,#FFD700,#FFA000); box-shadow:0 0 10px #FFB300; transition:width .3s; }
-  .loadStep { margin-top:14px; font-size:12px; color:#8a7a3a; letter-spacing:1.5px; min-height:16px; }
+.sectionTitle{margin:22px 0 10px;font-size:12px;letter-spacing:3px;color:#b8a45a;display:flex;align-items:center;gap:8px}
+.sectionTitle::before{content:"";width:14px;height:1.5px;background:#FFD700;box-shadow:0 0 6px #FFD700}
 
-  /* ===== MAIN SCREEN ===== */
-  #screenMain { padding-top:16px; }
-  .topbar {
-    display:flex; align-items:center; justify-content:space-between;
-    border:1.5px solid #3a3312; border-radius:16px; padding:12px 14px;
-    background:linear-gradient(180deg,#0c0c0c,#060606);
-    box-shadow:0 0 14px rgba(255,179,0,.12);
-  }
-  .topbar .miniX { font-size:26px; font-weight:900; color:#FFD700; text-shadow:0 0 8px #FFD700; }
-  .topbar .tt { font-size:12px; letter-spacing:2px; color:#c9b65a; }
-  .topbar .kv { font-size:11px; color:#8a7a3a; margin-top:3px; letter-spacing:1px; }
-  .topbar .right { text-align:right; }
+.toggleRow{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;margin-bottom:10px;border:1.5px solid #2a2408;border-radius:16px;background:linear-gradient(180deg,#0b0b0b,#050505);transition:border .25s,box-shadow .25s}
+.toggleRow.on{border-color:#FFD700;box-shadow:0 0 16px rgba(255,215,0,.28)}
+.toggleRow .lbl{font-size:14px;font-weight:700;letter-spacing:1px;color:#e8dc9a}
+.toggleRow.on .lbl{color:#FFD700}
+.toggleRow .desc{font-size:10.5px;color:#7a6f3a;margin-top:3px;letter-spacing:.5px}
+.switch{position:relative;width:54px;height:30px;border-radius:999px;background:#1c1808;border:1.5px solid #3a3312;flex:0 0 auto;transition:background .25s,border .25s,box-shadow .25s;cursor:pointer}
+.switch::after{content:"";position:absolute;top:2.5px;left:3px;width:22px;height:22px;border-radius:50%;background:#5a4d1a;transition:transform .25s,background .25s,box-shadow .25s}
+.switch.on{background:#2a2205;border-color:#FFD700;box-shadow:0 0 12px rgba(255,215,0,.5)}
+.switch.on::after{transform:translateX(23px);background:#FFD700;box-shadow:0 0 10px #FFD700}
 
-  .connCard {
-    margin-top:14px; padding:14px 16px; border-radius:16px;
-    display:flex; align-items:center; gap:12px;
-    background:linear-gradient(135deg, #04120a 0%, #07200f 100%);
-    border:1.5px solid #1d5a35;
-    box-shadow:0 0 20px rgba(0,255,120,.22), inset 0 0 24px rgba(0,255,120,.05);
-    position:relative; overflow:hidden;
-  }
-  .connCard::before {
-    content:""; position:absolute; top:0; left:-40%; width:40%; height:100%;
-    background:linear-gradient(90deg, transparent, rgba(61,255,136,.12), transparent);
-    animation:sweep 3s ease-in-out infinite;
-  }
-  @keyframes sweep { 0% { left:-40%; } 60%,100% { left:140%; } }
-  .connCard .pulseDot {
-    width:12px; height:12px; border-radius:50%; background:#3dff88;
-    box-shadow:0 0 12px #3dff88, 0 0 24px rgba(61,255,136,.6);
-    flex:0 0 auto; animation:blink 1.4s ease-in-out infinite;
-  }
-  .connCard .info { flex:1; text-align:left; }
-  .connCard .title {
-    font-size:13px; font-weight:900; letter-spacing:2px;
-    color:#3dff88; text-shadow:0 0 10px rgba(61,255,136,.7);
-  }
-  .connCard .detail {
-    margin-top:4px; font-size:10.5px; letter-spacing:.8px; color:#7a8f7f; font-weight:600;
-  }
-  .connCard .detail .gold { color:#FFD700; font-weight:800; }
-  .connCard .badgeType {
-    font-size:9px; font-weight:900; letter-spacing:1.5px;
-    padding:4px 9px; border-radius:999px;
-    background:rgba(61,255,136,.12); color:#3dff88;
-    border:1px solid rgba(61,255,136,.4);
-    text-transform:uppercase;
-  }
+.statGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.statCard{border:1.5px solid #2a2408;border-radius:14px;padding:12px 14px;background:linear-gradient(180deg,#0b0b0b,#050505)}
+.statCard .k{font-size:10.5px;letter-spacing:1.5px;color:#8a7a3a}
+.statCard .v{margin-top:6px;font-size:20px;font-weight:900;color:#FFD700;text-shadow:0 0 8px rgba(255,179,0,.5)}
+.statCard .v small{font-size:11px;color:#b8a45a;font-weight:600}
 
-  .sectionTitle {
-    margin:22px 0 10px; font-size:12px; letter-spacing:3px; color:#b8a45a;
-    display:flex; align-items:center; gap:8px;
-  }
-  .sectionTitle::before { content:""; width:14px; height:1.5px; background:#FFD700; box-shadow:0 0 6px #FFD700; }
+.sensGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sensBtn{padding:12px 8px;border-radius:14px;cursor:pointer;background:#0b0b0b;border:1.5px solid #2a2408;color:#b8a45a;font-size:12px;font-weight:700;letter-spacing:.3px;text-align:center;transition:all .2s;line-height:1.3}
+.sensBtn.on{border-color:#FFD700;color:#FFD700;background:#141000;box-shadow:0 0 14px rgba(255,215,0,.35)}
+.sensBtn .sVal{display:block;font-size:9.5px;color:#7a6f3a;font-weight:600;letter-spacing:1px;margin-top:2px}
+.sensBtn.on .sVal{color:#b8a45a}
+.sensBtn:active{transform:scale(.96)}
 
-  .toggleRow {
-    display:flex; align-items:center; justify-content:space-between;
-    padding:14px 16px; margin-bottom:10px;
-    border:1.5px solid #2a2408; border-radius:16px;
-    background:linear-gradient(180deg,#0b0b0b,#050505);
-    transition:border .25s, box-shadow .25s;
-  }
-  .toggleRow.on { border-color:#FFD700; box-shadow:0 0 16px rgba(255,215,0,.28); }
-  .toggleRow .lbl { font-size:14px; font-weight:700; letter-spacing:1px; color:#e8dc9a; }
-  .toggleRow.on .lbl { color:#FFD700; }
-  .toggleRow .desc { font-size:10.5px; color:#7a6f3a; margin-top:3px; letter-spacing:.5px; }
+.downloadBtn{margin-top:24px;padding:18px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(180deg,#FFE066,#FFB300);color:#1a1400;font-size:15px;font-weight:900;letter-spacing:2px;box-shadow:0 0 22px rgba(255,179,0,.55)}
+.downloadBtn:active{transform:scale(.97)}
 
-  .switch {
-    position:relative; width:54px; height:30px; border-radius:999px;
-    background:#1c1808; border:1.5px solid #3a3312; flex:0 0 auto;
-    transition:background .25s, border .25s, box-shadow .25s; cursor:pointer;
-  }
-  .switch::after {
-    content:""; position:absolute; top:2.5px; left:3px;
-    width:22px; height:22px; border-radius:50%;
-    background:#5a4d1a; transition:transform .25s, background .25s, box-shadow .25s;
-  }
-  .switch.on { background:#2a2205; border-color:#FFD700; box-shadow:0 0 12px rgba(255,215,0,.5); }
-  .switch.on::after { transform:translateX(23px); background:#FFD700; box-shadow:0 0 10px #FFD700; }
+.logoutBtn{margin-top:14px;padding:16px;border-radius:999px;cursor:pointer;background:linear-gradient(180deg,#2a0a0a,#140404);border:1.5px solid #5a1d1d;color:#ff6b6b;font-size:14px;font-weight:800;letter-spacing:2.5px;text-shadow:0 0 8px rgba(255,80,80,.5);box-shadow:0 0 14px rgba(255,60,60,.15);transition:all .2s}
+.logoutBtn:active{transform:scale(.97);box-shadow:0 0 22px rgba(255,60,60,.4);border-color:#ff4d4d}
 
-  .statGrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .statCard {
-    border:1.5px solid #2a2408; border-radius:14px; padding:12px 14px;
-    background:linear-gradient(180deg,#0b0b0b,#050505);
-  }
-  .statCard .k { font-size:10.5px; letter-spacing:1.5px; color:#8a7a3a; }
-  .statCard .v { margin-top:6px; font-size:20px; font-weight:900; color:#FFD700; text-shadow:0 0 8px rgba(255,179,0,.5); }
-  .statCard .v small { font-size:11px; color:#b8a45a; font-weight:600; }
+.footNote{margin-top:14px;text-align:center;font-size:10px;color:#5a5228;letter-spacing:1.5px}
 
-  .sensGrid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-  .sensBtn {
-    padding:12px 8px; border-radius:14px; cursor:pointer;
-    background:#0b0b0b; border:1.5px solid #2a2408; color:#b8a45a;
-    font-size:12px; font-weight:700; letter-spacing:.3px; text-align:center;
-    transition:all .2s; line-height:1.3;
-  }
-  .sensBtn.on {
-    border-color:#FFD700; color:#FFD700; background:#141000;
-    box-shadow:0 0 14px rgba(255,215,0,.35);
-  }
-  .sensBtn .sVal {
-    display:block; font-size:9.5px; color:#7a6f3a; font-weight:600;
-    letter-spacing:1px; margin-top:2px;
-  }
-  .sensBtn.on .sVal { color:#b8a45a; }
-  .sensBtn:active { transform:scale(.96); }
+/* ========== MODAL ========== */
+.modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;animation:fadeIn .25s ease}
+.modalOverlay.show{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modalBox{width:100%;max-width:340px;background:linear-gradient(180deg,#0e0e0e,#050505);border:1.5px solid #5a1d1d;border-radius:20px;padding:24px 20px 20px;text-align:center;box-shadow:0 0 40px rgba(255,60,60,.25);animation:popIn .3s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.modalIcon{font-size:42px;line-height:1;margin-bottom:12px;filter:drop-shadow(0 0 12px rgba(255,80,80,.6))}
+.modalTitle{font-size:16px;font-weight:900;letter-spacing:2px;color:#ff6b6b;text-shadow:0 0 10px rgba(255,80,80,.5)}
+.modalDesc{margin-top:10px;font-size:12.5px;color:#b8a45a;letter-spacing:.5px;line-height:1.5}
+.modalBtns{display:flex;gap:10px;margin-top:22px}
+.modalBtn{flex:1;padding:14px;border-radius:999px;border:none;cursor:pointer;font-size:13px;font-weight:800;letter-spacing:1.5px;transition:transform .12s}
+.modalBtn:active{transform:scale(.96)}
+.modalBtn.cancel{background:#1a1a1a;color:#b8a45a;border:1.5px solid #3a3312}
+.modalBtn.confirm{background:linear-gradient(180deg,#ff5555,#cc1f1f);color:#fff;box-shadow:0 0 18px rgba(255,60,60,.5)}
 
-  .downloadBtn {
-    margin-top:24px; padding:18px; border-radius:999px; border:none; cursor:pointer;
-    background:linear-gradient(180deg,#FFE066,#FFB300); color:#1a1400;
-    font-size:15px; font-weight:900; letter-spacing:2px;
-    box-shadow:0 0 22px rgba(255,179,0,.55);
-  }
-
-  .logoutBtn {
-    margin-top:26px; padding:16px; border-radius:999px; cursor:pointer;
-    background:linear-gradient(180deg, #2a0a0a, #140404);
-    border:1.5px solid #5a1d1d; color:#ff6b6b;
-    font-size:14px; font-weight:800; letter-spacing:2.5px;
-    text-shadow:0 0 8px rgba(255,80,80,.5);
-    box-shadow:0 0 14px rgba(255,60,60,.15);
-    transition:all .2s;
-  }
-  .logoutBtn:active { transform:scale(.97); box-shadow:0 0 22px rgba(255,60,60,.4); border-color:#ff4d4d; }
-
-  .footNote { margin-top:14px; text-align:center; font-size:10px; color:#5a5228; letter-spacing:1.5px; }
-
-  .modalOverlay {
-    position:fixed; inset:0; background:rgba(0,0,0,.85);
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    display:none; align-items:center; justify-content:center;
-    z-index:1000; padding:20px; animation:fadeIn .25s ease;
-  }
-  .modalOverlay.show { display:flex; }
-  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-  .modalBox {
-    width:100%; max-width:340px;
-    background:linear-gradient(180deg,#0e0e0e,#050505);
-    border:1.5px solid #5a1d1d; border-radius:20px;
-    padding:24px 20px 20px; text-align:center;
-    box-shadow:0 0 40px rgba(255,60,60,.25);
-    animation:popIn .3s cubic-bezier(.2,.9,.3,1.3);
-  }
-  @keyframes popIn { from{transform:scale(.85);opacity:0;} to{transform:scale(1);opacity:1;} }
-  .modalIcon { font-size:42px; line-height:1; margin-bottom:12px; filter: drop-shadow(0 0 12px rgba(255,80,80,.6)); }
-  .modalTitle { font-size:16px; font-weight:900; letter-spacing:2px; color:#ff6b6b; text-shadow:0 0 10px rgba(255,80,80,.5); }
-  .modalDesc { margin-top:10px; font-size:12.5px; color:#b8a45a; letter-spacing:.5px; line-height:1.5; }
-  .modalBtns { display:flex; gap:10px; margin-top:22px; }
-  .modalBtn {
-    flex:1; padding:14px; border-radius:999px; border:none; cursor:pointer;
-    font-size:13px; font-weight:800; letter-spacing:1.5px; transition:transform .12s;
-  }
-  .modalBtn:active { transform:scale(.96); }
-  .modalBtn.cancel { background:#1a1a1a; color:#b8a45a; border:1.5px solid #3a3312; }
-  .modalBtn.confirm { background:linear-gradient(180deg,#ff5555,#cc1f1f); color:#fff; box-shadow:0 0 18px rgba(255,60,60,.5); }
-
-  .toast {
-    position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(120%);
-    background:#141000; border:1.5px solid #FFD700; color:#FFD700;
-    padding:12px 22px; border-radius:999px; font-size:13px; font-weight:700;
-    letter-spacing:1px; box-shadow:0 0 22px rgba(255,215,0,.5);
-    transition:transform .35s cubic-bezier(.2,.9,.3,1.2); z-index:999; white-space:nowrap;
-  }
-  .toast.show { transform:translateX(-50%) translateY(0); }
+/* ========== TOAST ========== */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120%);background:#141000;border:1.5px solid #FFD700;color:#FFD700;padding:12px 22px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:1px;box-shadow:0 0 22px rgba(255,215,0,.5);transition:transform .35s cubic-bezier(.2,.9,.3,1.2);z-index:999;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- ============ LOCK SCREEN ============ -->
+<!-- ==================== LOCK SCREEN ==================== -->
 <div id="screenLock" class="screen active">
   <div class="logoX">X</div>
   <div class="brand">SERENITY LOCK</div>
@@ -291,7 +148,7 @@
   </div>
 </div>
 
-<!-- ============ LOADING SCREEN ============ -->
+<!-- ==================== LOADING SCREEN ==================== -->
 <div id="screenLoading" class="screen">
   <div class="spinner"></div>
   <div class="loadTitle">ĐANG KHỞI TẠO</div>
@@ -300,10 +157,10 @@
   <div class="loadStep" id="loadStep">Đang nạp cấu hình...</div>
 </div>
 
-<!-- ============ MAIN SCREEN ============ -->
+<!-- ==================== MAIN SCREEN ==================== -->
 <div id="screenMain" class="screen">
   <div class="topbar">
-    <div style="display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;align-items:center;gap:10px">
       <div class="miniX">X</div>
       <div>
         <div class="tt">SERENITY LOCK</div>
@@ -320,9 +177,7 @@
     <div class="pulseDot"></div>
     <div class="info">
       <div class="title" id="connTitle">ĐÃ KẾT NỐI</div>
-      <div class="detail" id="connDetail">
-        Phiên bản <span class="gold">--</span> • Số key <span class="gold">--</span> • <span id="connSource">--</span>
-      </div>
+      <div class="detail" id="connDetail">Phiên bản <span class="gold">--</span> • Số key <span class="gold">--</span> • <span>--</span></div>
     </div>
     <div class="badgeType" id="connType">LIVE</div>
   </div>
@@ -347,7 +202,7 @@
   <div class="footNote">SERENITY LOCK • v<span id="verFoot">---</span></div>
 </div>
 
-<!-- ============ MODAL ĐĂNG XUẤT ============ -->
+<!-- ==================== MODAL ĐĂNG XUẤT ==================== -->
 <div id="logoutModal" class="modalOverlay">
   <div class="modalBox">
     <div class="modalIcon">⚠️</div>
@@ -368,9 +223,21 @@
 <script>
 /* =========================================================
    SERENITY LOCK — HOÀN CHỈNH
+   Cấu trúc:
+   1. CONFIG       — hằng số, danh sách
+   2. STORAGE      — localStorage helpers
+   3. DATA         — fetch JSON 3 tầng
+   4. KEY          — validate + lookup
+   5. ACTIVATE     — kích hoạt + loading
+   6. MAIN         — render màn hình chính
+   7. CONFIG FILE  — mobileconfig
+   8. LOGOUT       — đăng xuất
+   9. INIT         — khởi động
    ========================================================= */
 
+/* ===== 1. CONFIG ===== */
 const DATA_URL = "https://mton3702-source.github.io/Proxy/data.json";
+
 const STORE = {
   key:"serenity_key", device:"serenity_device", expire:"serenity_expire",
   features:"serenity_features", sens:"serenity_sens", data:"serenity_data_cache"
@@ -385,21 +252,21 @@ const FEATURES = [
 ];
 
 const SENS_OPTIONS = [
-  { id:"ip8plus",  name:"iPhone 8 Plus", val:0.85 },
-  { id:"ip11",     name:"iPhone 11",     val:0.95 },
-  { id:"ip12",     name:"iPhone 12",     val:1.00 },
-  { id:"ip13",     name:"iPhone 13",     val:1.02 },
-  { id:"ip14",     name:"iPhone 14",     val:1.04 },
-  { id:"ip15",     name:"iPhone 15",     val:1.06 },
-  { id:"ip16",     name:"iPhone 16",     val:1.08 },
-  { id:"ip17",     name:"iPhone 17",     val:1.12 },
-  { id:"ip18",     name:"iPhone 18",     val:1.16 }
+  { id:"ip8plus", name:"iPhone 8 Plus", val:0.85 },
+  { id:"ip11",    name:"iPhone 11",     val:0.95 },
+  { id:"ip12",    name:"iPhone 12",     val:1.00 },
+  { id:"ip13",    name:"iPhone 13",     val:1.02 },
+  { id:"ip14",    name:"iPhone 14",     val:1.04 },
+  { id:"ip15",    name:"iPhone 15",     val:1.06 },
+  { id:"ip16",    name:"iPhone 16",     val:1.08 },
+  { id:"ip17",    name:"iPhone 17",     val:1.12 },
+  { id:"ip18",    name:"iPhone 18",     val:1.16 }
 ];
 
 const FALLBACK_DATA = {
-  version: "2.1.0",
-  updated: "2026-10-04",
-  keys: [
+  version:"2.1.0",
+  updated:"2026-10-04",
+  keys:[
     { key:"SERENITY-A1B2-C3D4-FF", type:"VIP",      days:365, device:null },
     { key:"SERENITY-E5F6-G7H8-FF", type:"PREMIUM",  days:180, device:null },
     { key:"SERENITY-I9J0-K1L2-FF", type:"STANDARD", days:90,  device:null },
@@ -407,48 +274,61 @@ const FALLBACK_DATA = {
     { key:"SERENITY-Q7R8-S9T0-FF", type:"VIP",      days:365, device:null },
     { key:"SERENITY-U1V2-W3X4-FF", type:"PREMIUM",  days:180, device:null }
   ],
-  aim: { strength:92, fov:95, range:150, smooth:85 },
-  dns: { primary:"1.1.1.1", secondary:"1.0.0.1" }
+  aim:{ strength:92, fov:95, range:150, smooth:85 },
+  dns:{ primary:"1.1.1.1", secondary:"1.0.0.1" }
 };
 
-let APP = { data:null, key:null, features:{}, sens:"ip18", timer:null, source:"none" };
+const APP = { data:null, key:null, features:{}, sens:"ip18", timer:null, source:"none" };
 
+/* ===== HELPERS ===== */
 const $ = id => document.getElementById(id);
-function show(s){ document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active")); $(s).classList.add("active"); window.scrollTo(0,0); }
-function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2200); }
-function save(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+const show = s => { document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active")); $(s).classList.add("active"); window.scrollTo(0,0); };
+const toast = m => { const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),2200); };
+const uuid = () => "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0,v=c==="x"?r:(r&0x3|0x8);return v.toString(16);});
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&apos;");
+
+/* ===== 2. STORAGE ===== */
+const save = (k,v) => { try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} };
+const load = (k,d) => { try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } };
 
 function getDeviceId(){
-  let id = load(STORE.device, null);
-  if(!id){ id="DEV-"+Math.random().toString(36).slice(2,10).toUpperCase()+"-"+Date.now().toString(36).toUpperCase(); save(STORE.device,id); }
+  let id = load(STORE.device,null);
+  if(!id){
+    id = "DEV-" + Math.random().toString(36).slice(2,10).toUpperCase() + "-" + Date.now().toString(36).toUpperCase();
+    save(STORE.device,id);
+  }
   return id;
 }
 
+/* ===== 3. FETCH DATA 3 TẦNG ===== */
 async function fetchData(){
+  // Tầng 1: Live
   try{
-    const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache:"no-store" });
+    const res = await fetch(DATA_URL+"?t="+Date.now(),{cache:"no-store"});
     if(res.ok){
       const json = await res.json();
-      save(STORE.data, json);
+      save(STORE.data,json);
       APP.source = "live";
-      console.log("[SERENITY] ✅ Kết nối JSON (live)");
+      console.log("[SERENITY] ✅ Live");
       return json;
     }
-  }catch(err){ console.warn("[SERENITY] Live thất bại:", err.message); }
+  }catch(err){ console.warn("[SERENITY] Live fail:",err.message); }
 
-  const cached = load(STORE.data, null);
-  if(cached){ APP.source="cache"; console.log("[SERENITY] ✅ Dùng cache"); return cached; }
+  // Tầng 2: Cache
+  const cached = load(STORE.data,null);
+  if(cached){ APP.source="cache"; console.log("[SERENITY] ✅ Cache"); return cached; }
 
-  save(STORE.data, FALLBACK_DATA);
+  // Tầng 3: Fallback
+  save(STORE.data,FALLBACK_DATA);
   APP.source = "fallback";
-  console.log("[SERENITY] ✅ Dùng fallback");
+  console.log("[SERENITY] ✅ Fallback");
   return FALLBACK_DATA;
 }
 
+/* ===== 4. KEY ===== */
 function validFormat(k){ return /^SERENITY-[A-Z0-9]{4}-[A-Z0-9]{4}-FF$/i.test(k.trim()); }
 
-function findKeyInData(data, key){
+function findKey(data,key){
   if(!data) return null;
   const pools = [];
   ["keys","key","list"].forEach(p=>{ if(Array.isArray(data[p])) pools.push(...data[p]); });
@@ -456,15 +336,21 @@ function findKeyInData(data, key){
   const target = key.trim().toUpperCase();
   for(const item of pools){
     if(typeof item === "string"){
-      if(item.toUpperCase() === target) return { key:item, type:"STANDARD", days:30 };
+      if(item.toUpperCase() === target) return { key:item, type:"STANDARD", days:30, device:null };
     }else if(item && typeof item === "object"){
       const kk = (item.key||item.code||item.id||"").toUpperCase();
-      if(kk === target) return { key:item.key||item.code||item.id, type:item.type||"STANDARD", days:item.days||30, device:item.device||null };
+      if(kk === target) return {
+        key:item.key||item.code||item.id,
+        type:item.type||item.plan||"STANDARD",
+        days:item.days||item.duration||30,
+        device:item.device||null
+      };
     }
   }
   return null;
 }
 
+/* ===== 5. KÍCH HOẠT ===== */
 async function activate(){
   const raw = $("keyInput").value.trim().toUpperCase();
   const msg = $("lockMsg");
@@ -476,23 +362,23 @@ async function activate(){
   msg.className="msg info"; msg.textContent="Đang kiểm tra key...";
 
   const data = APP.data || await fetchData();
-  const info = findKeyInData(data, raw);
+  const info = findKey(data,raw);
   if(!info){ msg.className="msg err"; msg.textContent="Key không tồn tại."; return; }
 
   const myDev = getDeviceId();
   if(info.device && info.device !== myDev){ msg.className="msg err"; msg.textContent="Key đã dùng cho thiết bị khác."; return; }
 
-  startWithKey(info, data);
+  startWithKey(info,data);
 }
 
-function startWithKey(info, data){
+function startWithKey(info,data){
   const expire = Date.now() + (info.days||30)*24*60*60*1000;
   save(STORE.key, info.key);
   save(STORE.expire, expire);
   save(STORE.data, data);
   APP.key = info.key; APP.data = data;
-  APP.features = load(STORE.features, {});
-  APP.sens = load(STORE.sens, "ip18");
+  APP.features = load(STORE.features,{});
+  APP.sens = load(STORE.sens,"ip18");
   runLoading();
 }
 
@@ -507,16 +393,19 @@ function runLoading(){
     if(pct>100) pct=100;
     bar.style.width = pct+"%";
     pctEl.textContent = Math.floor(pct)+"%";
-    stepEl.textContent = steps[Math.min(steps.length-1, Math.floor(pct/100*steps.length))];
-    if(pct>=100){ clearInterval(t); setTimeout(enterMain, 350); }
+    stepEl.textContent = steps[Math.min(steps.length-1,Math.floor(pct/100*steps.length))];
+    if(pct>=100){ clearInterval(t); setTimeout(enterMain,350); }
   }, stepTime);
 }
 
+/* ===== 6. MAIN ===== */
 function enterMain(){
-  const exp = load(STORE.expire, 0);
+  const exp = load(STORE.expire,0);
   if(!exp || Date.now() >= exp){ logout("Key đã hết hạn."); return; }
-  APP.key = load(STORE.key,null); APP.data = load(STORE.data,null);
-  APP.features = load(STORE.features,{}); APP.sens = load(STORE.sens,"ip18");
+  APP.key = load(STORE.key,null);
+  APP.data = load(STORE.data,null);
+  APP.features = load(STORE.features,{});
+  APP.sens = load(STORE.sens,"ip18");
   if(APP.source === "none") APP.source = "cache";
 
   renderMain();
@@ -524,6 +413,173 @@ function enterMain(){
   startCountdown();
 }
 
+function startCountdown(){
+  clearInterval(APP.timer);
+  const tick = ()=>{
+    const left = load(STORE.expire,0) - Date.now();
+    if(left <= 0){ logout("Key đã hết hạn."); return; }
+    const s = Math.floor(left/1000);
+    $("timeLeft").textContent = [Math.floor(s/3600),Math.floor((s%3600)/60),s%60].map(n=>String(n).padStart(2,"0")).join(":");
+  };
+  tick();
+  APP.timer = setInterval(tick,1000);
+}
+
+function renderMain(){
+  const d = APP.data || {};
+  const found = findKey(d, APP.key);
+  $("keyType").textContent = "KEY: " + (found?.type||"STANDARD") + " • " + (APP.key||"").slice(0,9) + "...";
+
+  // Thẻ ĐÃ KẾT NỐI
+  const nKeys = (d.keys?.length ?? d.key?.length ?? d.list?.length ?? 0);
+  const ver = d.version || "1.0.0";
+  const srcMap = { live:"Live", cache:"Cache", fallback:"Offline", none:"Cache" };
+  const srcLabel = srcMap[APP.source] || "Cache";
+  $("connDetail").innerHTML = `Phiên bản <span class="gold">${ver}</span> • Số key <span class="gold">${nKeys}</span> • <span>${srcLabel}</span>`;
+  $("connType").textContent = srcLabel.toUpperCase();
+
+  // Toggle chức năng
+  const list = $("featureList"); list.innerHTML = "";
+  FEATURES.forEach(f=>{
+    const on = !!APP.features[f.id];
+    const row = document.createElement("div");
+    row.className = "toggleRow" + (on?" on":"");
+    row.innerHTML = `<div><div class="lbl">${f.name}</div><div class="desc">${f.desc}</div></div><div class="switch ${on?'on':''}"></div>`;
+    row.addEventListener("click", ()=>{
+      APP.features[f.id] = !APP.features[f.id];
+      save(STORE.features,APP.features);
+      row.classList.toggle("on",APP.features[f.id]);
+      row.querySelector(".switch").classList.toggle("on",APP.features[f.id]);
+      toast((APP.features[f.id]?"BẬT ":"TẮT ")+f.name);
+    });
+    list.appendChild(row);
+  });
+
+  // Thông số AIM
+  const aim = d.aim || d.AIM || d.config || {};
+  $("sStrength").innerHTML = (aim.strength ?? 85) + "<small>%</small>";
+  $("sFov").innerHTML      = (aim.fov ?? 90) + "<small>°</small>";
+  $("sRange").innerHTML    = (aim.range ?? 120) + "<small>m</small>";
+  $("sSmooth").innerHTML   = (aim.smooth ?? 70) + "<small>%</small>";
+
+  // Độ nhạy
+  const sensRow = $("sensRow"); sensRow.innerHTML = "";
+  SENS_OPTIONS.forEach(s=>{
+    const btn = document.createElement("div");
+    btn.className = "sensBtn" + (APP.sens===s.id?" on":"");
+    btn.innerHTML = `${s.name}<span class="sVal">×${s.val.toFixed(2)}</span>`;
+    btn.addEventListener("click", ()=>{
+      APP.sens = s.id;
+      save(STORE.sens,s.id);
+      renderMain();
+      toast("Độ nhạy: " + s.name);
+    });
+    sensRow.appendChild(btn);
+  });
+
+  $("verFoot").textContent = ver;
+}
+
+/* ===== 7. MOBILECONFIG ===== */
+function downloadConfig(){
+  const d = APP.data || {};
+  const aim = d.aim || {};
+  const sens = SENS_OPTIONS.find(s=>s.id===APP.sens) || SENS_OPTIONS[SENS_OPTIONS.length-1];
+  const device = getDeviceId();
+  const exp = load(STORE.expire,0);
+
+  const dns1 = d.dns?.primary || "1.1.1.1";
+  const dns2 = d.dns?.secondary || "1.0.0.1";
+  const isValidIp = ip => /^(\d{1,3}\.){3}\d{1,3}$/.test(ip);
+  const safeDns1 = isValidIp(dns1) ? dns1 : "1.1.1.1";
+  const safeDns2 = isValidIp(dns2) ? dns2 : "1.0.0.1";
+
+  const feats = FEATURES.map(f=>`${f.name}=${APP.features[f.id]?"ON":"OFF"}`).join(" • ");
+
+  const payload = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>PayloadContent</key>
+  <array>
+    <dict>
+      <key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
+      <key>PayloadIdentifier</key><string>com.serenity.lock.dns.chinh</string>
+      <key>PayloadUUID</key><string>${uuid()}</string>
+      <key>PayloadDisplayName</key><string>SERENITY-DNS-Chinh</string>
+      <key>PayloadDescription</key><string>DNS chính SERENITY</string>
+      <key>PayloadOrganization</key><string>SERENITY</string>
+      <key>PayloadVersion</key><integer>1</integer>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key><string>HTTPS</string>
+        <key>ServerURL</key><string>https://${esc(safeDns1)}/dns-query</string>
+        <key>ServerAddresses</key><array><string>${esc(safeDns1)}</string></array>
+      </dict>
+    </dict>
+    <dict>
+      <key>PayloadType</key><string>com.apple.dnsSettings.managed</string>
+      <key>PayloadIdentifier</key><string>com.serenity.lock.dns.phu</string>
+      <key>PayloadUUID</key><string>${uuid()}</string>
+      <key>PayloadDisplayName</key><string>SERENITY-DNS-Phu</string>
+      <key>PayloadDescription</key><string>DNS phụ SERENITY</string>
+      <key>PayloadOrganization</key><string>SERENITY</string>
+      <key>PayloadVersion</key><integer>1</integer>
+      <key>DNSSettings</key>
+      <dict>
+        <key>DNSProtocol</key><string>HTTPS</string>
+        <key>ServerURL</key><string>https://${esc(safeDns2)}/dns-query</string>
+        <key>ServerAddresses</key><array><string>${esc(safeDns2)}</string></array>
+      </dict>
+    </dict>
+    <dict>
+      <key>PayloadType</key><string>com.serenity.lock.aim</string>
+      <key>PayloadIdentifier</key><string>com.serenity.lock.aim.config</string>
+      <key>PayloadUUID</key><string>${uuid()}</string>
+      <key>PayloadDisplayName</key><string>SERENITY-AIM-Config</string>
+      <key>PayloadDescription</key><string>Cấu hình AIM SERENITY</string>
+      <key>PayloadOrganization</key><string>SERENITY</string>
+      <key>PayloadVersion</key><integer>1</integer>
+      <key>Strength</key><integer>${parseInt(aim.strength ?? 85)}</integer>
+      <key>FOV</key><integer>${parseInt(aim.fov ?? 90)}</integer>
+      <key>Range</key><integer>${parseInt(aim.range ?? 120)}</integer>
+      <key>Smooth</key><integer>${parseInt(aim.smooth ?? 70)}</integer>
+      <key>Sensitivity</key><real>${parseFloat(sens.val)}</real>
+      <key>DeviceModel</key><string>${esc(sens.name)}</string>
+      <key>DeviceId</key><string>${esc(device)}</string>
+      <key>Features</key><string>${esc(feats)}</string>
+      <key>Expire</key><integer>${parseInt(exp)}</integer>
+      <key>ActivationKey</key><string>${esc(APP.key || "")}</string>
+    </dict>
+  </array>
+  <key>PayloadDisplayName</key><string>SERENITY LOCK</string>
+  <key>PayloadDescription</key><string>Cấu hình SERENITY LOCK</string>
+  <key>PayloadIdentifier</key><string>com.serenity.lock.profile</string>
+  <key>PayloadOrganization</key><string>SERENITY</string>
+  <key>PayloadRemovalDisallowed</key><false/>
+  <key>PayloadUUID</key><string>${uuid()}</string>
+  <key>PayloadVersion</key><integer>1</integer>
+</dict>
+</plist>`;
+
+  try{
+    const blob = new Blob([payload],{type:"application/x-apple-aspen-config"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "SERENITY-LOCK.mobileconfig";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+    toast("Đã tạo cấu hình — mở Cài đặt để cài đặt");
+  }catch(err){
+    console.error("[SERENITY] Lỗi mobileconfig:",err);
+    toast("Lỗi: " + err.message);
+  }
+}
+
+/* ===== 8. LOGOUT ===== */
 function logout(reason){
   localStorage.removeItem(STORE.key);
   localStorage.removeItem(STORE.expire);
@@ -532,7 +588,7 @@ function logout(reason){
   if(reason){
     $("lockMsg").className = "msg err";
     $("lockMsg").textContent = reason;
-  } else {
+  }else{
     $("lockMsg").className = "msg ok";
     $("lockMsg").textContent = "Đã đăng xuất thành công.";
   }
@@ -542,257 +598,24 @@ function logout(reason){
   updateBadge();
 }
 
-function confirmLogout(){ $("logoutModal").classList.add("show"); }
-function closeLogoutModal(){ $("logoutModal").classList.remove("show"); }
+const confirmLogout = () => $("logoutModal").classList.add("show");
+const closeLogoutModal = () => $("logoutModal").classList.remove("show");
 function doLogout(){
   closeLogoutModal();
   toast("Đã đăng xuất");
-  setTimeout(()=>{ logout(null); }, 400);
+  setTimeout(()=>logout(null),400);
 }
 
-function startCountdown(){
-  clearInterval(APP.timer);
-  const tick = ()=>{
-    const left = load(STORE.expire,0) - Date.now();
-    if(left <= 0){ logout("Key đã hết hạn."); return; }
-    const s = Math.floor(left/1000);
-    $("timeLeft").textContent = [Math.floor(s/3600), Math.floor((s%3600)/60), s%60].map(n=>String(n).padStart(2,"0")).join(":");
-  };
-  tick(); APP.timer = setInterval(tick,1000);
-}
-
-function updateConnCard(){
-  const d = APP.data || {};
-  const nKeys = (d.keys?.length ?? d.key?.length ?? d.list?.length ?? 0);
-  const ver = d.version || "1.0.0";
-  const srcMap = { live:"Live", cache:"Cache", fallback:"Offline", none:"Cache" };
-  const srcLabel = srcMap[APP.source] || "Cache";
-
-  $("connTitle").textContent = "ĐÃ KẾT NỐI";
-  $("connDetail").innerHTML = `Phiên bản <span class="gold">${ver}</span> • Số key <span class="gold">${nKeys}</span> • <span id="connSource">${srcLabel}</span>`;
-  $("connType").textContent = srcLabel.toUpperCase();
-}
-
-function renderMain(){
-  const d = APP.data || {};
-  const found = findKeyInData(d, APP.key);
-  $("keyType").textContent = "KEY: " + (found?.type||"STANDARD") + " • " + (APP.key||"").slice(0,9) + "...";
-
-  updateConnCard();
-
-  const list = $("featureList"); list.innerHTML = "";
-  FEATURES.forEach(f=>{
-    const on = !!APP.features[f.id];
-    const row = document.createElement("div");
-    row.className = "toggleRow" + (on?" on":"");
-    row.innerHTML = `<div><div class="lbl">${f.name}</div><div class="desc">${f.desc}</div></div><div class="switch ${on?'on':''}"></div>`;
-    row.addEventListener("click", ()=>{
-      APP.features[f.id] = !APP.features[f.id];
-      save(STORE.features, APP.features);
-      row.classList.toggle("on", APP.features[f.id]);
-      row.querySelector(".switch").classList.toggle("on", APP.features[f.id]);
-      toast((APP.features[f.id]?"BẬT ":"TẮT ")+f.name);
-    });
-    list.appendChild(row);
-  });
-
-  const aim = d.aim || d.AIM || d.config || {};
-  $("sStrength").innerHTML = (aim.strength ?? 85) + "<small>%</small>";
-  $("sFov").innerHTML      = (aim.fov ?? 90) + "<small>°</small>";
-  $("sRange").innerHTML    = (aim.range ?? 120) + "<small>m</small>";
-  $("sSmooth").innerHTML   = (aim.smooth ?? 70) + "<small>%</small>";
-
-  const sensRow = $("sensRow"); sensRow.innerHTML = "";
-  SENS_OPTIONS.forEach(s=>{
-    const btn = document.createElement("div");
-    btn.className = "sensBtn" + (APP.sens===s.id?" on":"");
-    btn.innerHTML = `${s.name}<span class="sVal">×${s.val.toFixed(2)}</span>`;
-    btn.addEventListener("click", ()=>{ APP.sens=s.id; save(STORE.sens,s.id); renderMain(); toast("Độ nhạy: "+s.name); });
-    sensRow.appendChild(btn);
-  });
-
-  $("verFoot").textContent = d.version || "1.0.0";
-}
-
-/* =========================================================
-   MOBILECONFIG — BẢN CHUẨN APPLE (ĐÃ SỬA LỖI)
-   ========================================================= */
-function downloadConfig(){
-  const d = APP.data || {}, aim = d.aim || {};
-  const sens = SENS_OPTIONS.find(s=>s.id===APP.sens) || SENS_OPTIONS[SENS_OPTIONS.length-1];
-  const device = getDeviceId(), exp = load(STORE.expire,0);
-  const dns1 = d.dns?.primary || "1.1.1.1";
-  const dns2 = d.dns?.secondary || "1.0.0.1";
-  const feats = FEATURES.map(f=>`${f.name}=${APP.features[f.id]?"ON":"OFF"}`).join(" • ");
-
-  // Escape XML
-  const esc = s => String(s)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&apos;");
-
-  const uuidAim  = uuid();
-  const uuidDns1 = uuid();
-  const uuidDns2 = uuid();
-  const uuidRoot = uuid();
-
-  // Đảm bảo DNS hợp lệ
-  const isValidIp = ip => /^(\d{1,3}\.){3}\d{1,3}$/.test(ip);
-  const safeDns1 = isValidIp(dns1) ? dns1 : "1.1.1.1";
-  const safeDns2 = isValidIp(dns2) ? dns2 : "1.0.0.1";
-
-  const payload = `<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>PayloadContent</key>
-  <array>
-
-    <dict>
-      <key>PayloadType</key>
-      <string>com.apple.dnsSettings.managed</string>
-      <key>PayloadIdentifier</key>
-      <string>com.serenity.lock.dns.chinh</string>
-      <key>PayloadUUID</key>
-      <string>${uuidDns1}</string>
-      <key>PayloadDisplayName</key>
-      <string>SERENITY-DNS-Chinh</string>
-      <key>PayloadDescription</key>
-      <string>DNS chính cho SERENITY LOCK</string>
-      <key>PayloadOrganization</key>
-      <string>SERENITY</string>
-      <key>PayloadVersion</key>
-      <integer>1</integer>
-      <key>DNSSettings</key>
-      <dict>
-        <key>DNSProtocol</key>
-        <string>HTTPS</string>
-        <key>ServerURL</key>
-        <string>https://${esc(safeDns1)}/dns-query</string>
-        <key>ServerAddresses</key>
-        <array>
-          <string>${esc(safeDns1)}</string>
-        </array>
-      </dict>
-    </dict>
-
-    <dict>
-      <key>PayloadType</key>
-      <string>com.apple.dnsSettings.managed</string>
-      <key>PayloadIdentifier</key>
-      <string>com.serenity.lock.dns.phu</string>
-      <key>PayloadUUID</key>
-      <string>${uuidDns2}</string>
-      <key>PayloadDisplayName</key>
-      <string>SERENITY-DNS-Phu</string>
-      <key>PayloadDescription</key>
-      <string>DNS phụ cho SERENITY LOCK</string>
-      <key>PayloadOrganization</key>
-      <string>SERENITY</string>
-      <key>PayloadVersion</key>
-      <integer>1</integer>
-      <key>DNSSettings</key>
-      <dict>
-        <key>DNSProtocol</key>
-        <string>HTTPS</string>
-        <key>ServerURL</key>
-        <string>https://${esc(safeDns2)}/dns-query</string>
-        <key>ServerAddresses</key>
-        <array>
-          <string>${esc(safeDns2)}</string>
-        </array>
-      </dict>
-    </dict>
-
-    <dict>
-      <key>PayloadType</key>
-      <string>com.serenity.lock.aim</string>
-      <key>PayloadIdentifier</key>
-      <string>com.serenity.lock.aim.config</string>
-      <key>PayloadUUID</key>
-      <string>${uuidAim}</string>
-      <key>PayloadDisplayName</key>
-      <string>SERENITY-AIM-Config</string>
-      <key>PayloadDescription</key>
-      <string>Cấu hình AIM của SERENITY LOCK</string>
-      <key>PayloadOrganization</key>
-      <string>SERENITY</string>
-      <key>PayloadVersion</key>
-      <integer>1</integer>
-      <key>Strength</key>
-      <integer>${parseInt(aim.strength ?? 85)}</integer>
-      <key>FOV</key>
-      <integer>${parseInt(aim.fov ?? 90)}</integer>
-      <key>Range</key>
-      <integer>${parseInt(aim.range ?? 120)}</integer>
-      <key>Sstringmooth</key>
-      <integer>${parseInt(aim.smooth ?? 70)}</integer>
-      <key>Sensitivity</key>
-      <real>${parse>
-Float(sens.val)}</real>
-      <key>DeviceModel</key>
-      <string>${esc(sens.name)}</      <key>DeviceId</key>
-      <string>${esc(device)}</string>
-      <key>Features</key>
-      <string>${esc(feats)}</string>
-      <key>Expire</key>
-      <integer>${parseInt(exp)}</integer>
-      <key>ActivationKey</key>
-      <string>${esc(APP.key || "")}</string>
-    </dict>
-
-  </array>
-  <key>PayloadDisplayName</key>
-  <string>SERENITY LOCK</string>
-  <key>PayloadDescription</key>
-  <string>Cấu hình SERENITY LOCK cho iPhone</string>
-  <key>PayloadIdentifier</key>
-  <string>com.serenity.lock.profile</string>
-  <key>PayloadOrganization</key>
-  <string>SERENITY</string>
-  <key>PayloadRemovalDisallowed</key>
-  <false/>
-  <key>PayloadUUID</key>
-  <string>${uuidRoot}</string>
-  <key>PayloadVersion</key>
-  <integer>1</integer>
-</dict>
-</plist>`;
-
-  try {
-    const blob = new Blob([payload], { type: "application/x-apple-aspen-config" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "SERENITY-LOCK.mobileconfig";
-    document.body.appendChild(a);
-Map    a.click();
-    document.body.removeChild(a);
-    setTimeout(()=>URL =.revokeObjectURL(url), 5000);
-    toast("Đ {ã tạo cấu hình — mở Cài đặt để cài đặt");
-  } catch (err) {
-    live console.error("[SERENITY] Lỗi tạo mobileconfig:", err);
-    toast("Lỗi tạo cấu hình:": " + errLive.message);
-  }
-}
-
-function uuid(){
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, c=>{
-    const r = Math.random()*16|0, v = c==="x"?r:(r&0x3|0x8);
-    return v.toString(16);
-  });
-}
-
+/* ===== 9. BADGE ===== */
 function updateBadge(){
   const badge = $("dataBadge"), txt = $("badgeText");
   const d = APP.data || {};
   const nKeys = (d.keys?.length ?? d.key?.length ?? d.list?.length ?? 0);
   const ver = d.version || "1.0.0";
-  badge.classList.remove("connected","error");
-  const src", cache:"Cache", fallback:"Offline", none:"Cache" };
+  const srcMap = { live:"Live", cache:"Cache", fallback:"Offline", none:"Cache" };
   const srcLabel = srcMap[APP.source] || "Live";
+
+  badge.classList.remove("connected","error");
   if(APP.source !== "none"){
     badge.classList.add("connected");
     txt.innerHTML = `ĐÃ KẾT NỐI JSON<span class="sub">Phiên bản ${ver} • Số key ${nKeys} • ${srcLabel}</span>`;
@@ -802,6 +625,7 @@ function updateBadge(){
   }
 }
 
+/* ===== INIT ===== */
 async function init(){
   const badge = $("dataBadge"), txt = $("badgeText");
   badge.classList.remove("connected","error");
@@ -811,12 +635,18 @@ async function init(){
   APP.data = data;
   updateBadge();
 
-  const savedKey = load(STORE.key, null), exp = load(STORE.expire, 0);
-  if(savedKey && exp && Date.now() < exp){ APP.key = savedKey; enterMain(); return; }
+  const savedKey = load(STORE.key,null);
+  const exp = load(STORE.expire,0);
+  if(savedKey && exp && Date.now() < exp){
+    APP.key = savedKey;
+    enterMain();
+    return;
+  }
 
   show("screenLock");
 }
 
+/* ===== EVENTS ===== */
 $("btnActivate").addEventListener("click", activate);
 $("keyInput").addEventListener("keydown", e=>{ if(e.key==="Enter") activate(); });
 $("btnDownload").addEventListener("click", downloadConfig);
@@ -824,11 +654,13 @@ $("btnLogout").addEventListener("click", confirmLogout);
 $("btnCancelLogout").addEventListener("click", closeLogoutModal);
 $("btnConfirmLogout").addEventListener("click", doLogout);
 $("logoutModal").addEventListener("click", e=>{ if(e.target === $("logoutModal")) closeLogoutModal(); });
+
+// Auto-format key
 $("keyInput").addEventListener("input", function(){
   let v = this.value.toUpperCase().replace(/[^A-Z0-9]/g,"");
   if(v.startsWith("SERENITY")){
     let parts = v.slice(8).match(/.{1,4}/g) || [];
-    this.value = "SERENITY" + (parts.length? "-"+parts.join("-") : "");
+    this.value = "SERENITY" + (parts.length ? "-"+parts.join("-") : "");
   }
 });
 
