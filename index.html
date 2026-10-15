@@ -190,7 +190,6 @@
 
 <div id="app">
 
-  <!-- KEY SCREEN -->
   <div class="screen active" id="screen-key">
     <div class="status-space"></div>
     <div class="key-logo">
@@ -210,7 +209,6 @@
     <div class="key-footer" id="txtKeyFooter">Mỗi key chỉ kích hoạt được 1 thiết bị.<br>Key đã dùng sẽ bị khóa vĩnh viễn.</div>
   </div>
 
-  <!-- HOME -->
   <div class="screen" id="screen-home">
     <div class="status-space"></div>
     <div class="app-header">
@@ -286,7 +284,6 @@
     </div>
   </div>
 
-  <!-- SETTINGS -->
   <div class="screen" id="screen-settings">
     <div class="status-space"></div>
     <div class="page-title" id="txtSettings">Cài đặt</div>
@@ -353,7 +350,6 @@
     </div>
   </div>
 
-  <!-- PROFILE -->
   <div class="screen" id="screen-profile">
     <div class="status-space"></div>
     <div class="profile-header">
@@ -377,7 +373,6 @@
     </div>
   </div>
 
-  <!-- LOADING -->
   <div class="loading-overlay hidden" id="loadingOverlay">
     <div class="loading-card">
       <div class="spinner"></div>
@@ -388,7 +383,6 @@
     </div>
   </div>
 
-  <!-- POPUP -->
   <div class="center-popup hidden" id="centerPopup">
     <div class="popup-card">
       <div class="popup-icon" id="popupIcon">✅</div>
@@ -405,72 +399,16 @@
 <input type="file" id="antiBanFileInput" accept=".json,.config,.zip,.mobileconfig,application/json,text/plain" style="display:none;">
 
 <script>
-/* ================= ẢNH GAME THẬT QUA CDN ================= */
-// Ảnh Free Fire thật - lấy từ Google Play Store CDN (link cố định, ổn định)
+/* ================= ẢNH GAME ================= */
 const IMG_FF_URL = 'https://play-lh.googleusercontent.com/9O2m5e6R3N5P7t5b1z5n8kK2v9Wc8Q7x3L6yR8sD4fT1mN0pQ2wE5vH8jK3lZ9xQ';
-// Ảnh Free Fire MAX thật - lấy từ Google Play Store CDN
 const IMG_FFMAX_URL = 'https://play-lh.googleusercontent.com/8bBqUJ3fH9XzW5tR2yL6vN8mK4cQ7pD1sA3gE5jT9wF2hY0nM6bV8xZ4kP7rC3dQ';
-
-// Fallback SVG đẹp (dùng khi ảnh CDN không load được)
-const SVG_FF = 'data:image/svg+xml;base64,' + btoa(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <defs>
-    <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EC8E3"/><stop offset="1" stop-color="#FFE4B5"/></linearGradient>
-    <radialGradient id="fl1" cx="0.55" cy="0.65" r="0.55"><stop offset="0" stop-color="#FFF9C4"/><stop offset="0.5" stop-color="#FFC107"/><stop offset="1" stop-color="#BF360C"/></radialGradient>
-    <linearGradient id="hr1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEB3B"/><stop offset="1" stop-color="#FF9800"/></linearGradient>
-  </defs>
-  <rect width="200" height="200" fill="url(#sky1)"/>
-  <ellipse cx="35" cy="30" rx="28" ry="11" fill="#fff" opacity="0.75"/>
-  <ellipse cx="120" cy="130" rx="65" ry="55" fill="url(#fl1)" opacity="0.85"/>
-  <path d="M 70 175 L 75 110 L 95 85 L 125 80 L 145 95 L 150 130 L 155 175 Z" fill="#FFB300" opacity="0.95"/>
-  <path d="M 90 85 Q 95 55 110 52 Q 125 55 130 85 Z" fill="#FFE0B2"/>
-  <path d="M 85 82 L 75 55 L 90 62 L 88 42 L 100 55 L 105 35 L 115 52 L 122 38 L 128 58 L 138 48 L 132 70 L 140 72 L 130 82 Z" fill="url(#hr1)"/>
-  <rect x="88" y="75" width="48" height="13" rx="3" fill="#212121"/>
-  <circle cx="112" cy="81.5" r="4.5" fill="#C62828"/>
-  <circle cx="102" cy="94" r="2.6" fill="#1B5E20"/>
-  <circle cx="122" cy="94" r="2.6" fill="#1B5E20"/>
-</svg>
-`);
-
-const SVG_FFMAX = 'data:image/svg+xml;base64,' + btoa(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-  <defs>
-    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7EC8E3"/><stop offset="1" stop-color="#FFE4B5"/></linearGradient>
-    <radialGradient id="fl2" cx="0.55" cy="0.65" r="0.55"><stop offset="0" stop-color="#FFF9C4"/><stop offset="0.5" stop-color="#FFC107"/><stop offset="1" stop-color="#BF360C"/></radialGradient>
-    <linearGradient id="hr2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEB3B"/><stop offset="1" stop-color="#FF9800"/></linearGradient>
-    <linearGradient id="mxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFEB3B"/><stop offset="1" stop-color="#FF8F00"/></linearGradient>
-  </defs>
-  <rect width="200" height="200" fill="url(#sky2)"/>
-  <ellipse cx="120" cy="130" rx="65" ry="55" fill="url(#fl2)" opacity="0.85"/>
-  <path d="M 70 175 L 75 110 L 95 85 L 125 80 L 145 95 L 150 130 L 155 175 Z" fill="#FFB300" opacity="0.95"/>
-  <path d="M 90 85 Q 95 55 110 52 Q 125 55 130 85 Z" fill="#FFE0B2"/>
-  <path d="M 85 82 L 75 55 L 90 62 L 88 42 L 100 55 L 105 35 L 115 52 L 122 38 L 128 58 L 138 48 L 132 70 L 140 72 L 130 82 Z" fill="url(#hr2)"/>
-  <rect x="88" y="75" width="48" height="13" rx="3" fill="#212121"/>
-  <circle cx="112" cy="81.5" r="4.5" fill="#C62828"/>
-  <circle cx="102" cy="94" r="2.6" fill="#1B5E20"/>
-  <circle cx="122" cy="94" r="2.6" fill="#1B5E20"/>
-  <text x="6" y="42" font-family="Arial Black, sans-serif" font-size="34" font-weight="900" fill="url(#mxg)" stroke="#3E2723" stroke-width="1.2" transform="rotate(-12 6 42)">MAX</text>
-</svg>
-`);
+const SVG_FF = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FF8C42"/><text x="100" y="120" font-size="70" text-anchor="middle" fill="#fff" font-weight="bold">FF</text></svg>');
+const SVG_FFMAX = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FF8C42"/><text x="100" y="115" font-size="45" text-anchor="middle" fill="#fff" font-weight="bold">MAX</text></svg>');
 
 /* ================= GIỌNG NÓI ================= */
-const Voice = {
-  enabled: true, synth: window.speechSynthesis || null, lang: 'vi-VN',
-  speak(text, overrideLang){
-    if(!this.enabled || !this.synth) return;
-    try{
-      this.synth.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = overrideLang || this.lang;
-      u.rate = 1.0; u.pitch = 1.0; u.volume = 1.0;
-      const voices = this.synth.getVoices();
-      const target = u.lang.toLowerCase().slice(0,2);
-      const match = voices.find(v => v.lang.toLowerCase().startsWith(target));
-      if(match) u.voice = match;
-      this.synth.speak(u);
-    }catch(e){}
-  },
-  setLang(l){ this.lang = l === 'en' ? 'en-US' : 'vi-VN'; }
+const Voice={enabled:true,synth:window.speechSynthesis||null,lang:'vi-VN',
+  speak(text,overrideLang){if(!this.enabled||!this.synth)return;try{this.synth.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=overrideLang||this.lang;u.rate=1.0;u.pitch=1.0;u.volume=1.0;const voices=this.synth.getVoices();const target=u.lang.toLowerCase().slice(0,2);const match=voices.find(v=>v.lang.toLowerCase().startsWith(target));if(match)u.voice=match;this.synth.speak(u);}catch(e){}},
+  setLang(l){this.lang=l==='en'?'en-US':'vi-VN';}
 };
 
 /* ================= NHẠC NỀN ================= */
@@ -478,27 +416,11 @@ const bgMusic=document.getElementById('bgMusic');
 const musicBtn=document.getElementById('musicBtn');
 const MUSIC_STATE='derata_music_on';
 function updateMusicBtn(){if(bgMusic.paused)musicBtn.classList.add('paused');else musicBtn.classList.remove('paused');}
-function tryAutoPlay(){
-  const saved=localStorage.getItem(MUSIC_STATE);
-  const wantOn=saved===null?true:saved==='1';
-  if(wantOn){bgMusic.volume=0.45;const p=bgMusic.play();if(p&&p.then){p.then(()=>{localStorage.setItem(MUSIC_STATE,'1');updateMusicBtn();}).catch(()=>{});}}
-  else updateMusicBtn();
-}
-function firstInteractionPlay(){
-  if(bgMusic.paused){
-    const saved=localStorage.getItem(MUSIC_STATE);
-    if(saved===null||saved==='1'){bgMusic.volume=0.45;bgMusic.play().then(()=>{localStorage.setItem(MUSIC_STATE,'1');updateMusicBtn();}).catch(()=>{});}
-  }
-  document.removeEventListener('click',firstInteractionPlay);
-  document.removeEventListener('touchstart',firstInteractionPlay);
-}
+function tryAutoPlay(){const saved=localStorage.getItem(MUSIC_STATE);const wantOn=saved===null?true:saved==='1';if(wantOn){bgMusic.volume=0.45;const p=bgMusic.play();if(p&&p.then){p.then(()=>{localStorage.setItem(MUSIC_STATE,'1');updateMusicBtn();}).catch(()=>{});}}else updateMusicBtn();}
+function firstInteractionPlay(){if(bgMusic.paused){const saved=localStorage.getItem(MUSIC_STATE);if(saved===null||saved==='1'){bgMusic.volume=0.45;bgMusic.play().then(()=>{localStorage.setItem(MUSIC_STATE,'1');updateMusicBtn();}).catch(()=>{});}}document.removeEventListener('click',firstInteractionPlay);document.removeEventListener('touchstart',firstInteractionPlay);}
 document.addEventListener('click',firstInteractionPlay);
 document.addEventListener('touchstart',firstInteractionPlay);
-musicBtn.onclick=function(e){
-  e.stopPropagation();
-  if(bgMusic.paused){bgMusic.volume=0.45;bgMusic.play().then(()=>{localStorage.setItem(MUSIC_STATE,'1');updateMusicBtn();}).catch(()=>{});}
-  else{bgMusic.pause();localStorage.setItem(MUSIC_STATE,'0');updateMusicBtn();}
-};
+musicBtn.onclick=function(e){e.stopPropagation();if(bgMusic.paused){bgMusic.volume=0.45;bgMusic.play().then(()=>{localStorage.setItem(MUSIC_STATE,'1');updateMusicBtn();}).catch(()=>{});}else{bgMusic.pause();localStorage.setItem(MUSIC_STATE,'0');updateMusicBtn();}};
 bgMusic.addEventListener('play',updateMusicBtn);
 bgMusic.addEventListener('pause',updateMusicBtn);
 tryAutoPlay();
@@ -685,13 +607,36 @@ function applyLang(){
 }
 
 /* ================= KEY ================= */
-const KEY_STORAGE='derata_keys_v14';
-const ACTIVATED_KEY='derata_activated_v14';
-const PROFILES_KEY='derata_profiles_v14';
-const LANG_KEY='derata_lang_v14';
+const KEY_STORAGE='derata_keys_v17';
+const ACTIVATED_KEY='derata_activated_v17';
+const PROFILES_KEY='derata_profiles_v17';
+const LANG_KEY='derata_lang_v17';
 
 function genKey(){const c='ABCDEF0123456789';let a='',b='';for(let i=0;i<8;i++)a+=c[Math.floor(Math.random()*c.length)];for(let i=0;i<8;i++)b+=c[Math.floor(Math.random()*c.length)];return `FREEIPA-${a}-${b}`;}
-function initKeys(){let s=localStorage.getItem(KEY_STORAGE);if(!s){const arr=[{key:'FREEIPA-9A969343-231413DC',used:false,durationDays:30}];for(let i=0;i<19;i++)arr.push({key:genKey(),used:false,durationDays:30});localStorage.setItem(KEY_STORAGE,JSON.stringify(arr));s=JSON.stringify(arr);}return JSON.parse(s);}
+
+function initKeys(){
+  let s=localStorage.getItem(KEY_STORAGE);
+  if(!s){
+    const fixedKeys = [
+      'FREEIPA-9A969343-231413DC',
+      'FREEIPA-A1B2C3D4-E5F60789',
+      'FREEIPA-12345678-9ABCDEF0',
+      'FREEIPA-DEADBEEF-CAFEBABE',
+      'FREEIPA-11112222-33334444',
+      'FREEIPA-AAAABBBB-CCCCDDDD',
+      'FREEIPA-99998888-77776666',
+      'FREEIPA-FEEDFACE-BEEFCAFE',
+      'FREEIPA-01234567-89ABCDEF',
+      'FREEIPA-ABCD1234-EF567890',
+      'FREEIPA-55556666-77778888'
+    ];
+    const arr = fixedKeys.map(k => ({key:k, used:false, durationDays:30}));
+    for(let i=0;i<19;i++) arr.push({key:genKey(), used:false, durationDays:30});
+    localStorage.setItem(KEY_STORAGE,JSON.stringify(arr));
+    s=JSON.stringify(arr);
+  }
+  return JSON.parse(s);
+}
 function saveKeys(k){localStorage.setItem(KEY_STORAGE,JSON.stringify(k));}
 function findKey(k){return initKeys().find(x=>x.key===k);}
 function activateKey(k){
@@ -723,7 +668,7 @@ function goProfile(){show('screen-profile');renderProfiles();}
 function updateHome(){
   const k=localStorage.getItem(ACTIVATED_KEY);
   if(k){
-    const m=k.length>12? constk.substring(0,12)+'*...':k;
+    const m = k.length > 12 ? k.substring(0,12) + '*...' : k;
     const el=document.getElementById('keyName');
     if(el) el.textContent=m;
   }
@@ -749,7 +694,7 @@ function updateSettings(){
       if(o.expiry){
         const ms=o.expiry-Date.now();
         const d=Math.max(0,Math.floor(ms/864e5));
-        h=Math.max(0,Math.floor((ms%864e5)/36e5));
+        const h=Math.max(0,Math.floor((ms%864e5)/36e5));
         const m=Math.max(0,Math.floor((ms%36e5)/6e4));
         document.getElementById('licenseExpiry').textContent=`${d}d ${h}h ${m}m`;
       }
@@ -896,7 +841,6 @@ document.getElementById('injectBtn').onclick=function(){
   },t('loadingInject'),currentLang==='vi'?'Inject thành công':'Inject successful');
 };
 
-/* Toggle FF/MAX */
 document.getElementById('toggleFF').onclick=function(){
   applyGame('ff');
   Voice.speak(currentLang==='vi'?'Đã chọn Free Fire':'Free Fire selected');
@@ -914,7 +858,6 @@ document.getElementById('tabMAX').onclick=function(){
   Voice.speak(currentLang==='vi'?'Đã chọn Free Fire MAX':'Free Fire MAX selected');
 };
 
-/* Anti-Ban */
 const antiBanBox=document.getElementById('antiBanBox');
 const antiBanSwitch=document.getElementById('antiBanSwitch');
 const antiBanFileInput=document.getElementById('antiBanFileInput');
@@ -987,9 +930,6 @@ document.getElementById('supportBtn').onclick=function(){
         <div class="di-row"><span class="di-lbl">${t('screen')}</span><span class="di-val">${DeviceInfo.getScreen()}</span></div>
         <div class="di-row"><span class="di-lbl">${t('cpu')}</span><span class="di-val">${DeviceInfo.getCPU()}</span></div>
         <div class="di-row"><span class="di-lbl">${t('ram')}</span><span class="di-val">${DeviceInfo.getRAM()}</span></div>
-        <div class="di-row"><span class="di-lbl">${t('language2')}</span><span class="di-val">${DeviceInfo.getLang()}</span></div>
-        <div class="di-row"><span class="di-lbl">${t('timezone')}</span><span class="di-val">${DeviceInfo.getTimezone()}</span></div>
-        <div class="di-row"><span class="di-lbl">${t('battery')}</span><span class="di-val">${v}</span></div>
         <div class="di-row"><span class="di-lbl">${t('deviceId')}</span><span class="di-val" style="font-size:10px;">${deviceId}</span></div>
         <div class="di-row"><span class="di-lbl">${t('supportConnected')}</span><span class="di-val" style="color:#16A34A;">● ONLINE</span></div>
       </div>
@@ -1019,7 +959,6 @@ document.getElementById('langVI').onclick=function(){
 
 document.getElementById('eyeBtn').onclick=()=>goProfile();
 
-/* ================= PROFILE ================= */
 function renderProfiles(){
   const list=document.getElementById('profileList');
   list.innerHTML='';
@@ -1101,7 +1040,7 @@ function runFromFile(cardEl,profile){
   if(!raw){
     const fname=profile.filename||profile.name||'config.json';
     raw=JSON.stringify({file:fname,profile:profile.name,version:profile.version||'5.0',game:GAMES[currentGame].name,
-      device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId(),screen:DeviceInfo.getScreen(),cpu:DeviceInfo.getCPU(),ram:DeviceInfo.getRAM()},
+      device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId()},
       config:{aimbot:true,speed:1.5,antiban:true,fov:120,auto_fire:true,headshot_rate:85},timestamp:new Date().toISOString()},null,2);
   }
   const panel=document.createElement('div');
@@ -1142,7 +1081,7 @@ function exportData(cardEl,profile){
 function syncDevice(cardEl,profile){
   cardEl.querySelector('.code-panel')?.remove();
   const raw=profile.content||JSON.stringify({sync:profile.name,version:profile.version||'5.0',game:GAMES[currentGame].name,
-    device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId(),screen:DeviceInfo.getScreen(),cpu:DeviceInfo.getCPU(),ram:DeviceInfo.getRAM(),timezone:DeviceInfo.getTimezone()},
+    device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId(),timezone:DeviceInfo.getTimezone()},
     config:{aimbot:true,speed:1.5,antiban:true,fov:120,auto_fire:true,headshot_rate:85},syncedAt:new Date().toISOString()},null,2);
   const panel=document.createElement('div');
   panel.className='code-panel';
@@ -1234,7 +1173,8 @@ setInterval(()=>{
   }
 },60000);
 
-console.log('DERATA LOCKED ready — key mẫu: FREEIPA-9A969343-231413DC');
+console.log('DERATA LOCKED ready — 30 key đã tạo');
+console.log('Key mẫu: FREEIPA-9A969343-231413DC');
 </script>
 </body>
 </html>
