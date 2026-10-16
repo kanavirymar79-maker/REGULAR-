@@ -204,6 +204,48 @@
   .spacer{flex:1;}
   ::-webkit-scrollbar{width:0;height:0;}
 
+  /* ================= SPLASH SCREEN ================= */
+  #screen-splash{position:relative;justify-content:center;align-items:center;padding:0;overflow:hidden;background:linear-gradient(160deg,#1A0A2E 0%,#2D1B4E 50%,#1A0A2E 100%);}
+  #screen-splash::before{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(123,44,191,.45),transparent 70%);border-radius:50%;top:-100px;left:-100px;animation:float1 6s ease-in-out infinite;}
+  #screen-splash::after{content:'';position:absolute;width:350px;height:350px;background:radial-gradient(circle,rgba(157,78,221,.35),transparent 70%);border-radius:50%;bottom:-80px;right:-80px;animation:float2 7s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.1)}}
+  @keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,-40px) scale(1.15)}}
+
+  .splash-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;padding:0 30px;animation:splashFadeIn .8s ease;}
+  @keyframes splashFadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+
+  .splash-logo-wrap{position:relative;width:130px;height:130px;margin-bottom:26px;display:flex;align-items:center;justify-content:center;}
+  .splash-logo-wrap::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:2px solid rgba(123,44,191,.35);border-top-color:#9D4EDD;animation:spinRing 3s linear infinite;}
+  .splash-logo-wrap::after{content:'';position:absolute;inset:-26px;border-radius:50%;border:1.5px dashed rgba(196,181,253,.25);animation:spinRing 8s linear infinite reverse;}
+  @keyframes spinRing{to{transform:rotate(360deg)}}
+
+  .splash-logo{width:110px;height:110px;border-radius:30px;background:#1A0A2E;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(123,44,191,.7),0 0 80px rgba(123,44,191,.35),inset 0 0 20px rgba(123,44,191,.4);animation:logoPulse 2.4s ease-in-out infinite;}
+  @keyframes logoPulse{0%,100%{transform:scale(1);box-shadow:0 0 40px rgba(123,44,191,.7),0 0 80px rgba(123,44,191,.35),inset 0 0 20px rgba(123,44,191,.4)}50%{transform:scale(1.05);box-shadow:0 0 55px rgba(157,78,221,.95),0 0 110px rgba(157,78,221,.5),inset 0 0 26px rgba(157,78,221,.6)}}
+  .splash-logo::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,#9D4EDD,#2D0A4E);z-index:1;}
+  .splash-logo::after{content:'D';position:absolute;font-size:68px;font-weight:900;color:#fff;text-shadow:0 0 24px #C4B5FD,0 0 40px #7B2CBF;z-index:2;font-family:'Inter',system-ui,sans-serif;letter-spacing:-2px;}
+
+  .splash-brand{font-size:30px;font-weight:900;letter-spacing:4px;color:#fff;text-shadow:0 0 20px rgba(157,78,221,.9),0 0 40px rgba(123,44,191,.6);margin-bottom:6px;background:linear-gradient(90deg,#C4B5FD,#fff,#C4B5FD);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:shineText 3s linear infinite;}
+  @keyframes shineText{to{background-position:200% center}}
+
+  .splash-sub{font-size:11px;font-weight:800;letter-spacing:6px;color:#9D4EDD;text-transform:uppercase;margin-bottom:44px;opacity:.9;}
+
+  .splash-progress-wrap{width:100%;max-width:280px;height:6px;background:rgba(255,255,255,.08);border-radius:20px;overflow:hidden;position:relative;box-shadow:inset 0 0 8px rgba(0,0,0,.4);}
+  .splash-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#7B2CBF,#9D4EDD,#C4B5FD,#9D4EDD,#7B2CBF);background-size:200% auto;border-radius:20px;transition:width .15s linear;box-shadow:0 0 16px rgba(157,78,221,.9);animation:shineBar 2s linear infinite;}
+  @keyframes shineBar{to{background-position:200% center}}
+
+  .splash-loading-row{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:280px;margin-top:14px;}
+  .splash-loading-text{font-size:11.5px;font-weight:700;color:#C4B5FD;letter-spacing:.5px;display:flex;align-items:center;gap:6px;}
+  .splash-loading-text .blink-dot{width:6px;height:6px;border-radius:50%;background:#9D4EDD;box-shadow:0 0 10px #9D4EDD;animation:blink 1s infinite;}
+  .splash-percent{font-size:12.5px;font-weight:900;color:#fff;letter-spacing:.5px;font-family:'Courier New',monospace;text-shadow:0 0 10px rgba(157,78,221,.8);}
+
+  .splash-dots{position:absolute;bottom:60px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:2;}
+  .splash-dots span{width:8px;height:8px;border-radius:50%;background:#7B2CBF;box-shadow:0 0 10px #7B2CBF;animation:dotJump 1.4s ease-in-out infinite;}
+  .splash-dots span:nth-child(2){animation-delay:.2s;background:#9D4EDD;box-shadow:0 0 10px #9D4EDD;}
+  .splash-dots span:nth-child(3){animation-delay:.4s;background:#C4B5FD;box-shadow:0 0 10px #C4B5FD;}
+  @keyframes dotJump{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-8px);opacity:1}}
+
+  .splash-footer{position:absolute;bottom:24px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;color:rgba(196,181,253,.5);letter-spacing:2px;z-index:2;text-transform:uppercase;}
+
   /* ================= MENU ĐEN XANH ================= */
   .game-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease;}
   .game-menu-overlay.hidden{display:none;}
@@ -300,7 +342,36 @@
 
 <div id="app">
 
-  <div class="screen active" id="screen-key">
+  <!-- ================= SPLASH SCREEN ================= -->
+  <div class="screen active" id="screen-splash">
+    <div class="splash-content">
+      <div class="splash-logo-wrap">
+        <div class="splash-logo"></div>
+      </div>
+      <div class="splash-brand">DERATA</div>
+      <div class="splash-sub">LOCKED · PREMIUM</div>
+
+      <div class="splash-progress-wrap">
+        <div class="splash-progress-bar" id="splashBar"></div>
+      </div>
+
+      <div class="splash-loading-row">
+        <div class="splash-loading-text">
+          <span class="blink-dot"></span>
+          <span id="splashLoadingText">Đang khởi động hệ thống...</span>
+        </div>
+        <div class="splash-percent" id="splashPercent">0%</div>
+      </div>
+    </div>
+
+    <div class="splash-dots">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="splash-footer">© DERATA SECURITY · v2.0</div>
+  </div>
+
+  <div class="screen" id="screen-key">
     <div class="status-space"></div>
     <div class="key-logo">
       <div class="logo-box"></div>
@@ -599,11 +670,75 @@ const IMG_FFMAX_URL = 'https://play-lh.googleusercontent.com/8bBqUJ3fH9XzW5tR2yL
 const SVG_FF = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FF8C42"/><text x="100" y="120" font-size="70" text-anchor="middle" fill="#fff" font-weight="bold">FF</text></svg>');
 const SVG_FFMAX = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FF8C42"/><text x="100" y="115" font-size="45" text-anchor="middle" fill="#fff" font-weight="bold">MAX</text></svg>');
 
-/* ================= GIỌNG NÓI ================= */
-const Voice={enabled:true,synth:window.speechSynthesis||null,lang:'vi-VN',
-  speak(text,overrideLang){if(!this.enabled||!this.synth)return;try{this.synth.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=overrideLang||this.lang;u.rate=1.0;u.pitch=1.0;u.volume=1.0;const voices=this.synth.getVoices();const target=u.lang.toLowerCase().slice(0,2);const match=voices.find(v=>v.lang.toLowerCase().startsWith(target));if(match)u.voice=match;this.synth.speak(u);}catch(e){}},
+/* ================= GIỌNG NÓI (VOICE) - TỰ ĐỘNG ================= */
+const Voice={
+  synth:window.speechSynthesis||null,
+  lang:'vi-VN',
+  voiceList:[],
+  unlocked:false,
+
+  init(){
+    if(!this.synth){console.warn('❌ Không hỗ trợ SpeechSynthesis');return;}
+    const loadVoices=()=>{
+      this.voiceList=this.synth.getVoices()||[];
+      console.log('🎤 Đã load '+this.voiceList.length+' giọng nói');
+    };
+    loadVoices();
+    if(this.synth.onvoiceschanged!==undefined){
+      this.synth.onvoiceschanged=loadVoices;
+    }
+    // Thử unlock ngay (có thể fail trên Chrome/iOS)
+    this.tryUnlock();
+    // Unlock khi user chạm lần đầu
+    const unlockOnTouch=()=>{
+      this.tryUnlock();
+      this.unlocked=true;
+      // Đọc câu chào sau khi unlock
+      setTimeout(()=>{
+        if(this.unlocked){
+          this.speak(currentLang==='vi'?'Xin chào, Derata Locked đã sẵn sàng':'Hello, Derata Locked is ready');
+        }
+      },250);
+      document.removeEventListener('click',unlockOnTouch);
+      document.removeEventListener('touchstart',unlockOnTouch);
+      document.removeEventListener('keydown',unlockOnTouch);
+    };
+    document.addEventListener('click',unlockOnTouch);
+    document.addEventListener('touchstart',unlockOnTouch);
+    document.addEventListener('keydown',unlockOnTouch);
+  },
+
+  tryUnlock(){
+    try{
+      const u=new SpeechSynthesisUtterance(' ');
+      u.volume=0;
+      this.synth.speak(u);
+    }catch(e){}
+  },
+
+  speak(text,overrideLang){
+    if(!this.synth||!text)return;
+    if(!this.unlocked){return;}
+    try{
+      this.synth.cancel();
+      const u=new SpeechSynthesisUtterance(String(text));
+      u.lang=overrideLang||this.lang;
+      u.rate=0.95;
+      u.pitch=1.05;
+      u.volume=1.0;
+      const voices=this.voiceList.length?this.voiceList:(this.synth.getVoices()||[]);
+      const target=u.lang.toLowerCase().slice(0,2);
+      let match=voices.find(v=>v.lang.toLowerCase().replace('_','-')===u.lang.toLowerCase());
+      if(!match) match=voices.find(v=>v.lang.toLowerCase().startsWith(target));
+      if(match) u.voice=match;
+      this.synth.speak(u);
+    }catch(e){console.warn('speak error',e);}
+  },
+
   setLang(l){this.lang=l==='en'?'en-US':'vi-VN';}
 };
+
+Voice.init();
 
 /* ================= NHẠC NỀN ================= */
 const bgMusic=document.getElementById('bgMusic');
@@ -1004,6 +1139,48 @@ function showCenterPopup(icon,title,desc,btnText,cb,extraHtml){
   btn.onclick=function(){pop.classList.add('hidden');if(cb) cb();};
 }
 
+/* ================= SPLASH SCREEN ================= */
+function runSplash(cb){
+  const bar=document.getElementById('splashBar');
+  const pct=document.getElementById('splashPercent');
+  const txt=document.getElementById('splashLoadingText');
+
+  const steps=[
+    {p:0,  t:currentLang==='vi'?'Đang khởi động hệ thống...':'Starting system...'},
+    {p:15, t:currentLang==='vi'?'Đang tải giao diện...':'Loading interface...'},
+    {p:32, t:currentLang==='vi'?'Đang kiểm tra thiết bị...':'Checking device...'},
+    {p:50, t:currentLang==='vi'?'Đang kết nối máy chủ...':'Connecting server...'},
+    {p:68, t:currentLang==='vi'?'Đang xác thực bảo mật...':'Verifying security...'},
+    {p:84, t:currentLang==='vi'?'Đang tối ưu hiệu năng...':'Optimizing performance...'},
+    {p:96, t:currentLang==='vi'?'Hoàn tất! Đang vào...':'Almost done! Entering...'},
+    {p:100,t:currentLang==='vi'?'Sẵn sàng!':'Ready!'}
+  ];
+
+  let i=0;
+  const total=2600;
+  const start=Date.now();
+
+  const timer=setInterval(()=>{
+    const elapsed=Date.now()-start;
+    const percent=Math.min(100,(elapsed/total)*100);
+    bar.style.width=percent+'%';
+    pct.textContent=Math.round(percent)+'%';
+
+    while(i<steps.length-1 && percent>=steps[i+1].p){i++;}
+    if(txt && steps[i]) txt.textContent=steps[i].t;
+
+    if(percent>=100){
+      clearInterval(timer);
+      setTimeout(()=>{ if(cb) cb(); },350);
+    }
+  },40);
+}
+
+function skipSplash(){
+  const s=document.getElementById('screen-splash');
+  if(s) s.style.display='none';
+}
+
 /* ================= MENU ĐEN XANH ================= */
 const gameMenuOverlay=document.getElementById('gameMenuOverlay');
 const menuStatus=document.getElementById('menuStatus');
@@ -1036,10 +1213,9 @@ function closeGameMenu(){
 
 document.getElementById('gameMenuCloseBtn').onclick=closeGameMenu;
 
-// Bấm từng dòng chức năng → bật/tắt
 document.querySelectorAll('.feature-row').forEach(row=>{
   row.onclick=function(e){
-    if(e.target.closest('.gswitch')) return; // tránh double
+    if(e.target.closest('.gswitch')) return;
     const feature=this.dataset.feature;
     const sw=this.querySelector('.gswitch');
     sw.classList.toggle('on');
@@ -1055,7 +1231,6 @@ document.querySelectorAll('.feature-row').forEach(row=>{
   };
 });
 
-// Bấm công tắc cũng bật/tắt
 document.querySelectorAll('.gswitch').forEach(sw=>{
   sw.onclick=function(e){
     e.stopPropagation();
@@ -1073,14 +1248,12 @@ document.querySelectorAll('.gswitch').forEach(sw=>{
   };
 });
 
-// VÀO GAME NGAY
 launchGameBtn.onclick=function(){
   const f=getGameFeatures();
   const enabled=[];
   ['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{
     if(f[k]) enabled.push(k);
   });
-  // Lưu lần chạy cuối
   localStorage.setItem('derata_last_launch', JSON.stringify({
     game:currentGame,
     features:f,
@@ -1093,12 +1266,10 @@ launchGameBtn.onclick=function(){
   menuStatus.textContent='✅ '+msg;
   Voice.speak(currentLang==='vi'?'Đang vào game':'Entering game');
 
-  // Đóng menu sau 1.5s và gọi deep link
   setTimeout(()=>{
     closeGameMenu();
     const scheme = currentGame==='max' ? 'freefiremax://' : 'freefire://';
     try{ window.location.href = scheme; }catch(e){}
-    // Thông báo nhỏ
     setTimeout(()=>{
       const feats = enabled.length>0 ? ' ['+enabled.join(', ').toUpperCase()+']' : '';
       alert(currentLang==='vi'
@@ -1198,7 +1369,6 @@ document.getElementById('injectBtn').onclick=function(){
   },t('loadingInject'),currentLang==='vi'?'Inject thành công, đang đồng bộ...':'Inject successful, syncing...');
 };
 
-/* NÚT MỞ GAME → mở MENU ĐEN XANH trước */
 document.getElementById('openGameBtn').onclick=function(){
   openGameMenu();
 };
@@ -1555,17 +1725,34 @@ function init(){
   applyLang();
   updateDeviceBadge();
 
-  const k=localStorage.getItem(ACTIVATED_KEY);
-  if(k){
-    const o=findKey(k);
-    if(o&&o.used&&o.expiry>Date.now()){goHome();updateHome();return;}
-    localStorage.removeItem(ACTIVATED_KEY);
-  }
-  show('screen-key');
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const splash=document.getElementById('screen-splash');
+  splash.classList.add('active');
+  splash.style.display='';
+
+  runSplash(()=>{
+    const k=localStorage.getItem(ACTIVATED_KEY);
+    if(k){
+      const o=findKey(k);
+      if(o&&o.used&&o.expiry>Date.now()){
+        skipSplash();
+        goHome();
+        updateHome();
+        Voice.speak(currentLang==='vi'?'Chào mừng trở lại Derata Locked':'Welcome back to Derata Locked');
+        return;
+      }
+      localStorage.removeItem(ACTIVATED_KEY);
+    }
+    skipSplash();
+    show('screen-key');
+    Voice.speak(currentLang==='vi'?'Vui lòng nhập key kích hoạt':'Please enter activation key');
+  });
 }
 init();
 
-console.log('DERATA LOCKED v2.0 ready — 30 key đã tạo');
+console.log('DERATA LOCKED v2.0 ready');
+console.log('🎤 Voice tự động - Không cần nút bật/tắt');
+console.log('👉 Chạm vào màn hình 1 lần để kích hoạt voice');
 console.log('Key mẫu: FREEIPA-9A969343-231413DC');
 </script>
 </body>
