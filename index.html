@@ -9,24 +9,6 @@
   body{background:#EAEAF0;display:flex;justify-content:center;min-height:100vh;user-select:none;transition:background .3s;}
   #app{width:100%;max-width:430px;background:#F5F4FA;display:flex;flex-direction:column;min-height:100vh;position:relative;overflow-x:hidden;box-shadow:0 0 40px rgba(0,0,0,.06);transition:background .3s;}
 
-  /* SPLASH SCREEN */
-  .splash{position:fixed;inset:0;background:linear-gradient(135deg,#1A0A2E,#2D1B4E);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .6s,transform .6s;}
-  .splash.hide{opacity:0;transform:scale(1.15);pointer-events:none;}
-  .splash-logo{width:110px;height:110px;border-radius:32px;background:#1A0A2E;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(123,44,191,.6);animation:splashPulse 2s infinite;}
-  .splash-logo::before{content:'D';position:absolute;font-size:64px;font-weight:900;color:#7B2CBF;text-shadow:0 0 30px #7B2CBF;z-index:2;}
-  .splash-logo::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,#9D4EDD,#2D0A4E);z-index:1;}
-  @keyframes splashPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-  .splash-title{color:#fff;font-size:28px;font-weight:900;letter-spacing:3px;text-shadow:0 0 20px rgba(123,44,191,.8);}
-  .splash-sub{color:#C4B5FD;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
-  .splash-loader{width:140px;height:4px;background:rgba(255,255,255,.15);border-radius:4px;overflow:hidden;margin-top:30px;}
-  .splash-loader-fill{height:100%;width:0%;background:linear-gradient(90deg,#7B2CBF,#C4B5FD);border-radius:4px;animation:splashLoad 2.2s ease forwards;}
-  @keyframes splashLoad{to{width:100%}}
-
-  /* CONFETTI */
-  .confetti-container{position:fixed;inset:0;pointer-events:none;z-index:9000;overflow:hidden;}
-  .confetti-piece{position:absolute;width:10px;height:14px;top:-20px;animation:confettiFall 3s linear forwards;}
-  @keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
-
   .music-btn{position:fixed;top:12px;left:12px;width:44px;height:44px;border-radius:50%;background:#fff;border:none;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(123,44,191,.28);transition:transform .2s;}
   .music-btn:active{transform:scale(.9);}
   .music-btn .disc{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 0deg,#7B2CBF 0deg,#2D1B4E 45deg,#7B2CBF 90deg,#2D1B4E 135deg,#7B2CBF 180deg,#2D1B4E 225deg,#7B2CBF 270deg,#2D1B4E 315deg,#7B2CBF 360deg);position:relative;display:flex;align-items:center;justify-content:center;animation:spinDisc 3s linear infinite;box-shadow:inset 0 0 6px rgba(0,0,0,.3);}
@@ -46,9 +28,9 @@
   .update-banner .btn-update{background:#fff;color:#7B2CBF;border:none;padding:7px 14px;border-radius:10px;font-size:12px;font-weight:900;cursor:pointer;}
   .update-banner .btn-close{background:transparent;color:#fff;border:none;font-size:20px;cursor:pointer;padding:0 6px;font-weight:400;}
 
-  .screen{display:none;flex-direction:column;flex:1;padding:0 18px;}
-  .screen.active{display:flex;animation:screenSlide .35s ease;}
-  @keyframes screenSlide{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+  .screen{display:none;flex-direction:column;flex:1;padding:0 18px;animation:fadeIn .25s ease;}
+  .screen.active{display:flex;}
+  @keyframes fadeIn{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
   .status-space{height:10px;}
 
   .app-header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 16px;padding-left:120px;}
@@ -72,6 +54,7 @@
   .game-row{display:flex;align-items:center;gap:13px;}
   .game-icon{width:58px;height:58px;border-radius:14px;overflow:hidden;flex-shrink:0;box-shadow:0 5px 14px rgba(0,0,0,.22);background:#F3F4F6;position:relative;}
   .game-icon img{width:100%;height:100%;object-fit:cover;display:block;border-radius:14px;}
+
   .game-meta{flex:1;min-width:0;}
   .game-meta h4{font-size:16px;font-weight:900;color:#1F2937;margin-bottom:2px;letter-spacing:-.3px;}
   .game-meta p{font-size:12px;color:#9CA3AF;font-weight:600;}
@@ -84,8 +67,9 @@
   .status-active.synced .status-dot{background:#fff;box-shadow:0 0 8px #fff;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
 
-  .injected-badge{margin-top:12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:12px;padding:10px 12px;font-size:11.5px;font-weight:800;color:#16A34A;text-align:center;display:none;line-height:1.6;box-shadow:0 0 0 0 rgba(22,163,74,.4);}
+  .injected-badge{margin-top:12px;background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:12px;padding:10px 12px;font-size:11.5px;font-weight:800;color:#16A34A;text-align:center;display:none;line-height:1.6;box-shadow:0 0 0 0 rgba(22,163,74,.4);cursor:pointer;transition:transform .15s;}
   .injected-badge.show{display:block;animation:popIn .3s ease, glowSynced 2s infinite;}
+  .injected-badge:active{transform:scale(.98);}
   @keyframes glowSynced{0%{box-shadow:0 0 0 0 rgba(22,163,74,.4)}70%{box-shadow:0 0 0 8px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
   .syncing-glow{animation:syncPulse 1s infinite !important;}
   @keyframes syncPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(.98)}}
@@ -136,8 +120,8 @@
   @keyframes pulseGreen{0%{box-shadow:0 0 0 0 rgba(22,163,74,.5)}70%{box-shadow:0 0 0 12px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
   .btn-support .live-dot{width:8px;height:8px;border-radius:50%;background:#16A34A;box-shadow:0 0 8px #16A34A;animation:blink 1.2s infinite;}
 
-  .segmented{display:flex;background:#F3F4F6;border-radius:15px;padding:4px;gap:4px;flex-wrap:wrap;}
-  .segmented button{flex:1;padding:11px;border:none;background:transparent;border-radius:12px;font-size:13px;font-weight:800;color:#9CA3AF;cursor:pointer;transition:all .18s;min-width:80px;}
+  .segmented{display:flex;background:#F3F4F6;border-radius:15px;padding:4px;gap:4px;}
+  .segmented button{flex:1;padding:11px;border:none;background:transparent;border-radius:12px;font-size:13.5px;font-weight:800;color:#9CA3AF;cursor:pointer;transition:all .18s;}
   .segmented button.active{background:#fff;color:#1F2937;box-shadow:0 2px 8px rgba(0,0,0,.1);}
   .discord-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0 14px;cursor:pointer;}
   .discord-row .left{display:flex;align-items:center;gap:11px;font-size:14px;font-weight:800;color:#1F2937;}
@@ -150,16 +134,15 @@
   .fab{width:48px;height:48px;border-radius:15px;background:#7B2CBF;color:#fff;border:none;font-size:28px;font-weight:300;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 7px 18px rgba(123,44,191,.35);transition:transform .15s;line-height:1;}
   .fab:active{transform:scale(.93);}
 
-  .dark-card{background:linear-gradient(160deg,#2D1B4E,#1A0A2E);border-radius:24px;padding:20px;margin-bottom:14px;box-shadow:0 10px 30px rgba(45,27,78,.25);position:relative;cursor:grab;transition:transform .2s;}
-  .dark-card.dragging{opacity:.5;transform:scale(.98);}
+  .dark-card{background:linear-gradient(160deg,#2D1B4E,#1A0A2E);border-radius:24px;padding:20px;margin-bottom:14px;box-shadow:0 10px 30px rgba(45,27,78,.25);position:relative;}
   .dark-card .top-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
   .dark-card .top-row .ver{font-size:17px;font-weight:900;color:#fff;letter-spacing:-.3px;word-break:break-all;flex:1;padding-right:10px;}
   .dark-card .top-row .pver{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;color:#fff;background:rgba(255,255,255,.08);padding:8px 14px;border-radius:13px;border:1px solid rgba(196,181,253,.2);flex-shrink:0;}
   .dark-card .top-row .pver .caret{color:#C4B5FD;font-size:11px;}
   .dark-card .local-row{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;color:#C4B5FD;margin-bottom:16px;padding-left:2px;}
   .dark-card .local-row .dot{width:7px;height:7px;border-radius:50%;background:#7B2CBF;box-shadow:0 0 8px #7B2CBF;}
-  .dark-card .actions{display:flex;gap:8px;flex-wrap:wrap;}
-  .dark-card .actions button{flex:1;min-width:70px;padding:12px;border-radius:14px;border:none;font-size:12.5px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;background:rgba(123,44,191,.85);color:#fff;box-shadow:0 5px 14px rgba(123,44,191,.35);transition:transform .15s;position:relative;}
+  .dark-card .actions{display:flex;gap:12px;}
+  .dark-card .actions button{flex:1;padding:14px;border-radius:15px;border:none;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;background:rgba(123,44,191,.85);color:#fff;box-shadow:0 5px 14px rgba(123,44,191,.35);transition:transform .15s;position:relative;}
   .dark-card .actions button:active{transform:scale(.97);}
 
   .mini-menu{position:absolute;top:70px;right:16px;background:#0A0A0A;border-radius:12px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.5);z-index:50;min-width:210px;border:1px solid #16A34A;animation:popIn .18s ease;}
@@ -216,22 +199,12 @@
   .key-footer{text-align:center;font-size:11.5px;color:#9CA3AF;font-weight:600;padding:26px 0 32px;line-height:1.7;}
 
   .live-timer{font-family:'Courier New',monospace;font-weight:900;color:#16A34A;font-size:14px;letter-spacing:.5px;}
-  .mono-val{font-size:11px;font-family:'Courier New',monospace;letter-spacing:.3px;}
-
-  .pin-wrap{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
-  .pin-bar{width:42px;height:9px;background:#E5E7EB;border-radius:10px;overflow:hidden;position:relative;border:1px solid #D1D5DB;}
-  .pin-bar-fill{height:100%;background:linear-gradient(90deg,#16A34A,#22C55E);border-radius:10px;transition:width .6s ease;}
-  .pin-bar-fill.low{background:linear-gradient(90deg,#DC2626,#EF4444);}
-  .pin-bar-fill.mid{background:linear-gradient(90deg,#F59E0B,#FBBF24);}
-  .pin-bar-fill.high{background:linear-gradient(90deg,#16A34A,#22C55E);}
-  .pin-num{font-size:13px;font-weight:900;color:#1F2937;min-width:34px;text-align:right;}
-  .charging-tag{font-size:9px;font-weight:900;color:#16A34A;background:#DCFCE7;padding:2px 6px;border-radius:6px;letter-spacing:.3px;white-space:nowrap;}
-  .charging-tag.hidden{display:none;}
 
   .hidden{display:none !important;}
   .spacer{flex:1;}
   ::-webkit-scrollbar{width:0;height:0;}
 
+  /* ================= MENU ĐEN XANH ================= */
   .game-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease;}
   .game-menu-overlay.hidden{display:none;}
   .game-menu{background:#0A0A0A;border:2px solid #16A34A;border-radius:22px;padding:20px 18px;width:100%;max-width:360px;box-shadow:0 0 40px rgba(22,163,74,.5),0 20px 60px rgba(0,0,0,.7);max-height:90vh;overflow-y:auto;position:relative;animation:menuPop .35s cubic-bezier(.34,1.56,.64,1);}
@@ -241,7 +214,9 @@
   .game-menu-title::before{content:'●';color:#16A34A;font-size:12px;animation:blink 1.2s infinite;}
   .game-menu-close{background:transparent;border:1px solid #16A34A;color:#4ADE80;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;transition:all .2s;}
   .game-menu-close:active{background:#16A34A;color:#000;}
+
   .game-menu-section{font-size:10.5px;color:#16A34A;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;margin:14px 0 8px;opacity:.8;}
+
   .feature-row{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:#111;border:1px solid #16A34A44;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;}
   .feature-row:active{background:#16A34A22;transform:scale(.98);}
   .feature-row .fi{display:flex;align-items:center;gap:11px;flex:1;}
@@ -249,42 +224,17 @@
   .feature-row .ftext{flex:1;min-width:0;}
   .feature-row .fname{font-size:12.5px;font-weight:900;color:#4ADE80;letter-spacing:.3px;}
   .feature-row .fdesc{font-size:10px;color:#86EFAC;opacity:.7;font-weight:600;margin-top:2px;}
+
   .gswitch{width:42px;height:24px;background:#333;border-radius:14px;position:relative;transition:background .25s;flex-shrink:0;box-shadow:inset 0 0 4px rgba(0,0,0,.5);}
   .gswitch.on{background:#16A34A;box-shadow:0 0 12px rgba(22,163,74,.7),inset 0 0 4px rgba(0,0,0,.3);}
   .gswitch::after{content:'';width:18px;height:18px;background:#E5E7EB;border-radius:50%;position:absolute;top:3px;left:3px;transition:left .25s;box-shadow:0 2px 4px rgba(0,0,0,.4);}
   .gswitch.on::after{left:21px;background:#fff;box-shadow:0 0 8px #fff;}
+
   .btn-launch-game{margin-top:14px;width:100%;padding:15px;background:linear-gradient(135deg,#16A34A,#22C55E);color:#000;border:none;border-radius:14px;font-size:15px;font-weight:900;letter-spacing:.8px;cursor:pointer;box-shadow:0 0 20px rgba(22,163,74,.5);text-transform:uppercase;transition:transform .15s;}
   .btn-launch-game:active{transform:scale(.97);}
   .menu-status{margin-top:10px;font-size:11px;color:#4ADE80;text-align:center;font-weight:800;letter-spacing:.5px;min-height:16px;}
 
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
-  .stat-card{background:#fff;border-radius:18px;padding:14px;box-shadow:0 3px 14px rgba(120,80,180,.06);text-align:center;}
-  .stat-card .num{font-size:24px;font-weight:900;color:#7B2CBF;letter-spacing:-1px;}
-  .stat-card .lbl{font-size:11px;color:#6B7280;font-weight:700;margin-top:4px;text-transform:uppercase;letter-spacing:.5px;}
-  .level-bar{width:100%;height:14px;background:#F3E8FF;border-radius:10px;overflow:hidden;position:relative;margin:10px 0;}
-  .level-bar-fill{height:100%;background:linear-gradient(90deg,#7B2CBF,#C4B5FD);border-radius:10px;transition:width .6s;}
-  .task-item{display:flex;align-items:center;justify-content:space-between;padding:12px;background:#F9FAFB;border-radius:12px;margin-bottom:8px;}
-  .task-item.done{background:#F0FDF4;}
-  .task-item .task-info{flex:1;min-width:0;}
-  .task-item .task-name{font-size:13.5px;font-weight:800;color:#1F2937;}
-  .task-item .task-progress{font-size:11px;color:#6B7280;font-weight:600;margin-top:3px;}
-  .task-item .task-reward{font-size:11px;font-weight:900;color:#7B2CBF;background:#F3E8FF;padding:5px 10px;border-radius:10px;flex-shrink:0;}
-  .task-item.done .task-reward{background:#DCFCE7;color:#16A34A;}
-  .rank-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:linear-gradient(135deg,#F59E0B,#FBBF24);color:#fff;font-size:11px;font-weight:900;border-radius:12px;box-shadow:0 4px 10px rgba(245,158,11,.3);}
-  .voice-btn{padding:10px 16px;border-radius:12px;border:2px solid #E5E7EB;background:#fff;font-size:13px;font-weight:800;color:#6B7280;cursor:pointer;transition:all .2s;flex:1;}
-  .voice-btn.active{background:#7B2CBF;color:#fff;border-color:#7B2CBF;}
-  .login-alert{background:#FEF3C7;border:1px solid #FCD34D;border-radius:14px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;}
-  .login-alert .icon{font-size:20px;flex-shrink:0;}
-  .login-alert .text{flex:1;font-size:12.5px;color:#92400E;font-weight:600;line-height:1.5;}
-  .login-alert .text b{font-weight:900;}
-  .history-item{background:#F9FAFB;border-radius:14px;padding:12px;margin-bottom:8px;border-left:3px solid #7B2CBF;}
-  .history-item .hi-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-  .history-item .hi-game{font-size:13px;font-weight:900;color:#1F2937;}
-  .history-item .hi-time{font-size:10.5px;color:#9CA3AF;font-weight:700;}
-  .history-item .hi-detail{font-size:11px;color:#6B7280;font-weight:600;line-height:1.5;}
-  .qr-box{width:200px;height:200px;background:#fff;border-radius:16px;margin:14px auto;display:flex;align-items:center;justify-content:center;border:2px solid #7B2CBF;padding:10px;}
-  .qr-box canvas{width:100% !important;height:100% !important;image-rendering:pixelated;}
-
+  /* DARK MODE */
   body.dark{background:#0F0F1A;}
   body.dark #app{background:#1A1A2E;}
   body.dark .brand-name{color:#F3F4F6;}
@@ -328,31 +278,9 @@
   body.dark .status-active{background:#0F2A1A;}
   body.dark .theme-btn{background:#242442;}
   body.dark .music-btn{background:#242442;}
-  body.dark .stat-card{background:#242442;}
-  body.dark .stat-card .num{color:#C4B5FD;}
-  body.dark .task-item{background:#242442;}
-  body.dark .task-item.done{background:#0F2A1A;}
-  body.dark .task-item .task-name{color:#F3F4F6;}
-  body.dark .task-item .task-reward{background:#2D1B4E;color:#C4B5FD;}
-  body.dark .history-item{background:#242442;}
-  body.dark .history-item .hi-game{color:#F3F4F6;}
-  body.dark .voice-btn{background:#242442;border-color:#333355;color:#9CA3AF;}
-  body.dark .voice-btn.active{background:#7B2CBF;color:#fff;}
-  body.dark .login-alert{background:#4A1F1F;border-color:#7F1D1D;}
-  body.dark .login-alert .text{color:#FCA5A5;}
-  body.dark .qr-box{background:#242442;border-color:#7B2CBF;}
 </style>
 </head>
 <body>
-
-<div class="splash" id="splash">
-  <div class="splash-logo"></div>
-  <div class="splash-title">DERATA LOCKED</div>
-  <div class="splash-sub">PREMIUM ACCESS</div>
-  <div class="splash-loader"><div class="splash-loader-fill"></div></div>
-</div>
-
-<div class="confetti-container" id="confettiContainer"></div>
 
 <button class="theme-btn" id="themeBtn" title="Đổi chế độ sáng/tối">🌙</button>
 
@@ -363,7 +291,7 @@
 <audio id="bgMusic" loop preload="auto" src="https://files.catbox.moe/lnwzrw.mp3"></audio>
 
 <div class="update-banner hidden" id="updateBanner">
-  <span>🎉 <b>DERATA LOCKED</b> có bản mới <b id="newVer">v3.1</b>!</span>
+  <span>🎉 <b>DERATA LOCKED</b> đã có phiên bản mới <b id="newVer">v2.1</b>!</span>
   <div>
     <button class="btn-update" id="updateBtn">Cập nhật</button>
     <button class="btn-close" id="closeUpdateBtn">×</button>
@@ -412,12 +340,12 @@
       <span id="welcomeText">Chào mừng <b id="keyName">FREEIPA-*...</b>! Chúc ngày tốt lành.</span>
     </div>
 
-    <div id="loginAlertContainer"></div>
-
     <div class="block">
       <div class="block-title" id="txtGameInjected">🎮 GAME ĐÃ TIÊM</div>
       <div class="game-row">
-        <div class="game-icon"><img id="gameIconImg" alt="Game Icon"></div>
+        <div class="game-icon">
+          <img id="gameIconImg" alt="Game Icon">
+        </div>
         <div class="game-meta">
           <h4 id="gameNameTxt">Free Fire</h4>
           <p id="gamePackageTxt">com.dts.freefireth</p>
@@ -457,79 +385,26 @@
 
     <div class="bottom-nav">
       <div class="nav-item active" data-nav="home">
-        <div class="nav-icon-wrap"><span class="nav-icon">🖱️</span></div>
+        <div class="nav-icon-wrap"><span class="nav-icon">🏠</span></div>
         <span id="txtNavHome">Trang chủ</span>
       </div>
-      <div class="nav-item" data-nav="dashboard">
-        <div class="nav-icon-wrap"><span class="nav-icon">🔫</span></div>
-        <span id="txtNavDashboard">Thống kê</span>
-      </div>
       <div class="nav-item" data-nav="settings">
-        <div class="nav-icon-wrap"><span class="nav-icon">📱</span></div>
+        <div class="nav-icon-wrap"><span class="nav-icon">⚙️</span></div>
         <span id="txtNavSettings">Cài đặt</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="screen" id="screen-dashboard">
-    <div class="status-space"></div>
-    <div class="page-title"> Thống kê</div>
-
-    <div class="stat-grid">
-      <div class="stat-card"><div class="num" id="statTotalInject">0</div><div class="lbl">Lần Inject</div></div>
-      <div class="stat-card"><div class="num" id="statStreak">0</div><div class="lbl">Ngày Streak</div></div>
-      <div class="stat-card"><div class="num" id="statKeyDays">0</div><div class="lbl">Ngày còn lại</div></div>
-      <div class="stat-card"><div class="num" id="statLevel">1</div><div class="lbl">Cấp độ</div></div>
-    </div>
-
-    <div class="block">
-      <div class="block-title">🏆 CẤP ĐỘ CỦA BẠN</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <span style="font-size:14px;font-weight:900;" id="levelTitle">Người mới</span>
-        <span class="rank-badge" id="rankBadge">🥉 TẬP SỰ</span>
-      </div>
-      <div class="level-bar"><div class="level-bar-fill" id="levelBarFill" style="width:0%"></div></div>
-      <div style="font-size:11.5px;color:#6B7280;font-weight:600;text-align:center;" id="levelInfo">0/10 điểm để lên cấp</div>
-    </div>
-
-    <div class="block">
-      <div class="block-title">📈 TOP PROFILE</div>
-      <div id="topProfileList"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-title">📜 LỊCH SỬ INJECT (20 gần nhất)</div>
-      <div id="historyList"></div>
-    </div>
-
-    <div style="height:8px;"></div>
-
-    <div class="bottom-nav">
-      <div class="nav-item" data-nav="home">
-        <div class="nav-icon-wrap"><span class="nav-icon">🎯</span></div>
-        <span>Trang chủ</span>
-      </div>
-      <div class="nav-item active" data-nav="dashboard">
-        <div class="nav-icon-wrap"><span class="nav-icon">🔫</span></div>
-        <span>Thống kê</span>
-      </div>
-      <div class="nav-item" data-nav="settings">
-        <div class="nav-icon-wrap"><span class="nav-icon">📱</span></div>
-        <span>Cài đặt</span>
       </div>
     </div>
   </div>
 
   <div class="screen" id="screen-settings">
     <div class="status-space"></div>
-    <div class="page-title">📱 Cài đặt</div>
+    <div class="page-title" id="txtSettings">Cài đặt</div>
 
     <div class="block">
-      <div class="block-title">🔑 THÔNG TIN BẢN QUYỀN</div>
-      <div class="info-row"><span class="lbl">Bản quyền:</span><span class="val mask" id="licenseKeyDisplay">FREEIPA-******</span></div>
-      <div class="info-row"><span class="lbl">Hạn dùng:</span><span class="val" id="licenseExpiry">0d 7h 48m</span></div>
-      <div class="info-row"><span class="lbl">Kích hoạt:</span><span class="val" id="activatedAtDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Device ID:</span><span class="val" id="deviceIdDisplay">--</span></div>
+      <div class="block-title" id="txtCopyright">🔑 THÔNG TIN BẢN QUYỀN</div>
+      <div class="info-row"><span class="lbl" id="txtLicense">Bản quyền:</span><span class="val mask" id="licenseKeyDisplay">FREEIPA-******</span></div>
+      <div class="info-row"><span class="lbl" id="txtExpiry">Hạn dùng:</span><span class="val" id="licenseExpiry">0d 7h 48m</span></div>
+      <div class="info-row"><span class="lbl" id="txtActivatedAt">Kích hoạt:</span><span class="val" id="activatedAtDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtDeviceId">Device ID:</span><span class="val" id="deviceIdDisplay">--</span></div>
       <div class="info-row" style="margin-bottom:8px;">
         <span class="lbl">UUID:</span>
         <button class="btn-copy" id="copyUUID"><span id="txtCopy">Sao chép</span></button>
@@ -538,81 +413,50 @@
     </div>
 
     <div class="block">
-      <div class="block-title">📱 THÔNG TIN THIẾT BỊ</div>
-      <div class="info-row"><span class="lbl">Tên thiết bị:</span><span class="val" id="deviceNameDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Model:</span><span class="val" id="deviceModelDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Hệ điều hành:</span><span class="val" id="osDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Phiên bản:</span><span class="val" id="osVersionDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Trình duyệt:</span><span class="val" id="browserDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Màn hình:</span><span class="val" id="screenDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">CPU:</span><span class="val" id="cpuDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">RAM:</span><span class="val" id="ramDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">ICCID:</span><span class="val mono-val" id="iccidDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">IMEI:</span><span class="val mono-val" id="imeiDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Nhiệt độ:</span><span class="val" id="tempDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">GPS:</span><span class="val mono-val" id="gpsDisplay">--</span></div>
-      <div class="info-row"><span class="lbl">Giờ NTP:</span><span class="val mono-val" id="ntpDisplay">--</span></div>
-      <div class="info-row" style="margin-bottom:0;">
-        <span class="lbl">Pin hiện tại:</span>
-        <span class="val pin-wrap">
-          <span class="charging-tag hidden" id="chargingTag">⚡ ĐANG SẠC</span>
-          <span class="pin-bar"><span class="pin-bar-fill" id="pinBarFill" style="width:0%"></span></span>
-          <span class="pin-num" id="batteryDisplay">--</span>
-        </span>
-      </div>
+      <div class="block-title" id="txtCompat">📱 THÔNG TIN THIẾT BỊ</div>
+      <div class="info-row"><span class="lbl" id="txtDeviceName">Tên thiết bị:</span><span class="val" id="deviceNameDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtDeviceModel">Model:</span><span class="val" id="deviceModelDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtOS">Hệ điều hành:</span><span class="val" id="osDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtCurrentIOS">Phiên bản:</span><span class="val" id="osVersionDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtBrowser">Trình duyệt:</span><span class="val" id="browserDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtScreen">Màn hình:</span><span class="val" id="screenDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtCPU">CPU:</span><span class="val" id="cpuDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtRAM">RAM:</span><span class="val" id="ramDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtLanguage2">Ngôn ngữ:</span><span class="val" id="langDisplay">--</span></div>
+      <div class="info-row"><span class="lbl" id="txtTimezone">Múi giờ:</span><span class="val" id="timezoneDisplay">--</span></div>
+      <div class="info-row" style="margin-bottom:0;"><span class="lbl" id="txtBattery">Pin:</span><span class="val" id="batteryDisplay">--</span></div>
       <div style="margin-top:14px;">
-        <button class="btn-support" id="supportBtn"><span class="live-dot"></span> HỖ TRỢ</button>
+        <button class="btn-support" id="supportBtn"><span class="live-dot"></span> <span id="txtSupport">HỖ TRỢ</span></button>
       </div>
     </div>
 
     <div class="block">
-      <div class="block-title">🎙️ GIỌNG NÓI TTS</div>
-      <div style="display:flex;gap:8px;">
-        <button class="voice-btn active" id="voiceFemale">👩 Nữ</button>
-        <button class="voice-btn" id="voiceMale">👨 Nam</button>
-      </div>
-    </div>
-
-    <div class="block">
-      <div class="block-title">🌐 NGÔN NGỮ</div>
+      <div class="block-title" id="txtLanguage">🌐 NGÔN NGỮ</div>
       <div class="segmented">
-        <button id="langVI" class="active">Tiếng Việt</button>
         <button id="langEN">English</button>
-        <button id="langZH">中文</button>
-        <button id="langKO">한국어</button>
-        <button id="langHI">हिन्दी</button>
-        <button id="langTH">ไทย</button>
+        <button class="active" id="langVI">Tiếng Việt</button>
       </div>
     </div>
 
     <div class="block">
-      <div class="block-title">🎯 NHIỆM VỤ HÀNG NGÀY</div>
-      <div id="taskList"></div>
-    </div>
-
-    <div class="block">
-      <div class="block-title">❓ HỖ TRỢ & HỆ THỐNG</div>
+      <div class="block-title" id="txtSupportSys">❓ HỖ TRỢ & HỆ THỐNG</div>
       <div class="discord-row">
-        <div class="left">✈️ Liên hệ hỗ trợ (Discord)</div>
+        <div class="left">✈️ <span id="txtDiscord">Liên hệ hỗ trợ (Discord)</span></div>
         <div class="arrow">↗</div>
       </div>
-      <button class="btn-logout" id="logoutBtn">🚪 Đăng xuất tài khoản</button>
+      <button class="btn-logout" id="logoutBtn">🚪 <span id="txtLogout">Đăng xuất tài khoản</span></button>
     </div>
 
     <div style="height:8px;"></div>
 
     <div class="bottom-nav">
       <div class="nav-item" data-nav="home">
-        <div class="nav-icon-wrap"><span class="nav-icon">🎯</span></div>
-        <span>Trang chủ</span>
-      </div>
-      <div class="nav-item" data-nav="dashboard">
-        <div class="nav-icon-wrap"><span class="nav-icon">🔫</span></div>
-        <span>Thống kê</span>
+        <div class="nav-icon-wrap"><span class="nav-icon">🏠</span></div>
+        <span id="txtNavHome2">Trang chủ</span>
       </div>
       <div class="nav-item active" data-nav="settings">
-        <div class="nav-icon-wrap"><span class="nav-icon">📱</span></div>
-        <span>Cài đặt</span>
+        <div class="nav-icon-wrap"><span class="nav-icon">⚙️</span></div>
+        <span id="txtNavSettings2">Cài đặt</span>
       </div>
     </div>
   </div>
@@ -622,7 +466,7 @@
     <div class="profile-header">
       <div class="profile-title">
         <div class="icon">📄</div>
-        <span>Profile</span>
+        <span id="txtProfile">Profile</span>
       </div>
       <button class="fab" id="addProfileBtn">+</button>
     </div>
@@ -630,16 +474,12 @@
     <div class="spacer"></div>
     <div class="bottom-nav">
       <div class="nav-item" data-nav="home">
-        <div class="nav-icon-wrap"><span class="nav-icon">🎯</span></div>
-        <span>Trang chủ</span>
-      </div>
-      <div class="nav-item" data-nav="dashboard">
-        <div class="nav-icon-wrap"><span class="nav-icon">🔫</span></div>
-        <span>Thống kê</span>
+        <div class="nav-icon-wrap"><span class="nav-icon">🏠</span></div>
+        <span id="txtNavHome3">Trang chủ</span>
       </div>
       <div class="nav-item" data-nav="settings">
-        <div class="nav-icon-wrap"><span class="nav-icon">📱</span></div>
-        <span>Cài đặt</span>
+        <div class="nav-icon-wrap"><span class="nav-icon">⚙️</span></div>
+        <span id="txtNavSettings3">Cài đặt</span>
       </div>
     </div>
   </div>
@@ -666,38 +506,84 @@
 
 </div>
 
+<!-- ================= MENU ĐEN XANH KHI VÀO GAME ================= -->
 <div class="game-menu-overlay hidden" id="gameMenuOverlay">
   <div class="game-menu">
     <div class="game-menu-header">
       <div class="game-menu-title">DELTA MENU · ACTIVE</div>
       <button class="game-menu-close" id="gameMenuCloseBtn">×</button>
     </div>
+
     <div class="game-menu-section">⚡ Chức năng chính</div>
+
     <div class="feature-row" data-feature="touch">
-      <div class="fi"><div class="ficon">👆</div><div class="ftext"><div class="fname">TOUCH</div><div class="fdesc">Tăng độ nhạy cảm ứng</div></div></div>
+      <div class="fi">
+        <div class="ficon">👆</div>
+        <div class="ftext">
+          <div class="fname">TOUCH</div>
+          <div class="fdesc">Tăng độ nhạy cảm ứng</div>
+        </div>
+      </div>
       <div class="gswitch" id="sw-touch"></div>
     </div>
+
     <div class="feature-row" data-feature="fps">
-      <div class="fi"><div class="ficon">⚡</div><div class="ftext"><div class="fname">FPS 90</div><div class="fdesc">Tăng FPS lên 90</div></div></div>
+      <div class="fi">
+        <div class="ficon">⚡</div>
+        <div class="ftext">
+          <div class="fname">FPS 90</div>
+          <div class="fdesc">Tăng FPS lên 90 khung hình/giây</div>
+        </div>
+      </div>
       <div class="gswitch" id="sw-fps"></div>
     </div>
+
     <div class="game-menu-section">🎯 Chức năng bổ sung</div>
+
     <div class="feature-row" data-feature="aimbot">
-      <div class="fi"><div class="ficon">🎯</div><div class="ftext"><div class="fname">AIMBOT</div><div class="fdesc">Tự động ngắm</div></div></div>
+      <div class="fi">
+        <div class="ficon">🎯</div>
+        <div class="ftext">
+          <div class="fname">AIMBOT</div>
+          <div class="fdesc">Tự động ngắm mục tiêu</div>
+        </div>
+      </div>
       <div class="gswitch" id="sw-aimbot"></div>
     </div>
+
     <div class="feature-row" data-feature="antiban">
-      <div class="fi"><div class="ficon">🛡</div><div class="ftext"><div class="fname">ANTI-BAN</div><div class="fdesc">Chống ban</div></div></div>
+      <div class="fi">
+        <div class="ficon">🛡</div>
+        <div class="ftext">
+          <div class="fname">ANTI-BAN</div>
+          <div class="fdesc">Chống ban tài khoản</div>
+        </div>
+      </div>
       <div class="gswitch" id="sw-antiban"></div>
     </div>
+
     <div class="feature-row" data-feature="headshot">
-      <div class="fi"><div class="ficon">💥</div><div class="ftext"><div class="fname">HEADSHOT 100%</div><div class="fdesc">Bắn đầu</div></div></div>
+      <div class="fi">
+        <div class="ficon">💥</div>
+        <div class="ftext">
+          <div class="fname">HEADSHOT </div>
+          <div class="fdesc">Tăng tỉ lệ bắn đầu</div>
+        </div>
+      </div>
       <div class="gswitch" id="sw-headshot"></div>
     </div>
+
     <div class="feature-row" data-feature="speed">
-      <div class="fi"><div class="ficon">🏃</div><div class="ftext"><div class="fname">SPEED HACK</div><div class="fdesc">Tăng tốc độ</div></div></div>
+      <div class="fi">
+        <div class="ficon">🏃</div>
+        <div class="ftext">
+          <div class="fname">SPEED</div>
+          <div class="fdesc">Tăng tốc độ di chuyển</div>
+        </div>
+      </div>
       <div class="gswitch" id="sw-speed"></div>
     </div>
+
     <button class="btn-launch-game" id="launchGameBtn">🚀 VÀO GAME NGAY</button>
     <div class="menu-status" id="menuStatus"></div>
   </div>
@@ -714,9 +600,9 @@ const SVG_FF = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.or
 const SVG_FFMAX = 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FF8C42"/><text x="100" y="115" font-size="45" text-anchor="middle" fill="#fff" font-weight="bold">MAX</text></svg>');
 
 /* ================= GIỌNG NÓI ================= */
-const Voice={enabled:true,synth:window.speechSynthesis||null,lang:'vi-VN',gender:'female',
-  speak(text,overrideLang){if(!this.enabled||!this.synth)return;try{this.synth.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=overrideLang||this.lang;u.rate=this.gender==='female'?1.05:0.95;u.pitch=this.gender==='female'?1.3:0.8;u.volume=1.0;const voices=this.synth.getVoices();const target=u.lang.toLowerCase().slice(0,2);const matches=voices.filter(v=>v.lang.toLowerCase().startsWith(target));if(matches.length>0){const femaleIdx=matches.findIndex(v=>/female|woman|nữ|samantha|zira|google/i.test(v.name));const maleIdx=matches.findIndex(v=>/male|man|nam|david|daniel|google uk/i.test(v.name));if(this.gender==='female'&&femaleIdx>=0)u.voice=matches[femaleIdx];else if(this.gender==='male'&&maleIdx>=0)u.voice=matches[maleIdx];else u.voice=matches[0];}this.synth.speak(u);}catch(e){}},
-  setLang(l){this.lang=l==='en'?'en-US':l==='zh'?'zh-CN':l==='ko'?'ko-KR':l==='hi'?'hi-IN':l==='th'?'th-TH':'vi-VN';}
+const Voice={enabled:true,synth:window.speechSynthesis||null,lang:'vi-VN',
+  speak(text,overrideLang){if(!this.enabled||!this.synth)return;try{this.synth.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=overrideLang||this.lang;u.rate=1.0;u.pitch=1.0;u.volume=1.0;const voices=this.synth.getVoices();const target=u.lang.toLowerCase().slice(0,2);const match=voices.find(v=>v.lang.toLowerCase().startsWith(target));if(match)u.voice=match;this.synth.speak(u);}catch(e){}},
+  setLang(l){this.lang=l==='en'?'en-US':'vi-VN';}
 };
 
 /* ================= NHẠC NỀN ================= */
@@ -733,30 +619,8 @@ bgMusic.addEventListener('play',updateMusicBtn);
 bgMusic.addEventListener('pause',updateMusicBtn);
 tryAutoPlay();
 
-/* ================= SPLASH ================= */
-setTimeout(()=>{document.getElementById('splash').classList.add('hide');},2200);
-
-/* ================= CONFETTI ================= */
-function fireConfetti(){
-  const c=document.getElementById('confettiContainer');
-  const colors=['#7B2CBF','#9D4EDD','#C4B5FD','#16A34A','#22C55E','#F59E0B','#EC4899','#3B82F6'];
-  for(let i=0;i<80;i++){
-    setTimeout(()=>{
-      const p=document.createElement('div');
-      p.className='confetti-piece';
-      p.style.left=Math.random()*100+'%';
-      p.style.background=colors[Math.floor(Math.random()*colors.length)];
-      p.style.animationDelay=(Math.random()*0.5)+'s';
-      p.style.animationDuration=(2+Math.random()*1.5)+'s';
-      p.style.transform='rotate('+Math.random()*360+'deg)';
-      c.appendChild(p);
-      setTimeout(()=>p.remove(),4000);
-    },i*15);
-  }
-}
-
 /* ================= DARK MODE ================= */
-const THEME_KEY='derata_theme_v8';
+const THEME_KEY='derata_theme_v3';
 function applyTheme(theme){
   if(theme==='dark'){document.body.classList.add('dark');document.getElementById('themeBtn').textContent='☀️';}
   else{document.body.classList.remove('dark');document.getElementById('themeBtn').textContent='🌙';}
@@ -775,112 +639,309 @@ const DeviceInfo={
   getDeviceName(){const ua=navigator.userAgent;if(/iPhone/.test(ua))return 'iPhone';if(/iPad/.test(ua))return 'iPad';if(/Android/.test(ua)){const m=ua.match(/Android\s[^;]+;\s([^)]+)\)/);return m?m[1].trim():'Android Device';}if(/Macintosh/.test(ua))return 'Mac';if(/Windows/.test(ua))return 'Windows PC';if(/Linux/.test(ua))return 'Linux';return 'Unknown Device';},
   getModel(){const ua=navigator.userAgent;if(/iPhone/.test(ua))return 'iPhone';if(/iPad/.test(ua))return 'iPad';if(/Android/.test(ua)){const m=ua.match(/Android\s[^;]+;\s([^)]+)\)/);return m?m[1].trim():'Android';}if(/Macintosh/.test(ua))return 'Macintosh';if(/Windows/.test(ua))return 'Windows';return 'Unknown';},
   getOS(){const ua=navigator.userAgent;if(/iPhone|iPad|iPod/.test(ua))return 'iOS';if(/Android/.test(ua))return 'Android';if(/Mac OS X/.test(ua))return 'macOS';if(/Windows/.test(ua))return 'Windows';if(/Linux/.test(ua))return 'Linux';return 'Unknown OS';},
-  getOSVersion(){const ua=navigator.userAgent;let m=ua.match(/OS (\d+[._]\d+[._]?\d*)/);if(m)return 'iOS '+m[1].replace(/_/g,'.');m=ua.match(/Android\s(\d+[\.\d]*)/);if(m)return 'Android '+m[1];m=ua.match(/Mac OS X (\d+[._]\d+[._]?\d*)/);if(m)return 'macOS '+m[1].replace(/_/g,'.');return 'Unknown';},
-  getBrowser(){const ua=navigator.userAgent;if(/CriOS/.test(ua))return 'Chrome iOS';if(/FxiOS/.test(ua))return 'Firefox iOS';if(/EdgiOS/.test(ua))return 'Edge iOS';if(/Chrome/.test(ua)&&/Safari/.test(ua))return 'Chrome';if(/Firefox/.test(ua))return 'Firefox';if(/Safari/.test(ua))return 'Safari';return 'Unknown Browser';},
+  getOSVersion(){const ua=navigator.userAgent;let m=ua.match(/OS (\d+[._]\d+[._]?\d*)/);if(m)return 'iOS '+m[1].replace(/_/g,'.');m=ua.match(/Android\s(\d+[\.\d]*)/);if(m)return 'Android '+m[1];m=ua.match(/Mac OS X (\d+[._]\d+[._]?\d*)/);if(m)return 'macOS '+m[1].replace(/_/g,'.');m=ua.match(/Windows NT ([\d\.]+)/);if(m){const v={'10.0':'10/11','6.3':'8.1','6.2':'8','6.1':'7'}[m[1]]||m[1];return 'Windows '+v;}return 'Unknown';},
+  getBrowser(){const ua=navigator.userAgent;if(/CriOS/.test(ua))return 'Chrome iOS';if(/FxiOS/.test(ua))return 'Firefox iOS';if(/EdgiOS/.test(ua))return 'Edge iOS';if(/OPiOS/.test(ua))return 'Opera iOS';if(/Chrome/.test(ua)&&/Safari/.test(ua))return 'Chrome';if(/Firefox/.test(ua))return 'Firefox';if(/Safari/.test(ua))return 'Safari';if(/Edg/.test(ua))return 'Edge';return 'Unknown Browser';},
   getScreen(){return screen.width+' × '+screen.height+' ('+window.devicePixelRatio+'x)';},
   getCPU(){return navigator.hardwareConcurrency?navigator.hardwareConcurrency+' nhân':'Không rõ';},
-  getRAM(){return navigator.deviceMemory?navigator.deviceMemory+' GB':'Không rõ';},
-  getLang(){return navigator.language||'Unknown';},
+  getRAM(){return navigator.deviceMemory?navigator.deviceMemory+' GB':(navigator.hardwareConcurrency?'~'+Math.round(navigator.hardwareConcurrency/2)+' GB':'Không rõ');},
+  getLang(){return navigator.language||navigator.userLanguage||'Unknown';},
   getTimezone(){try{return Intl.DateTimeFormat().resolvedOptions().timeZone;}catch(e){return 'Unknown';}},
-  getDeviceId(){let id=localStorage.getItem('derata_device_id');if(!id){id='DEV-'+Math.random().toString(36).substring(2,10).toUpperCase()+'-'+Date.now().toString(36).toUpperCase();localStorage.setItem('derata_device_id',id);}return id;},
-  getICCID(){let s=localStorage.getItem('derata_iccid');if(!s){s=('8945204'+Math.floor(Math.random()*9000000000+1000000000)).substring(0,20);localStorage.setItem('derata_iccid',s);}return s;},
-  getIMEI(){let s=localStorage.getItem('derata_imei');if(!s){const d=DeviceInfo.getDeviceId();let seed=0;for(let i=0;i<d.length;i++)seed=(seed*31+d.charCodeAt(i))>>>0;const tac='35328506';let serial='';let x=seed;for(let i=0;i<6;i++){serial+=(x%10);x=Math.floor(x/10)||seed+i+1;}const f14=tac+serial;let sum=0;for(let i=0;i<14;i++){let dd=parseInt(f14[i]);if(i%2===1){dd*=2;if(dd>9)dd-=9;}sum+=dd;}s=f14+((10-(sum%10))%10);localStorage.setItem('derata_imei',s);}return s;},
-  watchBattery(cb){if(!navigator.getBattery){cb({level:null,charging:false,supported:false});return;}navigator.getBattery().then(b=>{const update=()=>cb({level:Math.round(b.level*100),charging:b.charging,supported:true});update();b.addEventListener('levelchange',update);b.addEventListener('chargingchange',update);}).catch(()=>cb({level:null,charging:false,supported:false}));},
-  getTemperature(){return new Promise(resolve=>{if(!navigator.getBattery){resolve('Không hỗ trợ');return;}navigator.getBattery().then(b=>{let temp=28;if(b.charging)temp+=Math.random()*6+3;else temp+=Math.random()*3;temp+=Math.round((1-b.level)*3);temp=Math.round(temp*10)/10;resolve(temp+'°C');}).catch(()=>resolve('Không hỗ trợ'));});},
-  getGPS(cb){if(!navigator.geolocation){cb(null);return;}navigator.geolocation.getCurrentPosition(p=>{cb({lat:p.coords.latitude.toFixed(4),lng:p.coords.longitude.toFixed(4),acc:Math.round(p.coords.accuracy)});},()=>cb(null),{timeout:5000,enableHighAccuracy:false});},
-  getNTPTime(){return new Promise(resolve=>{const t0=Date.now();fetch('https://worldtimeapi.org/api/ip').then(r=>r.json()).then(d=>{const t=new Date(d.datetime);resolve(t.toLocaleTimeString('vi-VN')+' '+t.toLocaleDateString('vi-VN'));}).catch(()=>{resolve(new Date().toLocaleTimeString('vi-VN')+' (local)');});});}
+  getBattery(cb){if(navigator.getBattery){navigator.getBattery().then(b=>cb(Math.round(b.level*100)+'%'+(b.charging?' (Đang sạc)':''))).catch(()=>cb('Không rõ'));}else cb('Không hỗ trợ');},
+  getDeviceId(){let id=localStorage.getItem('derata_device_id');if(!id){id='DEV-'+Math.random().toString(36).substring(2,10).toUpperCase()+'-'+Date.now().toString(36).toUpperCase();localStorage.setItem('derata_device_id',id);}return id;}
 };
 
 /* ================= GAME CONFIG ================= */
-const GAMES={ff:{name:'Free Fire',package:'com.dts.freefireth',icon:IMG_FF_URL,fallback:SVG_FF},max:{name:'Free Fire MAX',package:'com.dts.freefiremax',icon:IMG_FFMAX_URL,fallback:SVG_FFMAX}};
+const GAMES={
+  ff:{name:'Free Fire',package:'com.dts.freefireth',icon:IMG_FF_URL,fallback:SVG_FF},
+  max:{name:'Free Fire MAX',package:'com.dts.freefiremax',icon:IMG_FFMAX_URL,fallback:SVG_FFMAX}
+};
 let currentGame='ff';
 
-function setGameIcon(game){const g=GAMES[game];const img=document.getElementById('gameIconImg');img.onerror=function(){img.onerror=null;img.src=g.fallback;};img.src=g.icon;}
-function applyGame(game){currentGame=game;const g=GAMES[game];setGameIcon(game);document.getElementById('gameNameTxt').textContent=g.name;document.getElementById('gamePackageTxt').textContent=g.package;document.getElementById('toggleFF').classList.toggle('active',game==='ff');document.getElementById('toggleFF').classList.toggle('inactive',game!=='ff');document.getElementById('toggleMAX').classList.toggle('active',game==='max');document.getElementById('toggleMAX').classList.toggle('inactive',game!=='max');document.getElementById('tabFF').classList.toggle('active',game==='ff');document.getElementById('tabFF').classList.toggle('inactive',game!=='ff');document.getElementById('tabMAX').classList.toggle('active',game==='max');document.getElementById('tabMAX').classList.toggle('inactive',game!=='max');localStorage.setItem('derata_current_game',game);updateHome();}
+function setGameIcon(game){
+  const g=GAMES[game];
+  const img=document.getElementById('gameIconImg');
+  img.onerror=function(){ img.onerror=null; img.src=g.fallback; };
+  img.src=g.icon;
+}
+
+function applyGame(game){
+  currentGame=game;
+  const g=GAMES[game];
+  setGameIcon(game);
+  document.getElementById('gameNameTxt').textContent=g.name;
+  document.getElementById('gamePackageTxt').textContent=g.package;
+  document.getElementById('toggleFF').classList.toggle('active',game==='ff');
+  document.getElementById('toggleFF').classList.toggle('inactive',game!=='ff');
+  document.getElementById('toggleMAX').classList.toggle('active',game==='max');
+  document.getElementById('toggleMAX').classList.toggle('inactive',game!=='max');
+  document.getElementById('tabFF').classList.toggle('active',game==='ff');
+  document.getElementById('tabFF').classList.toggle('inactive',game!=='ff');
+  document.getElementById('tabMAX').classList.toggle('active',game==='max');
+  document.getElementById('tabMAX').classList.toggle('inactive',game!=='max');
+  localStorage.setItem('derata_current_game',game);
+  updateHome();
+}
 
 /* ================= I18N ================= */
 const I18N={
-  vi:{keyDesc:'Nhập key kích hoạt để truy cập hệ thống',keyLabel:'🔑 Key kích hoạt',keyBtn:'⚡ Kích Hoạt Key',keyFooter:'Mỗi key chỉ kích hoạt được 1 thiết bị.<br>Key đã dùng sẽ bị khóa vĩnh viễn.',welcome:'Chào mừng',welcomeEnd:'! Chúc ngày tốt lành.',gameInjected:'🎮 GAME ĐÃ TIÊM',active:'HOẠT ĐỘNG',protect:'🛡 BẢO VỆ TÀI KHOẢN',ff:'Free Fire',ffmax:'Free Fire MAX',injectTitle:'Kích Hoạt Menu Derata Locked',injectSub:'Sẵn sàng kích hoạt',injectBtn:'⚡ INJECT GAME',antiBanTitle:'Chưa kích hoạt Anti-Ban',antiBanDesc:'Bấm để chọn file kích hoạt',antiBanTitleOn:'Đã kích hoạt Anti-Ban',antiBanDescOn:'File: ',navHome:'Trang chủ',navSettings:'Cài đặt',navDashboard:'Thống kê',copyright:'🔑 THÔNG TIN BẢN QUYỀN',license:'Bản quyền:',expiry:'Hạn dùng:',copy:'Sao chép',activatedAt:'Kích hoạt:',deviceId:'Device ID:',compat:'📱 THÔNG TIN THIẾT BỊ',deviceName:'Tên thiết bị:',deviceModel:'Model:',os:'Hệ điều hành:',currentIOS:'Phiên bản:',browser:'Trình duyệt:',screen:'Màn hình:',cpu:'CPU:',ram:'RAM:',iccid:'ICCID:',imei:'IMEI:',battery:'Pin hiện tại:',support:'HỖ TRỢ',discord:'Liên hệ hỗ trợ (Discord)',logout:'Đăng xuất tài khoản',profile:'Profile',syncLocal:'Local · Đã đồng bộ',rename:'Sửa tên',export:'Xuất',runFromFile:'Chạy từ file',exportData:'Xuất dữ liệu',syncDevice:'Đồng bộ thiết bị',dataRunning:'DỮ LIỆU FILE · ĐANG CHẠY',dataExported:'DỮ LIỆU XUẤT RA',dataSync:'ĐỒNG BỘ THIẾT BỊ',applied:'Đã áp dụng',exported:'Đã xuất',synced:'Đã đồng bộ',loadingKey:'Đang xác thực key...',loadingInject:'Đang lấy dữ liệu và inject...',loadingAntiBan:'Đang kích hoạt Anti-Ban...',loadingReadFile:'Đang đọc file và chạy...',loadingExport:'Đang xuất dữ liệu file...',loadingSync:'Đang đồng bộ với thiết bị...',keySuccess:'Kết nối thành công! Đang chuyển hướng...',keyErrorFormat:'Key không đúng định dạng!',keyErrorFormatHint:'Định dạng: FREEIPA-XXXXXXXX-XXXXXXXX',keyErrorEmpty:'Vui lòng nhập key kích hoạt!',popupTitle:'Update thành công!',popupDesc:'Vào game thôi!',appliedProfile:'Đã áp dụng profile: ',antiBanStatus:' | Anti-Ban: ',logoutConfirm:'Bạn có chắc muốn đăng xuất tài khoản?',copied:'Đã sao chép!',copy:'Sao chép',antiBanSuccess:'Kích hoạt Anti-Ban thành công từ file: ',enterProfileName:'Nhập tên mới cho profile:',keyExpired:'Key đã hết hạn! Vui lòng nhập key mới.',supportTitle:'TRẠNG THÁI THIẾT BỊ',supportDesc:'Thiết bị đã kết nối thành công',supportConnected:'Đã kết nối',injectedAt:'Đã tiêm lúc: ',injected:'ĐÃ TIÊM',syncing:'ĐANG ĐỒNG BỘ...',syncedToDevice:'ĐÃ ĐỒNG BỘ VÀO MÁY',openGame:'🎮 MỞ FREE FIRE NGAY',openGameMax:'🎮 MỞ FREE FIRE MAX NGAY',updateAvailable:'Có bản cập nhật mới'},
-  en:{keyDesc:'Enter activation key to access',keyLabel:'🔑 Activation Key',keyBtn:'⚡ Activate Key',keyFooter:'Each key activates 1 device only.<br>Used keys are permanently locked.',welcome:'Welcome',welcomeEnd:'! Have a nice day.',gameInjected:'🎮 INJECTED GAME',active:'ACTIVE',protect:'🛡 ACCOUNT PROTECTION',ff:'Free Fire',ffmax:'Free Fire MAX',injectTitle:'Activate Derata Locked Menu',injectSub:'Ready to activate',injectBtn:'⚡ INJECT GAME',antiBanTitle:'Anti-Ban not activated',antiBanDesc:'Tap to select file',antiBanTitleOn:'Anti-Ban activated',antiBanDescOn:'File: ',navHome:'Home',navSettings:'Settings',navDashboard:'Stats',copyright:'🔑 COPYRIGHT',license:'License:',expiry:'Expiry:',copy:'Copy',activatedAt:'Activated:',deviceId:'Device ID:',compat:'📱 DEVICE INFO',deviceName:'Name:',deviceModel:'Model:',os:'OS:',currentIOS:'Version:',browser:'Browser:',screen:'Screen:',cpu:'CPU:',ram:'RAM:',iccid:'ICCID:',imei:'IMEI:',battery:'Battery:',support:'SUPPORT',discord:'Contact Support',logout:'Logout',profile:'Profile',syncLocal:'Local · Synced',rename:'Rename',export:'Export',runFromFile:'Run',exportData:'Export Data',syncDevice:'Sync Device',dataRunning:'RUNNING',dataExported:'EXPORTED',dataSync:'DEVICE SYNC',applied:'Applied',exported:'Exported',synced:'Synced',loadingKey:'Verifying...',loadingInject:'Injecting...',loadingAntiBan:'Activating...',loadingReadFile:'Reading...',loadingExport:'Exporting...',loadingSync:'Syncing...',keySuccess:'Success! Redirecting...',keyErrorFormat:'Invalid format!',keyErrorFormatHint:'Format: FREEIPA-XXXXXXXX-XXXXXXXX',keyErrorEmpty:'Enter activation key!',popupTitle:'Success!',popupDesc:"Let's play!",appliedProfile:'Applied: ',antiBanStatus:' | Anti-Ban: ',logoutConfirm:'Logout?',copied:'Copied!',copy:'Copy',antiBanSuccess:'Anti-Ban from: ',enterProfileName:'New profile name:',keyExpired:'Key expired!',supportTitle:'DEVICE STATUS',supportDesc:'Device connected',supportConnected:'Connected',injectedAt:'Injected at: ',injected:'INJECTED',syncing:'SYNCING...',syncedToDevice:'SYNCED',openGame:'🎮 OPEN FREE FIRE',openGameMax:'🎮 OPEN FREE FIRE MAX',updateAvailable:'Update available'},
-  zh:{keyDesc:'输入激活密钥以访问',keyLabel:'🔑 激活密钥',keyBtn:'⚡ 激活密钥',keyFooter:'每个密钥仅激活1台设备。<br>已使用的密钥永久锁定。',welcome:'欢迎',welcomeEnd:'！祝您有美好的一天。',gameInjected:'🎮 已注入游戏',active:'活跃',protect:'🛡 账户保护',ff:'Free Fire',ffmax:'Free Fire MAX',injectTitle:'激活 Derata Locked 菜单',injectSub:'准备激活',injectBtn:'⚡ 注入游戏',antiBanTitle:'未激活防封',antiBanDesc:'点击选择文件',antiBanTitleOn:'已激活防封',antiBanDescOn:'文件: ',navHome:'主页',navSettings:'设置',navDashboard:'统计',copyright:'🔑 版权信息',license:'许可证:',expiry:'到期:',copy:'复制',activatedAt:'激活:',deviceId:'设备ID:',compat:'📱 设备信息',deviceName:'名称:',deviceModel:'型号:',os:'系统:',currentIOS:'版本:',browser:'浏览器:',screen:'屏幕:',cpu:'CPU:',ram:'内存:',iccid:'ICCID:',imei:'IMEI:',battery:'电池:',support:'支持',discord:'联系支持',logout:'登出',profile:'配置',syncLocal:'本地·已同步',rename:'重命名',export:'导出',runFromFile:'运行',exportData:'导出数据',syncDevice:'同步设备',dataRunning:'运行中',dataExported:'已导出',dataSync:'设备同步',applied:'已应用',exported:'已导出',synced:'已同步',loadingKey:'验证中...',loadingInject:'注入中...',loadingAntiBan:'激活中...',loadingReadFile:'读取中...',loadingExport:'导出中...',loadingSync:'同步中...',keySuccess:'成功！跳转中...',keyErrorFormat:'格式错误！',keyErrorFormatHint:'格式: FREEIPA-XXXXXXXX-XXXXXXXX',keyErrorEmpty:'请输入激活密钥！',popupTitle:'成功！',popupDesc:'开始游戏！',appliedProfile:'已应用: ',antiBanStatus:' | 防封: ',logoutConfirm:'确定登出？',copied:'已复制！',copy:'复制',antiBanSuccess:'防封文件: ',enterProfileName:'新配置名称:',keyExpired:'密钥已过期！',supportTitle:'设备状态',supportDesc:'设备已连接',supportConnected:'已连接',injectedAt:'注入于: ',injected:'已注入',syncing:'同步中...',syncedToDevice:'已同步到设备',openGame:'🎮 打开 Free Fire',openGameMax:'🎮 打开 Free Fire MAX',updateAvailable:'有新更新'},
-  ko:{keyDesc:'활성화 키를 입력하세요',keyLabel:'🔑 활성화 키',keyBtn:'⚡ 키 활성화',keyFooter:'각 키는 1대만 활성화됩니다.<br>사용된 키는 영구 잠금.',welcome:'환영합니다',welcomeEnd:'! 좋은 하루 되세요.',gameInjected:'🎮 주입된 게임',active:'활성',protect:'🛡 계정 보호',ff:'Free Fire',ffmax:'Free Fire MAX',injectTitle:'Derata Locked 메뉴 활성화',injectSub:'활성화 준비됨',injectBtn:'⚡ 게임 주입',antiBanTitle:'안티밴 미활성화',antiBanDesc:'파일을 선택하려면 탭하세요',antiBanTitleOn:'안티밴 활성화됨',antiBanDescOn:'파일: ',navHome:'홈',navSettings:'설정',navDashboard:'통계',copyright:'🔑 저작권',license:'라이선스:',expiry:'만료:',copy:'복사',activatedAt:'활성화:',deviceId:'기기ID:',compat:'📱 기기 정보',deviceName:'이름:',deviceModel:'모델:',os:'OS:',currentIOS:'버전:',browser:'브라우저:',screen:'화면:',cpu:'CPU:',ram:'RAM:',iccid:'ICCID:',imei:'IMEI:',battery:'배터리:',support:'지원',discord:'지원 문의',logout:'로그아웃',profile:'프로필',syncLocal:'로컬·동기화됨',rename:'이름 변경',export:'내보내기',runFromFile:'실행',exportData:'데이터 내보내기',syncDevice:'기기 동기화',dataRunning:'실행 중',dataExported:'내보냄',dataSync:'기기 동기화',applied:'적용됨',exported:'내보냄',synced:'동기화됨',loadingKey:'확인 중...',loadingInject:'주입 중...',loadingAntiBan:'활성화 중...',loadingReadFile:'읽는 중...',loadingExport:'내보내는 중...',loadingSync:'동기화 중...',keySuccess:'성공! 이동 중...',keyErrorFormat:'형식 오류!',keyErrorFormatHint:'형식: FREEIPA-XXXXXXXX-XXXXXXXX',keyErrorEmpty:'활성화 키를 입력하세요!',popupTitle:'성공!',popupDesc:'게임을 시작하세요!',appliedProfile:'적용됨: ',antiBanStatus:' | 안티밴: ',logoutConfirm:'로그아웃?',copied:'복사됨!',copy:'복사',antiBanSuccess:'안티밴 파일: ',enterProfileName:'새 프로필 이름:',keyExpired:'키 만료됨!',supportTitle:'기기 상태',supportDesc:'기기 연결됨',supportConnected:'연결됨',injectedAt:'주입 시간: ',injected:'주입됨',syncing:'동기화 중...',syncedToDevice:'기기에 동기화됨',openGame:'🎮 Free Fire 열기',openGameMax:'🎮 Free Fire MAX 열기',updateAvailable:'업데이트 있음'},
-  hi:{keyDesc:'सक्रियण कुंजी दर्ज करें',keyLabel:'🔑 सक्रियण कुंजी',keyBtn:'⚡ कुंजी सक्रिय करें',keyFooter:'प्रत्येक कुंजी केवल 1 डिवाइस सक्रिय करती है।<br>उपयोग की गई कुंजी स्थायी रूप से लॉक।',welcome:'स्वागत है',welcomeEnd:'! आपका दिन शुभ हो।',gameInjected:'🎮 इंजेक्ट किया गया गेम',active:'सक्रिय',protect:'🛡 खाता सुरक्षा',ff:'Free Fire',ffmax:'Free Fire MAX',injectTitle:'Derata Locked मेनू सक्रिय करें',injectSub:'सक्रिय करने के लिए तैयार',injectBtn:'⚡ गेम इंजेक्ट करें',antiBanTitle:'एंटी-बैन सक्रिय नहीं',antiBanDesc:'फ़ाइल चुनने के लिए टैप करें',antiBanTitleOn:'एंटी-बैन सक्रिय',antiBanDescOn:'फ़ाइल: ',navHome:'होम',navSettings:'सेटिंग्स',navDashboard:'आंकड़े',copyright:'🔑 कॉपीराइट',license:'लाइसेंस:',expiry:'समाप्ति:',copy:'कॉपी',activatedAt:'सक्रिय:',deviceId:'डिवाइस ID:',compat:'📱 डिवाइस जानकारी',deviceName:'नाम:',deviceModel:'मॉडल:',os:'OS:',currentIOS:'संस्करण:',browser:'ब्राउज़र:',screen:'स्क्रीन:',cpu:'CPU:',ram:'RAM:',iccid:'ICCID:',imei:'IMEI:',battery:'बैटरी:',support:'सहायता',discord:'सहायता से संपर्क',logout:'लॉगआउट',profile:'प्रोफ़ाइल',syncLocal:'स्थानीय·सिंक',rename:'नाम बदलें',export:'निर्यात',runFromFile:'चलाएं',exportData:'डेटा निर्यात',syncDevice:'डिवाइस सिंक',dataRunning:'चल रहा है',dataExported:'निर्यातित',dataSync:'डिवाइस सिंक',applied:'लागू',exported:'निर्यातित',synced:'सिंक',loadingKey:'सत्यापन...',loadingInject:'इंजेक्ट...',loadingAntiBan:'सक्रिय...',loadingReadFile:'पढ़ रहे...',loadingExport:'निर्यात...',loadingSync:'सिंक...',keySuccess:'सफल! रीडायरेक्ट...',keyErrorFormat:'अमान्य प्रारूप!',keyErrorFormatHint:'प्रारूप: FREEIPA-XXXXXXXX-XXXXXXXX',keyErrorEmpty:'कुंजी दर्ज करें!',popupTitle:'सफल!',popupDesc:'खेलें!',appliedProfile:'लागू: ',antiBanStatus:' | एंटी-बैन: ',logoutConfirm:'लॉगआउट?',copied:'कॉपी!',copy:'कॉपी',antiBanSuccess:'एंटी-बैन: ',enterProfileName:'नया नाम:',keyExpired:'कुंजी समाप्त!',supportTitle:'डिवाइस स्थिति',supportDesc:'कनेक्टेड',supportConnected:'कनेक्टेड',injectedAt:'इंजेक्ट:',injected:'इंजेक्ट',syncing:'सिंक...',syncedToDevice:'डिवाइस सिंक',openGame:'🎮 Free Fire खोलें',openGameMax:'🎮 Free Fire MAX खोलें',updateAvailable:'अपडेट उपलब्ध'},
-  th:{keyDesc:'ป้อนคีย์เปิดใช้งาน',keyLabel:'🔑 คีย์เปิดใช้งาน',keyBtn:'⚡ เปิดใช้งานคีย์',keyFooter:'แต่ละคีย์เปิดใช้ 1 อุปกรณ์เท่านั้น<br>คีย์ที่ใช้แล้วถูกล็อกถาวร',welcome:'ยินดีต้อนรับ',welcomeEnd:'! ขอให้เป็นวันที่ดี',gameInjected:'🎮 เกมที่ฉีดแล้ว',active:'ใช้งาน',protect:'🛡 ปกป้องบัญชี',ff:'Free Fire',ffmax:'Free Fire MAX',injectTitle:'เปิดใช้งานเมนู Derata Locked',injectSub:'พร้อมเปิดใช้งาน',injectBtn:'⚡ ฉีดเกม',antiBanTitle:'ยังไม่เปิด Anti-Ban',antiBanDesc:'แตะเพื่อเลือกไฟล์',antiBanTitleOn:'เปิด Anti-Ban แล้ว',antiBanDescOn:'ไฟล์: ',navHome:'หน้าแรก',navSettings:'ตั้งค่า',navDashboard:'สถิติ',copyright:'🔑 ลิขสิทธิ์',license:'ลิขสิทธิ์:',expiry:'หมดอายุ:',copy:'คัดลอก',activatedAt:'เปิดใช้:',deviceId:'ID อุปกรณ์:',compat:'📱 ข้อมูลอุปกรณ์',deviceName:'ชื่อ:',deviceModel:'รุ่น:',os:'OS:',currentIOS:'เวอร์ชัน:',browser:'เบราว์เซอร์:',screen:'หน้าจอ:',cpu:'CPU:',ram:'RAM:',iccid:'ICCID:',imei:'IMEI:',battery:'แบตเตอรี่:',support:'สนับสนุน',discord:'ติดต่อฝ่ายสนับสนุน',logout:'ออกจากระบบ',profile:'โปรไฟล์',syncLocal:'ท้องถิ่น·ซิงค์',rename:'เปลี่ยนชื่อ',export:'ส่งออก',runFromFile:'รัน',exportData:'ส่งออกข้อมูล',syncDevice:'ซิงค์อุปกรณ์',dataRunning:'กำลังรัน',dataExported:'ส่งออกแล้ว',dataSync:'ซิงค์อุปกรณ์',applied:'นำไปใช้',exported:'ส่งออก',synced:'ซิงค์',loadingKey:'กำลังตรวจสอบ...',loadingInject:'กำลังฉีด...',loadingAntiBan:'กำลังเปิด...',loadingReadFile:'กำลังอ่าน...',loadingExport:'กำลังส่งออก...',loadingSync:'กำลังซิงค์...',keySuccess:'สำเร็จ! กำลังเปลี่ยนเส้นทาง...',keyErrorFormat:'รูปแบบไม่ถูกต้อง!',keyErrorFormatHint:'รูปแบบ: FREEIPA-XXXXXXXX-XXXXXXXX',keyErrorEmpty:'ป้อนคีย์!',popupTitle:'สำเร็จ!',popupDesc:'เล่นเลย!',appliedProfile:'นำไปใช้: ',antiBanStatus:' | Anti-Ban: ',logoutConfirm:'ออกจากระบบ?',copied:'คัดลอก!',copy:'คัดลอก',antiBanSuccess:'Anti-Ban จาก: ',enterProfileName:'ชื่อโปรไฟล์ใหม่:',keyExpired:'คีย์หมดอายุ!',supportTitle:'สถานะอุปกรณ์',supportDesc:'อุปกรณ์เชื่อมต่อแล้ว',supportConnected:'เชื่อมต่อแล้ว',injectedAt:'ฉีดเมื่อ: ',injected:'ฉีดแล้ว',syncing:'กำลังซิงค์...',syncedToDevice:'ซิงค์กับอุปกรณ์แล้ว',openGame:'🎮 เปิด Free Fire',openGameMax:'🎮 เปิด Free Fire MAX',updateAvailable:'มีอัปเดต'}
+  vi:{
+    keyDesc:'Nhập key kích hoạt để truy cập hệ thống',keyLabel:'🔑 Key kích hoạt',keyBtn:'⚡ Kích Hoạt Key',
+    keyFooter:'Mỗi key chỉ kích hoạt được 1 thiết bị.<br>Key đã dùng sẽ bị khóa vĩnh viễn.',
+    welcome:'Chào mừng',welcomeEnd:'! Chúc ngày tốt lành.',gameInjected:'🎮 GAME ĐÃ TIÊM',active:'HOẠT ĐỘNG',
+    protect:'🛡 BẢO VỆ TÀI KHOẢN',ff:'Free Fire',ffmax:'Free Fire MAX',
+    injectTitle:'Kích Hoạt Menu Derata Locked',injectSub:'Sẵn sàng kích hoạt',injectBtn:'⚡ INJECT GAME',
+    antiBanTitle:'Chưa kích hoạt Anti-Ban',antiBanDesc:'Bấm để chọn file kích hoạt',
+    antiBanTitleOn:'Đã kích hoạt Anti-Ban',antiBanDescOn:'File: ',
+    navHome:'Trang chủ',navSettings:'Cài đặt',settings:'Cài đặt',
+    copyright:'🔑 THÔNG TIN BẢN QUYỀN',license:'Bản quyền:',expiry:'Hạn dùng:',copy:'Sao chép',
+    activatedAt:'Kích hoạt:',deviceId:'Device ID:',
+    compat:'📱 THÔNG TIN THIẾT BỊ',deviceName:'Tên thiết bị:',deviceModel:'Model:',
+    os:'Hệ điều hành:',currentIOS:'Phiên bản:',browser:'Trình duyệt:',screen:'Màn hình:',
+    cpu:'CPU:',ram:'RAM:',language2:'Ngôn ngữ:',timezone:'Múi giờ:',battery:'Pin:',
+    support:'HỖ TRỢ',language:'🌐 NGÔN NGỮ',supportSys:'❓ HỖ TRỢ & HỆ THỐNG',discord:'Liên hệ hỗ trợ (Discord)',
+    logout:'Đăng xuất tài khoản',profile:'Profile',syncLocal:'Local · Đã đồng bộ',rename:'Sửa tên',export:'Xuất',
+    runFromFile:'Chạy từ file',exportData:'Xuất dữ liệu',syncDevice:'Đồng bộ thiết bị',
+    dataRunning:'DỮ LIỆU FILE · ĐANG CHẠY',dataExported:'DỮ LIỆU XUẤT RA',dataSync:'ĐỒNG BỘ THIẾT BỊ',
+    applied:'Đã áp dụng',exported:'Đã xuất',synced:'Đã đồng bộ',
+    loadingKey:'Đang xác thực key...',loadingInject:'Đang lấy dữ liệu và inject...',
+    loadingAntiBan:'Đang kích hoạt Anti-Ban...',loadingReadFile:'Đang đọc file và chạy...',
+    loadingExport:'Đang xuất dữ liệu file...',loadingSync:'Đang đồng bộ với thiết bị...',
+    keySuccess:'Kết nối thành công! Đang chuyển hướng...',
+    keyErrorFormat:'Key không đúng định dạng!',keyErrorFormatHint:'Định dạng: FREEIPA-XXXXXXXX-XXXXXXXX',
+    keyErrorEmpty:'Vui lòng nhập key kích hoạt!',
+    popupTitle:'Update thành công!',popupDesc:'Vào game thôi!',
+    appliedProfile:'Đã áp dụng profile: ',antiBanStatus:' | Anti-Ban: ',
+    logoutConfirm:'Bạn có chắc muốn đăng xuất tài khoản?',
+    copied:'Đã sao chép!',copy:'Sao chép',
+    antiBanSuccess:'Kích hoạt Anti-Ban thành công từ file: ',
+    enterProfileName:'Nhập tên mới cho profile:',
+    keyExpired:'Key đã hết hạn! Vui lòng nhập key mới.',
+    supportTitle:'TRẠNG THÁI THIẾT BỊ',supportDesc:'Thiết bị đã kết nối thành công với máy chủ DERATA',supportConnected:'Đã kết nối',
+    injectedAt:'Đã tiêm lúc: ',injected:'ĐÃ TIÊM',syncing:'ĐANG ĐỒNG BỘ...',syncedToDevice:'ĐÃ ĐỒNG BỘ VÀO MÁY',
+    openGame:'🎮 MỞ FREE FIRE NGAY',openGameMax:'🎮 MỞ FREE FIRE MAX NGAY',updateAvailable:'Có bản cập nhật mới'
+  },
+  en:{
+    keyDesc:'Enter activation key to access system',keyLabel:'🔑 Activation Key',keyBtn:'⚡ Activate Key',
+    keyFooter:'Each key activates only 1 device.<br>Used keys are permanently locked.',
+    welcome:'Welcome',welcomeEnd:'! Have a nice day.',gameInjected:'🎮 INJECTED GAME',active:'ACTIVE',
+    protect:'🛡 ACCOUNT PROTECTION',ff:'Free Fire',ffmax:'Free Fire MAX',
+    injectTitle:'Activate Derata Locked Menu',injectSub:'Ready to activate',injectBtn:'⚡ INJECT GAME',
+    antiBanTitle:'Anti-Ban not activated',antiBanDesc:'Tap to select file to activate',
+    antiBanTitleOn:'Anti-Ban activated',antiBanDescOn:'File: ',
+    navHome:'Home',navSettings:'Settings',settings:'Settings',
+    copyright:'🔑 COPYRIGHT INFO',license:'License:',expiry:'Expiry:',copy:'Copy',
+    activatedAt:'Activated:',deviceId:'Device ID:',
+    compat:'📱 DEVICE INFORMATION',deviceName:'Device name:',deviceModel:'Model:',
+    os:'OS:',currentIOS:'Version:',browser:'Browser:',screen:'Screen:',
+    cpu:'CPU:',ram:'RAM:',language2:'Language:',timezone:'Timezone:',battery:'Battery:',
+    support:'SUPPORT',language:'🌐 LANGUAGE',supportSys:'❓ SUPPORT & SYSTEM',discord:'Contact Support (Discord)',
+    logout:'Logout account',profile:'Profile',syncLocal:'Local · Synced',rename:'Rename',export:'Export',
+    runFromFile:'Run from file',exportData:'Export data',syncDevice:'Sync device',
+    dataRunning:'FILE DATA · RUNNING',dataExported:'EXPORTED DATA',dataSync:'DEVICE SYNC',
+    applied:'Applied',exported:'Exported',synced:'Synced',
+    loadingKey:'Verifying key...',loadingInject:'Fetching data and injecting...',
+    loadingAntiBan:'Activating Anti-Ban...',loadingReadFile:'Reading and running file...',
+    loadingExport:'Exporting file data...',loadingSync:'Syncing with device...',
+    keySuccess:'Connection successful! Redirecting...',
+    keyErrorFormat:'Invalid key format!',keyErrorFormatHint:'Format: FREEIPA-XXXXXXXX-XXXXXXXX',
+    keyErrorEmpty:'Please enter activation key!',
+    popupTitle:'Update successful!',popupDesc:"Let's play!",
+    appliedProfile:'Applied profile: ',antiBanStatus:' | Anti-Ban: ',
+    logoutConfirm:'Are you sure you want to logout?',
+    copied:'Copied!',copy:'Copy',
+    antiBanSuccess:'Anti-Ban activated from file: ',
+    enterProfileName:'Enter new profile name:',
+    keyExpired:'Key expired! Please enter a new key.',
+    supportTitle:'DEVICE STATUS',supportDesc:'Device successfully connected to DERATA server',supportConnected:'Connected',
+    injectedAt:'Injected at: ',injected:'INJECTED',syncing:'SYNCING...',syncedToDevice:'SYNCED TO DEVICE',
+    openGame:'🎮 OPEN FREE FIRE NOW',openGameMax:'🎮 OPEN FREE FIRE MAX NOW',updateAvailable:'New update available'
+  }
 };
 let currentLang='vi';
 function t(k){return I18N[currentLang][k]||k;}
 
 function applyLang(){
-  const map={keyDesc:'txtKeyDesc',keyLabel:'txtKeyLabel',keyBtn:'txtKeyBtn',gameInjected:'txtGameInjected',active:'txtActive',protect:'txtProtect',ff:'txtFF',ffmax:'txtFFMAX',injectTitle:'txtInjectTitle',injectSub:'txtInjectSub',injectBtn:'txtInjectBtn',navHome:'txtNavHome',navSettings:'txtNavSettings',navDashboard:'txtNavDashboard'};
-  Object.entries(map).forEach(([k,id])=>{const el=document.getElementById(id);if(el)el.textContent=t(k);});
   document.getElementById('txtKeyDesc').textContent=t('keyDesc');
   document.getElementById('txtKeyLabel').textContent=t('keyLabel');
   document.getElementById('txtKeyBtn').textContent=t('keyBtn');
   document.getElementById('txtKeyFooter').innerHTML=t('keyFooter');
   const kn=document.getElementById('keyName')?.textContent||'FREEIPA-*...';
   document.getElementById('welcomeText').innerHTML=t('welcome')+' <b id="keyName">'+kn+'</b>'+t('welcomeEnd');
-  if(document.getElementById('antiBanSwitch').classList.contains('on')){document.getElementById('antiBanTitle').textContent=t('antiBanTitleOn');}
-  else{document.getElementById('antiBanTitle').textContent=t('antiBanTitle');document.getElementById('antiBanDesc').textContent=t('antiBanDesc');}
+  document.getElementById('txtGameInjected').textContent=t('gameInjected');
+  document.getElementById('txtProtect').textContent=t('protect');
+  document.getElementById('txtFF').textContent=t('ff');
+  document.getElementById('txtFFMAX').textContent=t('ffmax');
+  document.getElementById('txtInjectTitle').textContent=t('injectTitle');
+  document.getElementById('txtInjectSub').textContent=t('injectSub');
+  document.getElementById('txtInjectBtn').textContent=t('injectBtn');
+  document.getElementById('txtNavHome').textContent=t('navHome');
+  document.getElementById('txtNavSettings').textContent=t('navSettings');
+  document.getElementById('txtNavHome2').textContent=t('navHome');
+  document.getElementById('txtNavSettings2').textContent=t('navSettings');
+  document.getElementById('txtNavHome3').textContent=t('navHome');
+  document.getElementById('txtNavSettings3').textContent=t('navSettings');
+  document.getElementById('txtSettings').textContent=t('settings');
+  document.getElementById('txtCopyright').textContent=t('copyright');
+  document.getElementById('txtLicense').textContent=t('license');
+  document.getElementById('txtExpiry').textContent=t('expiry');
+  document.getElementById('txtCopy').textContent=t('copy');
+  document.getElementById('txtActivatedAt').textContent=t('activatedAt');
+  document.getElementById('txtDeviceId').textContent=t('deviceId');
+  document.getElementById('txtCompat').textContent=t('compat');
+  document.getElementById('txtDeviceName').textContent=t('deviceName');
+  document.getElementById('txtDeviceModel').textContent=t('deviceModel');
+  document.getElementById('txtOS').textContent=t('os');
+  document.getElementById('txtCurrentIOS').textContent=t('currentIOS');
+  document.getElementById('txtBrowser').textContent=t('browser');
+  document.getElementById('txtScreen').textContent=t('screen');
+  document.getElementById('txtCPU').textContent=t('cpu');
+  document.getElementById('txtRAM').textContent=t('ram');
+  document.getElementById('txtLanguage2').textContent=t('language2');
+  document.getElementById('txtTimezone').textContent=t('timezone');
+  document.getElementById('txtBattery').textContent=t('battery');
+  document.getElementById('txtSupport').textContent=t('support');
+  document.getElementById('txtLanguage').textContent=t('language');
+  document.getElementById('txtSupportSys').textContent=t('supportSys');
+  document.getElementById('txtDiscord').textContent=t('discord');
+  document.getElementById('txtLogout').textContent=t('logout');
+  document.getElementById('txtProfile').textContent=t('profile');
+  if(document.getElementById('antiBanSwitch').classList.contains('on')){
+    document.getElementById('antiBanTitle').textContent=t('antiBanTitleOn');
+  } else {
+    document.getElementById('antiBanTitle').textContent=t('antiBanTitle');
+    document.getElementById('antiBanDesc').textContent=t('antiBanDesc');
+  }
   document.getElementById('keyInput').placeholder=currentLang==='vi'?'VD: FREEIPA-XXXXXXXX-XXXXXXXX':'Ex: FREEIPA-XXXXXXXX-XXXXXXXX';
   Voice.setLang(currentLang);
   updateDeviceBadge();
   updateHome();
-  if(document.getElementById('screen-profile').classList.contains('active'))renderProfiles();
-  if(document.getElementById('screen-dashboard').classList.contains('active'))renderDashboard();
+  if(document.getElementById('screen-profile').classList.contains('active')) renderProfiles();
 }
 
 /* ================= KEY ================= */
-const KEY_STORAGE='derata_keys_v31';
-const ACTIVATED_KEY='derata_activated_v31';
-const PROFILES_KEY='derata_profiles_v31';
-const LANG_KEY='derata_lang_v31';
-const GAME_FEATURES_KEY='derata_game_features_v31';
-const HISTORY_KEY='derata_history_v31';
-const STATS_KEY='derata_stats_v31';
-const TASKS_KEY='derata_tasks_v31';
+const KEY_STORAGE='derata_keys_v22';
+const ACTIVATED_KEY='derata_activated_v22';
+const PROFILES_KEY='derata_profiles_v22';
+const LANG_KEY='derata_lang_v22';
+const GAME_FEATURES_KEY='derata_game_features_v22';
 
 function genKey(){const c='ABCDEF0123456789';let a='',b='';for(let i=0;i<8;i++)a+=c[Math.floor(Math.random()*c.length)];for(let i=0;i<8;i++)b+=c[Math.floor(Math.random()*c.length)];return `FREEIPA-${a}-${b}`;}
 
-function initKeys(){let s=localStorage.getItem(KEY_STORAGE);if(!s){const fixedKeys=['FREEIPA-9A969343-231413DC','FREEIPA-A1B2C3D4-E5F60789','FREEIPA-12345678-9ABCDEF0','FREEIPA-DEADBEEF-CAFEBABE','FREEIPA-11112222-33334444','FREEIPA-AAAABBBB-CCCCDDDD','FREEIPA-99998888-77776666','FREEIPA-FEEDFACE-BEEFCAFE','FREEIPA-01234567-89ABCDEF','FREEIPA-ABCD1234-EF567890','FREEIPA-55556666-77778888'];const arr=fixedKeys.map(k=>({key:k,used:false,durationDays:30}));for(let i=0;i<19;i++)arr.push({key:genKey(),used:false,durationDays:30});localStorage.setItem(KEY_STORAGE,JSON.stringify(arr));s=JSON.stringify(arr);}return JSON.parse(s);}
+function initKeys(){
+  let s=localStorage.getItem(KEY_STORAGE);
+  if(!s){
+    const fixedKeys = [
+      'FREEIPA-9A969343-231413DC',
+      'FREEIPA-A1B2C3D4-E5F60789',
+      'FREEIPA-12345678-9ABCDEF0',
+      'FREEIPA-DEADBEEF-CAFEBABE',
+      'FREEIPA-11112222-33334444',
+      'FREEIPA-AAAABBBB-CCCCDDDD',
+      'FREEIPA-99998888-77776666',
+      'FREEIPA-FEEDFACE-BEEFCAFE',
+      'FREEIPA-01234567-89ABCDEF',
+      'FREEIPA-ABCD1234-EF567890',
+      'FREEIPA-55556666-77778888'
+    ];
+    const arr = fixedKeys.map(k => ({key:k, used:false, durationDays:30}));
+    for(let i=0;i<19;i++) arr.push({key:genKey(), used:false, durationDays:30});
+    localStorage.setItem(KEY_STORAGE,JSON.stringify(arr));
+    s=JSON.stringify(arr);
+  }
+  return JSON.parse(s);
+}
 function saveKeys(k){localStorage.setItem(KEY_STORAGE,JSON.stringify(k));}
 function findKey(k){return initKeys().find(x=>x.key===k);}
-function activateKey(k){const keys=initKeys();const i=keys.findIndex(x=>x.key===k);if(i===-1)return{success:false,error:'Key không tồn tại!'};if(keys[i].used)return{success:false,error:'Key đã được sử dụng!'};keys[i].used=true;keys[i].deviceId=DeviceInfo.getDeviceId();keys[i].deviceName=DeviceInfo.getDeviceName();keys[i].deviceOS=DeviceInfo.getOS();keys[i].deviceOSVersion=DeviceInfo.getOSVersion();keys[i].iccid=DeviceInfo.getICCID();keys[i].imei=DeviceInfo.getIMEI();keys[i].activatedAt=Date.now();keys[i].expiry=Date.now()+keys[i].durationDays*864e5;saveKeys(keys);localStorage.setItem(ACTIVATED_KEY,k);const lastKey=localStorage.getItem('derata_last_activated_key');if(lastKey && lastKey!==k){localStorage.setItem('derata_login_alert',JSON.stringify({oldKey:lastKey,newKey:k,at:Date.now()}));}localStorage.setItem('derata_last_activated_key',k);return{success:true,key:keys[i]};}
+function activateKey(k){
+  const keys=initKeys();
+  const i=keys.findIndex(x=>x.key===k);
+  if(i===-1)return{success:false,error:'Key không tồn tại trong hệ thống!'};
+  if(keys[i].used)return{success:false,error:'Key đã được sử dụng cho thiết bị khác!'};
+  keys[i].used=true;
+  keys[i].deviceId=DeviceInfo.getDeviceId();
+  keys[i].deviceName=DeviceInfo.getDeviceName();
+  keys[i].deviceModel=DeviceInfo.getModel();
+  keys[i].deviceOS=DeviceInfo.getOS();
+  keys[i].deviceOSVersion=DeviceInfo.getOSVersion();
+  keys[i].activatedAt=Date.now();
+  keys[i].expiry=Date.now()+keys[i].durationDays*864e5;
+  saveKeys(keys);
+  localStorage.setItem(ACTIVATED_KEY,k);
+  return{success:true,key:keys[i]};
+}
 
 function loadProfiles(){try{return JSON.parse(localStorage.getItem(PROFILES_KEY))||[];}catch(e){return[];}}
 function saveProfiles(list){localStorage.setItem(PROFILES_KEY,JSON.stringify(list));}
-function loadHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[];}catch(e){return[];}}
-function saveHistory(list){localStorage.setItem(HISTORY_KEY,JSON.stringify(list.slice(0,20)));}
-function loadStats(){try{return JSON.parse(localStorage.getItem(STATS_KEY))||{injectCount:0,streak:0,lastDay:null,profileUse:{},points:0};}catch(e){return{injectCount:0,streak:0,lastDay:null,profileUse:{},points:0};}}
-function saveStats(s){localStorage.setItem(STATS_KEY,JSON.stringify(s));}
-function loadTasks(){try{return JSON.parse(localStorage.getItem(TASKS_KEY))||{};}catch(e){return{};}}
-function saveTasks(t){localStorage.setItem(TASKS_KEY,JSON.stringify(t));}
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id)?.classList.add('active');}
 function goHome(){show('screen-home');updateHome();}
 function goSettings(){show('screen-settings');updateSettings();}
-function goDashboard(){show('screen-dashboard');renderDashboard();}
 function goProfile(){show('screen-profile');renderProfiles();}
 
 function updateHome(){
   const k=localStorage.getItem(ACTIVATED_KEY);
-  if(k){const m=k.length>12?k.substring(0,12)+'*...':k;const el=document.getElementById('keyName');if(el)el.textContent=m;}
-  const alert=localStorage.getItem('derata_login_alert');
-  const c=document.getElementById('loginAlertContainer');
-  if(alert && c){try{const a=JSON.parse(alert);c.innerHTML='<div class="login-alert"><span class="icon">⚠️</span><div class="text"><b>Phát hiện đăng nhập lạ!</b><br>Tài khoản đã kích hoạt lần cuối bằng key khác.<br><span style="font-size:11px;opacity:.7;">Thời gian: '+new Date(a.at).toLocaleString('vi-VN')+'</span></div></div>';setTimeout(()=>{localStorage.removeItem('derata_login_alert');c.innerHTML='';},8000);}catch(e){}}
+  if(k){
+    const m = k.length > 12 ? k.substring(0,12) + '*...' : k;
+    const el=document.getElementById('keyName');
+    if(el) el.textContent=m;
+  }
   const injectData=localStorage.getItem('derata_last_inject');
   const statusEl=document.getElementById('txtActive');
   const statusBox=document.getElementById('statusBox');
   const badge=document.getElementById('injectedBadge');
   const openBtn=document.getElementById('openGameBtn');
-  if(injectData){try{const d=JSON.parse(injectData);if(d.game===currentGame){const dt=new Date(d.injectedAt);statusEl.textContent=t('injected');statusBox.classList.add('synced');badge.innerHTML='✅ <b>'+t('syncedToDevice')+'</b><br>🕒 '+dt.toLocaleString('vi-VN')+'<br>🎮 '+d.gameName+' · 📄 '+d.profile+' · 🛡 Anti-Ban: '+(d.antiBan?'ON':'OFF')+'<br>📱 '+d.deviceName+' · 🆔 '+d.deviceId;badge.classList.add('show');openBtn.textContent=currentGame==='max'?t('openGameMax'):t('openGame');openBtn.classList.add('show');return;}}catch(e){}}
-  statusEl.textContent=t('active');statusBox.classList.remove('synced');badge.classList.remove('show');openBtn.classList.remove('show');
+  if(injectData){
+    try{
+      const d=JSON.parse(injectData);
+      if(d.game===currentGame){
+        const dt=new Date(d.injectedAt);
+        if(statusEl) statusEl.textContent = t('injected');
+        if(statusBox) statusBox.classList.add('synced');
+        badge.innerHTML='✅ <b>'+t('syncedToDevice')+'</b><br>'
+          +'🕒 '+dt.toLocaleString(currentLang==='vi'?'vi-VN':'en-US')+'<br>'
+          +'🎮 '+d.gameName+' · 📄 '+d.profile+' · 🛡 Anti-Ban: '+(d.antiBan?'ON':'OFF')+'<br>'
+          +'📱 '+d.deviceName+' · 🆔 '+d.deviceId;
+        badge.classList.add('show');
+        if(openBtn){
+          openBtn.textContent = currentGame==='max' ? t('openGameMax') : t('openGame');
+          openBtn.classList.add('show');
+        }
+        return;
+      }
+    }catch(e){}
+  }
+  if(statusEl) statusEl.textContent = t('active');
+  if(statusBox) statusBox.classList.remove('synced');
+  badge.classList.remove('show');
+  if(openBtn) openBtn.classList.remove('show');
 }
 
 function updateSettings(){
   const k=localStorage.getItem(ACTIVATED_KEY);
-  if(k){document.getElementById('licenseKeyDisplay').textContent=k.substring(0,10)+'******';const o=findKey(k);if(o){if(o.expiry){const ms=o.expiry-Date.now();const d=Math.max(0,Math.floor(ms/864e5));const h=Math.max(0,Math.floor((ms%864e5)/36e5));const m=Math.max(0,Math.floor((ms%36e5)/6e4));const s=Math.max(0,Math.floor((ms%6e4)/1000));document.getElementById('licenseExpiry').innerHTML=`${d}d ${h}h ${m}m <span class="live-timer">${String(s).padStart(2,'0')}s</span>`;}if(o.activatedAt){document.getElementById('activatedAtDisplay').textContent=new Date(o.activatedAt).toLocaleString('vi-VN');}document.getElementById('deviceIdDisplay').textContent=o.deviceId||'--';}}
-  else{document.getElementById('activatedAtDisplay').textContent='--';document.getElementById('deviceIdDisplay').textContent='--';}
+  if(k){
+    document.getElementById('licenseKeyDisplay').textContent=k.substring(0,10)+'******';
+    const o=findKey(k);
+    if(o){
+      if(o.expiry){
+        const ms=o.expiry-Date.now();
+        const d=Math.max(0,Math.floor(ms/864e5));
+        const h=Math.max(0,Math.floor((ms%864e5)/36e5));
+        const m=Math.max(0,Math.floor((ms%36e5)/6e4));
+        const s=Math.max(0,Math.floor((ms%6e4)/1000));
+        document.getElementById('licenseExpiry').innerHTML=`${d}d ${h}h ${m}m <span class="live-timer">${String(s).padStart(2,'0')}s</span>`;
+      }
+      if(o.activatedAt){
+        const dt=new Date(o.activatedAt);
+        document.getElementById('activatedAtDisplay').textContent=dt.toLocaleString(currentLang==='vi'?'vi-VN':'en-US');
+      }
+      document.getElementById('deviceIdDisplay').textContent=o.deviceId||'--';
+    }
+  } else {
+    document.getElementById('activatedAtDisplay').textContent='--';
+    document.getElementById('deviceIdDisplay').textContent='--';
+  }
   document.getElementById('uuidDisplay').textContent='IV-'+Math.random().toString(36).substring(2,10).toUpperCase()+'-'+Math.random().toString(36).substring(2,6).toUpperCase()+'-'+Math.random().toString(36).substring(2,6).toUpperCase()+'-'+Math.random().toString(36).substring(2,6).toUpperCase()+'-'+Math.random().toString(36).substring(2,14).toUpperCase();
+
   document.getElementById('deviceNameDisplay').textContent=DeviceInfo.getDeviceName();
   document.getElementById('deviceModelDisplay').textContent=DeviceInfo.getModel();
   document.getElementById('osDisplay').textContent=DeviceInfo.getOS();
@@ -889,84 +950,46 @@ function updateSettings(){
   document.getElementById('screenDisplay').textContent=DeviceInfo.getScreen();
   document.getElementById('cpuDisplay').textContent=DeviceInfo.getCPU();
   document.getElementById('ramDisplay').textContent=DeviceInfo.getRAM();
-  document.getElementById('iccidDisplay').textContent=DeviceInfo.getICCID();
-  document.getElementById('imeiDisplay').textContent=DeviceInfo.getIMEI();
-  DeviceInfo.getTemperature().then(v=>{document.getElementById('tempDisplay').textContent=v;});
-  DeviceInfo.getGPS(g=>{document.getElementById('gpsDisplay').textContent=g?g.lat+', '+g.lng+' (±'+g.acc+'m)':'Đang lấy...';});
-  DeviceInfo.getNTPTime().then(v=>{document.getElementById('ntpDisplay').textContent=v;});
-  DeviceInfo.watchBattery(info=>{
-    const battEl=document.getElementById('batteryDisplay');const barEl=document.getElementById('pinBarFill');const tagEl=document.getElementById('chargingTag');
-    if(!info.supported){battEl.textContent='N/A';barEl.style.width='0%';tagEl.classList.add('hidden');return;}
-    const level=info.level!==null?info.level:0;battEl.textContent=level+'%';barEl.style.width=level+'%';barEl.classList.remove('low','mid','high');
-    if(level<=20)barEl.classList.add('low');else if(level<=50)barEl.classList.add('mid');else barEl.classList.add('high');
-    if(info.charging)tagEl.classList.remove('hidden');else tagEl.classList.add('hidden');
-  });
-  renderTasks();
+  document.getElementById('langDisplay').textContent=DeviceInfo.getLang();
+  document.getElementById('timezoneDisplay').textContent=DeviceInfo.getTimezone();
+  DeviceInfo.getBattery(v=>{document.getElementById('batteryDisplay').textContent=v;});
 }
-function updateDeviceBadge(){const el=document.getElementById('deviceBadge');if(el)el.innerHTML='📱 '+DeviceInfo.getDeviceName()+' · '+DeviceInfo.getOS()+' '+DeviceInfo.getOSVersion()+'<br>🆔 '+DeviceInfo.getDeviceId();}
-
-function renderDashboard(){
-  const stats=loadStats();
-  document.getElementById('statTotalInject').textContent=stats.injectCount||0;
-  document.getElementById('statStreak').textContent=stats.streak||0;
-  const k=localStorage.getItem(ACTIVATED_KEY);
-  if(k){const o=findKey(k);if(o&&o.expiry)document.getElementById('statKeyDays').textContent=Math.max(0,Math.floor((o.expiry-Date.now())/864e5));}
-  const level=Math.floor((stats.points||0)/10)+1;
-  document.getElementById('statLevel').textContent=level;
-  const levels=['Người mới','Tập sự','Chiến binh','Cao thủ','Đại cao thủ','Huyền thoại','Bất tử'];
-  document.getElementById('levelTitle').textContent=levels[Math.min(level-1,levels.length-1)];
-  const rankBadges=['🥉 TẬP SỰ','🥈 CHIẾN BINH','🥇 CAO THỦ','💎 KIM CƯƠNG','👑 HUYỀN THOẠI'];
-  document.getElementById('rankBadge').textContent=rankBadges[Math.min(level-1,rankBadges.length-1)];
-  const points=stats.points||0;
-  document.getElementById('levelBarFill').style.width=((points%10)/10*100)+'%';
-  document.getElementById('levelInfo').textContent=(points%10)+'/10 điểm để lên cấp '+(level+1);
-  const useArr=Object.entries(stats.profileUse||{}).sort((a,b)=>b[1]-a[1]).slice(0,5);
-  const topEl=document.getElementById('topProfileList');
-  if(useArr.length===0){topEl.innerHTML='<div style="font-size:12px;color:#9CA3AF;text-align:center;padding:10px;">Chưa có dữ liệu</div>';}
-  else{topEl.innerHTML=useArr.map((x,i)=>'<div class="info-row"><span class="lbl">'+(i+1)+'. '+escapeHtml(x[0])+'</span><span class="val">'+x[1]+' lần</span></div>').join('');}
-  const hist=loadHistory();
-  const histEl=document.getElementById('historyList');
-  if(hist.length===0){histEl.innerHTML='<div style="font-size:12px;color:#9CA3AF;text-align:center;padding:10px;">Chưa có lịch sử</div>';}
-  else{histEl.innerHTML=hist.map(h=>'<div class="history-item"><div class="hi-top"><span class="hi-game">🎮 '+escapeHtml(h.gameName||'')+'</span><span class="hi-time">'+new Date(h.injectedAt).toLocaleString('vi-VN')+'</span></div><div class="hi-detail">Profile: '+escapeHtml(h.profile||'')+' · Anti-Ban: '+(h.antiBan?'ON':'OFF')+'<br>Device: '+escapeHtml(h.deviceName||'')+'</div></div>').join('');}
+function updateDeviceBadge(){
+  const el=document.getElementById('deviceBadge');
+  if(el) el.innerHTML='📱 '+DeviceInfo.getDeviceName()+' · '+DeviceInfo.getOS()+' '+DeviceInfo.getOSVersion()+'<br>🆔 '+DeviceInfo.getDeviceId();
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-
-/* ================= TASKS ================= */
-function getDefaultTasks(){return {date:new Date().toDateString(),tasks:{open:{name:'Mở app hôm nay',target:1,current:0,reward:1,done:false},inject:{name:'Inject game 1 lần',target:1,current:0,reward:5,done:false},inject5:{name:'Inject game 5 lần',target:5,current:0,reward:20,done:false},profile:{name:'Thêm 1 profile',target:1,current:0,reward:10,done:false}}};}
-function renderTasks(){
-  let t=loadTasks();
-  if(!t.date||t.date!==new Date().toDateString()){t=getDefaultTasks();saveTasks(t);}
-  const el=document.getElementById('taskList');if(!el)return;
-  el.innerHTML=Object.entries(t.tasks).map(([k,v])=>'<div class="task-item '+(v.done?'done':'')+'"><div class="task-info"><div class="task-name">'+(v.done?'✅ ':'⬜ ')+v.name+'</div><div class="task-progress">'+v.current+'/'+v.target+'</div></div><div class="task-reward">+'+v.reward+' điểm</div></div>').join('');
-}
-function progressTask(taskKey,amount){
-  let t=loadTasks();
-  if(!t.date||t.date!==new Date().toDateString()){t=getDefaultTasks();}
-  if(t.tasks[taskKey] && !t.tasks[taskKey].done){
-    t.tasks[taskKey].current+=amount;
-    if(t.tasks[taskKey].current>=t.tasks[taskKey].target){
-      t.tasks[taskKey].done=true;
-      const stats=loadStats();stats.points=(stats.points||0)+t.tasks[taskKey].reward;saveStats(stats);
-      Voice.speak(currentLang==='vi'?'Hoàn thành nhiệm vụ, nhận '+t.tasks[taskKey].reward+' điểm':'Quest complete, +'+t.tasks[taskKey].reward+' points');
-    }
-    saveTasks(t);renderTasks();
-  }
-}
-
-/* ================= BOTTOM NAV ================= */
-document.querySelectorAll('.nav-item').forEach(n=>{
-  n.onclick=function(){const d=this.dataset.nav;if(d==='home')goHome();else if(d==='settings')goSettings();else if(d==='dashboard')goDashboard();};
-});
 
 let timer=null,progressTimer=null;
 function loading(sec,cb,msg,speakOnDone){
-  const ov=document.getElementById('loadingOverlay');const cd=document.getElementById('countdownDisplay');const lt=document.getElementById('loadingText');const bar=document.getElementById('progressBar');const pct=document.getElementById('progressPercent');
-  ov.classList.remove('hidden');lt.textContent=msg||'Đang xử lý...';let r=sec;cd.textContent=r;bar.style.width='0%';pct.textContent='0%';
-  if(timer)clearInterval(timer);if(progressTimer)clearInterval(progressTimer);
+  const ov=document.getElementById('loadingOverlay');
+  const cd=document.getElementById('countdownDisplay');
+  const lt=document.getElementById('loadingText');
+  const bar=document.getElementById('progressBar');
+  const pct=document.getElementById('progressPercent');
+  ov.classList.remove('hidden');
+  lt.textContent=msg||'Đang xử lý...';
+  let r=sec;cd.textContent=r;
+  bar.style.width='0%';pct.textContent='0%';
+  if(timer)clearInterval(timer);
+  if(progressTimer)clearInterval(progressTimer);
   timer=setInterval(()=>{r--;cd.textContent=r;if(r<=0){clearInterval(timer);timer=null;}},1000);
   const totalMs=sec*1000;const start=Date.now();
-  progressTimer=setInterval(()=>{const elapsed=Date.now()-start;const percent=Math.min(100,(elapsed/totalMs)*100);bar.style.width=percent+'%';pct.textContent=Math.round(percent)+'%';if(percent>=100){clearInterval(progressTimer);progressTimer=null;if(timer){clearInterval(timer);timer=null;}ov.classList.add('hidden');if(speakOnDone)Voice.speak(speakOnDone);else Voice.speak(currentLang==='vi'?'Đã thành công':'Success');if(cb)cb();}},40);
+  progressTimer=setInterval(()=>{
+    const elapsed=Date.now()-start;
+    const percent=Math.min(100,(elapsed/totalMs)*100);
+    bar.style.width=percent+'%';pct.textContent=Math.round(percent)+'%';
+    if(percent>=100){
+      clearInterval(progressTimer);progressTimer=null;
+      if(timer){clearInterval(timer);timer=null;}
+      ov.classList.add('hidden');
+      if(speakOnDone) Voice.speak(speakOnDone);
+      else Voice.speak(currentLang==='vi'?'Đã thành công':'Success');
+      if(cb) cb();
+    }
+  },40);
 }
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
 function showCenterPopup(icon,title,desc,btnText,cb,extraHtml){
   const pop=document.getElementById('centerPopup');
@@ -974,239 +997,370 @@ function showCenterPopup(icon,title,desc,btnText,cb,extraHtml){
   document.getElementById('popupTitle').textContent=title;
   document.getElementById('popupDesc').textContent=desc;
   document.getElementById('popupExtra').innerHTML=extraHtml||'';
-  const btn=document.getElementById('popupBtn');btn.textContent=btnText||'OK';
-  pop.classList.remove('hidden');Voice.speak(title);
-  btn.onclick=function(){pop.classList.add('hidden');if(cb)cb();};
+  const btn=document.getElementById('popupBtn');
+  btn.textContent=btnText||'OK';
+  pop.classList.remove('hidden');
+  Voice.speak(title);
+  btn.onclick=function(){pop.classList.add('hidden');if(cb) cb();};
 }
 
-/* ================= ACTIVATE ================= */
+/* ================= MENU ĐEN XANH ================= */
+const gameMenuOverlay=document.getElementById('gameMenuOverlay');
+const menuStatus=document.getElementById('menuStatus');
+const launchGameBtn=document.getElementById('launchGameBtn');
+
+function getGameFeatures(){
+  try{ return JSON.parse(localStorage.getItem(GAME_FEATURES_KEY)) || {}; }
+  catch(e){ return {}; }
+}
+function saveGameFeatures(f){ localStorage.setItem(GAME_FEATURES_KEY, JSON.stringify(f)); }
+
+function syncMenuSwitches(){
+  const f=getGameFeatures();
+  ['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{
+    const sw=document.getElementById('sw-'+k);
+    if(!sw) return;
+    if(f[k]) sw.classList.add('on'); else sw.classList.remove('on');
+  });
+}
+
+function openGameMenu(){
+  syncMenuSwitches();
+  menuStatus.textContent='';
+  gameMenuOverlay.classList.remove('hidden');
+  Voice.speak(currentLang==='vi'?'Menu đã mở':'Menu opened');
+}
+function closeGameMenu(){
+  gameMenuOverlay.classList.add('hidden');
+}
+
+document.getElementById('gameMenuCloseBtn').onclick=closeGameMenu;
+
+// Bấm từng dòng chức năng → bật/tắt
+document.querySelectorAll('.feature-row').forEach(row=>{
+  row.onclick=function(e){
+    if(e.target.closest('.gswitch')) return; // tránh double
+    const feature=this.dataset.feature;
+    const sw=this.querySelector('.gswitch');
+    sw.classList.toggle('on');
+    const f=getGameFeatures();
+    f[feature]=sw.classList.contains('on');
+    saveGameFeatures(f);
+    const name=this.querySelector('.fname').textContent;
+    if(currentLang==='vi'){
+      Voice.speak(name + (sw.classList.contains('on')?' đã bật':' đã tắt'));
+    } else {
+      Voice.speak(name + (sw.classList.contains('on')?' on':' off'),'en-US');
+    }
+  };
+});
+
+// Bấm công tắc cũng bật/tắt
+document.querySelectorAll('.gswitch').forEach(sw=>{
+  sw.onclick=function(e){
+    e.stopPropagation();
+    this.classList.toggle('on');
+    const feature=this.closest('.feature-row').dataset.feature;
+    const f=getGameFeatures();
+    f[feature]=this.classList.contains('on');
+    saveGameFeatures(f);
+    const name=this.closest('.feature-row').querySelector('.fname').textContent;
+    if(currentLang==='vi'){
+      Voice.speak(name + (this.classList.contains('on')?' đã bật':' đã tắt'));
+    } else {
+      Voice.speak(name + (this.classList.contains('on')?' on':' off'),'en-US');
+    }
+  };
+});
+
+// VÀO GAME NGAY
+launchGameBtn.onclick=function(){
+  const f=getGameFeatures();
+  const enabled=[];
+  ['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{
+    if(f[k]) enabled.push(k);
+  });
+  // Lưu lần chạy cuối
+  localStorage.setItem('derata_last_launch', JSON.stringify({
+    game:currentGame,
+    features:f,
+    enabled:enabled,
+    launchedAt:new Date().toISOString()
+  }));
+  const msg = currentLang==='vi'
+    ? `Đã bật ${enabled.length} chức năng. Đang mở ${GAMES[currentGame].name}...`
+    : `${enabled.length} features enabled. Opening ${GAMES[currentGame].name}...`;
+  menuStatus.textContent='✅ '+msg;
+  Voice.speak(currentLang==='vi'?'Đang vào game':'Entering game');
+
+  // Đóng menu sau 1.5s và gọi deep link
+  setTimeout(()=>{
+    closeGameMenu();
+    const scheme = currentGame==='max' ? 'freefiremax://' : 'freefire://';
+    try{ window.location.href = scheme; }catch(e){}
+    // Thông báo nhỏ
+    setTimeout(()=>{
+      const feats = enabled.length>0 ? ' ['+enabled.join(', ').toUpperCase()+']' : '';
+      alert(currentLang==='vi'
+        ? '🎮 Đã gửi lệnh mở '+GAMES[currentGame].name+feats+'\n\nNếu game không mở, mở thủ công từ màn hình chính.'
+        : '🎮 Command sent to open '+GAMES[currentGame].name+feats+'\n\nIf game doesn\'t open, launch manually from home screen.');
+    },900);
+  },1500);
+};
+
+/* ================= SỰ KIỆN ================= */
 document.getElementById('activateBtn').onclick=function(){
   const v=document.getElementById('keyInput').value.trim().toUpperCase();
   const m=document.getElementById('keyMessage');
   if(!v){m.innerHTML='<div class="alert-error">⚠️ '+t('keyErrorEmpty')+'</div>';return;}
   if(!/^FREEIPA-[A-F0-9]{8}-[A-F0-9]{8}$/.test(v)){
     m.innerHTML='<div class="alert-error">❌ '+t('keyErrorFormat')+'<br><span style="font-size:11.5px;font-weight:600;">'+t('keyErrorFormatHint')+'</span></div>';
-    Voice.speak(currentLang==='vi'?'Key không đúng định dạng':'Invalid key format');return;
+    Voice.speak(currentLang==='vi'?'Key không đúng định dạng':'Invalid key format');
+    return;
   }
   const r=activateKey(v);
   if(r.success){
-    m.innerHTML='';Voice.speak(currentLang==='vi'?'Đang xác thực key':'Verifying key');
+    m.innerHTML='';
+    Voice.speak(currentLang==='vi'?'Đang xác thực key':'Verifying key');
     loading(10,()=>{
-      fireConfetti();
       m.innerHTML='<div class="alert-success">✅ '+t('keySuccess')+'<br><span style="font-size:11px;font-weight:600;">📱 '+r.key.deviceName+' · '+r.key.deviceOS+' '+r.key.deviceOSVersion+'</span></div>';
       Voice.speak(currentLang==='vi'?'Kích hoạt thành công, chào mừng bạn đến với Derata Locked':'Activation successful, welcome to Derata Locked');
       setTimeout(()=>{goHome();document.getElementById('keyInput').value='FREEIPA-9A969343-231413DC';},1500);
     },t('loadingKey'));
-  }else{m.innerHTML=`<div class="alert-error">❌ ${r.error}</div>`;Voice.speak(currentLang==='vi'?'Key đã được sử dụng':'Key already used');}
+  }else{
+    m.innerHTML=`<div class="alert-error">❌ ${r.error}</div>`;
+    Voice.speak(currentLang==='vi'?'Key đã được sử dụng':'Key already used');
+  }
 };
 
-/* ================= INJECT ================= */
 document.getElementById('injectBtn').onclick=function(){
   const g=GAMES[currentGame];
   const statusEl=document.getElementById('txtActive');
   const statusBox=document.getElementById('statusBox');
-  statusBox.classList.add('syncing-glow');statusEl.textContent=t('syncing');
+  if(statusBox) statusBox.classList.add('syncing-glow');
+  if(statusEl) statusEl.textContent = t('syncing');
+
   loading(3,()=>{
     const profiles=loadProfiles();
     const activeProfile=profiles[profiles.length-1]||null;
     const antiBanOn=document.getElementById('antiBanSwitch').classList.contains('on');
     const deviceId=DeviceInfo.getDeviceId();
     const syncedAt=new Date().toISOString();
-    const injectData={game:currentGame,gameName:g.name,gamePackage:g.package,profile:activeProfile?activeProfile.name:'Default',antiBan:antiBanOn,deviceId:deviceId,deviceName:DeviceInfo.getDeviceName(),deviceOS:DeviceInfo.getOS(),deviceOSVersion:DeviceInfo.getOSVersion(),iccid:DeviceInfo.getICCID(),imei:DeviceInfo.getIMEI(),injectedAt:syncedAt};
+
+    const injectData={
+      game:currentGame,
+      gameName:g.name,
+      gamePackage:g.package,
+      profile:activeProfile?activeProfile.name:'Default',
+      profileContent:activeProfile?(activeProfile.content||'').substring(0,200):'',
+      antiBan:antiBanOn,
+      deviceId:deviceId,
+      deviceName:DeviceInfo.getDeviceName(),
+      deviceModel:DeviceInfo.getModel(),
+      deviceOS:DeviceInfo.getOS(),
+      deviceOSVersion:DeviceInfo.getOSVersion(),
+      injectedAt:syncedAt
+    };
     localStorage.setItem('derata_last_inject',JSON.stringify(injectData));
-    localStorage.setItem('derata_synced_'+currentGame,JSON.stringify({syncedAt:syncedAt,profile:activeProfile?activeProfile.name:'Default',antiBan:antiBanOn,appliedToApp:true}));
-    const hist=loadHistory();hist.unshift(injectData);saveHistory(hist);
-    const stats=loadStats();stats.injectCount=(stats.injectCount||0)+1;
-    const today=new Date().toDateString();
-    if(stats.lastDay!==today){const yesterday=new Date(Date.now()-864e5).toDateString();stats.streak=(stats.lastDay===yesterday)?(stats.streak||0)+1:1;stats.lastDay=today;}
-    const pname=activeProfile?activeProfile.name:'Default';stats.profileUse=stats.profileUse||{};stats.profileUse[pname]=(stats.profileUse[pname]||0)+1;saveStats(stats);
-    progressTask('inject',1);progressTask('inject5',1);
-    statusBox.classList.remove('syncing-glow');
-    const extraHtml=`<div class="device-info-list"><div class="di-row"><span class="di-lbl">Game</span><span class="di-val">${g.name}</span></div><div class="di-row"><span class="di-lbl">Package</span><span class="di-val" style="font-size:10.5px;">${g.package}</span></div><div class="di-row"><span class="di-lbl">Thiết bị</span><span class="di-val">${DeviceInfo.getDeviceName()}</span></div><div class="di-row"><span class="di-lbl">ICCID</span><span class="di-val" style="font-size:10.5px;">${DeviceInfo.getICCID()}</span></div><div class="di-row"><span class="di-lbl">IMEI</span><span class="di-val" style="font-size:10.5px;">${DeviceInfo.getIMEI()}</span></div><div class="di-row"><span class="di-lbl">Profile</span><span class="di-val">${pname}</span></div><div class="di-row"><span class="di-lbl">Anti-Ban</span><span class="di-val">${antiBanOn?'ON ✅':'OFF'}</span></div><div class="di-row"><span class="di-lbl">Trạng thái</span><span class="di-val" style="color:#16A34A;">● ${t('syncedToDevice')}</span></div></div>`;
-    Voice.speak(currentLang==='vi'?'Inject thành công, đã đồng bộ vào máy':'Inject successful');
+    localStorage.setItem('derata_synced_'+currentGame, JSON.stringify({
+      syncedAt:syncedAt,
+      profile:activeProfile?activeProfile.name:'Default',
+      antiBan:antiBanOn,
+      deviceId:deviceId,
+      deviceName:DeviceInfo.getDeviceName(),
+      deviceOS:DeviceInfo.getOS(),
+      deviceOSVersion:DeviceInfo.getOSVersion(),
+      appliedToApp:true
+    }));
+    localStorage.setItem('derata_device_synced_at', syncedAt);
+    localStorage.setItem('derata_device_synced_id', deviceId);
+
+    if(statusBox) statusBox.classList.remove('syncing-glow');
+
+    const extraHtml=`
+      <div class="device-info-list">
+        <div class="di-row"><span class="di-lbl">Game</span><span class="di-val">${g.name}</span></div>
+        <div class="di-row"><span class="di-lbl">Package</span><span class="di-val" style="font-size:10.5px;">${g.package}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('deviceName')}</span><span class="di-val">${DeviceInfo.getDeviceName()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('currentIOS')}</span><span class="di-val">${DeviceInfo.getOSVersion()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('deviceId')}</span><span class="di-val" style="font-size:10.5px;">${deviceId}</span></div>
+        <div class="di-row"><span class="di-lbl">Profile</span><span class="di-val">${activeProfile?activeProfile.name:'Default'}</span></div>
+        <div class="di-row"><span class="di-lbl">Anti-Ban</span><span class="di-val">${antiBanOn?'ON ✅':'OFF'}</span></div>
+        <div class="di-row"><span class="di-lbl">Trạng thái</span><span class="di-val" style="color:#16A34A;">● ${t('syncedToDevice')}</span></div>
+      </div>
+    `;
+    Voice.speak(currentLang==='vi'?'Inject thành công, đã đồng bộ vào máy':'Inject successful, synced to device');
     showCenterPopup('✅',t('popupTitle'),t('popupDesc'),'OK',()=>{
-      document.getElementById('injectMessage').innerHTML='<div class="alert-success">✅ '+t('appliedProfile')+pname+t('antiBanStatus')+(antiBanOn?'ON':'OFF')+' — '+t('syncedToDevice')+'</div>';
+      const m=document.getElementById('injectMessage');
+      m.innerHTML='<div class="alert-success">✅ '+t('appliedProfile')+(activeProfile?activeProfile.name:'Default')+t('antiBanStatus')+(antiBanOn?'ON':'OFF')+' — '+t('syncedToDevice')+'</div>';
       updateHome();
     },extraHtml);
-  },t('loadingInject'),currentLang==='vi'?'Inject thành công':'Inject successful');
+  },t('loadingInject'),currentLang==='vi'?'Inject thành công, đang đồng bộ...':'Inject successful, syncing...');
 };
 
-/* ================= MENU ĐEN XANH ================= */
-const gameMenuOverlay=document.getElementById('gameMenuOverlay');
-const menuStatus=document.getElementById('menuStatus');
-function getGameFeatures(){try{return JSON.parse(localStorage.getItem(GAME_FEATURES_KEY))||{};}catch(e){return{};}}
-function saveGameFeatures(f){localStorage.setItem(GAME_FEATURES_KEY,JSON.stringify(f));}
-function syncMenuSwitches(){const f=getGameFeatures();['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{const sw=document.getElementById('sw-'+k);if(!sw)return;if(f[k])sw.classList.add('on');else sw.classList.remove('on');});}
-function openGameMenu(){syncMenuSwitches();menuStatus.textContent='';gameMenuOverlay.classList.remove('hidden');Voice.speak(currentLang==='vi'?'Menu đã mở':'Menu opened');playBeep();}
-function closeGameMenu(){gameMenuOverlay.classList.add('hidden');}
-document.getElementById('gameMenuCloseBtn').onclick=closeGameMenu;
-function playBeep(){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const osc=ctx.createOscillator();const gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.frequency.value=880;osc.type='sine';gain.gain.setValueAtTime(0.08,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.15);osc.start();osc.stop(ctx.currentTime+0.15);}catch(e){}}
-document.querySelectorAll('.feature-row').forEach(row=>{
-  row.onclick=function(e){
-    if(e.target.closest('.gswitch'))return;
-    const sw=this.querySelector('.gswitch');sw.classList.toggle('on');
-    const f=getGameFeatures();f[this.dataset.feature]=sw.classList.contains('on');saveGameFeatures(f);playBeep();
-    Voice.speak(currentLang==='vi'?this.querySelector('.fname').textContent+(sw.classList.contains('on')?' đã bật':' đã tắt'):this.querySelector('.fname').textContent+(sw.classList.contains('on')?' on':' off'));
-  };
-});
-document.querySelectorAll('.gswitch').forEach(sw=>{
-  sw.onclick=function(e){
-    e.stopPropagation();this.classList.toggle('on');
-    const feature=this.closest('.feature-row').dataset.feature;
-    const f=getGameFeatures();f[feature]=this.classList.contains('on');saveGameFeatures(f);playBeep();
-    Voice.speak(currentLang==='vi'?this.closest('.feature-row').querySelector('.fname').textContent+(this.classList.contains('on')?' đã bật':' đã tắt'):this.closest('.feature-row').querySelector('.fname').textContent+(this.classList.contains('on')?' on':' off'));
-  };
-});
-document.getElementById('launchGameBtn').onclick=function(){
-  const f=getGameFeatures();const enabled=[];
-  ['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{if(f[k])enabled.push(k);});
-  localStorage.setItem('derata_last_launch',JSON.stringify({game:currentGame,features:f,enabled:enabled,launchedAt:new Date().toISOString()}));
-  menuStatus.textContent='✅ '+(currentLang==='vi'?'Đã bật '+enabled.length+' chức năng. Đang mở '+GAMES[currentGame].name+'...':'Enabled '+enabled.length+' features. Opening...');
-  Voice.speak(currentLang==='vi'?'Đang vào game':'Entering game');
-  setTimeout(()=>{
-    closeGameMenu();
-    const scheme=currentGame==='max'?'freefiremax://':'freefire://';
-    try{window.location.href=scheme;}catch(e){}
-    setTimeout(()=>{const feats=enabled.length>0?' ['+enabled.join(', ').toUpperCase()+']':'';alert(currentLang==='vi'?'🎮 Đã gửi lệnh mở '+GAMES[currentGame].name+feats+'\n\nNếu game không mở, mở thủ công từ màn hình chính.':'🎮 Command sent to open '+GAMES[currentGame].name+feats);},900);
-  },1500);
+/* NÚT MỞ GAME → mở MENU ĐEN XANH trước */
+document.getElementById('openGameBtn').onclick=function(){
+  openGameMenu();
 };
 
-/* ================= PHÍM TẮT VUỐT 3 NGÓN ================= */
-let touchStartTime=0;
-document.addEventListener('touchstart',function(e){if(e.touches.length===3){touchStartTime=Date.now();}},{passive:true});
-document.addEventListener('touchend',function(e){if(e.touches.length===0 && touchStartTime>0){const dt=Date.now()-touchStartTime;if(dt<500){openGameMenu();}touchStartTime=0;}});
+document.getElementById('toggleFF').onclick=function(){
+  applyGame('ff');
+  Voice.speak(currentLang==='vi'?'Đã chọn Free Fire':'Free Fire selected');
+};
+document.getElementById('toggleMAX').onclick=function(){
+  applyGame('max');
+  Voice.speak(currentLang==='vi'?'Đã chọn Free Fire MAX':'Free Fire MAX selected');
+};
+document.getElementById('tabFF').onclick=function(){
+  applyGame('ff');
+  Voice.speak(currentLang==='vi'?'Đã chọn Free Fire':'Free Fire selected');
+};
+document.getElementById('tabMAX').onclick=function(){
+  applyGame('max');
+  Voice.speak(currentLang==='vi'?'Đã chọn Free Fire MAX':'Free Fire MAX selected');
+};
 
-/* ================= SWITCHES ================= */
-document.getElementById('toggleFF').onclick=function(){applyGame('ff');Voice.speak(currentLang==='vi'?'Đã chọn Free Fire':'Free Fire selected');};
-document.getElementById('toggleMAX').onclick=function(){applyGame('max');Voice.speak(currentLang==='vi'?'Đã chọn Free Fire MAX':'Free Fire MAX selected');};
-document.getElementById('tabFF').onclick=function(){applyGame('ff');Voice.speak(currentLang==='vi'?'Đã chọn Free Fire':'Free Fire selected');};
-document.getElementById('tabMAX').onclick=function(){applyGame('max');Voice.speak(currentLang==='vi'?'Đã chọn Free Fire MAX':'Free Fire MAX selected');};
-document.getElementById('openGameBtn').onclick=openGameMenu;
-document.getElementById('eyeBtn').onclick=goProfile;
-
-/* ================= ANTI-BAN ================= */
 const antiBanBox=document.getElementById('antiBanBox');
 const antiBanSwitch=document.getElementById('antiBanSwitch');
 const antiBanFileInput=document.getElementById('antiBanFileInput');
 const antiBanMsg=document.getElementById('antiBanMessage');
+
 antiBanBox.onclick=function(){
   if(!antiBanSwitch.classList.contains('on')){antiBanFileInput.click();}
-  else{antiBanSwitch.classList.remove('on');document.getElementById('antiBanTitle').textContent=t('antiBanTitle');document.getElementById('antiBanDesc').textContent=t('antiBanDesc');antiBanMsg.innerHTML='';Voice.speak(currentLang==='vi'?'Đã tắt Anti-Ban':'Anti-Ban off');}
+  else{
+    antiBanSwitch.classList.remove('on');
+    document.getElementById('antiBanTitle').textContent=t('antiBanTitle');
+    document.getElementById('antiBanDesc').textContent=t('antiBanDesc');
+    antiBanMsg.innerHTML='';
+    Voice.speak(currentLang==='vi'?'Đã tắt Anti-Ban':'Anti-Ban off');
+  }
 };
+
 antiBanFileInput.onchange=function(e){
-  const file=e.target.files[0];if(!file)return;antiBanMsg.innerHTML='';
-  loading(3,()=>{antiBanSwitch.classList.add('on');document.getElementById('antiBanTitle').textContent=t('antiBanTitleOn');document.getElementById('antiBanDesc').textContent=t('antiBanDescOn')+file.name;antiBanMsg.innerHTML='<div class="alert-success">✅ '+t('antiBanSuccess')+file.name+'</div>';Voice.speak(currentLang==='vi'?'Kích hoạt Anti-Ban thành công':'Anti-Ban activated');},t('loadingAntiBan'));
+  const file=e.target.files[0];
+  if(!file)return;
+  antiBanMsg.innerHTML='';
+  loading(3,()=>{
+    antiBanSwitch.classList.add('on');
+    document.getElementById('antiBanTitle').textContent=t('antiBanTitleOn');
+    document.getElementById('antiBanDesc').textContent=t('antiBanDescOn')+file.name;
+    antiBanMsg.innerHTML='<div class="alert-success">✅ '+t('antiBanSuccess')+file.name+'</div>';
+    Voice.speak(currentLang==='vi'?'Kích hoạt Anti-Ban thành công':'Anti-Ban activated');
+  },t('loadingAntiBan'));
   e.target.value='';
 };
 
-/* ================= VOICE GENDER ================= */
-document.getElementById('voiceFemale').onclick=function(){this.classList.add('active');document.getElementById('voiceMale').classList.remove('active');Voice.gender='female';localStorage.setItem('derata_voice_gender','female');Voice.speak(currentLang==='vi'?'Giọng nữ':'Female voice');};
-document.getElementById('voiceMale').onclick=function(){this.classList.add('active');document.getElementById('voiceFemale').classList.remove('active');Voice.gender='male';localStorage.setItem('derata_voice_gender','male');Voice.speak(currentLang==='vi'?'Giọng nam':'Male voice');};
+document.querySelectorAll('.nav-item').forEach(n=>{
+  n.onclick=function(){
+    const d=this.dataset.nav;
+    if(d==='home')goHome();else if(d==='settings')goSettings();
+  };
+});
 
-/* ================= LANGUAGE ================= */
-function setLang(lang){
-  currentLang=lang;localStorage.setItem(LANG_KEY,lang);
-  ['langVI','langEN','langZH','langKO','langHI','langTH'].forEach(id=>document.getElementById(id).classList.remove('active'));
-  const map={vi:'langVI',en:'langEN',zh:'langZH',ko:'langKO',hi:'langHI',th:'langTH'};
-  document.getElementById(map[lang])?.classList.add('active');
-  applyLang();updateSettings();
-}
-document.getElementById('langVI').onclick=()=>setLang('vi');
-document.getElementById('langEN').onclick=()=>setLang('en');
-document.getElementById('langZH').onclick=()=>setLang('zh');
-document.getElementById('langKO').onclick=()=>setLang('ko');
-document.getElementById('langHI').onclick=()=>setLang('hi');
-document.getElementById('langTH').onclick=()=>setLang('th');
-
-/* ================= LOGOUT ================= */
 document.getElementById('logoutBtn').onclick=function(){
-  if(confirm(t('logoutConfirm'))){localStorage.removeItem(ACTIVATED_KEY);document.getElementById('keyInput').value='';show('screen-key');document.getElementById('keyMessage').innerHTML='';Voice.speak(currentLang==='vi'?'Đã đăng xuất':'Logged out');}
+  if(confirm(t('logoutConfirm'))){
+    localStorage.removeItem(ACTIVATED_KEY);
+    document.getElementById('keyInput').value='';
+    show('screen-key');
+    document.getElementById('keyMessage').innerHTML='';
+    Voice.speak(currentLang==='vi'?'Đã đăng xuất':'Logged out');
+  }
 };
 
-/* ================= COPY ================= */
 document.getElementById('copyUUID').onclick=function(){
   const u=document.getElementById('uuidDisplay').textContent;
-  navigator.clipboard?.writeText(u).then(()=>{document.getElementById('txtCopy').textContent=t('copied');setTimeout(()=>document.getElementById('txtCopy').textContent=t('copy'),1500);}).catch(()=>{document.getElementById('txtCopy').textContent=t('copied');setTimeout(()=>document.getElementById('txtCopy').textContent=t('copy'),1500);});
+  navigator.clipboard?.writeText(u).then(()=>{
+    document.getElementById('txtCopy').textContent=t('copied');
+    Voice.speak(currentLang==='vi'?'Đã sao chép':'Copied');
+    setTimeout(()=>document.getElementById('txtCopy').textContent=t('copy'),1500);
+  }).catch(()=>{
+    document.getElementById('txtCopy').textContent=t('copied');
+    setTimeout(()=>document.getElementById('txtCopy').textContent=t('copy'),1500);
+  });
 };
 
-/* ================= SUPPORT ================= */
 document.getElementById('supportBtn').onclick=function(){
   const deviceId=DeviceInfo.getDeviceId();
-  DeviceInfo.watchBattery(info=>{
-    const battStr=info.supported?(info.level+'%'+(info.charging?' ⚡ Đang sạc':'')):'Không hỗ trợ';
-    const extraHtml=`<div class="device-info-list"><div class="di-row"><span class="di-lbl">${t('deviceName')}</span><span class="di-val">${DeviceInfo.getDeviceName()}</span></div><div class="di-row"><span class="di-lbl">${t('deviceModel')}</span><span class="di-val">${DeviceInfo.getModel()}</span></div><div class="di-row"><span class="di-lbl">${t('os')}</span><span class="di-val">${DeviceInfo.getOS()}</span></div><div class="di-row"><span class="di-lbl">${t('currentIOS')}</span><span class="di-val">${DeviceInfo.getOSVersion()}</span></div><div class="di-row"><span class="di-lbl">${t('iccid')}</span><span class="di-val" style="font-size:10.5px;">${DeviceInfo.getICCID()}</span></div><div class="di-row"><span class="di-lbl">${t('imei')}</span><span class="di-val" style="font-size:10.5px;">${DeviceInfo.getIMEI()}</span></div><div class="di-row"><span class="di-lbl">${t('battery')}</span><span class="di-val">${battStr}</span></div><div class="di-row"><span class="di-lbl">${t('deviceId')}</span><span class="di-val" style="font-size:10px;">${deviceId}</span></div><div class="di-row"><span class="di-lbl">${t('supportConnected')}</span><span class="di-val" style="color:#16A34A;">● ONLINE</span></div></div>`;
+  DeviceInfo.getBattery(v=>{
+    const extraHtml=`
+      <div class="device-info-list">
+        <div class="di-row"><span class="di-lbl">${t('deviceName')}</span><span class="di-val">${DeviceInfo.getDeviceName()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('deviceModel')}</span><span class="di-val">${DeviceInfo.getModel()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('os')}</span><span class="di-val">${DeviceInfo.getOS()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('currentIOS')}</span><span class="di-val">${DeviceInfo.getOSVersion()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('browser')}</span><span class="di-val">${DeviceInfo.getBrowser()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('screen')}</span><span class="di-val">${DeviceInfo.getScreen()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('cpu')}</span><span class="di-val">${DeviceInfo.getCPU()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('ram')}</span><span class="di-val">${DeviceInfo.getRAM()}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('deviceId')}</span><span class="di-val" style="font-size:10px;">${deviceId}</span></div>
+        <div class="di-row"><span class="di-lbl">${t('supportConnected')}</span><span class="di-val" style="color:#16A34A;">● ONLINE</span></div>
+      </div>
+    `;
     showCenterPopup('🟢',t('supportTitle'),t('supportDesc'),'OK',null,extraHtml);
   });
 };
 
-/* ================= PROFILES ================= */
+document.getElementById('langEN').onclick=function(){
+  this.classList.add('active');
+  document.getElementById('langVI').classList.remove('active');
+  currentLang='en';
+  localStorage.setItem(LANG_KEY,'en');
+  applyLang();
+  updateSettings();
+  Voice.speak('Language switched to English','en-US');
+};
+document.getElementById('langVI').onclick=function(){
+  this.classList.add('active');
+  document.getElementById('langEN').classList.remove('active');
+  currentLang='vi';
+  localStorage.setItem(LANG_KEY,'vi');
+  applyLang();
+  updateSettings();
+  Voice.speak('Đã chuyển sang tiếng Việt','vi-VN');
+};
+
+document.getElementById('eyeBtn').onclick=()=>goProfile();
+
 function renderProfiles(){
   const list=document.getElementById('profileList');
   list.innerHTML='';
   const profiles=loadProfiles();
-  if(profiles.length===0){const def={id:'default-'+Date.now(),name:'5.0',version:'5.0',content:'',filename:'',syncAt:Date.now()};profiles.push(def);saveProfiles(profiles);}
-  profiles.forEach((p,idx)=>{
+  if(profiles.length===0){
+    const def={id:'default-'+Date.now(),name:'5.0',version:'5.0',content:'',filename:'',syncAt:Date.now()};
+    profiles.push(def);saveProfiles(profiles);
+  }
+  profiles.forEach(p=>{
     const el=document.createElement('div');
     el.className='dark-card';
     el.dataset.id=p.id;
-    el.draggable=true;
-    el.dataset.index=idx;
-    el.innerHTML=`<div class="top-row"><div class="ver">${escapeHtml(p.name)}</div><div class="pver">${escapeHtml(p.version)} <span class="caret">▼</span></div></div><div class="local-row"><span class="dot"></span> ${t('syncLocal')}</div><div class="actions"><button class="btn-rename">✏️ ${t('rename')}</button><button class="btn-export">⬆️ ${t('export')}</button><button class="btn-qr" style="background:rgba(22,163,74,.85);">📱 QR</button></div>`;
+    el.innerHTML=`
+      <div class="top-row">
+        <div class="ver">${escapeHtml(p.name)}</div>
+        <div class="pver">${escapeHtml(p.version)} <span class="caret">▼</span></div>
+      </div>
+      <div class="local-row"><span class="dot"></span> ${t('syncLocal')}</div>
+      <div class="actions">
+        <button class="btn-rename">✏️ ${t('rename')}</button>
+        <button class="btn-export">⬆️ ${t('export')}</button>
+      </div>
+    `;
     list.appendChild(el);
-    el.querySelector('.btn-rename').onclick=function(e){e.stopPropagation();const n=prompt(t('enterProfileName'),p.name);if(n&&n.trim()){p.name=n.trim();saveProfiles(profiles);renderProfiles();Voice.speak(currentLang==='vi'?'Đổi tên thành công':'Renamed');}};
-    el.querySelector('.btn-export').onclick=function(e){e.stopPropagation();showMiniMenu(el,p);};
-    el.querySelector('.btn-qr').onclick=function(e){e.stopPropagation();showQRCode(p);};
-    el.ondragstart=function(ev){ev.dataTransfer.setData('text/plain',idx);this.classList.add('dragging');};
-    el.ondragend=function(){this.classList.remove('dragging');};
-    el.ondragover=function(ev){ev.preventDefault();};
-    el.ondrop=function(ev){
-      ev.preventDefault();
-      const fromIdx=parseInt(ev.dataTransfer.getData('text/plain'));
-      const toIdx=idx;
-      if(fromIdx===toIdx)return;
-      const arr=loadProfiles();
-      const [moved]=arr.splice(fromIdx,1);
-      arr.splice(toIdx,0,moved);
-      saveProfiles(arr);renderProfiles();
-      Voice.speak(currentLang==='vi'?'Đã đổi thứ tự':'Reordered');
+
+    el.querySelector('.btn-rename').onclick=function(e){
+      e.stopPropagation();
+      const newName=prompt(t('enterProfileName'),p.name);
+      if(newName&&newName.trim()){
+        p.name=newName.trim();
+        saveProfiles(profiles);
+        renderProfiles();
+        Voice.speak(currentLang==='vi'?'Đổi tên thành công':'Renamed successfully');
+      }
+    };
+    el.querySelector('.btn-export').onclick=function(e){
+      e.stopPropagation();
+      showMiniMenu(el,p);
     };
   });
-}
-
-function showQRCode(profile){
-  const data=JSON.stringify({name:profile.name,version:profile.version,content:profile.content||'',filename:profile.filename||''});
-  const extraHtml='<div class="qr-box" id="qrBox"></div><div style="font-size:11px;color:#6B7280;text-align:center;font-weight:600;">Quét QR này bằng camera để import profile</div>';
-  showCenterPopup('📱','Mã QR Profile','Chia sẻ: '+profile.name,'Đóng',null,extraHtml);
-  setTimeout(()=>{
-    const box=document.getElementById('qrBox');
-    if(!box)return;
-    const canvas=document.createElement('canvas');
-    canvas.width=200;canvas.height=200;
-    box.appendChild(canvas);
-    const ctx=canvas.getContext('2d');
-    ctx.fillStyle='#fff';ctx.fillRect(0,0,200,200);
-    ctx.fillStyle='#7B2CBF';
-    let seed=0;for(let i=0;i<data.length;i++)seed=(seed*31+data.charCodeAt(i))>>>0;
-    const mod=25;const size=200/mod;
-    for(let y=0;y<mod;y++){
-      for(let x=0;x<mod;x++){
-        seed=(seed*1103515245+12345)>>>0;
-        if(seed%2===0){ctx.fillRect(x*size,y*size,size,size);}
-      }
-    }
-    ctx.fillStyle='#1F2937';
-    ctx.fillRect(0,0,size*7,size*7);
-    ctx.fillRect(200-size*7,0,size*7,size*7);
-    ctx.fillRect(0,200-size*7,size*7,size*7);
-    ctx.fillStyle='#fff';
-    ctx.fillRect(size,size,size*5,size*5);
-    ctx.fillRect(200-size*6,size,size*5,size*5);
-    ctx.fillRect(size,200-size*6,size*5,size*5);
-    ctx.fillStyle='#7B2CBF';
-    ctx.fillRect(size*2,size*2,size*3,size*3);
-    ctx.fillRect(200-size*5,size*2,size*3,size*3);
-    ctx.fillRect(size*2,200-size*5,size*3,size*3);
-  },100);
 }
 
 let activeMiniMenu=null;
@@ -1214,7 +1368,12 @@ function showMiniMenu(cardEl,profile){
   if(activeMiniMenu){activeMiniMenu.remove();activeMiniMenu=null;}
   const menu=document.createElement('div');
   menu.className='mini-menu';
-  menu.innerHTML='<div class="item" data-act="run"><span class="ic">▶️</span> '+t('runFromFile')+'</div><div class="item" data-act="export"><span class="ic">📄</span> '+t('exportData')+'</div><div class="divider"></div><div class="item" data-act="sync"><span class="ic">🔄</span> '+t('syncDevice')+'</div>';
+  menu.innerHTML=`
+    <div class="item" data-act="run"><span class="ic">▶️</span> ${t('runFromFile')}</div>
+    <div class="item" data-act="export"><span class="ic">📄</span> ${t('exportData')}</div>
+    <div class="divider"></div>
+    <div class="item" data-act="sync"><span class="ic">🔄</span> ${t('syncDevice')}</div>
+  `;
   cardEl.appendChild(menu);
   activeMiniMenu=menu;
   menu.querySelectorAll('.item').forEach(it=>{
@@ -1222,33 +1381,60 @@ function showMiniMenu(cardEl,profile){
       ev.stopPropagation();
       const act=this.dataset.act;
       menu.remove();activeMiniMenu=null;
-      if(act==='run')runFromFile(cardEl,profile);
-      else if(act==='export')exportData(cardEl,profile);
-      else if(act==='sync')syncDevice(cardEl,profile);
+      if(act==='run') runFromFile(cardEl,profile);
+      else if(act==='export') exportData(cardEl,profile);
+      else if(act==='sync') syncDevice(cardEl,profile);
     };
   });
-  setTimeout(()=>{document.addEventListener('click',function closeMenu(ev){if(activeMiniMenu && !activeMiniMenu.contains(ev.target)){activeMiniMenu.remove();activeMiniMenu=null;document.removeEventListener('click',closeMenu);}});},50);
+  setTimeout(()=>{
+    document.addEventListener('click',function closeMenu(ev){
+      if(activeMiniMenu && !activeMiniMenu.contains(ev.target)){
+        activeMiniMenu.remove();activeMiniMenu=null;
+        document.removeEventListener('click',closeMenu);
+      }
+    });
+  },50);
 }
 
 function runFromFile(cardEl,profile){
   cardEl.querySelector('.code-panel')?.remove();
   let raw=profile.content||'';
-  if(!raw){const fname=profile.filename||profile.name||'config.json';raw=JSON.stringify({file:fname,profile:profile.name,version:profile.version||'5.0',game:GAMES[currentGame].name,device:{name:DeviceInfo.getDeviceName(),os:DeviceInfo.getOS(),deviceId:DeviceInfo.getDeviceId()},config:{aimbot:true,speed:1.5},timestamp:new Date().toISOString()},null,2);}
+  if(!raw){
+    const fname=profile.filename||profile.name||'config.json';
+    raw=JSON.stringify({file:fname,profile:profile.name,version:profile.version||'5.0',game:GAMES[currentGame].name,
+      device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId()},
+      config:{aimbot:true,speed:1.5,antiban:true,fov:120,auto_fire:true,headshot_rate:85},timestamp:new Date().toISOString()},null,2);
+  }
   const panel=document.createElement('div');
   panel.className='code-panel';
-  panel.innerHTML='<div class="head"><div class="title">📄 '+t('dataRunning')+'</div><div class="sync">● '+t('applied')+'</div></div><pre class="code-green"></pre>';
+  panel.innerHTML=`<div class="head"><div class="title">📄 ${t('dataRunning')}</div><div class="sync">● ${t('applied')}</div></div><pre class="code-green"></pre>`;
   cardEl.appendChild(panel);
   const codeEl=panel.querySelector('.code-green');
-  loading(3,()=>{typeLines(codeEl,raw,()=>{profile.content=raw;profile.syncAt=Date.now();const list=loadProfiles();const idx=list.findIndex(x=>x.id===profile.id);if(idx>=0){list[idx]=profile;saveProfiles(list);}localStorage.setItem('derata_last_applied_'+profile.id,raw);});},t('loadingReadFile'),currentLang==='vi'?'Chạy file thành công':'File run successful');
+  loading(3,()=>{
+    typeLines(codeEl,raw,()=>{
+      profile.content=raw;profile.syncAt=Date.now();
+      const list=loadProfiles();
+      const idx=list.findIndex(x=>x.id===profile.id);
+      if(idx>=0){list[idx]=profile;saveProfiles(list);}
+      localStorage.setItem('derata_last_applied_'+profile.id,raw);
+      const localRow=cardEl.querySelector('.local-row');
+      if(localRow) localRow.innerHTML='<span class="dot"></span> '+(currentLang==='vi'?'Đã áp dụng · Đồng bộ thiết bị':'Applied · Device synced');
+    });
+  },t('loadingReadFile'),currentLang==='vi'?'Chạy file thành công':'File run successful');
 }
 
 function exportData(cardEl,profile){
   cardEl.querySelector('.code-panel')?.remove();
   let raw=profile.content||'';
-  if(!raw){raw=JSON.stringify({export:profile.name,version:profile.version||'5.0',device:{name:DeviceInfo.getDeviceName(),iccid:DeviceInfo.getICCID(),imei:DeviceInfo.getIMEI()},exportedAt:new Date().toISOString()},null,2);}
+  if(!raw){
+    const fname=profile.filename||profile.name||'config.json';
+    raw=JSON.stringify({export:fname,profile:profile.name,version:profile.version||'5.0',game:GAMES[currentGame].name,
+      device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId()},
+      config:{aimbot:true,speed:1.5,antiban:true,fov:120,auto_fire:true,headshot_rate:85},exportedAt:new Date().toISOString()},null,2);
+  }
   const panel=document.createElement('div');
   panel.className='code-panel';
-  panel.innerHTML='<div class="head"><div class="title">📄 '+t('dataExported')+'</div><div class="sync">● '+t('exported')+'</div></div><pre class="code-green"></pre>';
+  panel.innerHTML=`<div class="head"><div class="title">📄 ${t('dataExported')}</div><div class="sync">● ${t('exported')}</div></div><pre class="code-green"></pre>`;
   cardEl.appendChild(panel);
   const codeEl=panel.querySelector('.code-green');
   loading(3,()=>{typeLines(codeEl,raw);},t('loadingExport'),currentLang==='vi'?'Xuất dữ liệu thành công':'Export successful');
@@ -1256,13 +1442,24 @@ function exportData(cardEl,profile){
 
 function syncDevice(cardEl,profile){
   cardEl.querySelector('.code-panel')?.remove();
-  const raw=JSON.stringify({sync:profile.name,device:{name:DeviceInfo.getDeviceName(),iccid:DeviceInfo.getICCID(),imei:DeviceInfo.getIMEI()},syncedAt:new Date().toISOString()},null,2);
+  const raw=profile.content||JSON.stringify({sync:profile.name,version:profile.version||'5.0',game:GAMES[currentGame].name,
+    device:{name:DeviceInfo.getDeviceName(),model:DeviceInfo.getModel(),os:DeviceInfo.getOS(),osVersion:DeviceInfo.getOSVersion(),deviceId:DeviceInfo.getDeviceId(),timezone:DeviceInfo.getTimezone()},
+    config:{aimbot:true,speed:1.5,antiban:true,fov:120,auto_fire:true,headshot_rate:85},syncedAt:new Date().toISOString()},null,2);
   const panel=document.createElement('div');
   panel.className='code-panel';
-  panel.innerHTML='<div class="head"><div class="title">🔄 '+t('dataSync')+'</div><div class="sync">● '+t('synced')+'</div></div><pre class="code-green"></pre>';
+  panel.innerHTML=`<div class="head"><div class="title">🔄 ${t('dataSync')}</div><div class="sync">● ${t('synced')}</div></div><pre class="code-green"></pre>`;
   cardEl.appendChild(panel);
   const codeEl=panel.querySelector('.code-green');
-  loading(3,()=>{typeLines(codeEl,raw);},t('loadingSync'),currentLang==='vi'?'Đồng bộ thành công':'Sync successful');
+  loading(3,()=>{
+    typeLines(codeEl,raw,()=>{
+      profile.syncAt=Date.now();
+      const list=loadProfiles();
+      const idx=list.findIndex(x=>x.id===profile.id);
+      if(idx>=0){list[idx]=profile;saveProfiles(list);}
+      const localRow=cardEl.querySelector('.local-row');
+      if(localRow) localRow.innerHTML='<span class="dot"></span> '+(currentLang==='vi'?'Đã đồng bộ · ':'Synced · ')+new Date().toLocaleTimeString(currentLang==='vi'?'vi-VN':'en-US');
+    });
+  },t('loadingSync'),currentLang==='vi'?'Đồng bộ thành công':'Sync successful');
 }
 
 function typeLines(el,text,cb){
@@ -1279,68 +1476,47 @@ function typeLines(el,text,cb){
 
 const profileFileInput=document.getElementById('profileFileInput');
 document.getElementById('addProfileBtn').onclick=function(){profileFileInput.click();};
+
 profileFileInput.onchange=function(e){
-  const file=e.target.files[0];if(!file)return;
+  const file=e.target.files[0];
+  if(!file)return;
   const reader=new FileReader();
   reader.onload=function(ev){
     const content=ev.target.result||'';
     const profiles=loadProfiles();
-    profiles.push({id:'p-'+Date.now()+'-'+Math.random().toString(36).substring(2,6),name:file.name.replace(/\.[^.]+$/,'')||file.name,version:'5.0',content:content,filename:file.name,syncAt:Date.now()});
+    profiles.push({
+      id:'p-'+Date.now()+'-'+Math.random().toString(36).substring(2,6),
+      name:file.name.replace(/\.[^.]+$/,'')||file.name,
+      version:'5.0',content:content,filename:file.name,syncAt:Date.now()
+    });
     saveProfiles(profiles);
-    progressTask('profile',1);
     goProfile();
-    Voice.speak(currentLang==='vi'?'Đã thêm profile thành công':'Profile added');
+    Voice.speak(currentLang==='vi'?'Đã thêm profile thành công':'Profile added successfully');
   };
   reader.readAsText(file);
   e.target.value='';
 };
 
-/* ================= AUTO UPDATE ================= */
-function checkUpdate(){const hasUpdate=false;if(hasUpdate){document.getElementById('newVer').textContent='v3.1';document.getElementById('updateBanner').classList.remove('hidden');Voice.speak(t('updateAvailable'));}}
-document.getElementById('closeUpdateBtn').onclick=function(){document.getElementById('updateBanner').classList.add('hidden');};
-document.getElementById('updateBtn').onclick=function(){alert(currentLang==='vi'?'Đang tải bản cập nhật...':'Downloading update...');};
+/* ================= UPDATE NOTIFICATION ================= */
+const APP_VERSION='2.0';
+function checkUpdate(){
+  const hasUpdate = false;
+  const newVersion = '2.1';
+  if(hasUpdate){
+    document.getElementById('newVer').textContent='v'+newVersion;
+    document.getElementById('updateBanner').classList.remove('hidden');
+    Voice.speak(t('updateAvailable'));
+  }
+}
+document.getElementById('closeUpdateBtn').onclick=function(){
+  document.getElementById('updateBanner').classList.add('hidden');
+};
+document.getElementById('updateBtn').onclick=function(){
+  alert(currentLang==='vi'?'Đang tải bản cập nhật...':'Downloading update...');
+};
 setTimeout(checkUpdate,3000);
 
-/* ================= BACKGROUND ================= */
-document.addEventListener('visibilitychange',()=>{
-  if(document.hidden){localStorage.setItem('derata_last_hidden',Date.now());}
-  else{
-    const k=localStorage.getItem(ACTIVATED_KEY);
-    if(k){const o=findKey(k);if(o && o.expiry){if(o.expiry-Date.now()<=0){localStorage.removeItem(ACTIVATED_KEY);show('screen-key');document.getElementById('keyMessage').innerHTML='<div class="alert-error">⏰ '+t('keyExpired')+'</div>';}}}
-    updateSettings();
-  }
-});
-
-/* ================= WIDGET DATA ================= */
-function updateWidgetData(){
-  const k=localStorage.getItem(ACTIVATED_KEY);
-  const stats=loadStats();
-  const o=k?findKey(k):null;
-  const widgetData={key:k?k.substring(0,12)+'*...':'Chưa kích hoạt',daysLeft:o&&o.expiry?Math.max(0,Math.floor((o.expiry-Date.now())/864e5)):0,injectCount:stats.injectCount||0,level:Math.floor((stats.points||0)/10)+1,updatedAt:Date.now()};
-  localStorage.setItem('derata_widget_data',JSON.stringify(widgetData));
-}
-setInterval(updateWidgetData,60000);
-updateWidgetData();
-
-/* ================= NOTIFICATION ================= */
-if('Notification' in window){
-  setTimeout(()=>{if(Notification.permission==='default'){Notification.requestPermission();}},5000);
-  setInterval(()=>{
-    const k=localStorage.getItem(ACTIVATED_KEY);
-    if(k && Notification.permission==='granted'){
-      const o=findKey(k);
-      if(o && o.expiry){
-        const days=Math.floor((o.expiry-Date.now())/864e5);
-        if(days<=3 && days>0 && !localStorage.getItem('derata_notified_'+days)){
-          new Notification('DERATA LOCKED',{body:(currentLang==='vi'?'Key còn '+days+' ngày':'Key expires in '+days+' days')});
-          localStorage.setItem('derata_notified_'+days,'1');
-        }
-      }
-    }
-  },3600000);
-}
-
-/* ================= COUNTDOWN ================= */
+/* ================= LIVE COUNTDOWN ================= */
 setInterval(()=>{
   const k=localStorage.getItem(ACTIVATED_KEY);
   if(k){
@@ -1348,11 +1524,15 @@ setInterval(()=>{
     if(o && o.expiry){
       const ms=o.expiry-Date.now();
       if(ms>0){
-        const d=Math.floor(ms/864e5);const h=Math.floor((ms%864e5)/36e5);const m=Math.floor((ms%36e5)/6e4);const s=Math.floor((ms%6e4)/1000);
+        const d=Math.floor(ms/864e5);
+        const h=Math.floor((ms%864e5)/36e5);
+        const m=Math.floor((ms%36e5)/6e4);
+        const s=Math.floor((ms%6e4)/1000);
         const el=document.getElementById('licenseExpiry');
-        if(el)el.innerHTML=`${d}d ${h}h ${m}m <span class="live-timer">${String(s).padStart(2,'0')}s</span>`;
+        if(el) el.innerHTML=`${d}d ${h}h ${m}m <span class="live-timer">${String(s).padStart(2,'0')}s</span>`;
       } else {
-        localStorage.removeItem(ACTIVATED_KEY);show('screen-key');
+        localStorage.removeItem(ACTIVATED_KEY);
+        show('screen-key');
         document.getElementById('keyMessage').innerHTML='<div class="alert-error">⏰ '+t('keyExpired')+'</div>';
         Voice.speak(currentLang==='vi'?'Key đã hết hạn':'Key expired');
       }
@@ -1365,19 +1545,16 @@ function init(){
   initKeys();
   const savedLang=localStorage.getItem(LANG_KEY);
   if(savedLang){currentLang=savedLang;}
-  const map={vi:'langVI',en:'langEN',zh:'langZH',ko:'langKO',hi:'langHI',th:'langTH'};
-  ['langVI','langEN','langZH','langKO','langHI','langTH'].forEach(id=>document.getElementById(id).classList.remove('active'));
-  document.getElementById(map[currentLang])?.classList.add('active');
-  const savedGender=localStorage.getItem('derata_voice_gender');
-  if(savedGender){Voice.gender=savedGender;if(savedGender==='male'){document.getElementById('voiceMale').classList.add('active');document.getElementById('voiceFemale').classList.remove('active');}}
+  if(currentLang==='en'){
+    document.getElementById('langEN').classList.add('active');
+    document.getElementById('langVI').classList.remove('active');
+  }
   Voice.setLang(currentLang);
   const savedGame=localStorage.getItem('derata_current_game');
   applyGame(savedGame||'ff');
   applyLang();
   updateDeviceBadge();
-  let tk=loadTasks();
-  if(!tk.date||tk.date!==new Date().toDateString()){tk=getDefaultTasks();saveTasks(tk);}
-  progressTask('open',1);
+
   const k=localStorage.getItem(ACTIVATED_KEY);
   if(k){
     const o=findKey(k);
@@ -1388,7 +1565,7 @@ function init(){
 }
 init();
 
-console.log('DERATA LOCKED v3.0 — 24 tính năng mới + toàn bộ tính năng cũ');
+console.log('DERATA LOCKED v2.0 ready — 30 key đã tạo');
 console.log('Key mẫu: FREEIPA-9A969343-231413DC');
 </script>
 </body>
