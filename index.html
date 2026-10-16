@@ -9,7 +9,6 @@
   body{background:#EAEAF0;display:flex;justify-content:center;min-height:100vh;user-select:none;transition:background .3s;}
   #app{width:100%;max-width:430px;background:#F5F4FA;display:flex;flex-direction:column;min-height:100vh;position:relative;overflow-x:hidden;box-shadow:0 0 40px rgba(0,0,0,.06);transition:background .3s;}
 
-  /* MUSIC */
   .music-btn{position:fixed;top:12px;left:12px;width:44px;height:44px;border-radius:50%;background:#fff;border:none;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(123,44,191,.28);transition:transform .2s;}
   .music-btn:active{transform:scale(.9);}
   .music-btn .disc{width:34px;height:34px;border-radius:50%;background:conic-gradient(from 0deg,#7B2CBF 0deg,#2D1B4E 45deg,#7B2CBF 90deg,#2D1B4E 135deg,#7B2CBF 180deg,#2D1B4E 225deg,#7B2CBF 270deg,#2D1B4E 315deg,#7B2CBF 360deg);position:relative;display:flex;align-items:center;justify-content:center;animation:spinDisc 3s linear infinite;box-shadow:inset 0 0 6px rgba(0,0,0,.3);}
@@ -20,11 +19,9 @@
   .music-btn .icon-off{position:absolute;font-size:15px;color:#DC2626;font-weight:900;display:none;z-index:3;text-shadow:0 0 4px #fff;}
   .music-btn.paused .icon-off{display:block;}
 
-  /* THEME BUTTON */
   .theme-btn{position:fixed;top:12px;left:64px;width:44px;height:44px;border-radius:50%;background:#fff;border:none;cursor:pointer;z-index:999;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(123,44,191,.28);transition:transform .2s;font-size:18px;}
   .theme-btn:active{transform:scale(.9);}
 
-  /* UPDATE BANNER */
   .update-banner{position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#7B2CBF,#9D4EDD);color:#fff;padding:12px 18px;font-size:13px;font-weight:800;z-index:2000;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 4px 20px rgba(123,44,191,.4);animation:slideDown .4s ease;}
   @keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
   .update-banner.hidden{display:none;}
@@ -77,7 +74,6 @@
   .syncing-glow{animation:syncPulse 1s infinite !important;}
   @keyframes syncPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(.98)}}
 
-  /* OPEN GAME BUTTON */
   .open-game-btn{margin-top:12px;width:100%;padding:15px;background:linear-gradient(135deg,#7B2CBF,#9D4EDD);color:#fff;border:none;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 7px 18px rgba(123,44,191,.35);display:none;align-items:center;justify-content:center;gap:8px;letter-spacing:.3px;transition:transform .15s;}
   .open-game-btn.show{display:flex;animation:popIn .3s ease;}
   .open-game-btn:active{transform:scale(.97);}
@@ -208,7 +204,37 @@
   .spacer{flex:1;}
   ::-webkit-scrollbar{width:0;height:0;}
 
-  /* ===== DARK MODE ===== */
+  /* ================= MENU ĐEN XANH ================= */
+  .game-menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .3s ease;}
+  .game-menu-overlay.hidden{display:none;}
+  .game-menu{background:#0A0A0A;border:2px solid #16A34A;border-radius:22px;padding:20px 18px;width:100%;max-width:360px;box-shadow:0 0 40px rgba(22,163,74,.5),0 20px 60px rgba(0,0,0,.7);max-height:90vh;overflow-y:auto;position:relative;animation:menuPop .35s cubic-bezier(.34,1.56,.64,1);}
+  @keyframes menuPop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+  .game-menu-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #16A34A33;}
+  .game-menu-title{color:#4ADE80;font-size:14px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:8px;text-shadow:0 0 12px rgba(74,222,128,.7);}
+  .game-menu-title::before{content:'●';color:#16A34A;font-size:12px;animation:blink 1.2s infinite;}
+  .game-menu-close{background:transparent;border:1px solid #16A34A;color:#4ADE80;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+  .game-menu-close:active{background:#16A34A;color:#000;}
+
+  .game-menu-section{font-size:10.5px;color:#16A34A;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;margin:14px 0 8px;opacity:.8;}
+
+  .feature-row{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:#111;border:1px solid #16A34A44;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;}
+  .feature-row:active{background:#16A34A22;transform:scale(.98);}
+  .feature-row .fi{display:flex;align-items:center;gap:11px;flex:1;}
+  .feature-row .ficon{font-size:18px;width:30px;height:30px;background:#16A34A22;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .feature-row .ftext{flex:1;min-width:0;}
+  .feature-row .fname{font-size:12.5px;font-weight:900;color:#4ADE80;letter-spacing:.3px;}
+  .feature-row .fdesc{font-size:10px;color:#86EFAC;opacity:.7;font-weight:600;margin-top:2px;}
+
+  .gswitch{width:42px;height:24px;background:#333;border-radius:14px;position:relative;transition:background .25s;flex-shrink:0;box-shadow:inset 0 0 4px rgba(0,0,0,.5);}
+  .gswitch.on{background:#16A34A;box-shadow:0 0 12px rgba(22,163,74,.7),inset 0 0 4px rgba(0,0,0,.3);}
+  .gswitch::after{content:'';width:18px;height:18px;background:#E5E7EB;border-radius:50%;position:absolute;top:3px;left:3px;transition:left .25s;box-shadow:0 2px 4px rgba(0,0,0,.4);}
+  .gswitch.on::after{left:21px;background:#fff;box-shadow:0 0 8px #fff;}
+
+  .btn-launch-game{margin-top:14px;width:100%;padding:15px;background:linear-gradient(135deg,#16A34A,#22C55E);color:#000;border:none;border-radius:14px;font-size:15px;font-weight:900;letter-spacing:.8px;cursor:pointer;box-shadow:0 0 20px rgba(22,163,74,.5);text-transform:uppercase;transition:transform .15s;}
+  .btn-launch-game:active{transform:scale(.97);}
+  .menu-status{margin-top:10px;font-size:11px;color:#4ADE80;text-align:center;font-weight:800;letter-spacing:.5px;min-height:16px;}
+
+  /* DARK MODE */
   body.dark{background:#0F0F1A;}
   body.dark #app{background:#1A1A2E;}
   body.dark .brand-name{color:#F3F4F6;}
@@ -256,17 +282,14 @@
 </head>
 <body>
 
-<!-- THEME BUTTON -->
 <button class="theme-btn" id="themeBtn" title="Đổi chế độ sáng/tối">🌙</button>
 
-<!-- MUSIC BUTTON -->
 <button class="music-btn paused" id="musicBtn" title="Bật/Tắt nhạc nền">
   <div class="disc"></div>
   <span class="icon-off">🔇</span>
 </button>
 <audio id="bgMusic" loop preload="auto" src="https://files.catbox.moe/lnwzrw.mp3"></audio>
 
-<!-- UPDATE BANNER -->
 <div class="update-banner hidden" id="updateBanner">
   <span>🎉 <b>DERATA LOCKED</b> đã có phiên bản mới <b id="newVer">v2.1</b>!</span>
   <div>
@@ -277,7 +300,6 @@
 
 <div id="app">
 
-  <!-- KEY SCREEN -->
   <div class="screen active" id="screen-key">
     <div class="status-space"></div>
     <div class="key-logo">
@@ -297,7 +319,6 @@
     <div class="key-footer" id="txtKeyFooter">Mỗi key chỉ kích hoạt được 1 thiết bị.<br>Key đã dùng sẽ bị khóa vĩnh viễn.</div>
   </div>
 
-  <!-- HOME -->
   <div class="screen" id="screen-home">
     <div class="status-space"></div>
     <div class="app-header">
@@ -310,7 +331,7 @@
           <button class="active" id="toggleFF">FF</button>
           <button id="toggleMAX">MAX</button>
         </div>
-        <button class="eye-btn" id="eyeBtn">👁</button>
+        <button class="eye-btn" id="eyeBtn">⚙️</button>
       </div>
     </div>
 
@@ -374,7 +395,6 @@
     </div>
   </div>
 
-  <!-- SETTINGS -->
   <div class="screen" id="screen-settings">
     <div class="status-space"></div>
     <div class="page-title" id="txtSettings">Cài đặt</div>
@@ -441,7 +461,6 @@
     </div>
   </div>
 
-  <!-- PROFILE -->
   <div class="screen" id="screen-profile">
     <div class="status-space"></div>
     <div class="profile-header">
@@ -465,7 +484,6 @@
     </div>
   </div>
 
-  <!-- LOADING -->
   <div class="loading-overlay hidden" id="loadingOverlay">
     <div class="loading-card">
       <div class="spinner"></div>
@@ -476,7 +494,6 @@
     </div>
   </div>
 
-  <!-- POPUP -->
   <div class="center-popup hidden" id="centerPopup">
     <div class="popup-card">
       <div class="popup-icon" id="popupIcon">✅</div>
@@ -487,6 +504,89 @@
     </div>
   </div>
 
+</div>
+
+<!-- ================= MENU ĐEN XANH KHI VÀO GAME ================= -->
+<div class="game-menu-overlay hidden" id="gameMenuOverlay">
+  <div class="game-menu">
+    <div class="game-menu-header">
+      <div class="game-menu-title">DELTA MENU · ACTIVE</div>
+      <button class="game-menu-close" id="gameMenuCloseBtn">×</button>
+    </div>
+
+    <div class="game-menu-section">⚡ Chức năng chính</div>
+
+    <div class="feature-row" data-feature="touch">
+      <div class="fi">
+        <div class="ficon">👆</div>
+        <div class="ftext">
+          <div class="fname">TOUCH</div>
+          <div class="fdesc">Tăng độ nhạy cảm ứng</div>
+        </div>
+      </div>
+      <div class="gswitch" id="sw-touch"></div>
+    </div>
+
+    <div class="feature-row" data-feature="fps">
+      <div class="fi">
+        <div class="ficon">⚡</div>
+        <div class="ftext">
+          <div class="fname">FPS 90</div>
+          <div class="fdesc">Tăng FPS lên 90 khung hình/giây</div>
+        </div>
+      </div>
+      <div class="gswitch" id="sw-fps"></div>
+    </div>
+
+    <div class="game-menu-section">🎯 Chức năng bổ sung</div>
+
+    <div class="feature-row" data-feature="aimbot">
+      <div class="fi">
+        <div class="ficon">🎯</div>
+        <div class="ftext">
+          <div class="fname">AIMBOT</div>
+          <div class="fdesc">Tự động ngắm mục tiêu</div>
+        </div>
+      </div>
+      <div class="gswitch" id="sw-aimbot"></div>
+    </div>
+
+    <div class="feature-row" data-feature="antiban">
+      <div class="fi">
+        <div class="ficon">🛡</div>
+        <div class="ftext">
+          <div class="fname">ANTI-BAN</div>
+          <div class="fdesc">Chống ban tài khoản</div>
+        </div>
+      </div>
+      <div class="gswitch" id="sw-antiban"></div>
+    </div>
+
+    <div class="feature-row" data-feature="headshot">
+      <div class="fi">
+        <div class="ficon">💥</div>
+        <div class="ftext">
+          <div class="fname">HEAD</div>
+          <div class="fdesc">Tăng tỉ lệ bắn đầu</div>
+        </div>
+      </div>
+      <div class="gswitch" id="sw-headshot"></div>
+    </div>
+
+    <div class="feature-row" data-feature="speed">
+      <div class="fi">
+        <div class="ficon">🏃</div>
+        <div class="ftext">
+          <div class="fname">SPEED </div>
+          <div class="fdesc">Tăng tốc độ di chuyển</div>
+        </div>
+      </div>
+      <div class="gswitch" id="sw-speed"></div>
+    </div>
+
+    <button class="btn-launch-game" id="launchGameBtn">🚀 VÀO GAME NGAY</button>
+    <div class="menu-status" id="menuStatus"></div>
+  </div>
 </div>
 
 <input type="file" id="profileFileInput" accept=".json,.config,.zip,.mobileconfig,application/json,text/plain" style="display:none;">
@@ -520,15 +620,10 @@ bgMusic.addEventListener('pause',updateMusicBtn);
 tryAutoPlay();
 
 /* ================= DARK MODE ================= */
-const THEME_KEY='derata_theme_v2';
+const THEME_KEY='derata_theme_v3';
 function applyTheme(theme){
-  if(theme==='dark'){
-    document.body.classList.add('dark');
-    document.getElementById('themeBtn').textContent='☀️';
-  } else {
-    document.body.classList.remove('dark');
-    document.getElementById('themeBtn').textContent='🌙';
-  }
+  if(theme==='dark'){document.body.classList.add('dark');document.getElementById('themeBtn').textContent='☀️';}
+  else{document.body.classList.remove('dark');document.getElementById('themeBtn').textContent='🌙';}
   localStorage.setItem(THEME_KEY,theme);
 }
 document.getElementById('themeBtn').onclick=function(){
@@ -724,10 +819,11 @@ function applyLang(){
 }
 
 /* ================= KEY ================= */
-const KEY_STORAGE='derata_keys_v21';
-const ACTIVATED_KEY='derata_activated_v21';
-const PROFILES_KEY='derata_profiles_v21';
-const LANG_KEY='derata_lang_v21';
+const KEY_STORAGE='derata_keys_v22';
+const ACTIVATED_KEY='derata_activated_v22';
+const PROFILES_KEY='derata_profiles_v22';
+const LANG_KEY='derata_lang_v22';
+const GAME_FEATURES_KEY='derata_game_features_v22';
 
 function genKey(){const c='ABCDEF0123456789';let a='',b='';for(let i=0;i<8;i++)a+=c[Math.floor(Math.random()*c.length)];for(let i=0;i<8;i++)b+=c[Math.floor(Math.random()*c.length)];return `FREEIPA-${a}-${b}`;}
 
@@ -908,6 +1004,110 @@ function showCenterPopup(icon,title,desc,btnText,cb,extraHtml){
   btn.onclick=function(){pop.classList.add('hidden');if(cb) cb();};
 }
 
+/* ================= MENU ĐEN XANH ================= */
+const gameMenuOverlay=document.getElementById('gameMenuOverlay');
+const menuStatus=document.getElementById('menuStatus');
+const launchGameBtn=document.getElementById('launchGameBtn');
+
+function getGameFeatures(){
+  try{ return JSON.parse(localStorage.getItem(GAME_FEATURES_KEY)) || {}; }
+  catch(e){ return {}; }
+}
+function saveGameFeatures(f){ localStorage.setItem(GAME_FEATURES_KEY, JSON.stringify(f)); }
+
+function syncMenuSwitches(){
+  const f=getGameFeatures();
+  ['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{
+    const sw=document.getElementById('sw-'+k);
+    if(!sw) return;
+    if(f[k]) sw.classList.add('on'); else sw.classList.remove('on');
+  });
+}
+
+function openGameMenu(){
+  syncMenuSwitches();
+  menuStatus.textContent='';
+  gameMenuOverlay.classList.remove('hidden');
+  Voice.speak(currentLang==='vi'?'Menu đã mở':'Menu opened');
+}
+function closeGameMenu(){
+  gameMenuOverlay.classList.add('hidden');
+}
+
+document.getElementById('gameMenuCloseBtn').onclick=closeGameMenu;
+
+// Bấm từng dòng chức năng → bật/tắt
+document.querySelectorAll('.feature-row').forEach(row=>{
+  row.onclick=function(e){
+    if(e.target.closest('.gswitch')) return; // tránh double
+    const feature=this.dataset.feature;
+    const sw=this.querySelector('.gswitch');
+    sw.classList.toggle('on');
+    const f=getGameFeatures();
+    f[feature]=sw.classList.contains('on');
+    saveGameFeatures(f);
+    const name=this.querySelector('.fname').textContent;
+    if(currentLang==='vi'){
+      Voice.speak(name + (sw.classList.contains('on')?' đã bật':' đã tắt'));
+    } else {
+      Voice.speak(name + (sw.classList.contains('on')?' on':' off'),'en-US');
+    }
+  };
+});
+
+// Bấm công tắc cũng bật/tắt
+document.querySelectorAll('.gswitch').forEach(sw=>{
+  sw.onclick=function(e){
+    e.stopPropagation();
+    this.classList.toggle('on');
+    const feature=this.closest('.feature-row').dataset.feature;
+    const f=getGameFeatures();
+    f[feature]=this.classList.contains('on');
+    saveGameFeatures(f);
+    const name=this.closest('.feature-row').querySelector('.fname').textContent;
+    if(currentLang==='vi'){
+      Voice.speak(name + (this.classList.contains('on')?' đã bật':' đã tắt'));
+    } else {
+      Voice.speak(name + (this.classList.contains('on')?' on':' off'),'en-US');
+    }
+  };
+});
+
+// VÀO GAME NGAY
+launchGameBtn.onclick=function(){
+  const f=getGameFeatures();
+  const enabled=[];
+  ['touch','fps','aimbot','antiban','headshot','speed'].forEach(k=>{
+    if(f[k]) enabled.push(k);
+  });
+  // Lưu lần chạy cuối
+  localStorage.setItem('derata_last_launch', JSON.stringify({
+    game:currentGame,
+    features:f,
+    enabled:enabled,
+    launchedAt:new Date().toISOString()
+  }));
+  const msg = currentLang==='vi'
+    ? `Đã bật ${enabled.length} chức năng. Đang mở ${GAMES[currentGame].name}...`
+    : `${enabled.length} features enabled. Opening ${GAMES[currentGame].name}...`;
+  menuStatus.textContent='✅ '+msg;
+  Voice.speak(currentLang==='vi'?'Đang vào game':'Entering game');
+
+  // Đóng menu sau 1.5s và gọi deep link
+  setTimeout(()=>{
+    closeGameMenu();
+    const scheme = currentGame==='max' ? 'freefiremax://' : 'freefire://';
+    try{ window.location.href = scheme; }catch(e){}
+    // Thông báo nhỏ
+    setTimeout(()=>{
+      const feats = enabled.length>0 ? ' ['+enabled.join(', ').toUpperCase()+']' : '';
+      alert(currentLang==='vi'
+        ? '🎮 Đã gửi lệnh mở '+GAMES[currentGame].name+feats+'\n\nNếu game không mở, mở thủ công từ màn hình chính.'
+        : '🎮 Command sent to open '+GAMES[currentGame].name+feats+'\n\nIf game doesn\'t open, launch manually from home screen.');
+    },900);
+  },1500);
+};
+
 /* ================= SỰ KIỆN ================= */
 document.getElementById('activateBtn').onclick=function(){
   const v=document.getElementById('keyInput').value.trim().toUpperCase();
@@ -998,19 +1198,9 @@ document.getElementById('injectBtn').onclick=function(){
   },t('loadingInject'),currentLang==='vi'?'Inject thành công, đang đồng bộ...':'Inject successful, syncing...');
 };
 
-/* NÚT MỞ GAME */
+/* NÚT MỞ GAME → mở MENU ĐEN XANH trước */
 document.getElementById('openGameBtn').onclick=function(){
-  const g=GAMES[currentGame];
-  Voice.speak(currentLang==='vi'?'Đang mở '+g.name:'Opening '+g.name);
-  loading(2,()=>{
-    const scheme = currentGame==='max' ? 'freefiremax://' : 'freefire://';
-    try{ window.location.href = scheme; }catch(e){}
-    setTimeout(()=>{
-      alert(currentLang==='vi'
-        ? '✅ Đã gửi lệnh mở '+g.name+'!\n\nNếu game không mở, hãy mở thủ công từ màn hình chính.'
-        : '✅ Command sent to open '+g.name+'!\n\nIf game doesn\'t open, launch it manually from home screen.');
-    },800);
-  },currentLang==='vi'?'Đang mở '+g.name+'...':'Opening '+g.name+'...',currentLang==='vi'?'Đã mở game':'Game opened');
+  openGameMenu();
 };
 
 document.getElementById('toggleFF').onclick=function(){
@@ -1310,7 +1500,6 @@ profileFileInput.onchange=function(e){
 /* ================= UPDATE NOTIFICATION ================= */
 const APP_VERSION='2.0';
 function checkUpdate(){
-  // Giả lập — đổi hasUpdate=true để test banner
   const hasUpdate = false;
   const newVersion = '2.1';
   if(hasUpdate){
